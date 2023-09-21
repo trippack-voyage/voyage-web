@@ -4,7 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from './Components/Mainpage/Header';
-import Mainpage from './Pages/Mainpage';
+import MainBagPage from './Pages/MainBagPage';
 
 import Backpack from './Pages/Bagpack';
 import FriendSet from './Pages/FriendSet';
@@ -17,7 +17,7 @@ function App() {
           <Routes>
             {/* Header,Footer를 보여주고 싶은 컴포넌트 */}
             <Route element={<Header />}>
-              <Route path="/main" element={<Mainpage />} />
+              <Route path="/main-bag" element={<MainBagPage />} />
             </Route>
           </Routes>
           <Routes>
