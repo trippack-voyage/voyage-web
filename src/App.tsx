@@ -29,10 +29,10 @@ function App() {
           </Routes>
           <Routes>
             {/* Header,Footer를 안 보여주고 싶은 컴포넌트 */}
-            <Route path="/ProfilePage" element={<ProfilePage />} />
+            <Route path="/ProfilePage" element={<ProfilePage />} /> {/*시작 프로필 설정*/}
             <Route path="/bagpack" element={<Backpack />} />
             <Route path="/friend-set" element={<FriendSet />} />
-            <Route path="/" element={<StartPage />} />
+            <Route path="/" element={<StartPage />} /> {/*시작페이지 */}
           </Routes>
         </Router>
       </RecoilRoot>
