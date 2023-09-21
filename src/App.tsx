@@ -22,7 +22,7 @@ function App() {
           </Routes>
           <Routes>
             {/* Header,Footer를 안 보여주고 싶은 컴포넌트 */}
-            <Route path="/bag-pack" element={<Backpack />} />
+            <Route path="/bagpack" element={<Backpack />} />
             <Route path="/friend-set" element={<FriendSet />} />
           </Routes>
         </Router>
