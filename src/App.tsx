@@ -23,13 +23,13 @@ function App() {
             {/* Header,Footer를 보여주고 싶은 컴포넌트 */}
             <Route element={<Header />}>
               <Route path="/main-bag" element={<MainBagPage />} />
-              <Route path="/ProfilePage" element={<ProfilePage />} />
               <Route path="/MyPage" element={<MyPage />} />
               <Route path="/MainPage" element={<MainPage />} />
             </Route>
           </Routes>
           <Routes>
             {/* Header,Footer를 안 보여주고 싶은 컴포넌트 */}
+            <Route path="/ProfilePage" element={<ProfilePage />} />
             <Route path="/bagpack" element={<Backpack />} />
             <Route path="/friend-set" element={<FriendSet />} />
             <Route path="/" element={<StartPage />} />

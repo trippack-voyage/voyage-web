@@ -7,25 +7,29 @@ import styled from 'styled-components';
 const ProfileCover = styled.div`
   text-align: center;
 `;
+
+//로고
 const LogoImg = styled.div`
-  border: 2px solid #000;
-  width: 400px;
-  height: 80px;
-  background-color: #D9D9D9;
-  margin: 20px auto 10px auto;
+  color: #f18851;
+  font-size: 50px;
+  font-weight: 900;
+  text-align: center;
+  margin-top: 30px;
 `;
+
+//프로필
 const ProfileText = styled.div`
-  border: 2px solid #000;
   font-family: Inter;
   font-size: 60px;
   font-weight: 700;
   line-height: 65px;
   letter-spacing: 0em;
+  margin-top: 50px;
 `;
 const InputImgIc1 = styled.div<{ img: string }>`
   border: 2px solid #000;
-  width: 350px;
-  height: 350px;
+  width: 280px;
+  height: 280px;
   flex-shrink: 0;
   border-radius: 50%;
   background-image: URL(${(props) => props.img});
@@ -35,8 +39,8 @@ const InputImgIc1 = styled.div<{ img: string }>`
 `;
 const InputImgIc2 = styled.div`
   border: 2px solid #000;
-  width: 350px;
-  height: 350px;
+  width: 280px;
+  height: 280px;
   flex-shrink: 0;
   border-radius: 50%;
   background-color: #D9D9D9;
@@ -46,13 +50,15 @@ const InputImg = styled.input`
   display: none;
   border: 2px solid #000;
 `;
+
+//닉네임 작성
 const InputName = styled.input`
   border: none;
   border-bottom: 2px solid #000;
   width: 350px;
   height: 50px;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 500;
   line-height: 36px;
   letter-spacing: 0em;
@@ -62,7 +68,7 @@ const ClearBtn = styled.button`
   border: none;
   width: 300px;
   height: 80px;
-  margin: 100px auto 10px auto;
+  margin: 80px auto 10px auto;
   border-radius: 20px;
   background-color: #D9D9D9;
   font-family: Inter;
@@ -126,7 +132,7 @@ function ProfilePage() {
   return (
     <ProfileCover>
       <form method="post" encType="multipart/form-data">
-        <LogoImg>로고</LogoImg>
+        <LogoImg>voyage</LogoImg>
         <ProfileText>프로필</ProfileText>
         {profileImg? (
           <label htmlFor="profile"><InputImgIc1 id="profileImg" img={URL.createObjectURL(profileImg)} /></label>
