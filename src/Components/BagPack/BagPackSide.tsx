@@ -19,14 +19,13 @@ const Friend_list_box = styled.div`
 
 //친구 리스트 박스
 const Friend_inside_box = styled.div`
-    border: 2px solid #f18851;
+    border: 2px solid black;
     font-size: 22px;
     font-weight: 700;
     margin: 20px auto;
     width: 330px;
     padding: 10px;
     border-radius: 15px;
-    color: #f18851;
     cursor: pointer;
 `;
 
@@ -36,7 +35,7 @@ const Set_box = styled.div`
 
 //친구 관리, GPT 박스
 const Set_inside_box = styled.div`
-    border: 2px solid #f18851;
+    border: 2px solid black;
     font-size: 22px;
     font-weight: 700;
     margin-top: 20px;
@@ -45,7 +44,6 @@ const Set_inside_box = styled.div`
     width: 330px;
     padding: 10px;
     border-radius: 15px;
-    color: #f18851;
     cursor: pointer;
 `;
 

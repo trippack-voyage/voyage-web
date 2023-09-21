@@ -10,6 +10,7 @@ const EssentialItems_closeBox = styled.div`
     border-radius: 15px;
     display: flex;
     margin-top: 15px;
+    margin-bottom: 30px;
 `;
 
 //물품 아이콘 박스
