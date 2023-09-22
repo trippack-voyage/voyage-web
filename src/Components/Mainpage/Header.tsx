@@ -8,6 +8,7 @@ const Header_box = styled.div`
   font-weight: 900;
   text-align: center;
   margin-top: 10px;
+  padding: 20px;
 `;
 
 function Header() {

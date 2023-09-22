@@ -7,25 +7,18 @@ import styled from 'styled-components';
 const ProfileCover = styled.div`
   text-align: center;
 `;
-const LogoImg = styled.div`
-  border: 2px solid #000;
-  width: 400px;
-  height: 80px;
-  background-color: #D9D9D9;
-  margin: 20px auto 10px auto;
-`;
+
 const ProfileText = styled.div`
-  border: 2px solid #000;
   font-family: Inter;
   font-size: 60px;
   font-weight: 700;
   line-height: 65px;
-  letter-spacing: 0em;
+  margin-top: 50px;
 `;
 const InputImgIc1 = styled.div<{ img: string }>`
   border: 2px solid #000;
-  width: 350px;
-  height: 350px;
+  width: 280px;
+  height: 280px;
   flex-shrink: 0;
   border-radius: 50%;
   background-image: URL(${(props) => props.img});
@@ -35,8 +28,8 @@ const InputImgIc1 = styled.div<{ img: string }>`
 `;
 const InputImgIc2 = styled.div`
   border: 2px solid #000;
-  width: 350px;
-  height: 350px;
+  width: 280px;
+  height: 280px;
   flex-shrink: 0;
   border-radius: 50%;
   background-color: #D9D9D9;
@@ -52,7 +45,7 @@ const InputName = styled.input`
   width: 350px;
   height: 50px;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 500;
   line-height: 36px;
   letter-spacing: 0em;
@@ -62,15 +55,14 @@ const ClearBtn = styled.button`
   border: none;
   width: 300px;
   height: 80px;
-  margin: 100px auto 10px auto;
+  margin: 50px auto 10px auto;
   border-radius: 20px;
-  background-color: #D9D9D9;
+  background-color: #f18851;
   font-family: Inter;
   font-size: 30px;
   font-weight: 700;
-  line-height: 48px;
-  letter-spacing: 0em;
   text-align: center;
+  color: white;
 `;
 
 function MyPage() {
@@ -126,7 +118,6 @@ function MyPage() {
   return (
     <ProfileCover>
       <form method="post" encType="multipart/form-data">
-        <LogoImg>로고</LogoImg>
         <ProfileText>프로필 수정</ProfileText>
         {profileImg? (
           <label htmlFor="profile"><InputImgIc1 id="profileImg" img={URL.createObjectURL(profileImg)} /></label>

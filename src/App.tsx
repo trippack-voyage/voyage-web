@@ -3,10 +3,10 @@ import { RecoilRoot } from 'recoil';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from './Components/Mainpage/Header';
-import MainBagPage from './Pages/MainBagPage';
+import MainBagPage from './Page/MainBagPage';
 
-import Backpack from './Pages/Bagpack';
-import FriendSet from './Pages/FriendSet';
+import Bagpack from './Page/Bagpack';
+import FriendSet from './Page/FriendSet';
 import { GlobalStyle } from './GlobalStyle';
 import StartPage from './Page/StartPage';
 import ProfilePage from './Page/ProfilePage';
@@ -22,16 +22,16 @@ function App() {
           <Routes>
             {/* Header,Footer를 보여주고 싶은 컴포넌트 */}
             <Route element={<Header />}>
-              <Route path="/main-bag" element={<MainBagPage />} /> {/*내 가방 설정*/}
-              <Route path="/MyPage" element={<MyPage />} />
+              <Route path="/bag-list" element={<MainBagPage />} /> {/*내 가방 리스트(추가)*/}
+              <Route path="/MyPage" element={<MyPage />} /> {/*프로필 수정*/}
               <Route path="/MainPage" element={<MainPage />} />
+              <Route path="/ProfilePage" element={<ProfilePage />} /> {/*시작 프로필 설정*/}
             </Route>
           </Routes>
           <Routes>
             {/* Header,Footer를 안 보여주고 싶은 컴포넌트 */}
-            <Route path="/ProfilePage" element={<ProfilePage />} /> {/*시작 프로필 설정*/}
-            <Route path="/bagpack" element={<Backpack />} />
-            <Route path="/friend-set" element={<FriendSet />} />
+            <Route path="/bagpack" element={<Bagpack />} /> {/*짐 설정*/}
+            <Route path="/friend-set" element={<FriendSet />} /> {/*친구 설정*/}
             <Route path="/" element={<StartPage />} /> {/*시작페이지 */}
           </Routes>
         </Router>

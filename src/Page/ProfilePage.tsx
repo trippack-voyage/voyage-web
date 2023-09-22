@@ -8,24 +8,15 @@ const ProfileCover = styled.div`
   text-align: center;
 `;
 
-//로고
-const LogoImg = styled.div`
-  color: #f18851;
-  font-size: 50px;
-  font-weight: 900;
-  text-align: center;
-  margin-top: 30px;
-`;
-
 //프로필
 const ProfileText = styled.div`
   font-family: Inter;
   font-size: 60px;
   font-weight: 700;
   line-height: 65px;
-  letter-spacing: 0em;
   margin-top: 50px;
 `;
+
 const InputImgIc1 = styled.div<{ img: string }>`
   border: 2px solid #000;
   width: 280px;
@@ -68,15 +59,14 @@ const ClearBtn = styled.button`
   border: none;
   width: 300px;
   height: 80px;
-  margin: 80px auto 10px auto;
+  margin: 50px auto 10px auto;
   border-radius: 20px;
-  background-color: #D9D9D9;
+  background-color: #f18851;
   font-family: Inter;
   font-size: 30px;
   font-weight: 700;
-  line-height: 48px;
-  letter-spacing: 0em;
   text-align: center;
+  color: white;
 `;
 
 function ProfilePage() {
@@ -132,7 +122,6 @@ function ProfilePage() {
   return (
     <ProfileCover>
       <form method="post" encType="multipart/form-data">
-        <LogoImg>voyage</LogoImg>
         <ProfileText>프로필</ProfileText>
         {profileImg? (
           <label htmlFor="profile"><InputImgIc1 id="profileImg" img={URL.createObjectURL(profileImg)} /></label>

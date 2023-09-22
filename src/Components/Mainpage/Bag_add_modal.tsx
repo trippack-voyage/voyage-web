@@ -10,7 +10,7 @@ export const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 50;
-  margin-top: -240px;
+  margin-top: -280px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -21,9 +21,10 @@ export const ModalView = styled.div.attrs(props => ({
   padding: 40px 20px;
   background-color: white;
   border-radius: 30px;
-  width: 500px;
-  height: 550px;
+  width: 550px;
+  height: 620px;
   box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+  margin: 25px;
 `;
 
 //모달 헤더
@@ -61,8 +62,8 @@ const Bag_add_modal_input_box = styled.div`
 const Bag_add_modal_input = styled.input`
   border: 2px solid #f18851;
   border-radius: 8px;
-  width: 400px;
-  height: 50px;
+  width: 450px;
+  height: 65px;
   padding: 5px 20px;
   font-size: 25px;
   font-weight: 500;
@@ -80,8 +81,8 @@ const Bag_add_modal_input_text = styled.div`
 const Bag_add_modal_input_year = styled.input`
   border: 2px solid #f18851;
   border-radius: 8px;
-  width: 100px;
-  height: 45px;
+  width: 150px;
+  height: 60px;
   padding: 5px 20px;
   font-size: 25px;
   font-weight: 500;
@@ -91,8 +92,8 @@ const Bag_add_modal_input_year = styled.input`
 const Bag_add_modal_input_month_day = styled.input`
   border: 2px solid #f18851;
   border-radius: 8px;
-  width: 70px;
-  height: 45px;
+  width: 120px;
+  height: 60px;
   padding: 5px 20px;
   font-size: 25px;
   font-weight: 500;
@@ -113,8 +114,8 @@ const Bag_add_modal_btn = styled.button`
   font-size: 27px;
   font-weight: 700;
   margin-top: 10px;
-  width: 440px;
-  height: 60px;
+  width: 450px;
+  height: 66px;
 `;
 
 function Bag_add_modal() {

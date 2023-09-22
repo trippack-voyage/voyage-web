@@ -53,7 +53,7 @@ function BackpackSide() {
     //main 클릭시
     const navigate = useNavigate();
     function onClick_main(){
-        navigate("/main");
+        navigate("/bag-list");
     }
 
     function onClick_friendSet(){

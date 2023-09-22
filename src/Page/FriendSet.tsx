@@ -33,13 +33,13 @@ const Friend_list_box = styled.div`
 //footer
 const FriendSet_main_footer = styled.div`
     display: flex;
-    margin-top: 30px;
+    margin-top: 40px;
 `;
 
 const Friend_delete_btn = styled.button`
     border: 1px solid black;
     width: 300px;
-    height: 55px;
+    height: 60px;
     font-size: 25px;
     font-weight: 700;
     margin: auto 0 auto auto;
@@ -52,7 +52,7 @@ const Friend_delete_btn = styled.button`
 const Friend_add_btn = styled.button`
     border: 1px solid black;
     width: 300px;
-    height: 55px;
+    height: 60px;
     font-size: 25px;
     font-weight: 700;
     margin-left: 20px;
@@ -65,7 +65,7 @@ const Friend_add_btn = styled.button`
 //프로필
 const Prifile_box = styled.div`
     margin-right: 50px;
-    height: 150px;
+    height: 180px;
     border: 2px solid #f18851;
     border-radius: 10px;
     padding: 10px;
@@ -83,9 +83,10 @@ const Profile_img = styled.div`
 `;
 
 const Profile_name = styled.div`
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 20px;
     font-weight: 500;
+    text-align: center;
 `;
 
 function FriendSet() {

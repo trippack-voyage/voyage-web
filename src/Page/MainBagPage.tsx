@@ -7,6 +7,7 @@ import { bagAddModalState } from "../recoil/atoms";
 const Main_header = styled.div`
   margin-top: 80px;
   z-index: 10;
+  text-align: center;
 `;
 
 const Main_title = styled.span`
@@ -18,7 +19,7 @@ const Main_title = styled.span`
 const Main_title_line = styled.div`
   border: 1px solid black;
   width: 100px;
-  margin: 30px auto;
+  margin: 50px auto;
 `;
 
 const Main_main = styled.div`
