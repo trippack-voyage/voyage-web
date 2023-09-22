@@ -22,7 +22,7 @@ function App() {
           <Routes>
             {/* Header,Footer를 보여주고 싶은 컴포넌트 */}
             <Route element={<Header />}>
-              <Route path="/main-bag" element={<MainBagPage />} />
+              <Route path="/main-bag" element={<MainBagPage />} /> {/*내 가방 설정*/}
               <Route path="/MyPage" element={<MyPage />} />
               <Route path="/MainPage" element={<MainPage />} />
             </Route>
