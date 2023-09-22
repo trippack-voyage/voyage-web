@@ -23,10 +23,11 @@ const Friend_inside_box = styled.div`
     font-size: 22px;
     font-weight: 700;
     margin: 20px auto;
-    width: 330px;
-    padding: 10px;
+    width: 350px;
+    padding: 15px;
     border-radius: 15px;
     cursor: pointer;
+    text-align: center;
 `;
 
 const Set_box = styled.div`
@@ -41,10 +42,11 @@ const Set_inside_box = styled.div`
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 330px;
-    padding: 10px;
+    width: 350px;
+    padding: 15px;
     border-radius: 15px;
     cursor: pointer;
+    text-align: center;
 `;
 
 function BackpackSide() {
