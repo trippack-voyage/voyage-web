@@ -25,7 +25,7 @@ const No_travel_icon = styled.img`
 
 //물품 텍스트
 const No_travel_text = styled.div`
-    margin: 20px auto auto 20px;
+    margin: 23px auto auto 23px;
     font-size: 30px;
     font-weight: 900;
 `;
@@ -96,15 +96,16 @@ const CheckBox = styled.input`
 //닫기 버튼
 const No_travel_close_btn = styled.div`
     margin: 20px 5px 25px auto;
+    border: none;
     padding-bottom: 20px;
     font-size: 20px;
     font-weight: 500;
-    border: none;
     color: gray;
     background-color: white;
     width: 100px;
     border-radius: 20px;
     cursor: pointer;
+    text-align: center;
 `;
 
 function EssentialItems() {

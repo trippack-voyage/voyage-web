@@ -7,8 +7,7 @@ const Side_box = styled.div`
     height: 770px;
     border-radius: 20px;
     background-color: white;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin: 17px 0px 17px 20px;
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
 `;
 

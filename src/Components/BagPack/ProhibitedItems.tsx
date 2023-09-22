@@ -24,7 +24,7 @@ const No_travel_icon = styled.img`
 
 //기내 금지 물품 텍스트
 const No_travel_text = styled.div`
-    margin: 20px auto auto 20px;
+    margin: 23px auto auto 23px;
     font-size: 30px;
     font-weight: 900;
 `;
