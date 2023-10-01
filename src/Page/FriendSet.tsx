@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-image: linear-gradient(to top, #fcaf85, #fec5a8);
+        background-color: #f6f8f9;
     }
 `
 
@@ -25,7 +25,7 @@ const Bagpack_main_box = styled.div`
 const Bagpack_main_header = styled.div`
     display: flex;
     margin-bottom: 50px;
-    font-size: 50px;
+    font-size: 48px;
     font-weight: 700;
 `;
 
@@ -39,8 +39,8 @@ const Friend_list_box = styled.div`
     flex-wrap: wrap;
     background-color: white;
     border-radius: 20px;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
     padding: 20px;
+    border: 1px solid #c1c1c1;
 `;
 
 //footer
@@ -59,8 +59,8 @@ const Friend_delete_btn = styled.button`
     margin: auto 0 auto auto;
     border-radius: 20px;
     border: none;
-    background-color: white;
-    color: black;
+    background-color: #1a1919;
+    color: #FF541E;
 `;
 
 //친구 추가 버튼
@@ -73,20 +73,22 @@ const Friend_add_btn = styled.button`
     margin-left: 20px;
     border-radius: 20px;
     border: none;
-    background-color: white;
-    color: black;
+    background-color: #1a1919;
+    color: #FF541E;
 `;
 
 //프로필
 const Prifile_box = styled.div`
     margin-right: 50px;
     height: 180px;
-    border: 2px solid #f18851;
+    border: 3px solid #FF541E;
+    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
     border-radius: 10px;
     padding: 10px;
 
     &.active{
         border: none;
+        box-shadow: none;
     }
 `;
 

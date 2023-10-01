@@ -64,7 +64,7 @@ function BackpackSide() {
     return (
         <Side_box>
             <Friend_list_box>
-                <Friend_inside_box onClick={onClick_main}>Main</Friend_inside_box>
+                <Friend_inside_box onClick={onClick_main}>이미지</Friend_inside_box>
             </Friend_list_box>
             <Set_box>
                 <Set_inside_box onClick={onClick_friendSet}>친구 관리</Set_inside_box>

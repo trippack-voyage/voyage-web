@@ -6,13 +6,18 @@ import ProhibitedItmes from '../Components/BagPack/ProhibitedItems';
 import EssentialItmes from '../Components/BagPack/EssentialItems';
 import AddItmes from '../Components/BagPack/AddItems';
 import FriendItmes from '../Components/BagPack/FriendItems';
+import { useNavigate } from 'react-router-dom';
+
+import {
+    IoArrowBack
+  } from "react-icons/io5";
 
 export const GlobalStyle = createGlobalStyle`
     #root,
     html,
     body {
         width: 100%;
-        background-color:#f8f8f8;
+        background-color: #f6f8f9;
     }
 `
 const Bagpack_main = styled.div`
@@ -27,6 +32,7 @@ const Bagpack_main_box = styled.div`
 //헤더
 const Bagpack_main_header = styled.div`
     display: flex;
+    margin-top: 20px;
     margin-bottom: 50px;
     color: #1a1919;
 `;
@@ -44,12 +50,18 @@ const Bagpack_main_header_text2 = styled.span`
 `;
 
 function Backpack() {
+
+    const navi = useNavigate();
+    function onClickBack(){
+        navi("/bag-list");
+    }
     return (
         <div>
             <GlobalStyle/>
             <Bagpack_main>
                 <BagPackSide/>
                 <Bagpack_main_box>
+                    <IoArrowBack size="50" onClick={onClickBack}/>
                     <Bagpack_main_header>
                         <Bagpack_main_header_text1>이미지</Bagpack_main_header_text1>
                         <Bagpack_main_header_text2>의 가방</Bagpack_main_header_text2>

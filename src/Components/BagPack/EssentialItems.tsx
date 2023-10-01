@@ -69,6 +69,7 @@ const Item_listBox = styled.div`
     margin: 10px auto;
     display: flex;
     border-radius: 20px;
+    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
 `;
 
 const Item_name = styled.div`

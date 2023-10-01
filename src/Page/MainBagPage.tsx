@@ -3,21 +3,33 @@ import styled from "styled-components";
 import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
 import { useRecoilState } from "recoil";
 import { bagAddModalState } from "../recoil/atoms";
+import { createGlobalStyle } from "styled-components";
 
+import {FaPlus} from 'react-icons/fa';
+
+export const GlobalStyle = createGlobalStyle`
+    #root,
+    html,
+    body {
+        width: 100%;
+        background-color: #f6f8f9;
+    }
+`
 const Main_header = styled.div`
-  margin-top: 80px;
+  margin-top: 60px;
   z-index: 10;
   text-align: center;
 `;
 
 const Main_title = styled.span`
-  font-size: 50px;
+  font-size: 45px;
   font-weight: 700;
   margin: 0px auto;
+  color: #1a1919;
 `;
 
 const Main_title_line = styled.div`
-  border: 1px solid black;
+  border: 2px solid #1a1919;
   width: 100px;
   margin: 50px auto;
 `;
@@ -35,11 +47,11 @@ const Bag_add_btn_box = styled.div`
 
 //가방 추가 버튼
 const Bag_add_btn = styled.button`
-  width: 70px;
-  height: 70px;
-  border-radius: 40px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
   font-size: 50px;
-  background-color: #f18851;
+  background-color: #1a1919;
   border: none;
   color: white;
   position: fixed;
@@ -80,12 +92,17 @@ function Mainpage() {
 
   return (
     <div>
+      <GlobalStyle/>
       <Main_header>
         <Main_title>내 여행 가방들</Main_title>
         <Main_title_line></Main_title_line>
       </Main_header>
       <Main_main>
-        <Bag_add_btn_box><Bag_add_btn onClick={openModalHandler}>+</Bag_add_btn></Bag_add_btn_box>
+        <Bag_add_btn_box>
+          <Bag_add_btn onClick={openModalHandler}>
+            <FaPlus size="40"></FaPlus>
+          </Bag_add_btn>
+        </Bag_add_btn_box>
       </Main_main>
       {isOpen ? 
         <Bag_add_modal></Bag_add_modal>

@@ -16,26 +16,26 @@ const EssentialItems_closeBox = styled.div`
 
 //물품 아이콘 박스
 const No_travel_icon_box = styled.div`
-    margin: 20px 0 auto 20px;
+    margin: 22px 0 auto 22px;
 `;
 
 //물품 아이콘
 const No_travel_icon = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 `;
 
 //물품 텍스트
 const No_travel_text = styled.div`
     margin: 23px auto auto 23px;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 900;
 `;
 
 //물품 버튼
 const No_travel_btn = styled.button`
     margin: 25px 20px auto auto;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 500;
     border: none;
     color: gray;
@@ -49,6 +49,7 @@ const ProhibitedItems_openBox = styled.div`
     border-radius: 15px;
     display: flex;
     margin-top: 15px;
+    border: 1px solid #c1c1c1;
 `;
 
 function FriendItems() {
