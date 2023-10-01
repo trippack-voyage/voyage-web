@@ -6,9 +6,8 @@ const Side_box = styled.div`
     width: 450px;
     height: 770px;
     border-radius: 20px;
-    background-color: white;
+    background-color: #1a1919;
     margin: 17px 0px 17px 20px;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
 `;
 
 //친구 박스
@@ -18,7 +17,7 @@ const Friend_list_box = styled.div`
 
 //친구 리스트 박스
 const Friend_inside_box = styled.div`
-    border: 2px solid black;
+    border: 2px solid #FF541E;
     font-size: 22px;
     font-weight: 700;
     margin: 20px auto;
@@ -27,6 +26,7 @@ const Friend_inside_box = styled.div`
     border-radius: 15px;
     cursor: pointer;
     text-align: center;
+    color: #FF541E;
 `;
 
 const Set_box = styled.div`
@@ -35,7 +35,7 @@ const Set_box = styled.div`
 
 //친구 관리, GPT 박스
 const Set_inside_box = styled.div`
-    border: 2px solid black;
+    border: 2px solid #FF541E;
     font-size: 22px;
     font-weight: 700;
     margin-top: 20px;
@@ -46,6 +46,7 @@ const Set_inside_box = styled.div`
     border-radius: 15px;
     cursor: pointer;
     text-align: center;
+    color: #FF541E;
 `;
 
 function BackpackSide() {

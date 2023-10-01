@@ -10,30 +10,32 @@ const EssentialItems_closeBox = styled.div`
     border-radius: 15px;
     display: flex;
     margin-top: 15px;
+    border: 1px solid #c1c1c1;
 `;
 
 //물품 아이콘 박스
 const No_travel_icon_box = styled.div`
-    margin: 15px 0 auto 15px;
+    margin: 20px 0 auto 20px;
 `;
 
 //물품 아이콘
 const No_travel_icon = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 `;
 
 //물품 텍스트
 const No_travel_text = styled.div`
-    margin: 23px auto auto 23px;
-    font-size: 30px;
+    margin: 25px auto auto 23px;
+    font-size: 25px;
     font-weight: 900;
+    color: #1a1919;
 `;
 
 //물품 열기 버튼
 const No_travel_btn = styled.button`
     margin: auto 20px 25px auto;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 500;
     border: none;
     color: gray;
@@ -46,6 +48,8 @@ const ProhibitedItems_openBox = styled.div`
     width: 950px;
     border-radius: 15px;
     margin-top: 15px;
+    border: 1px solid #c1c1c1;
+    color: #1a1919;
 `;
 
 const ProhibitedItems_openBox_header = styled.div`
@@ -68,7 +72,7 @@ const Item_listBox = styled.div`
 const Item_box = styled.div`
     border-bottom: 2px solid #f2f2f2;
     margin-bottom: 20px;
-    margin-left: 40px;
+    margin-left: 70px;
     padding-bottom: 25px;
 `;
 
@@ -87,7 +91,7 @@ const Item_icon = styled.img`
 
 //위탁수하물 금지물품 텍스트
 const Item_icon_text = styled.span`
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     display: flex;
     margin: auto auto auto 10px;
@@ -95,7 +99,7 @@ const Item_icon_text = styled.span`
 
 //위탁수하물 금지물품 상세텍스트
 const Item_icon_txt = styled.span`
-    font-size: 20px;
+    font-size: 19px;
     display: flex;
     margin: auto auto auto 70px;
     color: gray;
@@ -106,7 +110,7 @@ const No_travel_close_btn = styled.div`
     margin: 20px 5px 25px auto;
     border: none;
     padding-bottom: 20px;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 500;
     color: gray;
     background-color: white;

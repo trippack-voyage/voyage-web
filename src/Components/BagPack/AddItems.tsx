@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import plus_icon from '../../img/plus-icon.png';
+import ItemList from './ItemList';
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
@@ -10,6 +11,7 @@ const EssentialItems_closeBox = styled.div`
     border-radius: 15px;
     display: flex;
     margin-top: 15px;
+    border: 1px solid #c1c1c1;
 `;
 
 const ProhibitedItems_openBox_header = styled.div`
@@ -18,26 +20,26 @@ const ProhibitedItems_openBox_header = styled.div`
 
 //물품 아이콘 박스
 const No_travel_icon_box = styled.div`
-    margin: 20px 0 auto 20px;
+    margin: 22px 0 auto 22px;
 `;
 
 //물품 아이콘
 const No_travel_icon = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 `;
 
 //물품 텍스트
 const No_travel_text = styled.div`
-    margin: 23px auto auto 23px;
-    font-size: 30px;
+    margin: 25px auto auto 23px;
+    font-size: 25px;
     font-weight: 900;
 `;
 
-//물품 버튼
+//열림, 닫힘 버튼
 const No_travel_btn = styled.button`
     margin: 25px 20px auto auto;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 500;
     border: none;
     color: gray;
@@ -50,10 +52,10 @@ const ProhibitedItems_openBox = styled.div`
     width: 950px;
     border-radius: 15px;
     margin-top: 15px;
+    border: 1px solid #c1c1c1;
 `;
 
 //추가 물품 입력
-
 const AddItems_input = styled.input`
     width: 750px;
     height: 20px;
@@ -83,7 +85,7 @@ function AddItems() {
                     <No_travel_text>추가 물품</No_travel_text>
                     <No_travel_btn onClick={onClick_prohibitedItem}>닫기</No_travel_btn>
                 </ProhibitedItems_openBox_header>
-                    <AddItems_input></AddItems_input>
+                <ItemList></ItemList>
             </ProhibitedItems_openBox>):
             (<EssentialItems_closeBox>
                 <No_travel_icon_box><No_travel_icon src={plus_icon}></No_travel_icon></No_travel_icon_box>

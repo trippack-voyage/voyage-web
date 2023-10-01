@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-image: linear-gradient(to top, #fcaf85, #fec5a8);
+        background-color:#f8f8f8;
     }
 `
 const Bagpack_main = styled.div`
@@ -28,15 +28,16 @@ const Bagpack_main_box = styled.div`
 const Bagpack_main_header = styled.div`
     display: flex;
     margin-bottom: 50px;
+    color: #1a1919;
 `;
 
 const Bagpack_main_header_text1 = styled.span`
-    font-size: 50px;
+    font-size: 48px;
     font-weight: 700;
 `;
 
 const Bagpack_main_header_text2 = styled.span`
-    font-size: 35px;
+    font-size: 32px;
     font-weight: 700;
     margin-left: 10px;
     padding-top: 15px;

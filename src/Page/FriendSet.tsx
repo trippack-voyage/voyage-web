@@ -3,6 +3,15 @@ import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
 
+export const GlobalStyle = createGlobalStyle`
+    #root,
+    html,
+    body {
+        width: 100%;
+        background-image: linear-gradient(to top, #fcaf85, #fec5a8);
+    }
+`
+
 const Bagpack_main = styled.div`
     display: flex;
 `;
@@ -28,6 +37,10 @@ const Friend_list_box = styled.div`
     width: 1000px;
     flex-direction: row;
     flex-wrap: wrap;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px;
 `;
 
 //footer
@@ -36,6 +49,7 @@ const FriendSet_main_footer = styled.div`
     margin-top: 40px;
 `;
 
+//친구 삭제 버튼
 const Friend_delete_btn = styled.button`
     border: 1px solid black;
     width: 300px;
@@ -45,10 +59,11 @@ const Friend_delete_btn = styled.button`
     margin: auto 0 auto auto;
     border-radius: 20px;
     border: none;
-    background-color: #f18851;
-    color: white;
+    background-color: white;
+    color: black;
 `;
 
+//친구 추가 버튼
 const Friend_add_btn = styled.button`
     border: 1px solid black;
     width: 300px;
@@ -58,8 +73,8 @@ const Friend_add_btn = styled.button`
     margin-left: 20px;
     border-radius: 20px;
     border: none;
-    background-color: #f18851;
-    color: white;
+    background-color: white;
+    color: black;
 `;
 
 //프로필
@@ -117,6 +132,7 @@ function FriendSet() {
 
     return (
         <div>
+            <GlobalStyle/>
             <Bagpack_main>
                 <BagPackSide/>
                 <Bagpack_main_box>

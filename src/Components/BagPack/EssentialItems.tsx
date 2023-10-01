@@ -10,30 +10,31 @@ const EssentialItems_closeBox = styled.div`
     border-radius: 15px;
     display: flex;
     margin-top: 15px;
+    border: 1px solid #c1c1c1;
 `;
 
 //물품 아이콘 박스
 const No_travel_icon_box = styled.div`
-    margin: 15px 0 auto 15px;
+    margin: 20px 0 auto 20px;
 `;
 
 //물품 아이콘
 const No_travel_icon = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 `;
 
 //물품 텍스트
 const No_travel_text = styled.div`
-    margin: 23px auto auto 23px;
-    font-size: 30px;
+    margin: 25px auto auto 23px;
+    font-size: 25px;
     font-weight: 900;
 `;
 
 //물품 열기 버튼
 const No_travel_btn = styled.button`
     margin: auto 20px 25px auto;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 500;
     border: none;
     color: gray;
@@ -46,6 +47,7 @@ const ProhibitedItems_openBox = styled.div`
     width: 950px;
     border-radius: 15px;
     margin-top: 15px;
+    border: 1px solid #c1c1c1;
 `;
 
 const ProhibitedItems_openBox_header = styled.div`
@@ -61,7 +63,7 @@ const Open_box_main = styled.div`
 `;
 
 const Item_listBox = styled.div`
-    border: 2px solid black;
+    border: 3px solid #FF541E;
     width: 250px;
     height: 70px;
     margin: 10px auto;
@@ -70,7 +72,7 @@ const Item_listBox = styled.div`
 `;
 
 const Item_name = styled.div`
-    font-size: 25px;
+    font-size: 22px;
     margin: auto 0 auto 25px;
     width: 150px;
     text-align: left;
@@ -80,7 +82,7 @@ const CheckBox = styled.input`
     appearance: none;
     margin: auto auto auto 20px;
     border-radius: 10px;
-    background-color: #E6E6E6;
+    background-color: #e0e0e0;
     width: 35px;
     height: 35px;
 
@@ -89,16 +91,16 @@ const CheckBox = styled.input`
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
         background-size: 100% 100%;
         background-position: 50%;
-        background-color: #fcaf85;
+        background-color: #1a1919;
     }
 `;
 
 //닫기 버튼
 const No_travel_close_btn = styled.div`
-    margin: 20px 5px 25px auto;
+    margin: 25px 5px 20px auto;
     border: none;
     padding-bottom: 20px;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 500;
     color: gray;
     background-color: white;
