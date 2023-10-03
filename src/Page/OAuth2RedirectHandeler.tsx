@@ -65,7 +65,7 @@ function OAuth2RedirectHandeler() {
 
         });
       } else{
-        console.log("access_token 없음!");
+        console.log("access_token 없음");
       }
     });
   },[])
