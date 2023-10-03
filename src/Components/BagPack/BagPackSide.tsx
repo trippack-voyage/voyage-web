@@ -6,8 +6,9 @@ const Side_box = styled.div`
     width: 450px;
     height: 770px;
     border-radius: 20px;
-    background-color: #1a1919;
+    background-color: white;
     margin: 17px 0px 17px 20px;
+    border: 1px solid #c1c1c1;
 `;
 
 //친구 박스
@@ -17,7 +18,7 @@ const Friend_list_box = styled.div`
 
 //친구 리스트 박스
 const Friend_inside_box = styled.div`
-    border: 2px solid #FF541E;
+    border: 2px solid #1a1919;
     font-size: 22px;
     font-weight: 700;
     margin: 20px auto;
@@ -26,7 +27,7 @@ const Friend_inside_box = styled.div`
     border-radius: 15px;
     cursor: pointer;
     text-align: center;
-    color: #FF541E;
+    color: #1a1919;
 `;
 
 const Set_box = styled.div`
@@ -35,7 +36,7 @@ const Set_box = styled.div`
 
 //친구 관리, GPT 박스
 const Set_inside_box = styled.div`
-    border: 2px solid #FF541E;
+    border: 2px solid #1a1919;
     font-size: 22px;
     font-weight: 700;
     margin-top: 20px;
@@ -46,7 +47,8 @@ const Set_inside_box = styled.div`
     border-radius: 15px;
     cursor: pointer;
     text-align: center;
-    color: #FF541E;
+    background-color: #1a1919;
+    color: white;
 `;
 
 function BackpackSide() {
@@ -54,7 +56,7 @@ function BackpackSide() {
     //main 클릭시
     const navigate = useNavigate();
     function onClick_main(){
-        navigate("/bag-list");
+        navigate("/bagpack");
     }
 
     function onClick_friendSet(){

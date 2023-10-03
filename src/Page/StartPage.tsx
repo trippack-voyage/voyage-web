@@ -32,8 +32,8 @@ const StartText = styled.div`
 
 function StartPage() {
 
-  const Rest_api_key='fcf78e99174996ae189702c84e5d3dba' //REST API KEY
-  const redirect_uri = 'http://localhost:8080/login/oauth2/code/kakao' //Redirect URI
+  const Rest_api_key='b791159adc4e18ab175997922e03859a' //REST API KEY
+  const redirect_uri = 'http://localhost:3000/api/oauth/token' //Redirect URI
   // oauth 요청 URL
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
 

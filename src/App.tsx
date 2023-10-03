@@ -34,7 +34,7 @@ function App() {
             <Route path="/bagpack" element={<Bagpack />} /> {/*짐 설정*/}
             <Route path="/friend-set" element={<FriendSet />} /> {/*친구 설정*/}
             <Route path="/" element={<StartPage />} /> {/*시작페이지 */}
-            <Route path="/api/oauth/token" element={<OAuth2RedirectHandeler />}></Route>
+            <Route path="api/oauth/token" element={<OAuth2RedirectHandeler />}></Route>
           </Routes>
         </Router>
       </RecoilRoot>

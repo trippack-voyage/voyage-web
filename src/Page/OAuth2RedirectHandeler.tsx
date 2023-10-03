@@ -4,42 +4,72 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
  
 function OAuth2RedirectHandeler() {
-  
+
+/*
+  useEffect(() => {
+
+    try{
+      const res = axios
+        .get(
+          `http://localhost:8080/api/oauth/token?code=${code}`
+        )
+        .then((response) => {
+          console.log("응답확인", response);
+          const token = response.headers.authorization;
+          window.localStorage.setItem("token", token);
+        });
+        console.log(res);
+    }catch(e){
+      console.log(e);
+    }
+  })*/
+
+  const Rest_api_key='b791159adc4e18ab175997922e03859a' //REST API KEY
+  const redirect_uri = 'http://localhost:3000/api/oauth/token' //Redirect URI
+  const grant_type = 'authorization_code';
   const url = new URL(window.location.href);
   const code = url.searchParams.get("code");
-  console.log(code);
+  const navi = useNavigate();
 
   useEffect(() => {
-    console.log(code)
-    main()
-  }, [])
+    axios.post(
+      `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&code=${code}`,
+      {},
+      {
+        headers: {
+          "Content-type":
+          "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+      }
+    ).then((res) => {
+      console.log(res);
+      const {data} = res;
+      const {access_token} = data;
 
+      if(access_token){
+        console.log(`${access_token}`);
 
-  const getKakaoTokenHandler = async (code: string) => {
-    const url = "/api/oauth/token"
-    await axios.get(url, {params: {code}})
-    .then((res) => {
-      console.log("res: ", res)
-      console.log("성공")
-    })
-    .catch((error) => {
-      console.log(error.response)
-      console.log("실패")
-    })
-  }
+        axios.post(
+          "https://kapi.kakao.com/v2/user/me",
+          {},
+          {
+            headers:{
+              Authorization: `Bearer ${access_token}`,
+              "Content-type": "application/x-www-form-urlencoded",
+            },
+          }
+        ).then((res) => {
+          console.log("데이터 성공: ");
+          console.log(res);
+          navi("/bag-list");
 
-  const main = async () => {
+        });
+      } else{
+        console.log("access_token 없음!");
+      }
+    });
+  },[])
 
-    if (code === null || code === "") {
-        alert("카카오에서 코드를 받는데 실패했습니다");
-        return;
-    } else {
-      console.log("백엔드 전달");
-      getKakaoTokenHandler(code.toString())
-    }
-  }
-  
-  
   return (
       <div>
           Loading...
