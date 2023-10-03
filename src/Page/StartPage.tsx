@@ -90,6 +90,7 @@ const StartText = styled.div`
 
 const Bag_line = styled.div`
   display: flex;
+  margin-top: -5px;
 `;
 
 const Bag_line1 = styled.div`
@@ -107,10 +108,10 @@ const Bag_line2 = styled.div`
 //캐리어 애니메이션
 const Box_Ani = keyframes`
   from {
-    transform: translate(100px, 90px);
+    transform: translate(100px, 95px);
   }
   to {
-    transform: translate(400px, 90px);
+    transform: translate(400px, 95px);
   }
 `;
 
