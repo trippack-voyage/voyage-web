@@ -2,27 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import styled, {keyframes, createGlobalStyle} from 'styled-components';
+import SuitCase from '../img/suitcases.png';
  
-function OAuth2RedirectHandeler() {
-
-/*
-  useEffect(() => {
-
-    try{
-      const res = axios
-        .get(
-          `http://localhost:8080/api/oauth/token?code=${code}`
-        )
-        .then((response) => {
-          console.log("응답확인", response);
-          const token = response.headers.authorization;
-          window.localStorage.setItem("token", token);
-        });
-        console.log(res);
-    }catch(e){
-      console.log(e);
+export const GlobalStyle = createGlobalStyle`
+    #root,
+    html,
+    body {
+        width: 100%;
+        background-color: #000000;
     }
-  })*/
+`
+
+function OAuth2RedirectHandeler() {
 
   const Rest_api_key='b791159adc4e18ab175997922e03859a' //REST API KEY
   const redirect_uri = 'http://localhost:3000/api/oauth/token' //Redirect URI
@@ -72,7 +64,7 @@ function OAuth2RedirectHandeler() {
 
   return (
       <div>
-          Loading...
+          <GlobalStyle/>
       </div>
   );
 }

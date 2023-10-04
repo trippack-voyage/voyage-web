@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import styled, {keyframes} from 'styled-components';
+import styled, {keyframes, createGlobalStyle} from 'styled-components';
 import LoginLogo from '../img/kakao_login_large_wide.png';
-import { createGlobalStyle } from "styled-components";
 import SuitCase from '../img/suitcases.png';
 
 export const GlobalStyle = createGlobalStyle`
