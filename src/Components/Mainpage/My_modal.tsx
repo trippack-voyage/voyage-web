@@ -6,9 +6,6 @@ import { useRecoilState } from "recoil";
 
 export const ModalContainer = styled.div`
   display: flex;
-  flex-flow: row wrep;
-  justify-content: center;
-  align-items: center;
   z-index: 50;
 `;
 
@@ -17,27 +14,44 @@ export const ModalView = styled.div.attrs(props => ({
 }))`
   text-align: center;
   text-decoration: none;
-  padding: 40px 20px;
   background-color: white;
-  border-radius: 30px;
-  width: 100px;
-  height: 100px;
-  box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
-  margin: 25px;
+  border-radius: 20px;
+  width: 180px;
+  height: 200px;
+  margin: -10px 50px -200px auto;
+  padding: 10px;
+  background-color: black;
+`;
+
+const My_list = styled.div`
+  font-size: 23px;
+  color: gray;
+  padding: 14px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover{
+    color: #ea5028;
+  }
+`;
+
+//구분선
+const My_list_line = styled.div`
+  border: 1px solid gray;
+  width: 50px;
+  margin: 5px auto;
 `;
 
 function My_modal() {
 
-    const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
-
-   const openModalHandler = () => {
-    setIsOpen(false);
-  };
-
   return (
       <ModalContainer>
         <ModalView>
-
+          <My_list>로그아웃</My_list>
+          <My_list_line></My_list_line>
+          <My_list>회원탈퇴</My_list>
+          <My_list_line></My_list_line>
+          <My_list>문의하기</My_list>
         </ModalView>
       </ModalContainer>
   );

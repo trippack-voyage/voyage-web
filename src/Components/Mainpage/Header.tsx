@@ -93,7 +93,11 @@ function Header() {
   const [isOpen, setIsOpen] = useRecoilState(myModalState);
 
   const openModalHandler = () => {
-    setIsOpen(true);
+
+    if(isOpen === false)
+      setIsOpen(true);
+    else
+      setIsOpen(false);
     console.log(isOpen);
   };
   
