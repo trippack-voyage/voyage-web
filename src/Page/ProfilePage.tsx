@@ -11,10 +11,10 @@ const ProfileCover = styled.div`
 //프로필
 const ProfileText = styled.div`
   font-family: Inter;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 65px;
-  margin-top: 50px;
+  margin-top: 40px;
 `;
 
 const InputImgIc1 = styled.div<{ img: string }>`
@@ -91,6 +91,7 @@ function ProfilePage() {
   };
   
   const startService = () => {
+    //프로필 전송
     /*
     const formData = new FormData();
     formData.append("name", name);
@@ -116,7 +117,7 @@ function ProfilePage() {
           e.preventDefault();
         });
     */
-    //navigate('/SignUp3', { replace: true });
+    navigate('/bag-list', { replace: true });
   }
 
   return (
