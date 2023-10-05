@@ -6,6 +6,7 @@ import { bagAddModalState } from "../recoil/atoms";
 import { createGlobalStyle } from "styled-components";
 
 import {FaPlus} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -14,6 +15,13 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
         background-color: #f6f8f9;
     }
+
+    @font-face {
+      font-family: 'KBO-Dia-Gothic_bold';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+  }
 `
 const Main_header = styled.div`
   margin-top: 60px;
@@ -22,10 +30,11 @@ const Main_header = styled.div`
 `;
 
 const Main_title = styled.span`
-  font-size: 45px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 500;
   margin: 0px auto;
   color: #1a1919;
+  font-family: 'KBO-Dia-Gothic_bold';
 `;
 
 const Main_title_line = styled.div`
@@ -81,6 +90,8 @@ export const ModalView = styled.div.attrs(props => ({
   width: 400px;
   height: 550px;
 `;
+
+
 
 function Mainpage() {
 
