@@ -1,19 +1,30 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import BackArrow from '../svg/back_arrow.svg'
 //import axios from 'axios';
 //border: 2px solid #000;
 
 const ProfileCover = styled.div`
   text-align: center;
 `;
-
-const ProfileText = styled.div`
-  font-family: Inter;
-  font-size: 60px;
+const ProfileBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+`;
+const BackIcon = styled.img`
+  width: 70px;
+`;
+const ProfileText = styled.span`
+  font-size: 50px;
   font-weight: 700;
   line-height: 65px;
-  margin-top: 50px;
+`;
+const LogoutText = styled.span`
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 65px;
 `;
 const InputImgIc1 = styled.div<{ img: string }>`
   border: 2px solid #000;
@@ -69,7 +80,8 @@ function MyPage() {
   const navigate = useNavigate();
   const [profileImg, setProfileImg] = useState<File>();
   const [name, setName] = useState<String>();
-  
+  const viewName = '닉네임';
+
   const updateProfile = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -86,7 +98,15 @@ function MyPage() {
     setName(e.target.value);
   };
   
-  const startService = () => {
+  const onBack = () => {
+    navigate('/bag-list', { replace: true });
+  }
+  const onLogout = () => {
+    //로그아웃 전송
+    navigate('/', { replace: true });
+  }
+  const ProfileEdit = () => {
+    //수정사항 전송 (닉네임과 사진)
     /*
     const formData = new FormData();
     formData.append("name", name);
@@ -112,22 +132,27 @@ function MyPage() {
           e.preventDefault();
         });
     */
-    //navigate('/SignUp3', { replace: true });
+    //navigate('', { replace: true });
   }
 
   return (
     <ProfileCover>
+      
       <form method="post" encType="multipart/form-data">
-        <ProfileText>프로필 수정</ProfileText>
+        <ProfileBox>
+          <BackIcon src={BackArrow} onClick={onBack}/>
+          <ProfileText>프로필 수정</ProfileText>
+          <LogoutText onClick={onLogout}>로그아웃</LogoutText>
+        </ProfileBox>
         {profileImg? (
           <label htmlFor="profile"><InputImgIc1 id="profileImg" img={URL.createObjectURL(profileImg)} /></label>
         ): (
           <label htmlFor="profile"><InputImgIc2 id="profileImg" /></label>
         )} 
         <InputImg type="file" id="profile" accept="image/*" onChange={updateProfile} />
-        <InputName type="text" id="name" placeholder="닉네임" autoComplete="off" onChange={updateName} />
+        <InputName type="text" id="name" placeholder={viewName} autoComplete="off" onChange={updateName} />
       </form>
-      <ClearBtn onClick={startService}>완료</ClearBtn>
+      <ClearBtn onClick={ProfileEdit}>완료</ClearBtn>
     </ProfileCover>
   );
 }
