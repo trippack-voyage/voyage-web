@@ -12,11 +12,11 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #000000;
     }
     @font-face {
-      font-family: 'KBO-Dia-Gothic_bold';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
-      font-weight: 700;
+      font-family: 'TAEBAEKfont';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKfont.woff2') format('woff2');
+      font-weight: normal;
       font-style: normal;
-  }
+    }
 `
 
 //how to pack
@@ -26,7 +26,7 @@ const Logo_text2 = styled.div`
   font-weight: 700;
   text-align: center;
   margin-top: 150px;
-  font-family: 'KBO-Dia-Gothic_bold';
+  font-family: 'TAEBAEKfont';
 `;
 
 //together ...
@@ -36,7 +36,7 @@ const Logo_text3 = styled.div`
   font-weight: 700;
   text-align: center;
   margin-top: 20px;
-  font-family: 'KBO-Dia-Gothic_bold';
+  font-family: 'TAEBAEKfont';
 `;
 
 //함께 ...
@@ -46,7 +46,7 @@ const Logo_text4 = styled.div`
   font-weight: 500;
   text-align: center;
   margin-top: 30px;
-  font-family: 'KBO-Dia-Gothic_bold';
+  font-family: 'TAEBAEKfont';
 `;
 
 //로고 박스
@@ -61,7 +61,7 @@ const Logo_text = styled.div`
   text-align: center;
   font-size: 150px;
   font-weight: 700;
-  font-family: 'KBO-Dia-Gothic_bold';
+  font-family: 'TAEBAEKfont';
 `;
 
 //로그인 버튼 박스

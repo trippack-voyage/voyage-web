@@ -4,6 +4,7 @@ import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
 import { useRecoilState } from "recoil";
 import { bagAddModalState } from "../recoil/atoms";
 import { createGlobalStyle } from "styled-components";
+import SuitCase from '../Components/Mainpage/SuitCase';
 
 import {FaPlus} from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -17,11 +18,11 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     @font-face {
-      font-family: 'KBO-Dia-Gothic_bold';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
-      font-weight: 700;
+      font-family: 'TAEBAEKfont';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKfont.woff2') format('woff2');
+      font-weight: normal;
       font-style: normal;
-  }
+    }
 `
 const Main_header = styled.div`
   margin-top: 60px;
@@ -34,17 +35,18 @@ const Main_title = styled.span`
   font-weight: 500;
   margin: 0px auto;
   color: #1a1919;
-  font-family: 'KBO-Dia-Gothic_bold';
+  font-family: 'TAEBAEKfont';
 `;
 
 const Main_title_line = styled.div`
   border: 2px solid #1a1919;
   width: 100px;
-  margin: 50px auto;
+  margin: 30px auto;
 `;
 
 const Main_main = styled.div`
-  margin-top: 50px;
+  margin-top: 40px;
+  border: 1px solid black;
 `;
 
 //가방 추가 버튼 박스
@@ -109,6 +111,7 @@ function Mainpage() {
         <Main_title_line></Main_title_line>
       </Main_header>
       <Main_main>
+        <SuitCase/>
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <FaPlus size="40"></FaPlus>

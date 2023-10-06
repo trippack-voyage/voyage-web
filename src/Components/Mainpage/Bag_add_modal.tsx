@@ -1,8 +1,17 @@
 import React, {useState} from 'react';
-import styled from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
 import { bagAddModalState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
+
+export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'TAEBAEKfont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+`
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -45,6 +54,7 @@ const Bag_add_modal_header_text = styled.span`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-family: 'TAEBAEKfont';
 `;
 //모달 메인
 const Bag_add_modal_main = styled.div`
@@ -136,6 +146,7 @@ const Bag_add_modal_btn = styled.button`
   width: 450px;
   height: 66px;
   color: white;
+  font-family: 'TAEBAEKfont';
 `;
 
 function Bag_add_modal() {
@@ -148,6 +159,7 @@ function Bag_add_modal() {
 
   return (
       <ModalContainer>
+        <GlobalStyle/>
         <ModalView>
             <Bag_add_modal_header>
                 <Bag_add_modal_backarrow>

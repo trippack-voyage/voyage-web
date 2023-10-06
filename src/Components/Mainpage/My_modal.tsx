@@ -1,8 +1,17 @@
 import React, {useState} from 'react';
-import styled from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
 import { bagAddModalState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
+
+export const GlobalStyle = createGlobalStyle`
+    @font-face {
+      font-family: 'TAEBAEKfont';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKfont.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+`
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -27,9 +36,9 @@ const My_list = styled.div`
   font-size: 23px;
   color: gray;
   padding: 14px;
-  font-weight: 700;
+  font-weight: 500;
   cursor: pointer;
-
+  font-family: 'TAEBAEKfont';
   &:hover{
     color: #ea5028;
   }
@@ -46,6 +55,7 @@ function My_modal() {
 
   return (
       <ModalContainer>
+        <GlobalStyle/>
         <ModalView>
           <My_list>로그아웃</My_list>
           <My_list_line></My_list_line>
