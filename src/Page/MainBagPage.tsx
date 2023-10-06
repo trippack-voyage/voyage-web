@@ -47,6 +47,9 @@ const Main_title_line = styled.div`
 const Main_main = styled.div`
   margin-top: 40px;
   border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 //가방 추가 버튼 박스
@@ -111,6 +114,11 @@ function Mainpage() {
         <Main_title_line></Main_title_line>
       </Main_header>
       <Main_main>
+        <SuitCase/>
+        <SuitCase/>
+        <SuitCase/>
+        <SuitCase/>
+        <SuitCase/>
         <SuitCase/>
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>

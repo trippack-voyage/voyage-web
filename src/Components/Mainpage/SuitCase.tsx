@@ -17,8 +17,9 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 const SuitCase_container = styled.div`
-    border: 1px solid red;
     width: 300px;
+    margin-left: 30px;
+    margin-bottom: 50px;
 `;
 
 //손잡이
@@ -65,6 +66,7 @@ const Del_icon = styled.div`
 const Bag_info_box = styled.div`
     display: flex;
     font-family: 'S-CoreDream-3Light';
+    margin-top: 5px;
 `;
 
 //가방 정보 아이콘
