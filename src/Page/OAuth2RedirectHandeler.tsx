@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled, {keyframes, createGlobalStyle} from 'styled-components';
-import SuitCase from '../img/suitcases.png';
+import { user_id, user_name, user_profile } from "../recoil/atoms";
+import { useRecoilState } from "recoil";
  
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -19,11 +19,16 @@ function OAuth2RedirectHandeler() {
   const Rest_api_key='b791159adc4e18ab175997922e03859a' //REST API KEY
   const redirect_uri = 'http://localhost:3000/api/oauth/token' //Redirect URI
   const grant_type = 'authorization_code';
-  const url = new URL(window.location.href);
-  const code = url.searchParams.get("code");
+  const params = new URL(document.location.toString()).searchParams;
+  const code = params.get("code");
   const navi = useNavigate();
 
+  const [userId, setUserId] = useRecoilState(user_id);
+  const [userName, setUserName] = useRecoilState(user_name);
+  const [userProfile, setUserProfile] = useRecoilState(user_profile);
+
   useEffect(() => {
+    console.log("시작");
     axios.post(
       `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&code=${code}`,
       {},
@@ -51,8 +56,15 @@ function OAuth2RedirectHandeler() {
             },
           }
         ).then((res) => {
-          console.log("데이터 성공: ");
           console.log(res);
+          const {data} = res;
+          const {id} = data;
+          const {nickname} = data.properties;
+          const {profile_image} = data.properties;
+          setUserId(id);
+          setUserName(nickname);
+          setUserProfile(profile_image);
+
           navi("/bag-list");
 
         });

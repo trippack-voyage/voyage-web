@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import styled, {createGlobalStyle} from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { user_id, user_name, user_profile } from "../../recoil/atoms";
+import { useRecoilValue } from "recoil";
 
 export const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -51,13 +54,38 @@ const My_list_line = styled.div`
 
 function My_modal() {
 
+  const navi = useNavigate();
+
+  const userId= useRecoilValue(user_id);
+
+  const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
+
+  function unlink_res() {
+    console.log(userId);
+
+    axios.post(
+      KAKAO_UNLINK_URI,
+      {
+        target_id_type : "user_id",
+        target_id : `${userId}` //  해당 사용자 id(카카오 회원번호)
+      }, 
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "KakaoAK " + '1b5fbe1f05888072ec75005c783c9120',
+        },
+      }
+    );
+    navi("/");
+  }
+
   return (
       <ModalContainer>
         <GlobalStyle/>
         <ModalView>
           <My_list>로그아웃</My_list>
           <My_list_line></My_list_line>
-          <My_list>회원탈퇴</My_list>
+          <My_list onClick={unlink_res}>회원탈퇴</My_list>
           <My_list_line></My_list_line>
           <My_list><Link to="https://open.kakao.com/o/sJexJjMf">문의하기</Link></My_list>
         </ModalView>

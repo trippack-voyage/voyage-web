@@ -7,7 +7,7 @@ import { createGlobalStyle } from "styled-components";
 import SuitCase from '../Components/Mainpage/SuitCase';
 
 import {FaPlus} from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -99,11 +99,18 @@ export const ModalView = styled.div.attrs(props => ({
 
 function Mainpage() {
 
+  //가방 추가 버튼 클릭 시
   const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
 
   const openModalHandler = () => {
     setIsOpen(true);
   };
+
+  //캐리어 클릭 시
+  const navi = useNavigate();
+  function onClickSuitCase(){
+    navi("/bagpack");
+  }
 
   return (
     <div>
@@ -113,12 +120,12 @@ function Mainpage() {
         <Main_title_line></Main_title_line>
       </Main_header>
       <Main_main>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
+        <Link to="/bagpack"><SuitCase/></Link>
+        <Link to="/bagpack"><SuitCase/></Link>
+        <Link to="/bagpack"><SuitCase/></Link>
+        <Link to="/bagpack"><SuitCase/></Link>
+        <Link to="/bagpack"><SuitCase/></Link>
+        <Link to="/bagpack"><SuitCase/></Link>
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <FaPlus size="40"></FaPlus>

@@ -151,7 +151,7 @@ const Bag_add_modal_btn = styled.button`
 
 function Bag_add_modal() {
 
-    const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
+  const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
 
    const openModalHandler = () => {
     setIsOpen(false);
