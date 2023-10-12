@@ -46,7 +46,6 @@ const Main_title_line = styled.div`
 
 const Main_main = styled.div`
   margin-top: 40px;
-  border: 1px solid black;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

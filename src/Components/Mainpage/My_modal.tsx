@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import styled, {createGlobalStyle} from "styled-components";
-import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
-import { bagAddModalState } from "../../recoil/atoms";
-import { useRecoilState } from "recoil";
+import { Link } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -61,7 +59,7 @@ function My_modal() {
           <My_list_line></My_list_line>
           <My_list>회원탈퇴</My_list>
           <My_list_line></My_list_line>
-          <My_list>문의하기</My_list>
+          <My_list><Link to="https://open.kakao.com/o/sJexJjMf">문의하기</Link></My_list>
         </ModalView>
       </ModalContainer>
   );
