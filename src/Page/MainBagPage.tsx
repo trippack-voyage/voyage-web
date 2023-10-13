@@ -49,6 +49,7 @@ const Main_main = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  z-index: -1;
 `;
 
 //가방 추가 버튼 박스
@@ -71,31 +72,6 @@ const Bag_add_btn = styled.button`
   right : 3rem;
   bottom : 5%;
 `;
-
-export const ModalContainer = styled.div`
-  display: flex;
-  flex-flow: row wrep;
-  justify-content: center;
-  align-items: center;
-  z-index: 50;
-  margin-top: -220px;
-`;
-
-export const ModalView = styled.div.attrs(props => ({
-  role: 'dialog'
-}))`
-  text-align: center;
-  text-decoration: none;
-  padding: 30px 90px;
-  background-color: white;
-  border-radius: 30px;
-  color: #f18851;
-  border: 1px solid black;
-  width: 400px;
-  height: 550px;
-`;
-
-
 
 function Mainpage() {
 

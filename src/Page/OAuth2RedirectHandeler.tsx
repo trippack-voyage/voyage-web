@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-color: #000000;
+        background-color: white;
     }
 `
 
@@ -26,6 +26,8 @@ function OAuth2RedirectHandeler() {
   const [userId, setUserId] = useRecoilState(user_id);
   const [userName, setUserName] = useRecoilState(user_name);
   const [userProfile, setUserProfile] = useRecoilState(user_profile);
+
+  const [isAccount, setIsAccount] = useState(false);
 
   useEffect(() => {
     console.log("시작");
@@ -45,7 +47,22 @@ function OAuth2RedirectHandeler() {
 
       if(access_token){
         console.log(`${access_token}`);
-
+/*
+        if(isAccount === false){
+          axios(
+            {
+              url: '/api/oauth/token',
+              method: 'post',
+              data: {
+                data1: `${access_token}`
+              } , 
+              baseURL: 'http://localhost:8080',
+            }
+          ).then(function (response) {
+            console.log("백엔드 전달");
+          });
+        }
+*/
         axios.post(
           "https://kapi.kakao.com/v2/user/me",
           {},

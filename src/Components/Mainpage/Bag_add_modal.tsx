@@ -18,8 +18,7 @@ export const ModalContainer = styled.div`
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
-  z-index: 50;
-  margin-top: -280px;
+  margin-top: -1115px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -32,8 +31,9 @@ export const ModalView = styled.div.attrs(props => ({
   border-radius: 30px;
   width: 550px;
   height: 620px;
-  box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+  box-shadow: gray 0px 0px 15px;
   margin: 25px;
+  z-index: 1;
 `;
 
 //모달 헤더
