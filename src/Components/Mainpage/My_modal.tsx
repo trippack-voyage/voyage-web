@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled, {createGlobalStyle} from "styled-components";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { user_id, user_name, user_profile } from "../../recoil/atoms";
+import { user_accessToken, user_id, user_name, user_profile } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 
 export const GlobalStyle = createGlobalStyle`
@@ -57,9 +57,11 @@ function My_modal() {
   const navi = useNavigate();
 
   const userId= useRecoilValue(user_id);
+  const userAccessToken = useRecoilValue(user_accessToken);
 
   const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
 
+  //회원탈퇴
   function unlink_res() {
     console.log(userId);
 
@@ -79,11 +81,29 @@ function My_modal() {
     navi("/");
   }
 
+  function logout(){
+    axios({
+      method: 'POST',
+      url: 'https://kapi.kakao.com/v1/user/logout',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": `Bearer ${userAccessToken}`
+      },
+    }).then(() => {
+      window.location.href = '/'
+    }).catch((e) => {
+      console.log('e : ' , e)
+      if (e.response.data.code === -401) {
+        window.location.href = '/'
+      }
+    })
+  }
+
   return (
       <ModalContainer>
         <GlobalStyle/>
         <ModalView>
-          <My_list>로그아웃</My_list>
+          <My_list onClick={logout}>로그아웃</My_list>
           <My_list_line></My_list_line>
           <My_list onClick={unlink_res}>회원탈퇴</My_list>
           <My_list_line></My_list_line>

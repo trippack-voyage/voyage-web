@@ -45,7 +45,7 @@ const SuitCase_box = styled.div`
 
 //가방 정보 컨테이너
 const Bag_info_container = styled.div`
-    margin-top: 120px;
+    margin-top: 130px;
 `;
 
 const Bag_icon_box = styled.div`
@@ -76,7 +76,7 @@ const Bag_icon = styled.div`
 
 //가방 정보
 const Bag_info = styled.div`
-    font-size: 22px;
+    font-size: 20px;
     margin-left: 0px;
     margin-right: 20px;
 `;

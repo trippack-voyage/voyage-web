@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled, {keyframes, createGlobalStyle} from 'styled-components';
-import { user_id, user_name, user_profile } from "../recoil/atoms";
+import { user_id, user_name, user_profile, user_accessToken } from "../recoil/atoms";
 import { useRecoilState } from "recoil";
  
 export const GlobalStyle = createGlobalStyle`
@@ -26,6 +26,7 @@ function OAuth2RedirectHandeler() {
   const [userId, setUserId] = useRecoilState(user_id);
   const [userName, setUserName] = useRecoilState(user_name);
   const [userProfile, setUserProfile] = useRecoilState(user_profile);
+  const [userAccessToken, setUserAccessToken] = useRecoilState(user_accessToken);
 
   const [isAccount, setIsAccount] = useState(false);
 
@@ -81,6 +82,7 @@ function OAuth2RedirectHandeler() {
           setUserId(id);
           setUserName(nickname);
           setUserProfile(profile_image);
+          setUserAccessToken(`${access_token}`);
 
           navi("/bag-list");
 

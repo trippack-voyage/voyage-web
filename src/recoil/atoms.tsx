@@ -30,3 +30,8 @@ export const user_profile = atom<String>({
   key: 'user_profile',
   default: "",
 });
+
+export const user_accessToken = atom<String>({
+  key: 'user_accessToken',
+  default: "",
+});
