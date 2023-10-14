@@ -16,9 +16,9 @@ export const myModalState = atom<boolean>({
 });
 
 //회원 정보
-export const user_id = atom<String>({
+export const user_id = atom<Number>({
   key: 'user_id',
-  default: "",
+  default: 0,
 });
 
 export const user_name = atom<String>({

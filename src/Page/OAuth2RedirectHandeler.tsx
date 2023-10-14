@@ -26,6 +26,7 @@ function OAuth2RedirectHandeler() {
   const [userId, setUserId] = useRecoilState(user_id);
   const [userName, setUserName] = useRecoilState(user_name);
   const [userProfile, setUserProfile] = useRecoilState(user_profile);
+  const [userEmail, setUserEmail] = useState("");
   const [userAccessToken, setUserAccessToken] = useRecoilState(user_accessToken);
 
   const [isAccount, setIsAccount] = useState(false);
@@ -48,22 +49,7 @@ function OAuth2RedirectHandeler() {
 
       if(access_token){
         console.log(`${access_token}`);
-/*
-        if(isAccount === false){
-          axios(
-            {
-              url: '/api/oauth/token',
-              method: 'post',
-              data: {
-                data1: `${access_token}`
-              } , 
-              baseURL: 'http://localhost:8080',
-            }
-          ).then(function (response) {
-            console.log("백엔드 전달");
-          });
-        }
-*/
+
         axios.post(
           "https://kapi.kakao.com/v2/user/me",
           {},
@@ -79,10 +65,12 @@ function OAuth2RedirectHandeler() {
           const {id} = data;
           const {nickname} = data.properties;
           const {profile_image} = data.properties;
+          const {email} = data.kakao_account;
           setUserId(id);
           setUserName(nickname);
           setUserProfile(profile_image);
           setUserAccessToken(`${access_token}`);
+          setUserEmail(`${email}`);
 
           navi("/bag-list");
 
@@ -92,6 +80,20 @@ function OAuth2RedirectHandeler() {
       }
     });
   },[])
+
+  if(isAccount === false){
+    axios(
+      {
+        url: '/kakao/oauth/token',
+        method: 'POST',
+        data: {
+          data1: userId, data2: userProfile, data3: userName, data4: userEmail, data5: "ROLE_USER"
+        } , 
+      }
+    ).then(function (response) {
+      console.log("백엔드 전달");
+    });
+   }
 
   return (
       <div>

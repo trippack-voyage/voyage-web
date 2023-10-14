@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
 import { useRecoilState } from "recoil";
 import { bagAddModalState } from "../recoil/atoms";
 import { createGlobalStyle } from "styled-components";
 import SuitCase from '../Components/Mainpage/SuitCase';
+import axios from 'axios';
 
 import {FaPlus} from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
@@ -73,7 +74,7 @@ const Bag_add_btn = styled.button`
   bottom : 5%;
 `;
 
-function Mainpage() {
+function MainBagPage() {
 
   //가방 추가 버튼 클릭 시
   const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
@@ -87,6 +88,17 @@ function Mainpage() {
   function onClickSuitCase(){
     navi("/bagpack");
   }
+
+  /*가방 리스트 가져오기*/
+  const [bag_list , SetBag_list] = useState([]);
+/*
+  useEffect(()=> {
+      axios.get('/study/list').then((res)=>{
+      SetBag_list(res.data)
+      console.log(res)
+      })
+      .catch(error => console.log(error))
+  },[])  */
 
   return (
     <div>
@@ -115,4 +127,4 @@ function Mainpage() {
   );
 }
 
-export default Mainpage;
+export default MainBagPage;
