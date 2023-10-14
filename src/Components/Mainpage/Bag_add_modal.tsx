@@ -19,7 +19,7 @@ export const ModalContainer = styled.div`
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
-  margin-top: -1115px;
+  margin-top: -1070px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -30,11 +30,12 @@ export const ModalView = styled.div.attrs(props => ({
   padding: 40px 20px;
   background-color: white;
   border-radius: 30px;
-  width: 550px;
-  height: 620px;
+  width: 500px;
+  height: 580px;
   box-shadow: gray 0px 0px 15px;
-  margin: 25px;
   z-index: 1;
+  margin-top: 10px;
+  margin-bottom: 43px;
 `;
 
 //모달 헤더
@@ -48,7 +49,7 @@ const Bag_add_modal_backarrow = styled.span`
 `;
 //모달 헤더 제목(가방추가하기)
 const Bag_add_modal_header_text = styled.span`
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 700;
   width: 260px;
   position: absolute;
@@ -74,11 +75,11 @@ const Bag_add_modal_input_box = styled.div`
 const Bag_add_modal_input = styled.input`
   border: 2px solid #1a1919;
   border-radius: 8px;
-  width: 450px;
-  height: 65px;
+  width: 400px;
+  height: 60px;
   padding: 5px 20px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
 
   &::placeholder{
     color: #c1c1c1;
@@ -88,9 +89,9 @@ const Bag_add_modal_input = styled.input`
 //시작날짜, 끝날짜
 const Bag_add_modal_input_text = styled.div`
   width: 110px;
-  font-size: 22px;
-  font-weight: 600;
-  margin-left: 35px;
+  font-size: 19px;
+  font-weight: 700;
+  margin-left: 40px;
   margin-right: auto;
   text-align: left;
 
@@ -102,11 +103,11 @@ const Bag_add_modal_input_text = styled.div`
 const Bag_add_modal_input_year = styled.input`
   border: 2px solid #1a1919;
   border-radius: 8px;
-  width: 150px;
-  height: 60px;
+  width: 120px;
+  height: 50px;
   padding: 5px 20px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
   text-align: center;
 
   &::placeholder{
@@ -117,11 +118,11 @@ const Bag_add_modal_input_year = styled.input`
 const Bag_add_modal_input_month_day = styled.input`
   border: 2px solid #1a1919;
   border-radius: 8px;
-  width: 120px;
-  height: 60px;
+  width: 100px;
+  height: 50px;
   padding: 5px 20px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
   text-align: center;
 
   &::placeholder{
@@ -131,7 +132,7 @@ const Bag_add_modal_input_month_day = styled.input`
 
 //날짜 구분선
 const Bag_add_modal_input_date_line = styled.div`
-  border: 2px solid #1a1919;
+  border: 1px solid #1a1919;
   width: 10px;
   margin: 0 10px 0 10px;
 `;
@@ -141,11 +142,11 @@ const Bag_add_modal_btn = styled.button`
   border: none;
   background-color: #1a1919;
   border-radius: 10px;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 700;
   margin-top: 10px;
-  width: 450px;
-  height: 66px;
+  width: 400px;
+  height: 60px;
   color: white;
   font-family: 'TAEBAEKfont';
 `;
@@ -207,7 +208,7 @@ function Bag_add_modal() {
         <ModalView>
             <Bag_add_modal_header>
                 <Bag_add_modal_backarrow>
-                    <Bag_add_arrow width="25" height="25" fill="orange" onClick={openModalHandler}/>
+                    <Bag_add_arrow width="20" height="20" onClick={openModalHandler}/>
                 </Bag_add_modal_backarrow>
                 <Bag_add_modal_header_text>가방 추가하기</Bag_add_modal_header_text>
             </Bag_add_modal_header>

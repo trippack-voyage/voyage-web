@@ -96,12 +96,20 @@ const Bag_line = styled.div`
     margin: 8px 20px 8px auto;
 `;
 
+//삭제 모달창--------------------------------------------
+const Bag_del_box = styled.div`
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+`;
+
 function SuitCase() {
 
     const navi = useNavigate();
 
     function onClick_del(){
         alert("삭제");
+
     }
 
     //캐리어 클릭 시
@@ -115,6 +123,7 @@ function SuitCase() {
             <SuitCase_box>
                 <Bag_icon_box>
                     <Del_icon onClick={onClick_del}><BsTrash3 size="20"/></Del_icon>
+                    
                     <Edit_icon><RxPencil2 size="20"/></Edit_icon>
                 </Bag_icon_box>
                 <Bag_info_container onClick={onClickSuitCase}>
