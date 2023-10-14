@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import styled, {createGlobalStyle} from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
-import { bagAddModalState } from "../../recoil/atoms";
-import { useRecoilState } from "recoil";
+import { bagAddModalState, user_id } from "../../recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import axios from 'axios';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -151,11 +152,54 @@ const Bag_add_modal_btn = styled.button`
 
 function Bag_add_modal() {
 
+  //닫기 버튼 클릭 시
   const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
 
    const openModalHandler = () => {
     setIsOpen(false);
   };
+
+  const [bagName, setBagName] = useState(""); //가방이름
+  const [location, setLocation] = useState(""); //여행 지역
+
+  const [sYear, setSyear] = useState("")
+  const [sMonth, setSmonth] = useState("")
+  const [sDay, setSday] = useState("")
+
+  const [eYear, setEyear] = useState("")
+  const [eMonth, setEmonth] = useState("")
+  const [eDay, setEday] = useState("")
+
+  const start_date = sYear + "." + sMonth + "." + sDay; //시작 날짜
+  const end_date = eYear + "." + eMonth + "." + eDay; //끝 날짜
+
+  const userId= useRecoilValue(user_id);
+
+  function onClick_addBag(){
+    if (bagName != "" && location != "" && sYear !="" && sMonth != "" && sDay != ""
+      && eYear !="" && eMonth != "" && eDay != "") {
+      axios({
+        url: `/bag/1`,
+        method: 'POST',
+        data: {
+          bagName: bagName,
+          location: location,
+          endDate: end_date,
+        },
+      }).then((response) => {
+        console.log(response.data);
+
+      }).catch((error) => {
+        console.error('AxiosError:', error);
+      });
+    }
+
+    else{
+      alert("입력값을 확인해주세요");
+    }
+
+    console.log(userId);
+  }
 
   return (
       <ModalContainer>
@@ -169,28 +213,52 @@ function Bag_add_modal() {
             </Bag_add_modal_header>
             <Bag_add_modal_main>
                 <Bag_add_modal_input_box>
-                    <Bag_add_modal_input placeholder='가방이름을 입력해주세요.'></Bag_add_modal_input>
+                    <Bag_add_modal_input 
+                      placeholder='가방이름을 입력해주세요.'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setBagName(e.target.value); }}>                        
+                    </Bag_add_modal_input>
                 </Bag_add_modal_input_box>
                 <Bag_add_modal_input_box>
-                    <Bag_add_modal_input placeholder='여행 지역을 입력해주세요.'></Bag_add_modal_input>
+                    <Bag_add_modal_input 
+                      placeholder='여행 지역을 입력해주세요.'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setLocation(e.target.value); }}>
+                    </Bag_add_modal_input>
                 </Bag_add_modal_input_box>
                 <Bag_add_modal_input_text>시작 날짜</Bag_add_modal_input_text>
                 <Bag_add_modal_input_box>
-                    <Bag_add_modal_input_year placeholder='YYYY'></Bag_add_modal_input_year>
+                    <Bag_add_modal_input_year 
+                      placeholder='YYYY'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSyear(e.target.value); }}>
+                    </Bag_add_modal_input_year>
                     <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day placeholder='MM'></Bag_add_modal_input_month_day>
+                    <Bag_add_modal_input_month_day 
+                      placeholder='MM'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSmonth(e.target.value); }}>                      
+                    </Bag_add_modal_input_month_day>
                     <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day placeholder='DD'></Bag_add_modal_input_month_day>
+                    <Bag_add_modal_input_month_day 
+                      placeholder='DD'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSday(e.target.value); }}>
+                    </Bag_add_modal_input_month_day>
                 </Bag_add_modal_input_box>
                 <Bag_add_modal_input_text>끝 날짜</Bag_add_modal_input_text>
                 <Bag_add_modal_input_box>
-                    <Bag_add_modal_input_year placeholder='YYYY'></Bag_add_modal_input_year>
+                    <Bag_add_modal_input_year 
+                      placeholder='YYYY'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEyear(e.target.value); }}>
+                    </Bag_add_modal_input_year>
                     <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day placeholder='MM'></Bag_add_modal_input_month_day>
+                    <Bag_add_modal_input_month_day 
+                      placeholder='MM'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEmonth(e.target.value); }}>
+                    </Bag_add_modal_input_month_day>
                     <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day placeholder='DD'></Bag_add_modal_input_month_day>
+                    <Bag_add_modal_input_month_day 
+                      placeholder='DD'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEday(e.target.value); }}>
+                    </Bag_add_modal_input_month_day>
                 </Bag_add_modal_input_box>
-                <Bag_add_modal_btn>추가하기</Bag_add_modal_btn>
+                <Bag_add_modal_btn onClick={onClick_addBag}>추가하기</Bag_add_modal_btn>
             </Bag_add_modal_main>
         </ModalView>
       </ModalContainer>

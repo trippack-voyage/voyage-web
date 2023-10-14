@@ -6,6 +6,7 @@ import {BsBookmark, BsTrash3} from 'react-icons/bs';
 import {HiOutlineDotsHorizontal} from 'react-icons/hi';
 import {AiOutlineCheckSquare} from 'react-icons/ai';
 import {RxPencil2} from 'react-icons/rx';
+import { useNavigate } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -28,7 +29,6 @@ const SuitCase_handle = styled.div`
     border-radius: 20px;
     height: 90px;
     width: 120px;
-    index: -1;
     margin: 0 auto;
 `;
 
@@ -45,7 +45,9 @@ const SuitCase_box = styled.div`
 
 //가방 정보 컨테이너
 const Bag_info_container = styled.div`
-    margin-top: 130px;
+    margin-top: 5px;
+    height: 285px;
+    border: 1px solid white;
 `;
 
 const Bag_icon_box = styled.div`
@@ -69,6 +71,13 @@ const Bag_info_box = styled.div`
     margin-top: 5px;
 `;
 
+//가방 정보 박스(가방 이름)
+const Bag_info_box1 = styled.div`
+    display: flex;
+    font-family: 'S-CoreDream-3Light';
+    margin-top: 115px;
+`;
+
 //가방 정보 아이콘
 const Bag_icon = styled.div`
     margin: auto 8px auto auto;
@@ -88,43 +97,54 @@ const Bag_line = styled.div`
 `;
 
 function SuitCase() {
-  return (
-    <SuitCase_container>
-        <GlobalStyle/>
-        <SuitCase_handle/>
-        <SuitCase_box>
-            <Bag_icon_box>
-                <Del_icon><BsTrash3 size="20"/></Del_icon>
-                <Edit_icon><RxPencil2 size="20"/></Edit_icon>
-            </Bag_icon_box>
-            <Bag_info_container>
-                <Bag_info_box>
-                    <Bag_icon><BsBookmark size="15"/></Bag_icon>
-                    <Bag_info>가방이름</Bag_info>
-                </Bag_info_box>
-                <Bag_line/>
-                <Bag_info_box>
-                    <Bag_icon><IoLocationOutline size="15"/></Bag_icon>
-                    <Bag_info>여행지역</Bag_info>
-                </Bag_info_box>
-                <Bag_line/>
-                <Bag_info_box>
-                    <Bag_icon><IoCalendarOutline size="15"/></Bag_icon>
-                    <Bag_info>2023.10.10</Bag_info>
-                </Bag_info_box>
-                <Bag_info_box>
-                    <Bag_icon><HiOutlineDotsHorizontal size="15"/></Bag_icon>
-                    <Bag_info>2023.10.12</Bag_info>
-                </Bag_info_box>
-                <Bag_line/>
-                <Bag_info_box>
-                    <Bag_icon><AiOutlineCheckSquare size="15"/></Bag_icon>
-                    <Bag_info>짐싸는 중</Bag_info>
-                </Bag_info_box>
-            </Bag_info_container>
-        </SuitCase_box>
-    </SuitCase_container>
-  );
+
+    const navi = useNavigate();
+
+    function onClick_del(){
+        alert("삭제");
+    }
+
+    //캐리어 클릭 시
+    function onClickSuitCase(){
+        navi("/bagpack");
+    }
+    return (
+        <SuitCase_container>
+            <GlobalStyle/>
+            <SuitCase_handle/>
+            <SuitCase_box>
+                <Bag_icon_box>
+                    <Del_icon onClick={onClick_del}><BsTrash3 size="20"/></Del_icon>
+                    <Edit_icon><RxPencil2 size="20"/></Edit_icon>
+                </Bag_icon_box>
+                <Bag_info_container onClick={onClickSuitCase}>
+                    <Bag_info_box1>
+                        <Bag_icon><BsBookmark size="15"/></Bag_icon>
+                        <Bag_info>가방이름</Bag_info>
+                    </Bag_info_box1>
+                    <Bag_line/>
+                    <Bag_info_box>
+                        <Bag_icon><IoLocationOutline size="15"/></Bag_icon>
+                        <Bag_info>여행지역</Bag_info>
+                    </Bag_info_box>
+                    <Bag_line/>
+                    <Bag_info_box>
+                        <Bag_icon><IoCalendarOutline size="15"/></Bag_icon>
+                        <Bag_info>2023.10.10</Bag_info>
+                    </Bag_info_box>
+                    <Bag_info_box>
+                        <Bag_icon><HiOutlineDotsHorizontal size="15"/></Bag_icon>
+                        <Bag_info>2023.10.12</Bag_info>
+                    </Bag_info_box>
+                    <Bag_line/>
+                    <Bag_info_box>
+                        <Bag_icon><AiOutlineCheckSquare size="15"/></Bag_icon>
+                        <Bag_info>짐싸는 중</Bag_info>
+                    </Bag_info_box>
+                </Bag_info_container>
+            </SuitCase_box>
+        </SuitCase_container>
+    );
 }
 
 export default SuitCase;

@@ -81,7 +81,7 @@ function OAuth2RedirectHandeler() {
     });
   },[])
 
-  if(isAccount === false){
+/*  if(isAccount === false){
     axios(
       {
         url: '/kakao/oauth/token',
@@ -93,7 +93,7 @@ function OAuth2RedirectHandeler() {
     ).then(function (response) {
       console.log("백엔드 전달");
     });
-   }
+   }*/
 
   return (
       <div>

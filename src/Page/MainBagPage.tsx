@@ -83,12 +83,6 @@ function MainBagPage() {
     setIsOpen(true);
   };
 
-  //캐리어 클릭 시
-  const navi = useNavigate();
-  function onClickSuitCase(){
-    navi("/bagpack");
-  }
-
   /*가방 리스트 가져오기*/
   const [bag_list , SetBag_list] = useState([]);
 /*
@@ -108,12 +102,12 @@ function MainBagPage() {
         <Main_title_line></Main_title_line>
       </Main_header>
       <Main_main>
-        <Link to="/bagpack"><SuitCase/></Link>
-        <Link to="/bagpack"><SuitCase/></Link>
-        <Link to="/bagpack"><SuitCase/></Link>
-        <Link to="/bagpack"><SuitCase/></Link>
-        <Link to="/bagpack"><SuitCase/></Link>
-        <Link to="/bagpack"><SuitCase/></Link>
+        <SuitCase/>
+        <SuitCase/>
+        <SuitCase/>
+        <SuitCase/>
+        <SuitCase/>
+        <SuitCase/>
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <FaPlus size="40"></FaPlus>
