@@ -1,12 +1,19 @@
 import React from 'react';
 import styled, {createGlobalStyle} from 'styled-components';
 
+//아이콘
 import {IoLocationOutline , IoCalendarOutline} from 'react-icons/io5'; 
 import {BsBookmark, BsTrash3} from 'react-icons/bs';
 import {HiOutlineDotsHorizontal} from 'react-icons/hi';
 import {AiOutlineCheckSquare} from 'react-icons/ai';
 import {RxPencil2} from 'react-icons/rx';
+import {PiAirplaneTilt} from 'react-icons/pi';
+
 import { useNavigate } from 'react-router-dom';
+
+//recoil
+import { useRecoilState } from "recoil";
+import { bagUpdateState, bagDelState, bagState } from "../../recoil/atoms";
 
 export const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -96,35 +103,40 @@ const Bag_line = styled.div`
     margin: 8px 20px 8px auto;
 `;
 
-//삭제 모달창--------------------------------------------
-const Bag_del_box = styled.div`
-    border: 1px solid black;
-    width: 200px;
-    height: 200px;
-`;
-
 function SuitCase() {
 
     const navi = useNavigate();
 
+    const [isbagDel, setIsbagDel] = useRecoilState(bagDelState);
     function onClick_del(){
-        alert("삭제");
+        setIsbagDel(true);
+    }
 
+    const [isbagUpdate, setIsbagUpdate] = useRecoilState(bagUpdateState);
+    function onClick_update(){
+        setIsbagUpdate(true);
+    }
+
+    
+    const [isbagState, setIsbagState] = useRecoilState(bagState);
+    function onClick_airplain(){
+        setIsbagState(true);
     }
 
     //캐리어 클릭 시
     function onClickSuitCase(){
         navi("/bagpack");
     }
+
     return (
         <SuitCase_container>
             <GlobalStyle/>
             <SuitCase_handle/>
             <SuitCase_box>
                 <Bag_icon_box>
-                    <Del_icon onClick={onClick_del}><BsTrash3 size="20"/></Del_icon>
-                    
-                    <Edit_icon><RxPencil2 size="20"/></Edit_icon>
+                    <Del_icon onClick={onClick_del}><BsTrash3 size="20"/></Del_icon>                    
+                    <Edit_icon onClick={onClick_update}><RxPencil2 size="20"/></Edit_icon>
+                    <Del_icon onClick={onClick_airplain}><PiAirplaneTilt size="21"/></Del_icon>
                 </Bag_icon_box>
                 <Bag_info_container onClick={onClickSuitCase}>
                     <Bag_info_box1>

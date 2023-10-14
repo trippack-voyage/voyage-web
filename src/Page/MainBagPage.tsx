@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
-import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
-import { useRecoilState } from "recoil";
-import { bagAddModalState } from "../recoil/atoms";
 import { createGlobalStyle } from "styled-components";
-import SuitCase from '../Components/Mainpage/SuitCase';
 import axios from 'axios';
-
 import {FaPlus} from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
+
+//recoil
+import { useRecoilState, useRecoilValue } from "recoil";
+import { bagAddModalState, bagUpdateState, bagDelState, bagState } from "../recoil/atoms";
+//component 가져오기
+import SuitCase from '../Components/Mainpage/SuitCase';
+import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
+import Bag_update_modal from '../Components/Mainpage/Bag_update_modal';
+import Bag_delete_modal from '../Components/Mainpage/Bag_delete_modal';
+import Bag_state_modal from '../Components/Mainpage/Bag_state_modal';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -83,6 +88,10 @@ function MainBagPage() {
     setIsOpen(true);
   };
 
+  const isbagUpdate = useRecoilValue(bagUpdateState);
+  const isbagDel = useRecoilValue(bagDelState);
+  const isbagState = useRecoilValue(bagState);
+
   /*가방 리스트 가져오기*/
   const [bag_list , SetBag_list] = useState([]);
 /*
@@ -116,6 +125,15 @@ function MainBagPage() {
       </Main_main>
       {isOpen ? 
         <Bag_add_modal></Bag_add_modal>
+      : null}
+      {isbagUpdate ? 
+        <Bag_update_modal></Bag_update_modal>
+      : null}
+      {isbagDel ? 
+        <Bag_delete_modal></Bag_delete_modal>
+      : null}
+      {isbagState ? 
+        <Bag_state_modal></Bag_state_modal>
       : null}
     </div>
   );

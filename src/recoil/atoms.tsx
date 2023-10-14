@@ -1,7 +1,23 @@
 import { atom } from 'recoil';
 
-export const myModalState = atom<boolean>({
+//모달창 관리-----------------------------------
+export const myModalState = atom<boolean>({ //my 모달창
   key: 'myModalState',
+  default: false,
+});
+
+export const bagUpdateState = atom<boolean>({ //가방 수정
+  key: 'bagUpdateState',
+  default: false,
+});
+
+export const bagDelState = atom<boolean>({ //가방 삭제
+  key: 'bagDelState',
+  default: false,
+});
+
+export const bagState = atom<boolean>({ //가방 상태
+  key: 'bagState',
   default: false,
 });
 
