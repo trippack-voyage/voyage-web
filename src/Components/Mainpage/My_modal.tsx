@@ -62,6 +62,7 @@ function My_modal() {
   const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
 
   function unlink_res() {
+    //카카오 회원삭제
     /*axios.post(
       KAKAO_UNLINK_URI,
       {
