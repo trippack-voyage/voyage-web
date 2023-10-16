@@ -66,11 +66,27 @@ function OAuth2RedirectHandeler() {
           const {nickname} = data.properties;
           const {profile_image} = data.properties;
           const {email} = data.kakao_account;
-          setUserId(id);
-          setUserName(nickname);
-          setUserProfile(profile_image);
+          setUserId(`${id}`);
+          setUserName(`${nickname}`);
+          setUserProfile(`${profile_image}`);
           setUserAccessToken(`${access_token}`);
           setUserEmail(`${email}`);
+
+          if (isAccount === false) {
+            axios({
+              url: '/kakao/oauth/token',
+              method: 'GET',
+              params: {
+                kakaoId: id,
+                kakaoProfileImg: profile_image,
+                kakaoNickname: nickname,
+                kakaoEmail: email,
+                userRole: "ROLE_USER"
+              }
+            }).then(function (response) {
+              localStorage.setItem("kakaoId", id);
+            });
+          }
 
           navi("/bag-list");
 
@@ -80,20 +96,6 @@ function OAuth2RedirectHandeler() {
       }
     });
   },[])
-
-/*  if(isAccount === false){
-    axios(
-      {
-        url: '/kakao/oauth/token',
-        method: 'POST',
-        data: {
-          data1: userId, data2: userProfile, data3: userName, data4: userEmail, data5: "ROLE_USER"
-        } , 
-      }
-    ).then(function (response) {
-      console.log("백엔드 전달");
-    });
-   }*/
 
   return (
       <div>

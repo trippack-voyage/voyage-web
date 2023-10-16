@@ -53,14 +53,20 @@ const Set_inside_box = styled.div`
 
 function BackpackSide() {
 
-    //main 클릭시
+    //아이디 클릭시
     const navigate = useNavigate();
     function onClick_main(){
         navigate("/bagpack");
     }
 
+    //친구 관리
     function onClick_friendSet(){
         navigate("/friend-set");
+    }
+
+    //CHAT GPT
+    function onClick_chatgpt(){
+        navigate("/chat-gpt");
     }
 
     return (
@@ -70,7 +76,7 @@ function BackpackSide() {
             </Friend_list_box>
             <Set_box>
                 <Set_inside_box onClick={onClick_friendSet}>친구 관리</Set_inside_box>
-                <Set_inside_box>짐도우미(GPT)</Set_inside_box>
+                <Set_inside_box onClick={onClick_chatgpt}>짐도우미(GPT)</Set_inside_box>
             </Set_box>
         </Side_box>
     );

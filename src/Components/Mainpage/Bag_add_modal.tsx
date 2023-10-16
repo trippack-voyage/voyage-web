@@ -4,6 +4,7 @@ import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
 import { bagAddModalState, user_id } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -171,25 +172,28 @@ function Bag_add_modal() {
   const [eMonth, setEmonth] = useState("")
   const [eDay, setEday] = useState("")
 
-  const start_date = sYear + "." + sMonth + "." + sDay; //시작 날짜
-  const end_date = eYear + "." + eMonth + "." + eDay; //끝 날짜
+  const start_date = sYear + "-" + sMonth + "-" + sDay; //시작 날짜
+  const end_date = eYear + "-" + eMonth + "-" + eDay; //끝 날짜
 
-  const userId= useRecoilValue(user_id);
+  //const userId = useRecoilValue(user_id);
+  const userId = localStorage.getItem("kakaoId");
 
   function onClick_addBag(){
     if (bagName != "" && location != "" && sYear !="" && sMonth != "" && sDay != ""
       && eYear !="" && eMonth != "" && eDay != "") {
-      axios({
-        url: `/bag/1`,
-        method: 'POST',
-        data: {
-          bagName: bagName,
-          location: location,
-          endDate: end_date,
-        },
-      }).then((response) => {
-        console.log(response.data);
 
+      axios({
+        url: `/bag/${userId}`,
+        method: 'POST',
+        data : {
+          bagName: bagName,
+          endDate: end_date,
+          location: location,
+          startDate: start_date,
+      }
+
+      }).then((response) => {
+        console.log("백엔드 전달 완료");
       }).catch((error) => {
         console.error('AxiosError:', error);
       });
@@ -198,8 +202,6 @@ function Bag_add_modal() {
     else{
       alert("입력값을 확인해주세요");
     }
-
-    console.log(userId);
   }
 
   return (

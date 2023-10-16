@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
 import { useNavigate } from 'react-router-dom';
 import {IoArrowBack} from "react-icons/io5";
+import ChatInputBox from '../Components/BagPack/ChatGPT/InputBox';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -27,16 +28,22 @@ const Bagpack_main_box = styled.div`
 const Bagpack_main_header = styled.div`
     display: flex;
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 40px;
     font-weight: 700;
 `;
 
+const Bagpack_main_text = styled.div`
+    margin-top: 8px;
+    font-size: 18px;
+    color: gray;
+`;
+
 const Friend_list_box = styled.div`
     display: flex;
-    margin-top: 10px;
+    margin-top: 18px;
     margin-bottom: 10px;
-    height: 500px;
+    height: 450px;
     width: 1000px;
     flex-direction: row;
     flex-wrap: wrap;
@@ -130,7 +137,7 @@ function FriendSet() {
         alert("링크가 복사되었습니다.");
     }
 
-    const [friend_list, setFriend_list] = useState([1, 2, 3]);
+    const [friend_list, setFriend_list] = useState([1, 2, 3, 4, 5]);
     const [friend_state, setFriend_state] = useState([false, false, false]);
 
     let [btnActive, setBtnActive] = useState();
@@ -158,23 +165,13 @@ function FriendSet() {
                 <BagPackSide/>
                 <Bagpack_main_box>
                     <IoArrowBack size="50" onClick={onClickBack}/>
-                    <Bagpack_main_header>친구 관리</Bagpack_main_header>
+                    <Bagpack_main_header>짐 도우미(GPT)</Bagpack_main_header>
+                    <Bagpack_main_text>짐 도우미(GPT)를 이용해 짐을 쌀 때 필요한 정보를 얻어보세요!</Bagpack_main_text>
                     <Friend_list_box>
-                        {friend_list.map(function(a,i){
-                            return(    
-                            <Prifile_box 
-                                onClick={() => toggleActive(i)} 
-                                className={(friend_state[i] === false ? " active" : "")}
-                            >
-                                <Profile_img></Profile_img>
-                                <Profile_name>닉네임</Profile_name>
-                            </Prifile_box>
-                            )
-                        })}
+
                     </Friend_list_box>
                     <FriendSet_main_footer>
-                        <Friend_delete_btn onClick={onClick_deleteBtn}>친구 삭제하기</Friend_delete_btn>
-                        <Friend_add_btn onClick={onClick_addBtn}>친구 추가하기</Friend_add_btn>
+                        <ChatInputBox></ChatInputBox>
                     </FriendSet_main_footer>
                 </Bagpack_main_box>
             </Bagpack_main>

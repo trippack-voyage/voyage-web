@@ -56,16 +56,13 @@ function My_modal() {
 
   const navi = useNavigate();
 
-  const userId= useRecoilValue(user_id);
+  const userId= localStorage.getItem("kakaoId");
   const userAccessToken = useRecoilValue(user_accessToken);
 
   const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
 
-  //회원탈퇴
   function unlink_res() {
-    console.log(userId);
-
-    axios.post(
+    /*axios.post(
       KAKAO_UNLINK_URI,
       {
         target_id_type : "user_id",
@@ -77,10 +74,18 @@ function My_modal() {
           Authorization: "KakaoAK " + '1b5fbe1f05888072ec75005c783c9120',
         },
       }
-    );
-    navi("/");
+    );*/
+
+    axios.delete('/kakao/delete/' + `${userId}`)
+    .then(response => {
+        console.log('success:',response);
+    }).catch(e => {
+        console.log('error:', e)
+    })
+    //navi("/");
   }
 
+  //로그아웃
   function logout(){
     axios({
       method: 'POST',

@@ -22,9 +22,9 @@ export const bagState = atom<boolean>({ //가방 상태
 });
 
 //회원 정보-----------------------------
-export const user_id = atom<Number>({
+export const user_id = atom<any>({
   key: 'user_id',
-  default: 0,
+  default: "",
 });
 
 export const user_name = atom<String>({

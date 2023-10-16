@@ -7,6 +7,7 @@ import MainBagPage from './Page/MainBagPage';
 
 import Bagpack from './Page/Bagpack';
 import FriendSet from './Page/FriendSet';
+import ChatGPT from './Page/ChatGPT';
 import { GlobalStyle } from './GlobalStyle';
 import StartPage from './Page/StartPage';
 import ProfilePage from './Page/ProfilePage';
@@ -30,6 +31,7 @@ function App() {
           {/* Header,Footer를 안 보여주고 싶은 컴포넌트 */}
           <Route path="/bagpack" element={<Bagpack />} /> {/*짐 설정*/}
           <Route path="/friend-set" element={<FriendSet />} /> {/*친구 설정*/}
+          <Route path="/chat-gpt" element={<ChatGPT />} /> {/*chat gpt*/}
           <Route path="/" element={<StartPage />} /> {/*시작페이지 */}
           <Route path="api/oauth/token" element={<OAuth2RedirectHandeler />}></Route>
         </Routes>

@@ -94,14 +94,14 @@ function MainBagPage() {
 
   /*가방 리스트 가져오기*/
   const [bag_list , SetBag_list] = useState([]);
-/*
+
   useEffect(()=> {
-      axios.get('/study/list').then((res)=>{
+      axios.get('/bag/list').then((res)=>{
       SetBag_list(res.data)
       console.log(res)
       })
       .catch(error => console.log(error))
-  },[])  */
+  },[])  
 
   return (
     <div>
