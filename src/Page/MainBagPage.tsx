@@ -29,6 +29,13 @@ export const GlobalStyle = createGlobalStyle`
       font-weight: normal;
       font-style: normal;
     }
+
+    @font-face {
+      font-family: 'S-CoreDream-3Light';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+  }
 `
 const Main_header = styled.div`
   margin-top: 60px;
@@ -79,6 +86,21 @@ const Bag_add_btn = styled.button`
   bottom : 5%;
 `;
 
+//가방 없을 때 문구
+const Bag_none = styled.div`
+  margin: 100px auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1710px;
+`;
+
+const Bag_none_text = styled.div`
+  font-size: 20px;
+  margin-top: 20px;
+  font-family: S-CoreDream-3Light;
+  text-align: center;
+`;
+
 function MainBagPage() {
   interface IList {
     bagName: string,
@@ -127,15 +149,24 @@ function MainBagPage() {
         <Main_title_line></Main_title_line>
       </Main_header>
       <Main_main>
-        {bag_list.map(function(item,i){
-          return(
-            <SuitCase
-              bagName={item.bagName}
-              location={item.location}
-              start_date={item.start_date}
-              end_date={item.end_date}
-              status={item.status}/>
-          )})}
+        {bag_list.length === 0 ? 
+          <Bag_none>
+            <Bag_none_text>아직 가방이 없습니다.</Bag_none_text>
+            <Bag_none_text>가방을 추가해보세요!</Bag_none_text>
+          </Bag_none>:
+          <div>
+            {bag_list.map(function(item,i){
+              return(
+                <SuitCase
+                  bagName={item.bagName}
+                  location={item.location}
+                  start_date={item.start_date}
+                  end_date={item.end_date}
+                  status={item.status}/> 
+              )}
+            )}
+          </div>
+        }
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <FaPlus size="40"></FaPlus>
