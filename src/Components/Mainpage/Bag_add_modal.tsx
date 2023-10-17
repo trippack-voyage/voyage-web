@@ -191,7 +191,7 @@ function Bag_add_modal() {
       axios({
         url: `/bag/${kakaoId}`,
         method: 'POST',
-        headers: { "Content-Type": 'Application/json'},
+        headers: { "Content-Type": "Application/json;charset=UTF-8"},
         data:{
           location: requestData.location,
           bagName: requestData.bagName,

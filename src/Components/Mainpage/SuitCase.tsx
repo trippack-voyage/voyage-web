@@ -52,7 +52,7 @@ const SuitCase_box = styled.div`
 
 //가방 정보 컨테이너
 const Bag_info_container = styled.div`
-    margin-top: 5px;
+    margin-top: 40px;
     height: 285px;
     border: 1px solid white;
 `;
@@ -148,11 +148,6 @@ function SuitCase( {
             <GlobalStyle/>
             <SuitCase_handle/>
             <SuitCase_box>
-                <Bag_icon_box>
-                    <Del_icon onClick={onClick_del}><BsTrash3 size="20"/></Del_icon>                    
-                    <Edit_icon onClick={onClick_update}><RxPencil2 size="20"/></Edit_icon>
-                    <Del_icon onClick={onClick_airplain}><PiAirplaneTilt size="21"/></Del_icon>
-                </Bag_icon_box>
                 <Bag_info_container onClick={onClickSuitCase}>
                     <Bag_info_box1>
                         <Bag_icon><BsBookmark size="15"/></Bag_icon>
