@@ -43,6 +43,7 @@ export default function InputBox() {
         axios({
             url: '/chat-gpt/question',
             method: 'POST',
+            headers:{"Content-Type": 'text/plain'},
             data: {
                 question: inputValue
             }

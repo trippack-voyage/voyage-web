@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useParams } from 'react-router-dom';
 import styled, {createGlobalStyle} from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
 import { bagDelState, user_id } from "../../recoil/atoms";
@@ -19,7 +20,7 @@ export const ModalContainer = styled.div`
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
-  margin-top: -1000px;
+  margin-top: -500px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -35,7 +36,7 @@ export const ModalView = styled.div.attrs(props => ({
   box-shadow: gray 0px 0px 15px;
   z-index: 1;
   margin-top: 10px;
-  margin-bottom: 243px;
+  margin-bottom: 210px;
 `;
 
 //모달 헤더
@@ -82,14 +83,42 @@ const Bag_del_btn = styled.button`
   margin-left: 10px;
 `;
 
-function Bag_delete_modal() {
+
+function Bag_delete_modal(){
 
   //닫기 버튼 클릭 시
   const [isbagDel, setIsbagDel] = useRecoilState(bagDelState);
+  const bag_id = useParams().bagId;
 
    const openModalHandler = () => {
     setIsbagDel(false);
   };
+
+  function onClickDelete(){
+    /*axios.delete(`/bag/${bag_id}`)
+    .then(response => {
+        console.log('success:',response);
+    }).catch(e => {
+        console.log('error:', e)
+    })*/
+  axios.delete(`/bag/${bag_id}`, {
+    data: {
+      bagId: `${bag_id}`
+    },
+    
+  })
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      console.log(bag_id);
+    });
+  }
 
   return (
       <ModalContainer>
@@ -101,7 +130,7 @@ function Bag_delete_modal() {
             <Bag_add_modal_main>
               한 번 삭제된 가방은 다시 되돌릴 수 없어요!
               <Btn_container>
-                <Bag_del_btn>삭제</Bag_del_btn>
+                <Bag_del_btn onClick={onClickDelete}>삭제</Bag_del_btn>
                 <Bag_del_btn onClick={openModalHandler}>취소</Bag_del_btn>
               </Btn_container>
             </Bag_add_modal_main>

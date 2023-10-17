@@ -11,9 +11,6 @@ import { bagAddModalState, bagUpdateState, bagDelState, bagState } from "../reco
 //component 가져오기
 import SuitCase from '../Components/Mainpage/SuitCase';
 import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
-import Bag_update_modal from '../Components/Mainpage/Bag_update_modal';
-import Bag_delete_modal from '../Components/Mainpage/Bag_delete_modal';
-import Bag_state_modal from '../Components/Mainpage/Bag_state_modal';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -105,9 +102,10 @@ function MainBagPage() {
   interface IList {
     bagName: string,
     location: string,
-    start_date: string,
-    end_date: string,
-    status: string
+    startDate: string,
+    endDate: string,
+    status: string,
+    bagId: number
   }
 
   //가방 추가 버튼 클릭 시
@@ -160,9 +158,10 @@ function MainBagPage() {
                 <SuitCase
                   bagName={item.bagName}
                   location={item.location}
-                  start_date={item.start_date}
-                  end_date={item.end_date}
-                  status={item.status}/> 
+                  start_date={item.startDate}
+                  end_date={item.endDate}
+                  status={item.status}
+                  bagId={item.bagId}/> 
               )}
             )}
           </div>
@@ -175,15 +174,6 @@ function MainBagPage() {
       </Main_main>
       {isOpen ? 
         <Bag_add_modal></Bag_add_modal>
-      : null}
-      {isbagUpdate ? 
-        <Bag_update_modal></Bag_update_modal>
-      : null}
-      {isbagDel ? 
-        <Bag_delete_modal></Bag_delete_modal>
-      : null}
-      {isbagState ? 
-        <Bag_state_modal></Bag_state_modal>
       : null}
     </div>
   );

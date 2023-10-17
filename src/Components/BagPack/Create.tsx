@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import axios from 'axios';
 
 const ItemCreateContainer = styled.div`
   padding: 30px 70px;
@@ -45,6 +46,22 @@ interface InputTextProps {
     onSubmit,
     inputText,
   }: InputTextProps) {
+
+    function onClick_Item(){
+      axios({
+        url: '/pack',
+        method: 'POST',
+        data:{
+          packName: `${inputText}`
+        }
+  
+      }).then((response) => {
+        console.log(response.data);
+        console.log(`${inputText}`);
+      }).catch((error) => {
+        console.error('AxiosError:', error);
+      });
+    }
     return (
       <ItemCreateContainer>
         <form onSubmit={(event) => onSubmit(event)}>
@@ -56,7 +73,7 @@ interface InputTextProps {
               value={inputText}
             />
             <ItemAddBtn_box>
-              <ItemAddBtn type="submit">추가</ItemAddBtn>
+              <ItemAddBtn type="submit" onClick={onClick_Item}>추가</ItemAddBtn>
             </ItemAddBtn_box>
           </ItemInputContainer>
         </form>

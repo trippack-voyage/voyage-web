@@ -108,6 +108,7 @@ interface IProps {
     start_date: string;
     end_date: string;
     status: string;
+    bagId: number;
   }
   
 function SuitCase( {
@@ -115,7 +116,8 @@ function SuitCase( {
     location,
     start_date,
     end_date,
-    status
+    status,
+    bagId
   }: IProps){
 
     const navi = useNavigate();
@@ -138,7 +140,7 @@ function SuitCase( {
 
     //캐리어 클릭 시
     function onClickSuitCase(){
-        navi("/bagpack");
+        navi(`/bagpack/${bagId}`);
     }
 
     return (

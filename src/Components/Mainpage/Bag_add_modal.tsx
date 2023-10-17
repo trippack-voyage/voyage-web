@@ -20,7 +20,7 @@ export const ModalContainer = styled.div`
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
-  margin-top: -1070px;
+  margin-top: -500px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -34,7 +34,7 @@ export const ModalView = styled.div.attrs(props => ({
   width: 500px;
   height: 580px;
   box-shadow: gray 0px 0px 15px;
-  z-index: 1;
+  z-index: 5;
   margin-top: 10px;
   margin-bottom: 43px;
 `;
@@ -172,8 +172,8 @@ function Bag_add_modal() {
   const [eMonth, setEmonth] = useState("")
   const [eDay, setEday] = useState("")
 
-  const start_date = sYear + "-" + sMonth + "-" + sDay; //시작 날짜
-  const end_date = eYear + "-" + eMonth + "-" + eDay; //끝 날짜
+  const startDate = sYear + "-" + sMonth + "-" + sDay; //시작 날짜
+  const endDate = eYear + "-" + eMonth + "-" + eDay; //끝 날짜
 
   //const userId = useRecoilValue(user_id);
   const kakaoId = localStorage.getItem("kakaoId");
@@ -182,16 +182,22 @@ function Bag_add_modal() {
     if (bagName != "" && location != "" && sYear !="" && sMonth != "" && sDay != ""
       && eYear !="" && eMonth != "" && eDay != "") {
 
+      const requestData = {
+        location: location,
+        bagName: bagName,
+        startDate: startDate,
+        endDate: endDate
+      };
       axios({
-        url: '/bag/' + `${Number(kakaoId)}`,
+        url: `/bag/${kakaoId}`,
         method: 'POST',
+        headers: { "Content-Type": 'Application/json'},
         data:{
-          bagName: bagName,
-          location: location,
-          startDate: start_date,
-          endDate: end_date
-        }
-
+          location: requestData.location,
+          bagName: requestData.bagName,
+          startDate: requestData.startDate,
+          endDate: requestData.endDate
+        },
       }).then((response) => {
         console.log(response);
       }).catch((error) => {

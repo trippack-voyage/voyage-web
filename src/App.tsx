@@ -29,7 +29,7 @@ function App() {
         </Routes>
         <Routes>
           {/* Header,Footer를 안 보여주고 싶은 컴포넌트 */}
-          <Route path="/bagpack" element={<Bagpack />} /> {/*짐 설정*/}
+          <Route path="/bagpack/:bagId" element={<Bagpack />} /> {/*짐 설정*/}
           <Route path="/friend-set" element={<FriendSet />} /> {/*친구 설정*/}
           <Route path="/chat-gpt" element={<ChatGPT />} /> {/*chat gpt*/}
           <Route path="/" element={<StartPage />} /> {/*시작페이지 */}
