@@ -43,11 +43,8 @@ export default function InputBox() {
         axios({
             url: '/chat-gpt/question',
             method: 'POST',
-            headers: {
-                "Content-Type":"application/json"  //전달하는 데이터가 JSON형태임을 알려줌
-            },
             data: {
-                question: JSON.stringify(inputValue)
+                question: inputValue
             }
         }).then(function (response) {
                 console.log(inputValue);

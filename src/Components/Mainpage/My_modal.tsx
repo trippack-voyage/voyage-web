@@ -56,18 +56,18 @@ function My_modal() {
 
   const navi = useNavigate();
 
-  const userId= localStorage.getItem("kakaoId");
+  const kakaoId = localStorage.getItem("kakaoId");
   const userAccessToken = useRecoilValue(user_accessToken);
 
   const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
 
   function unlink_res() {
     //카카오 회원삭제
-    /*axios.post(
+    axios.post(
       KAKAO_UNLINK_URI,
       {
         target_id_type : "user_id",
-        target_id : `${userId}` //  해당 사용자 id(카카오 회원번호)
+        target_id : `${kakaoId}` //  해당 사용자 id(카카오 회원번호)
       }, 
       {
         headers: {
@@ -75,15 +75,15 @@ function My_modal() {
           Authorization: "KakaoAK " + '1b5fbe1f05888072ec75005c783c9120',
         },
       }
-    );*/
+    );
 
-    axios.delete('/kakao/delete/' + `${userId}`)
+    axios.delete('/kakao/delete/' + `${Number(kakaoId)}`)
     .then(response => {
         console.log('success:',response);
     }).catch(e => {
         console.log('error:', e)
     })
-    //navi("/");
+    navi("/");
   }
 
   //로그아웃

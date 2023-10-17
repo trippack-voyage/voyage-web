@@ -176,24 +176,24 @@ function Bag_add_modal() {
   const end_date = eYear + "-" + eMonth + "-" + eDay; //끝 날짜
 
   //const userId = useRecoilValue(user_id);
-  const userId = localStorage.getItem("kakaoId");
+  const kakaoId = localStorage.getItem("kakaoId");
 
   function onClick_addBag(){
     if (bagName != "" && location != "" && sYear !="" && sMonth != "" && sDay != ""
       && eYear !="" && eMonth != "" && eDay != "") {
 
       axios({
-        url: `/bag/${userId}`,
+        url: '/bag/' + `${Number(kakaoId)}`,
         method: 'POST',
-        data : {
+        data:{
           bagName: bagName,
-          endDate: end_date,
           location: location,
           startDate: start_date,
-      }
+          endDate: end_date
+        }
 
       }).then((response) => {
-        console.log("백엔드 전달 완료");
+        console.log(response);
       }).catch((error) => {
         console.error('AxiosError:', error);
       });

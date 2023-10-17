@@ -80,6 +80,13 @@ const Bag_add_btn = styled.button`
 `;
 
 function MainBagPage() {
+  interface IList {
+    bagName: string,
+    location: string,
+    start_date: string,
+    end_date: string,
+    status: string
+  }
 
   //가방 추가 버튼 클릭 시
   const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
@@ -93,14 +100,23 @@ function MainBagPage() {
   const isbagState = useRecoilValue(bagState);
 
   /*가방 리스트 가져오기*/
-  const [bag_list , SetBag_list] = useState([]);
+  const kakaoId = localStorage.getItem("kakaoId");
+  const [bag_list , SetBag_list] = useState<IList[]>([],);
 
   useEffect(()=> {
-      axios.get('/bag/list').then((res)=>{
-      SetBag_list(res.data)
-      console.log(res)
-      })
-      .catch(error => console.log(error))
+    axios({
+      url: '/bag/list',
+      method: 'GET',
+      params:{
+        kakaoId: `${kakaoId}`
+      }
+
+    }).then((response) => {
+      console.log(response.data);
+      SetBag_list(response.data);
+    }).catch((error) => {
+      console.error('AxiosError:', error);
+    });
   },[])  
 
   return (
@@ -111,12 +127,15 @@ function MainBagPage() {
         <Main_title_line></Main_title_line>
       </Main_header>
       <Main_main>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
-        <SuitCase/>
+        {bag_list.map(function(item,i){
+          return(
+            <SuitCase
+              bagName={item.bagName}
+              location={item.location}
+              start_date={item.start_date}
+              end_date={item.end_date}
+              status={item.status}/>
+          )})}
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <FaPlus size="40"></FaPlus>

@@ -102,8 +102,21 @@ const Bag_line = styled.div`
     width: 160px;
     margin: 8px 20px 8px auto;
 `;
-
-function SuitCase() {
+interface IProps {
+    bagName: string;
+    location: string;
+    start_date: string;
+    end_date: string;
+    status: string;
+  }
+  
+function SuitCase( {
+    bagName,
+    location,
+    start_date,
+    end_date,
+    status
+  }: IProps){
 
     const navi = useNavigate();
 
@@ -141,26 +154,26 @@ function SuitCase() {
                 <Bag_info_container onClick={onClickSuitCase}>
                     <Bag_info_box1>
                         <Bag_icon><BsBookmark size="15"/></Bag_icon>
-                        <Bag_info>가방이름</Bag_info>
+                        <Bag_info>{bagName}</Bag_info>
                     </Bag_info_box1>
                     <Bag_line/>
                     <Bag_info_box>
                         <Bag_icon><IoLocationOutline size="15"/></Bag_icon>
-                        <Bag_info>여행지역</Bag_info>
+                        <Bag_info>{location}</Bag_info>
                     </Bag_info_box>
                     <Bag_line/>
                     <Bag_info_box>
                         <Bag_icon><IoCalendarOutline size="15"/></Bag_icon>
-                        <Bag_info>2023.10.10</Bag_info>
+                        <Bag_info>{start_date}</Bag_info>
                     </Bag_info_box>
                     <Bag_info_box>
                         <Bag_icon><HiOutlineDotsHorizontal size="15"/></Bag_icon>
-                        <Bag_info>2023.10.12</Bag_info>
+                        <Bag_info>{end_date}</Bag_info>
                     </Bag_info_box>
                     <Bag_line/>
                     <Bag_info_box>
                         <Bag_icon><AiOutlineCheckSquare size="15"/></Bag_icon>
-                        <Bag_info>짐싸는 중</Bag_info>
+                        <Bag_info>{status==="AVAILABLE" ? "짐 싸는 중" : "짐 싸기 완료"}</Bag_info>
                     </Bag_info_box>
                 </Bag_info_container>
             </SuitCase_box>
