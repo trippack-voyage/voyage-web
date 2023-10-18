@@ -38,8 +38,8 @@ const Bagpack_main = styled.div`
 `;
 
 const Bagpack_main_box = styled.div`
-    margin-left: 120px;
-    margin-top: 50px;
+    margin-left: 70px;
+    margin-top: 20px;
 `;
 
 //헤더
