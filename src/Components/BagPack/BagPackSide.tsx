@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Side_box = styled.div`
     width: 450px;
-    height: 770px;
+    height: 860px;
     border-radius: 20px;
     background-color: white;
     margin: 17px 0px 17px 20px;
@@ -31,7 +31,7 @@ const Friend_inside_box = styled.div`
 `;
 
 const Set_box = styled.div`
-    margin-top: 20px;
+    margin-top: 100px;
 `;
 
 //친구 관리, GPT 박스
