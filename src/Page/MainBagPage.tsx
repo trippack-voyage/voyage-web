@@ -98,6 +98,12 @@ const Bag_none_text = styled.div`
   text-align: center;
 `;
 
+const Bag_container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 function MainBagPage() {
   interface IList {
     bagName: string,
@@ -152,7 +158,7 @@ function MainBagPage() {
             <Bag_none_text>아직 가방이 없습니다.</Bag_none_text>
             <Bag_none_text>가방을 추가해보세요!</Bag_none_text>
           </Bag_none>:
-          <div>
+          <Bag_container>
             {bag_list.map(function(item,i){
               return(
                 <SuitCase
@@ -164,7 +170,7 @@ function MainBagPage() {
                   bagId={item.bagId}/> 
               )}
             )}
-          </div>
+          </Bag_container>
         }
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>

@@ -176,7 +176,7 @@ function Bag_update_modal() {
 
   const userId= useRecoilValue(user_id);
 
-  function onClick_addBag(){
+  function onClick_updateBag(){
     if (bagName != "" && location != "" && sYear !="" && sMonth != "" && sDay != ""
       && eYear !="" && eMonth != "" && eDay != "") {
       axios({
@@ -259,7 +259,7 @@ function Bag_update_modal() {
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEday(e.target.value); }}>
                     </Bag_add_modal_input_month_day>
                 </Bag_add_modal_input_box>
-                <Bag_add_modal_btn onClick={onClick_addBag}>수정완료</Bag_add_modal_btn>
+                <Bag_add_modal_btn onClick={onClick_updateBag}>수정완료</Bag_add_modal_btn>
             </Bag_add_modal_main>
         </ModalView>
       </ModalContainer>

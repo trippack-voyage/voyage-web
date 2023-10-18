@@ -150,6 +150,10 @@ const Bag_add_modal_btn = styled.button`
   height: 60px;
   color: white;
   font-family: 'TAEBAEKfont';
+
+  &:hover{
+    color: #ea5028;
+  }
 `;
 
 function Bag_add_modal() {
@@ -189,7 +193,7 @@ function Bag_add_modal() {
         endDate: endDate
       };
       axios({
-        url: `/bag/${kakaoId}`,
+        url: `/bag/${Number(kakaoId)}`,
         method: 'POST',
         headers: { "Content-Type": "Application/json;charset=UTF-8"},
         data:{
@@ -200,6 +204,7 @@ function Bag_add_modal() {
         },
       }).then((response) => {
         console.log(response);
+        window.location.replace("/bag-list");
       }).catch((error) => {
         console.error('AxiosError:', error);
       });
