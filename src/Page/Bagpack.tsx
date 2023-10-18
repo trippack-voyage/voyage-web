@@ -69,37 +69,45 @@ const Bag_icon_box = styled.div`
 
 //가방 정보 수정 아이콘
 const Edit_icon = styled.div`
-    margin-left: 15px;
+    margin-left: auto;
+    padding: 15px 0px;
+    margin-right: 5px;
 `;
 
 //가방 삭제 아이콘
 const Del_icon = styled.div`
-    margin-left: 20px;
+    margin-left: 25px;
+    padding: 15px 0px;
 `;
 
 function Backpack() {
 
     const navi = useNavigate();
 
+    //뒤로가기 화살표 클릭시 메인으로 이동
     function onClickBack(){
         navi("/bag-list");
     }
 
+    //삭제 모달창
     const [isbagDel, setIsbagDel] = useRecoilState(bagDelState);
     function onClick_del(){
         setIsbagDel(true);
     }
 
+    //수정 모달창
     const [isbagUpdate, setIsbagUpdate] = useRecoilState(bagUpdateState);
     function onClick_update(){
         setIsbagUpdate(true);
     }
 
-    
+    //가방 상태 변경 모달창
     const [isbagState, setIsbagState] = useRecoilState(bagState);
     function onClick_airplain(){
         setIsbagState(true);
     }
+
+    const user_name = localStorage.getItem("userName");
 
     return (
         <div>
@@ -107,14 +115,14 @@ function Backpack() {
             <Bagpack_main>
                 <BagPackSide/>
                 <Bagpack_main_box>
-                    <IoArrowBack size="50" onClick={onClickBack}/>
                     <Bag_icon_box>
-                        <Del_icon onClick={onClick_del}><BsTrash3 size="20"/></Del_icon>                    
-                        <Edit_icon onClick={onClick_update}><RxPencil2 size="20"/></Edit_icon>
-                        <Del_icon onClick={onClick_airplain}><PiAirplaneTilt size="21"/></Del_icon>
+                        <IoArrowBack size="50" onClick={onClickBack}/>
+                        <Edit_icon onClick={onClick_update}><RxPencil2 size="25"/></Edit_icon>
+                        <Del_icon onClick={onClick_del}><BsTrash3 size="25"/></Del_icon>                    
+                        <Del_icon onClick={onClick_airplain}><PiAirplaneTilt size="26"/></Del_icon>
                     </Bag_icon_box>
                     <Bagpack_main_header>
-                        <Bagpack_main_header_text1>이미지</Bagpack_main_header_text1>
+                        <Bagpack_main_header_text1>{user_name}</Bagpack_main_header_text1>
                         <Bagpack_main_header_text2>의 가방</Bagpack_main_header_text2>
                     </Bagpack_main_header>
                     <ProhibitedItmes/>

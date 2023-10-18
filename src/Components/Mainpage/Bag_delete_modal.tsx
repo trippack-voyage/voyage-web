@@ -81,6 +81,10 @@ const Bag_del_btn = styled.button`
   color: white;
   font-family: 'TAEBAEKfont';
   margin-left: 10px;
+
+  &:hover{
+    color: #ea5028;
+  }
 `;
 
 
@@ -94,25 +98,17 @@ function Bag_delete_modal(){
     setIsbagDel(false);
   };
 
+  //삭제하기 버튼 클릭 시
   function onClickDelete(){
-    /*axios.delete(`/bag/${bag_id}`)
-    .then(response => {
-        console.log('success:',response);
-    }).catch(e => {
-        console.log('error:', e)
-    })*/
-  axios.delete(`/bag/${bag_id}`, {
-    data: {
-      bagId: `${bag_id}`
-    },
-    
-  })
+    axios.delete(`/bag/${bag_id}`, {
+      data: {
+        bagId: `${bag_id}`
+      },   
+    })
     .then(function (response) {
-      // handle success
       console.log(response);
     })
     .catch(function (error) {
-      // handle error
       console.log(error);
     })
     .then(function () {

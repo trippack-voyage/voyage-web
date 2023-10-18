@@ -85,6 +85,7 @@ function OAuth2RedirectHandeler() {
               }
             }).then(function (response) {
               localStorage.setItem("kakaoId", id);
+              localStorage.setItem("userName", nickname);
             });
           }
 
