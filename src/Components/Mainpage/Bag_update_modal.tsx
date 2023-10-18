@@ -204,7 +204,7 @@ function Bag_update_modal() {
   //수정 완료 버튼 클릭시
   function onClick_updateBag(){
     axios({
-      url: `/bag/${bag_id}`,
+      url: `/bag/${Number(bag_id)}`,
       method: 'PUT',
       data: {
         bagName: bagName,

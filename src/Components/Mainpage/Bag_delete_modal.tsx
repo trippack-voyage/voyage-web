@@ -20,7 +20,7 @@ export const ModalContainer = styled.div`
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
-  margin-top: -500px;
+  margin-top: -550px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -36,7 +36,7 @@ export const ModalView = styled.div.attrs(props => ({
   box-shadow: gray 0px 0px 15px;
   z-index: 1;
   margin-top: 10px;
-  margin-bottom: 210px;
+  margin-bottom: 230px;
 `;
 
 //모달 헤더
@@ -100,7 +100,7 @@ function Bag_delete_modal(){
 
   //삭제하기 버튼 클릭 시
   function onClickDelete(){
-    axios.delete(`/bag/${bag_id}`, {
+    axios.delete(`/bag/${Number(bag_id)}`, {
       data: {
         bagId: `${bag_id}`
       },   

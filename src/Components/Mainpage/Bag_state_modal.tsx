@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled, {createGlobalStyle} from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
 import axios from 'axios';
@@ -6,6 +6,7 @@ import axios from 'axios';
 //recoil
 import { bagState, user_id } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useParams } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -21,7 +22,7 @@ export const ModalContainer = styled.div`
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
-  margin-top: -500px;
+  margin-top: -550px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -37,7 +38,7 @@ export const ModalView = styled.div.attrs(props => ({
   box-shadow: gray 0px 0px 15px;
   z-index: 1;
   margin-top: 10px;
-  margin-bottom: 210px;
+  margin-bottom: 230px;
 `;
 
 //모달 헤더
@@ -82,6 +83,10 @@ const Bag_del_btn = styled.button`
   color: white;
   font-family: 'TAEBAEKfont';
   margin-left: 10px;
+
+  &:hover{
+    color: #ea5028;
+  }
 `;
 
 function Bag_state_modal() {
@@ -93,6 +98,34 @@ function Bag_state_modal() {
     setIsbagState(false);
   };
 
+  const bag_id = useParams().bagId;
+
+  useEffect(()=> {
+    axios({
+      url: `/bag/${bag_id}`,
+      method: 'GET'
+    }).then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.error('AxiosError:', error);
+    });
+  },[])  
+
+  //완료 버튼 클릭시
+  function onClick_Bagstate(){
+    axios({
+      url: `/bag/close/${Number(bag_id)}`,
+      method: 'PUT',
+    }).then((response) => {
+      console.log(response.data);
+
+    }).catch((error) => {
+      console.error('AxiosError:', error);
+    });
+    setIsbagState(false);
+  }
+
+
   return (
       <ModalContainer>
         <GlobalStyle/>
@@ -103,7 +136,7 @@ function Bag_state_modal() {
             <Bag_add_modal_main>
               짐 싸기가 완료되었나요?
               <Btn_container>
-                <Bag_del_btn>완료</Bag_del_btn>
+                <Bag_del_btn onClick={onClick_Bagstate}>완료</Bag_del_btn>
                 <Bag_del_btn onClick={openModalHandler}>취소</Bag_del_btn>
               </Btn_container>
             </Bag_add_modal_main>
