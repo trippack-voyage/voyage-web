@@ -176,8 +176,8 @@ function Bag_update_modal() {
   const [eMonth, setEmonth] = useState("")
   const [eDay, setEday] = useState("")
 
-  const [start_date, setStart_date] = useState(`${sYear} + "." + ${sMonth} + "." + ${sDay}`); //시작 날짜
-  const [end_date, setEnd_date] = useState(`${eYear} + "." + ${eMonth} + "." + ${eDay}`); //끝 날짜
+  const startDate = sYear + "-" + sMonth + "-" + sDay; //시작 날짜
+  const endDate = eYear + "-" + eMonth + "-" + eDay; //끝 날짜
 
   const bag_id = useParams().bagId; //주소에서 bagId가져오기
 
@@ -195,22 +195,24 @@ function Bag_update_modal() {
       setSday(response.data.startDate.substr(8, 2));
       setEyear(response.data.endDate.substr(0, 4));
       setEmonth(response.data.endDate.substr(5, 2));
-      setEday(response.data.endDate.substr(8, 2));
+      setEday(response.data.endDate.substr(8, 2));   
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
   },[])  
 
   //수정 완료 버튼 클릭시
-  function onClick_updateBag(){
+  function onClick_updateBag(){   
+    console.log(startDate);
+    console.log(endDate);
     axios({
       url: `/bag/${Number(bag_id)}`,
       method: 'PUT',
       data: {
         bagName: bagName,
         location: location,
-        startDate: start_date,
-        endDate: end_date,
+        startDate: startDate,
+        endDate: endDate,
       },
     }).then((response) => {
       console.log(response.data);
