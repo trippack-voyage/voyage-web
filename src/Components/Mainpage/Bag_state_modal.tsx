@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import styled, {createGlobalStyle} from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 //recoil
 import { bagState, user_id } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { useParams } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -112,13 +112,14 @@ function Bag_state_modal() {
   },[])  
 
   //완료 버튼 클릭시
+  const navi = useNavigate();
   function onClick_Bagstate(){
     axios({
       url: `/bag/close/${Number(bag_id)}`,
       method: 'PUT',
     }).then((response) => {
       console.log(response.data);
-
+      navi('/bag_list');
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
