@@ -21,6 +21,11 @@ export const bagState = atom<boolean>({ //가방 상태
   default: false,
 });
 
+export const bagId = atom<Number>({ //가방 일련번호
+  key: 'bagId',
+  default: 0,
+});
+
 //회원 정보-----------------------------
 export const user_id = atom<any>({
   key: 'user_id',
@@ -65,5 +70,11 @@ export const start_date = atom<String>({
 
 export const end_date = atom<String>({
   key: 'end_date',
+  default: "",
+});
+
+//chatGpt
+export const chat_response = atom<String>({
+  key: 'chat_response',
   default: "",
 });

@@ -5,6 +5,9 @@ import BagPackSide from '../Components/BagPack/BagPackSide';
 import { useNavigate } from 'react-router-dom';
 import {IoArrowBack} from "react-icons/io5";
 import ChatInputBox from '../Components/BagPack/ChatGPT/InputBox';
+//recoil
+import { chat_response } from '../recoil/atoms';
+import { useRecoilValue } from 'recoil';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -70,93 +73,23 @@ const FriendSet_main_footer = styled.div`
     margin-top: 30px;
 `;
 
-//친구 삭제 버튼
-const Friend_delete_btn = styled.button`
-    border: 1px solid black;
-    width: 300px;
-    height: 60px;
-    font-size: 22px;
-    font-weight: 700;
-    margin: auto 0 auto auto;
-    border-radius: 20px;
-    border: none;
-    background-color: #1a1919;
-    color: white;
-`;
-
-//친구 추가 버튼
-const Friend_add_btn = styled.button`
-    border: 1px solid black;
-    width: 300px;
-    height: 60px;
-    font-size: 22px;
-    font-weight: 700;
-    margin-left: 20px;
-    border-radius: 20px;
-    border: none;
-    background-color: #1a1919;
-    color: white;
-`;
-
-//프로필
-const Prifile_box = styled.div`
-    margin-right: 40px;
-    height: 170px;
-    border: 3px solid #FF541E;
-    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
-    border-radius: 10px;
-    padding: 10px 20px;
-
-    &.active{
-        border: none;
-        box-shadow: none;
-    }
-`;
-
-const Profile_img = styled.div`
-    background-color: lightgray;
-    width: 100px;
-    height: 100px;
-    border-radius: 60px;
-`;
-
-const Profile_name = styled.div`
-    margin-top: 20px;
+//응답 박스
+const Response_box = styled.div`
+    padding: 20px 30px;
     font-size: 20px;
-    font-weight: 500;
-    text-align: center;
+    word-break:break-all; 
+    line-height: 30px;
 `;
 
-function FriendSet() {
+function ChatGPT() {
 
-    function onClick_deleteBtn(){
-        alert("친구가 삭제되었습니다.");
-    }
-
-    function onClick_addBtn(){
-        alert("링크가 복사되었습니다.");
-    }
-
-    const [friend_list, setFriend_list] = useState([1, 2, 3, 4, 5]);
-    const [friend_state, setFriend_state] = useState([false, false, false]);
-
-    let [btnActive, setBtnActive] = useState();
-
-    const toggleActive = (e:any) => {
-        let copy = [...friend_state];
-
-        if(copy[e] == false)
-            copy[e] = true;
-        else
-            copy[e] = false;
-
-        setFriend_state(copy);
-    };
-
+    //메인 이동
     const navi = useNavigate();
     function onClickBack(){
         navi("/bag-list");
     }
+
+    const chat_res = useRecoilValue(chat_response);
 
     return (
         <div>
@@ -168,7 +101,7 @@ function FriendSet() {
                     <Bagpack_main_header>짐 도우미(GPT)</Bagpack_main_header>
                     <Bagpack_main_text>짐 도우미(GPT)를 이용해 짐을 쌀 때 필요한 정보를 얻어보세요!</Bagpack_main_text>
                     <Friend_list_box>
-
+                        <Response_box>{chat_res}</Response_box>
                     </Friend_list_box>
                     <FriendSet_main_footer>
                         <ChatInputBox></ChatInputBox>
@@ -179,5 +112,5 @@ function FriendSet() {
     );
   }
   
-  export default FriendSet;
+  export default ChatGPT;
   

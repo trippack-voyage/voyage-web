@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from "recoil";
+import { bagId } from "../../recoil/atoms";
 
 const Side_box = styled.div`
     width: 450px;
@@ -55,13 +57,14 @@ function BackpackSide() {
 
     //아이디 클릭시
     const navigate = useNavigate();
+    const bag_id = useRecoilValue(bagId);
     function onClick_main(){
-        navigate("/bagpack");
+        navigate("/bagpack/" + `${bag_id}`);
     }
 
     //친구 관리
     function onClick_friendSet(){
-        navigate("/friend-set");
+        navigate("/friend-set/" + `${bag_id}`);
     }
 
     //CHAT GPT

@@ -7,16 +7,13 @@ import EssentialItmes from '../Components/BagPack/EssentialItems';
 import AddItmes from '../Components/BagPack/AddItems';
 import FriendItmes from '../Components/BagPack/FriendItems';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from "recoil";
-import { bagDelState, bagState, bagUpdateState  } from "../recoil/atoms";
+import { useRecoilState } from "recoil";
+import { bagDelState, bagState, bagUpdateState, bagId } from "../recoil/atoms";
 //아이콘
-import {IoLocationOutline , IoCalendarOutline} from 'react-icons/io5'; 
-import {BsBookmark, BsTrash3} from 'react-icons/bs';
-import {HiOutlineDotsHorizontal} from 'react-icons/hi';
-import {AiOutlineCheckSquare} from 'react-icons/ai';
+import {BsTrash3} from 'react-icons/bs';
 import {RxPencil2} from 'react-icons/rx';
 import {PiAirplaneTilt} from 'react-icons/pi';
-
+//컴포넌트
 import Bag_update_modal from '../Components/Mainpage/Bag_update_modal';
 import Bag_delete_modal from '../Components/Mainpage/Bag_delete_modal';
 import Bag_state_modal from '../Components/Mainpage/Bag_state_modal';
@@ -83,6 +80,8 @@ const Del_icon = styled.div`
 function Backpack() {
 
     const navi = useNavigate();
+    const [bag, setBag] = useRecoilState(bagId);
+    setBag(Number(useParams().bagId));
 
     //뒤로가기 화살표 클릭시 메인으로 이동
     function onClickBack(){

@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {IoArrowBack} from "react-icons/io5";
+import axios from 'axios';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -126,8 +127,22 @@ function FriendSet() {
         alert("친구가 삭제되었습니다.");
     }
 
+    //친구 추가 버튼 클릭시
+    const bag_id = useParams().bagId;
     function onClick_addBtn(){
-        alert("링크가 복사되었습니다.");
+
+        axios({
+            url: '/invitations',
+            method: 'POST',
+            data:{
+                bagId: bag_id
+            },
+        }).then((response) => {
+            console.log(response);
+            alert("링크가 복사되었습니다!");
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
     }
 
     const [friend_list, setFriend_list] = useState([1, 2, 3]);
