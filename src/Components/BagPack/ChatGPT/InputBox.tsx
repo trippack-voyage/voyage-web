@@ -73,7 +73,6 @@ export default function InputBox() {
                     <ItemAddBtn onClick={onClickChat}>전송</ItemAddBtn>
                 </ItemAddBtn_box>
             </ItemInputContainer>
-            {responseText && <div>{responseText}</div>} {/* 응답 텍스트를 표시 */}
         </ItemCreateContainer>
     );
 }

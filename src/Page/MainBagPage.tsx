@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import axios from 'axios';
+//아이콘
 import {FaPlus} from 'react-icons/fa';
-import { useNavigate, Link } from 'react-router-dom';
-
+import {TiWeatherPartlySunny} from 'react-icons/ti';
 //recoil
 import { useRecoilState, useRecoilValue } from "recoil";
 import { bagAddModalState, bagUpdateState, bagDelState, bagState } from "../recoil/atoms";
@@ -83,12 +83,33 @@ const Bag_add_btn = styled.button`
   bottom : 5%;
 `;
 
+//날씨 버튼 박스
+const Weather_btn_box = styled.div`
+  width: 70px;
+  height: 70px;
+  margin: auto 30px auto auto;
+`;
+
+//날씨 버튼
+const Weather_btn = styled.button`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  font-size: 50px;
+  background-color: #1a1919;
+  border: none;
+  color: white;
+  position: fixed;
+  right : 3rem;
+  bottom : 18%;
+`;
+
 //가방 없을 때 문구
 const Bag_none = styled.div`
   margin: 100px auto;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 1710px;
+  width: 100%;
 `;
 
 const Bag_none_text = styled.div`
@@ -120,10 +141,6 @@ function MainBagPage() {
   const openModalHandler = () => {
     setIsOpen(true);
   };
-
-  const isbagUpdate = useRecoilValue(bagUpdateState);
-  const isbagDel = useRecoilValue(bagDelState);
-  const isbagState = useRecoilValue(bagState);
 
   /*가방 리스트 가져오기*/
   const kakaoId = localStorage.getItem("kakaoId");
@@ -177,6 +194,11 @@ function MainBagPage() {
             <FaPlus size="40"></FaPlus>
           </Bag_add_btn>
         </Bag_add_btn_box>
+        <Weather_btn_box>
+          <Weather_btn onClick={openModalHandler}>
+            <TiWeatherPartlySunny size="40"></TiWeatherPartlySunny>
+          </Weather_btn>
+        </Weather_btn_box>
       </Main_main>
       {isOpen ? 
         <Bag_add_modal></Bag_add_modal>

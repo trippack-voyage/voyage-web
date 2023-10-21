@@ -129,8 +129,9 @@ function FriendSet() {
 
     //친구 추가 버튼 클릭시
     const bag_id = useParams().bagId;
+    const [slag, setSlag] = useState("");
     function onClick_addBtn(){
-
+        //초대링크 생성
         axios({
             url: '/invitations',
             method: 'POST',
@@ -138,11 +139,24 @@ function FriendSet() {
                 bagId: bag_id
             },
         }).then((response) => {
-            console.log(response);
-            alert("링크가 복사되었습니다!");
+            console.log(response.data.slag); //slag값 추출
+            setSlag(response.data.slag); 
+
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
+
+        //초대링크 조회
+        axios({
+            url: `/invitations/${slag}`,
+            method: 'GET',
+          }).then((response) => {
+            console.log(response.data.bagId); //bagId 획득
+            navigator.clipboard.writeText(`http://localhost:8080/${response.data.bagId}`); //클립보드에 주소 복사
+            alert("링크가 복사되었습니다!");
+          }).catch((error) => {
+            console.error('AxiosError:', error);
+          });
     }
 
     const [friend_list, setFriend_list] = useState([1, 2, 3]);
