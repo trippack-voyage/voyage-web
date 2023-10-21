@@ -78,3 +78,9 @@ export const chat_response = atom<String>({
   key: 'chat_response',
   default: "",
 });
+
+//weather
+export const weatherModalState = atom<boolean>({ //가방 추가 모달
+  key: 'weatherModalState',
+  default: false,
+});

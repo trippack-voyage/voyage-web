@@ -6,11 +6,12 @@ import axios from 'axios';
 import {FaPlus} from 'react-icons/fa';
 import {TiWeatherPartlySunny} from 'react-icons/ti';
 //recoil
-import { useRecoilState, useRecoilValue } from "recoil";
-import { bagAddModalState, bagUpdateState, bagDelState, bagState } from "../recoil/atoms";
+import { useRecoilState } from "recoil";
+import { bagAddModalState, weatherModalState } from "../recoil/atoms";
 //component 가져오기
 import SuitCase from '../Components/Mainpage/SuitCase';
 import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
+import Weather_modal from '../Components/Mainpage/Weather_modal';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -142,6 +143,12 @@ function MainBagPage() {
     setIsOpen(true);
   };
 
+  //날씨 버튼 클릭 시
+  const [isOpenWeather, setIsOpenWeather] = useRecoilState(weatherModalState);
+  const openWeatherModalHandler = () => {
+    setIsOpenWeather(true);
+  };
+
   /*가방 리스트 가져오기*/
   const kakaoId = localStorage.getItem("kakaoId");
   const [bag_list , SetBag_list] = useState<IList[]>([],);
@@ -195,13 +202,16 @@ function MainBagPage() {
           </Bag_add_btn>
         </Bag_add_btn_box>
         <Weather_btn_box>
-          <Weather_btn onClick={openModalHandler}>
+          <Weather_btn onClick={openWeatherModalHandler}>
             <TiWeatherPartlySunny size="40"></TiWeatherPartlySunny>
           </Weather_btn>
         </Weather_btn_box>
       </Main_main>
       {isOpen ? 
         <Bag_add_modal></Bag_add_modal>
+      : null}
+      {isOpenWeather ? 
+        <Weather_modal></Weather_modal>
       : null}
     </div>
   );

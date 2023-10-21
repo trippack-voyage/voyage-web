@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled, {createGlobalStyle} from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
-import { bagAddModalState, user_id } from "../../recoil/atoms";
+import { weatherModalState, user_id } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -156,10 +156,10 @@ const Bag_add_modal_btn = styled.button`
   }
 `;
 
-function Bag_add_modal() {
+function Weather_modal() {
 
   //닫기 버튼 클릭 시
-  const [isOpen, setIsOpen] = useRecoilState(bagAddModalState);
+  const [isOpen, setIsOpen] = useRecoilState(weatherModalState);
 
    const openModalHandler = () => {
     setIsOpen(false);
@@ -223,7 +223,7 @@ function Bag_add_modal() {
                 <Bag_add_modal_backarrow>
                     <Bag_add_arrow width="20" height="20" onClick={openModalHandler}/>
                 </Bag_add_modal_backarrow>
-                <Bag_add_modal_header_text>가방 추가하기</Bag_add_modal_header_text>
+                <Bag_add_modal_header_text>날씨 조회하기</Bag_add_modal_header_text>
             </Bag_add_modal_header>
             <Bag_add_modal_main>
                 <Bag_add_modal_input_box>
@@ -272,11 +272,11 @@ function Bag_add_modal() {
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEday(e.target.value); }}>
                     </Bag_add_modal_input_month_day>
                 </Bag_add_modal_input_box>
-                <Bag_add_modal_btn onClick={onClick_addBag}>추가하기</Bag_add_modal_btn>
+                <Bag_add_modal_btn onClick={onClick_addBag}>조회하기</Bag_add_modal_btn>
             </Bag_add_modal_main>
         </ModalView>
       </ModalContainer>
   );
 }
 
-export default Bag_add_modal;
+export default Weather_modal;

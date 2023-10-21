@@ -119,7 +119,7 @@ function Bag_state_modal() {
       method: 'PUT',
     }).then((response) => {
       console.log(response.data);
-      navi('/bag_list');
+      navi('/bag-list');
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
