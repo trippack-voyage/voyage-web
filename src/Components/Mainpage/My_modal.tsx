@@ -27,8 +27,8 @@ export const ModalView = styled.div.attrs(props => ({
   background-color: white;
   border-radius: 20px;
   width: 180px;
-  height: 200px;
-  margin: -10px 50px -200px auto;
+  height: 260px;
+  margin: -10px 50px -250px auto;
   padding: 10px;
   background-color: black;
 `;
@@ -109,6 +109,8 @@ function My_modal() {
       <ModalContainer>
         <GlobalStyle/>
         <ModalView>
+          <My_list onClick={logout}>친구관리</My_list>
+          <My_list_line></My_list_line>
           <My_list onClick={logout}>로그아웃</My_list>
           <My_list_line></My_list_line>
           <My_list onClick={unlink_res}>회원탈퇴</My_list>

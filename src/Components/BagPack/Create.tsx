@@ -1,5 +1,7 @@
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const ItemCreateContainer = styled.div`
   padding: 30px 70px;
@@ -34,49 +36,63 @@ const ItemAddBtn = styled.button`
   font-weight: 600;
 `;
 
-
 interface InputTextProps {
-    onChange(e: React.ChangeEvent<HTMLInputElement>): void;
-    onSubmit(event: React.FormEvent<HTMLFormElement>): void;
-    inputText: string;
-  }
-  
-  export default function Create({
-    onChange,
-    onSubmit,
-    inputText,
-  }: InputTextProps) {
+  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+  onSubmit(event: React.FormEvent<HTMLFormElement>): void;
+  inputText: string;
+}
 
-    function onClick_Item(){
-      axios({
-        url: '/pack',
-        method: 'POST',
-        data:{
-          packName: `${inputText}`
-        }
-  
-      }).then((response) => {
-        console.log(response.data);
-        console.log(`${inputText}`);
-      }).catch((error) => {
-        console.error('AxiosError:', error);
+export default function Create({
+  onChange,
+  onSubmit,
+  inputText,
+}: InputTextProps) {
+  const [formData, setFormData] = useState({
+    bagId: 0,
+    isRequired: false,
+    packName: '',
+  });
+
+  function OnClick_Item() {
+    // JSON 데이터 생성
+    const bag_id = useParams().bagId;
+    const data = {
+      bagId: `${Number(bag_id)}`,
+      isRequired: formData.isRequired,
+      packName: formData.packName,
+    };
+
+    // Axios를 사용하여 POST 요청 보내기
+    axios
+      .post('/pack', data)
+      .then((response) => {
+        console.log('서버 응답:', response.data);
+      })
+      .catch((error) => {
+        console.error('Axios 에러:', error);
       });
-    }
-    return (
-      <ItemCreateContainer>
-        <form onSubmit={(event) => onSubmit(event)}>
-          <ItemInputContainer >
-            <ItemInputBox
-              onChange={(e) => onChange(e)}
-              type="text"
-              placeholder="물품을 추가해주세요."
-              value={inputText}
-            />
-            <ItemAddBtn_box>
-              <ItemAddBtn type="submit" onClick={onClick_Item}>추가</ItemAddBtn>
-            </ItemAddBtn_box>
-          </ItemInputContainer>
-        </form>
-      </ItemCreateContainer>
-    );
   }
+
+  return (
+    <ItemCreateContainer>
+      <form onSubmit={(event) => onSubmit(event)}>
+        <ItemInputContainer>
+          <ItemInputBox
+            onChange={(e) => {
+              setFormData({ ...formData, packName: e.target.value });
+              onChange(e);
+            }}
+            type="text"
+            placeholder="물품을 추가해주세요."
+            value={inputText}
+          />
+          <ItemAddBtn_box>
+            <ItemAddBtn type="submit" onClick={OnClick_Item}>
+              추가
+            </ItemAddBtn>
+          </ItemAddBtn_box>
+        </ItemInputContainer>
+      </form>
+    </ItemCreateContainer>
+  );
+}

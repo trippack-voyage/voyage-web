@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const ModalContainer = styled.div`
   display: flex;
-  flex-flow: row wrep;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
   margin-top: -595px;
@@ -151,22 +151,23 @@ function Weather_modal() {
   };
 
   const [location, setLocation] = useState(""); //지역이름
+  const [weatherData, setWeatherData] = useState({ temperature: 222.2, weather: "맑음" }); // 초기 상태 설정
+
 
   //조회하기 버튼 클릭 시
-  function onClick_weather(){
-      axios({
-        url: '/weather',
-        method: 'GET',
-        headers: { "Content-Type": "application/json" },
-        data: JSON.stringify({
-          city: location
-        })
-      }).then((response) => {
-        console.log(response);
-      }).catch((error) => {
+  function onClick_weather() {
+    axios
+      .get('/weather', {
+        params: { city: location },
+      })
+      .then((response) => {
+        // 서버에서 받은 데이터를 상태로 업데이트
+        setWeatherData(response.data);})
+      .catch((error) => {
         console.error('AxiosError:', error);
       });
   }
+  
 
   return (
       <ModalContainer>
@@ -190,11 +191,11 @@ function Weather_modal() {
                     <Weather_result_box>
                       <Weather>
                         <Weather_content1>날씨</Weather_content1>
-                        <Weather_content2>맑음</Weather_content2>
+                        <Weather_content2>{weatherData.weather}</Weather_content2>
                       </Weather>
                       <Weather>
                         <Weather_content1>온도</Weather_content1>
-                        <Weather_content2>222.2</Weather_content2>
+                        <Weather_content2>{weatherData.temperature}</Weather_content2>
                       </Weather>
                     </Weather_result_box>
                 </Bag_add_modal_input_box>
