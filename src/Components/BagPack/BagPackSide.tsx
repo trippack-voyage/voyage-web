@@ -6,7 +6,7 @@ import { bagId } from "../../recoil/atoms";
 
 const Side_box = styled.div`
     width: 450px;
-    height: 860px;
+    height: 830px;
     border-radius: 20px;
     background-color: white;
     margin: 17px 0px 17px 20px;
@@ -33,7 +33,7 @@ const Friend_inside_box = styled.div`
 `;
 
 const Set_box = styled.div`
-    margin-top: 100px;
+    margin-top: 70px;
 `;
 
 //친구 관리, GPT 박스

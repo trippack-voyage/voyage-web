@@ -87,58 +87,7 @@ const Bag_add_modal_input = styled.input`
   }
 `;
 
-//시작날짜, 끝날짜
-const Bag_add_modal_input_text = styled.div`
-  width: 110px;
-  font-size: 19px;
-  font-weight: 700;
-  margin-left: 40px;
-  margin-right: auto;
-  text-align: left;
-
-  &::placeholder{
-    color: #c1c1c1;
-  }
-`;
-//년도 입력
-const Bag_add_modal_input_year = styled.input`
-  border: 2px solid #1a1919;
-  border-radius: 8px;
-  width: 120px;
-  height: 50px;
-  padding: 5px 20px;
-  font-size: 19px;
-  font-weight: 700;
-  text-align: center;
-
-  &::placeholder{
-    color: #c1c1c1;
-  }
-`;
-//달, 일 입력
-const Bag_add_modal_input_month_day = styled.input`
-  border: 2px solid #1a1919;
-  border-radius: 8px;
-  width: 100px;
-  height: 50px;
-  padding: 5px 20px;
-  font-size: 19px;
-  font-weight: 700;
-  text-align: center;
-
-  &::placeholder{
-    color: #c1c1c1;
-  }
-`;
-
-//날짜 구분선
-const Bag_add_modal_input_date_line = styled.div`
-  border: 1px solid #1a1919;
-  width: 10px;
-  margin: 0 10px 0 10px;
-`;
-
-//가방 추가하기 버튼
+//조회하기 버튼
 const Bag_add_modal_btn = styled.button`
   border: none;
   background-color: #1a1919;
@@ -156,6 +105,42 @@ const Bag_add_modal_btn = styled.button`
   }
 `;
 
+//여행 가는 나라의 날씨를 검색해보세요! (문구)
+const Weather_text = styled.div`
+  margin-top: 40px;
+  font-size: 20px;
+  color: gray;
+`;
+
+//날씨 결과 박스
+const Weather_result_box = styled.div`
+  border-radius: 8px;
+  width: 400px;
+  height: 150px;
+  padding: 5px 20px;
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 30px;
+  border: 3px solid #FF541E;
+  box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+`;
+
+const Weather = styled.div`
+  display: flex;
+  margin-top: 25px;
+  font-size: 25px;
+`;
+
+const Weather_content1 = styled.div`
+  margin-left: 90px;
+`;
+
+const Weather_content2 = styled.div`
+  margin-left: 20px;
+  border-left: 2px solid black;
+  padding: 0px 30px;
+`;
+
 function Weather_modal() {
 
   //닫기 버튼 클릭 시
@@ -165,54 +150,22 @@ function Weather_modal() {
     setIsOpen(false);
   };
 
-  const [bagName, setBagName] = useState(""); //가방이름
-  const [location, setLocation] = useState(""); //여행 지역
+  const [location, setLocation] = useState(""); //지역이름
 
-  const [sYear, setSyear] = useState("")
-  const [sMonth, setSmonth] = useState("")
-  const [sDay, setSday] = useState("")
-
-  const [eYear, setEyear] = useState("")
-  const [eMonth, setEmonth] = useState("")
-  const [eDay, setEday] = useState("")
-
-  const startDate = sYear + "-" + sMonth + "-" + sDay; //시작 날짜
-  const endDate = eYear + "-" + eMonth + "-" + eDay; //끝 날짜
-
-  //const userId = useRecoilValue(user_id);
-  const kakaoId = localStorage.getItem("kakaoId");
-
-  function onClick_addBag(){
-    if (bagName != "" && location != "" && sYear !="" && sMonth != "" && sDay != ""
-      && eYear !="" && eMonth != "" && eDay != "") {
-
-      const requestData = {
-        location: location,
-        bagName: bagName,
-        startDate: startDate,
-        endDate: endDate
-      };
+  //조회하기 버튼 클릭 시
+  function onClick_weather(){
       axios({
-        url: `/bag/${Number(kakaoId)}`,
-        method: 'POST',
-        headers: { "Content-Type": "Application/json;charset=UTF-8"},
-        data:{
-          location: requestData.location,
-          bagName: requestData.bagName,
-          startDate: requestData.startDate,
-          endDate: requestData.endDate
-        },
+        url: '/weather',
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+        data: JSON.stringify({
+          city: location
+        })
       }).then((response) => {
         console.log(response);
-        window.location.replace("/bag-list");
       }).catch((error) => {
         console.error('AxiosError:', error);
       });
-    }
-
-    else{
-      alert("입력값을 확인해주세요");
-    }
   }
 
   return (
@@ -225,54 +178,27 @@ function Weather_modal() {
                 </Bag_add_modal_backarrow>
                 <Bag_add_modal_header_text>날씨 조회하기</Bag_add_modal_header_text>
             </Bag_add_modal_header>
+            <Weather_text>여행 가는 나라의 날씨를 검색해보세요!</Weather_text>
             <Bag_add_modal_main>
                 <Bag_add_modal_input_box>
                     <Bag_add_modal_input 
-                      placeholder='가방이름을 입력해주세요.'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setBagName(e.target.value); }}>                        
+                      placeholder='지역 이름을 입력해주세요. ex) seoul'
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setLocation(e.target.value); }}>                        
                     </Bag_add_modal_input>
                 </Bag_add_modal_input_box>
                 <Bag_add_modal_input_box>
-                    <Bag_add_modal_input 
-                      placeholder='여행 지역을 입력해주세요.'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setLocation(e.target.value); }}>
-                    </Bag_add_modal_input>
+                    <Weather_result_box>
+                      <Weather>
+                        <Weather_content1>날씨</Weather_content1>
+                        <Weather_content2>맑음</Weather_content2>
+                      </Weather>
+                      <Weather>
+                        <Weather_content1>온도</Weather_content1>
+                        <Weather_content2>222.2</Weather_content2>
+                      </Weather>
+                    </Weather_result_box>
                 </Bag_add_modal_input_box>
-                <Bag_add_modal_input_text>시작 날짜</Bag_add_modal_input_text>
-                <Bag_add_modal_input_box>
-                    <Bag_add_modal_input_year 
-                      placeholder='YYYY'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSyear(e.target.value); }}>
-                    </Bag_add_modal_input_year>
-                    <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day 
-                      placeholder='MM'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSmonth(e.target.value); }}>                      
-                    </Bag_add_modal_input_month_day>
-                    <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day 
-                      placeholder='DD'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSday(e.target.value); }}>
-                    </Bag_add_modal_input_month_day>
-                </Bag_add_modal_input_box>
-                <Bag_add_modal_input_text>끝 날짜</Bag_add_modal_input_text>
-                <Bag_add_modal_input_box>
-                    <Bag_add_modal_input_year 
-                      placeholder='YYYY'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEyear(e.target.value); }}>
-                    </Bag_add_modal_input_year>
-                    <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day 
-                      placeholder='MM'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEmonth(e.target.value); }}>
-                    </Bag_add_modal_input_month_day>
-                    <Bag_add_modal_input_date_line></Bag_add_modal_input_date_line>
-                    <Bag_add_modal_input_month_day 
-                      placeholder='DD'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setEday(e.target.value); }}>
-                    </Bag_add_modal_input_month_day>
-                </Bag_add_modal_input_box>
-                <Bag_add_modal_btn onClick={onClick_addBag}>조회하기</Bag_add_modal_btn>
+                <Bag_add_modal_btn onClick={onClick_weather}>조회하기</Bag_add_modal_btn>
             </Bag_add_modal_main>
         </ModalView>
       </ModalContainer>
