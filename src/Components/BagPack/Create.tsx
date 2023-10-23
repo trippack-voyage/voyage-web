@@ -51,15 +51,17 @@ export default function Create({
     bagId: 0,
     isRequired: false,
     packName: '',
+    isCompleted: false,
   });
 
+  const bag_id = useParams().bagId;
   function OnClick_Item() {
     // JSON 데이터 생성
-    const bag_id = useParams().bagId;
     const data = {
       bagId: `${Number(bag_id)}`,
       isRequired: formData.isRequired,
       packName: formData.packName,
+      isCompleted: false
     };
 
     // Axios를 사용하여 POST 요청 보내기
@@ -78,7 +80,7 @@ export default function Create({
       <form onSubmit={(event) => onSubmit(event)}>
         <ItemInputContainer>
           <ItemInputBox
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setFormData({ ...formData, packName: e.target.value });
               onChange(e);
             }}

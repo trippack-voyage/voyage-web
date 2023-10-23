@@ -203,8 +203,6 @@ function Bag_update_modal() {
 
   //수정 완료 버튼 클릭시
   function onClick_updateBag(){   
-    console.log(startDate);
-    console.log(endDate);
     axios({
       url: `/bag/${Number(bag_id)}`,
       method: 'PUT',
