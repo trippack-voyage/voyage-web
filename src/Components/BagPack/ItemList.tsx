@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import CreateTodo from "./Create";
-import TodoItem from "./TodoItem";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import styled from 'styled-components';
@@ -22,21 +21,6 @@ import {
 import {
   IoClose
 } from "react-icons/io5";
-
-
-export interface TList {
-  id: number;
-  text: string;
-  completed: boolean;
-}
-
-export interface PList {
-  packId: number;
-  packName: string;
-  isCompleted: boolean;
-  isRequired: boolean;
-}
-
 
 //추가 아이템 박스
 const ItemContainer = styled.div`
@@ -91,9 +75,32 @@ const InlineBtnBox = styled.button`
   background-color: white;
 `;
 
+const ItemUpdateForm = styled.form`
+  width: 730px;
+  display: flex;
+  margin-left: 28px;
+`;
+
+//수정 입력 창
+const ItemTextUpdateInput = styled.input`
+  font-size: 25px;
+  font-weight: 600;
+  color: #1a1919;
+  margin-bottom: 5px;
+  border: none;
+  outline: none;
+`;
+
+export interface PList {
+  packId: number;
+  packName: string;
+  completed: boolean;
+  isRequired: boolean;
+}
+
 export default function ItemList() {
   const [inputText, setInputText] = useState("");
-  const [todoList, setTodoList] = useState<TList[]>([]);
+  const [todoList, setTodoList] = useState<PList[]>([]);
 
   // 입력값 변경내용 확인
   const textTypingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,15 +110,13 @@ export default function ItemList() {
   // 입력 확인
   const textInputHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const newTodo: TList = {
-      id: Date.now(),
-      text: inputText,
+    const newTodo: PList = {
+      packName: inputText,
+      isRequired: false,
       completed: false,
+      packId: 0
     };
     setTodoList([...todoList, newTodo]);
-    // 아래처럼도 사용 가능
-    // setTodoList(todoList.concat(newTodo));
-    // 입력한 값 지우기
     setInputText("");
   };
 
@@ -128,15 +133,15 @@ export default function ItemList() {
   };
 
   // 값 수정하기
+  const [updatedText, setUpdatedText] = useState<string>();
   const updateHandler = (packid: number): void => {
-    /*axios({
+    axios({
       url: `/pack/${packid}`,
       method: 'PUT',
       data: {
-        packName: packName,
-        location: location,
-        startDate: startDate,
-        endDate: endDate,
+        packName: updatedText,
+        isRequired: false,
+        completed: false
       },
     }).then((response) => {
       console.log(response.data);
@@ -144,7 +149,12 @@ export default function ItemList() {
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-    setIsbagUpdate(false);*/
+    setIsUpdating(false);
+  };
+
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const handleFormSubmit = () => {
+    setIsUpdating(false);
   };
 
   //추가물품 가져오기
@@ -181,36 +191,49 @@ export default function ItemList() {
         onSubmit={textInputHandler}
         inputText={inputText}
       />
-      {/*
-      {todoList.map((item) => (
-        <TodoItem
-          id={item.id}
-          text={item.text}
-          completed={item.completed}
-          onClickDelete={textDeleteHandler}
-          onClickUpdate={updateHandler}
-        />
-      ))}*/}
       {packList.map(function(item,i){
         return(
+          <div>
+          {isUpdating === false? (
           <ItemContainer>
             <CompleteBtn
               className={isCompleted ? " checked" : ""}
               onClick={handleComplete}>  
             </CompleteBtn>
             <ItemText
-              style={item.isCompleted ? { textDecoration: "line-through" } : undefined}>
+              style={item.completed ? { textDecoration: "line-through" } : undefined}>
               {item.packName}
             </ItemText>
             <ButtonContainer>
-              <InlineBtnBox onClick={() => updateHandler(item.packId)}>
+              <InlineBtnBox onClick={() => setIsUpdating(true)}>
                 <HiOutlinePencilSquare size="28" />
               </InlineBtnBox>
               <InlineBtnBox onClick={() => onClickDelete(item.packId)}>
                 <BsTrash size="28" />
               </InlineBtnBox>
             </ButtonContainer>
-          </ItemContainer>
+          </ItemContainer>)
+          :(<ItemContainer>
+              <CompleteBtn
+                className={isCompleted ? " checked" : ""}
+                onClick={handleComplete}>  
+              </CompleteBtn>
+              <ItemUpdateForm onSubmit={handleFormSubmit}>
+              <ItemTextUpdateInput
+                placeholder={`${item.packName}`}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setUpdatedText(e.target.value); }}
+              />
+              <ButtonContainer>
+                <InlineBtnBox type="submit" onClick={() => updateHandler(item.packId)}>
+                  <BsCheckLg size="30" />
+                </InlineBtnBox>
+                <InlineBtnBox onClick={() => setIsUpdating(false)}>
+                  <IoClose size="30" />
+                </InlineBtnBox>
+              </ButtonContainer>
+            </ItemUpdateForm>
+          </ItemContainer>)}
+          </div>
         )}
       )}
     </div>
