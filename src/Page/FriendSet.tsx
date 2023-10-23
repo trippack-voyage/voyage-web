@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
@@ -105,7 +105,7 @@ const Prifile_box = styled.div`
     }
 `;
 
-const Profile_img = styled.div`
+const Profile_img = styled.img`
     background-color: lightgray;
     width: 100px;
     height: 100px;
@@ -132,6 +132,15 @@ const Link_box = styled.button`
     border-radius: 20px;
 `;
 
+const Message = styled.div`
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #FF541E;
+`;
+
+
 function FriendSet() {
 
     function onClick_deleteBtn(){
@@ -151,7 +160,7 @@ function FriendSet() {
                 bagId: Number(bag_id)
             },
         }).then((response) => {
-            console.log("slug:" + response.data.result.slug); //slag값 추출
+            console.log("slug:" + response.data.result.slug); //slug값 추출
             setSlug(response.data.result.slug); 
             setLink(true);
         }).catch((error) => {
@@ -159,54 +168,80 @@ function FriendSet() {
         });
     }
 
+    interface IList {
+        kakaoProfileImg: string,
+        kakaoNickname: string
+    }
+    //친구 목록
+    const [friend_list , SetFriend_list] = useState<IList[]>([],);
+
+    useEffect(()=> {
+        axios({
+          url: '/kakao/all-users',
+          method: 'GET'
     
-// 클립보드 권한 요청 함수
-async function requestClipboardPermission() {
-    try {
-        if ('permissions' in navigator) {
-            const clipboardPermissionName = 'clipboard-write' as PermissionName;
-            const permissionStatus = await navigator.permissions.query({ name: clipboardPermissionName });
-            return permissionStatus.state === 'granted';
-        } else {
-            console.error('navigator.permissions.query is not supported in this environment.');
+        }).then((response) => {
+          console.log(response.data);
+          SetFriend_list(response.data);
+        }).catch((error) => {
+          console.error('AxiosError:', error);
+        });
+    },[])  
+
+    
+    // 클립보드 권한 요청 함수
+    async function requestClipboardPermission() {
+        try {
+            if ('permissions' in navigator) {
+                const clipboardPermissionName = 'clipboard-write' as PermissionName;
+                const permissionStatus = await navigator.permissions.query({ name: clipboardPermissionName });
+                return permissionStatus.state === 'granted';
+            } else {
+                console.error('navigator.permissions.query is not supported in this environment.');
+                return false;
+            }
+        } catch (error) {
+            console.error('Error requesting clipboard permission:', error);
             return false;
         }
-    } catch (error) {
-        console.error('Error requesting clipboard permission:', error);
-        return false;
     }
-}
 
-// 클릭 이벤트 핸들러
-async function onClickLink() {
-    const hasClipboardPermission = await requestClipboardPermission();
 
-    if (hasClipboardPermission) {
-        axios({
-            url: `/invitations/${slug}`,
-            method: 'GET',
+    const [generatedLink, setGeneratedLink] = useState(''); // Initialize with an empty string
+
+    // 클릭 이벤트 핸들러
+    async function onClickLink() {
+        const hasClipboardPermission = await requestClipboardPermission();
+
+        if (hasClipboardPermission) {
+            axios({
+                url: `/invitations/${slug}`,
+                method: 'GET',
         }).then((response) => {
-            console.log("bagId획득:" + response.data.result.bagId); // bagId 획득
+            console.log("bagId획득:" + response.data.result.bagId);
             console.log(`http://localhost:3000/bagpack/${response.data.result.bagId}`);
 
+            const link = `http://localhost:3000/bagpack/${response.data.result.bagId}`;
+            setGeneratedLink(link); // Set the generated link
+
+
+            // 링크를 클립보드에 복사
             navigator.clipboard.writeText(`http://localhost:3000/bagpack/${response.data.result.bagId}`)
                 .then(() => {
-                    alert("링크가 복사되었습니다!");
+                    alert(" 초대링크가 복사되었습니다! ");
                     setLink(false);
                 })
                 .catch((error) => {
                     console.error('클립보드 액세스 에러:', error);
                 });
-        }).catch((error) => {
-            console.error('AxiosError:', error);
-        });
-    } else {
-        alert('클립보드 액세스 권한을 허용해야 합니다.');
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+        } else {
+            alert('클립보드 액세스 권한을 허용해야 합니다.');
+        }
     }
-}
 
-
-    const [friend_list, setFriend_list] = useState([1, 2, 3]);
     const [friend_state, setFriend_state] = useState([false, false, false]);
 
     let [btnActive, setBtnActive] = useState();
@@ -223,34 +258,41 @@ async function onClickLink() {
 
     return (
         <div>
-            <GlobalStyle/>
-            <Bagpack_main>
-                <BagPackSide/>
-                <Bagpack_main_box>
-                    <IoArrowBack size="50" onClick={onClickBack}/>
-                    <Bagpack_main_header>친구 관리</Bagpack_main_header>
-                    <Friend_list_box>
+          <GlobalStyle/>
+          <Bagpack_main>
+            <BagPackSide/>
+            <Bagpack_main_box>
+              <IoArrowBack size="50" onClick={onClickBack}/>
+              <Bagpack_main_header>친구 관리</Bagpack_main_header>
+              <Friend_list_box>
                         {friend_list.map(function(a,i){
                             return(    
                             <Prifile_box 
                                 onClick={() => toggleActive(i)} 
                                 className={(friend_state[i] === false ? " active" : "")}
                             >
-                                <Profile_img></Profile_img>
-                                <Profile_name>닉네임</Profile_name>
+                                <Profile_img src={a.kakaoProfileImg} height="100" width="100"></Profile_img>
+                                <Profile_name>{a.kakaoNickname}</Profile_name>
                             </Prifile_box>
                             )
                         })}
                     </Friend_list_box>
-                    <FriendSet_main_footer>
-                        {link ? <Link_box onClick={onClickLink}>링크 복사하기</Link_box> : <div></div>}
-                        <Friend_add_btn onClick={onClick_addBtn}>친구 추가하기</Friend_add_btn>
-                        <Friend_delete_btn onClick={onClick_deleteBtn}>친구 삭제하기</Friend_delete_btn>
-                    </FriendSet_main_footer>
-                </Bagpack_main_box>
-            </Bagpack_main>
+
+              <FriendSet_main_footer>
+              {link && (
+                <div>
+                    <Link_box onClick={() => { onClickLink(); setLink(false); }}>링크 복사하기</Link_box>
+                    <Message>{`${slug}로 입장 확인이 되어 초대링크가 생성되었습니다. \n 공유하세요!`}</Message>
+                </div>
+                )}
+                <Friend_add_btn onClick={onClick_addBtn}>친구 추가하기</Friend_add_btn>
+                <Friend_delete_btn onClick={onClick_deleteBtn}>친구 삭제하기</Friend_delete_btn>
+              </FriendSet_main_footer>
+            </Bagpack_main_box>
+          </Bagpack_main>
         </div>
-    );
+      );
+      
   }
   
   export default FriendSet;
