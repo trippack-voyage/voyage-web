@@ -344,8 +344,8 @@ function FriendSet() {
             method: 'GET'
     
         }).then((response) => {
-            console.log(response.data);
-            Setf_list(response.data);
+            console.log(response.data.result);
+            Setf_list(response.data.result);
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
@@ -360,8 +360,8 @@ function FriendSet() {
             method: 'GET'
     
         }).then((response) => {
-            console.log(response.data);
-            setFriend_receive(response.data);
+            console.log(response.data.result);
+            setFriend_receive(response.data.result);
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
@@ -421,7 +421,7 @@ function FriendSet() {
                     <Header_text3>친구 요청</Header_text3>
                 </Bagpack_main_header>
                 <Friend_main>
-                    {flist === null ? 
+                    {flist.length === 0 ? 
                         (<Friend_list_box>친구가 아직 없어요!</Friend_list_box>) : 
                         (<Friend_list_box>
                         {flist.map(function(a,i){
@@ -480,10 +480,10 @@ function FriendSet() {
                         })}
                     </Friend_list_box3>
 
-                    {friend_receive.length === null ? 
+                    {friend_receive.length === 0 ? 
                     (<Friend_list_box2></Friend_list_box2>):(
                     <Friend_list_box2>
-                        {friend_receive.map(function(a,i){
+                        {friend_receive && friend_receive.map(function(a,i){
                             return( 
                                 <div>  
                                     {find_result === `${a.kakaoNickname}` ?
