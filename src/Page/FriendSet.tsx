@@ -340,7 +340,7 @@ function FriendSet() {
     const [flist , Setf_list] = useState<PList[]>([],);
     useEffect(()=> {
         axios({
-            url: `/friend/friendList/${userCode}`,
+            url: `/friend/friendList/${Number(userCode)}`,
             method: 'GET'
     
         }).then((response) => {
@@ -356,7 +356,7 @@ function FriendSet() {
     const [friend_receive , setFriend_receive] = useState<PList[]>([],);
     useEffect(()=> {
         axios({
-            url: `/friend/acceptRequest/${userCode}`,
+            url: `/friend/acceptRequest/${Number(userCode)}`,
             method: 'GET'
     
         }).then((response) => {
@@ -480,6 +480,8 @@ function FriendSet() {
                         })}
                     </Friend_list_box3>
 
+                    {friend_receive.length === null ? 
+                    (<Friend_list_box2></Friend_list_box2>):(
                     <Friend_list_box2>
                         {friend_receive.map(function(a,i){
                             return( 
@@ -500,7 +502,7 @@ function FriendSet() {
                                 </div> 
                             )
                         })}
-                    </Friend_list_box2>
+                    </Friend_list_box2>)}
                 </Friend_main>
             </Bagpack_main_box>
           </Bagpack_main>
