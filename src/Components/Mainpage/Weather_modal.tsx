@@ -151,7 +151,7 @@ function Weather_modal() {
   };
 
   const [location, setLocation] = useState(""); //지역이름
-  const [weatherData, setWeatherData] = useState({ temperature: 222.2, weather: "맑음" }); // 초기 상태 설정
+  const [weatherData, setWeatherData] = useState({ temperature: 22.22, weather: "맑음" }); // 초기 상태 설정
 
 
   //조회하기 버튼 클릭 시

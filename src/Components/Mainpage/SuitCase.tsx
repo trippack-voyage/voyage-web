@@ -71,12 +71,14 @@ const Del_icon = styled.div`
     margin-left: 20px;
 `;
 
-//가방 정보 박스
-const Bag_info_box = styled.div`
-    display: flex;
-    font-family: 'S-CoreDream-3Light';
-    margin-top: 5px;
+// 가방 상태가 변경될 때 스타일 변경
+const Bag_info_box = styled.div<{ status: string }>`
+display: flex;
+font-family: 'S-CoreDream-3Light';
+margin-top: 5px;
+background-color: ${(props) => (props.status === 'FINISHED' ? '#EA5028' : 'transparent')};
 `;
+
 
 //가방 정보 박스(가방 이름)
 const Bag_info_box1 = styled.div`
@@ -154,21 +156,21 @@ function SuitCase( {
                         <Bag_info>{bagName}</Bag_info>
                     </Bag_info_box1>
                     <Bag_line/>
-                    <Bag_info_box>
+                    <Bag_info_box status="TRANSPARENT">
                         <Bag_icon><IoLocationOutline size="15"/></Bag_icon>
                         <Bag_info>{location}</Bag_info>
                     </Bag_info_box>
                     <Bag_line/>
-                    <Bag_info_box>
+                    <Bag_info_box status="TRANSPARENT">
                         <Bag_icon><IoCalendarOutline size="15"/></Bag_icon>
                         <Bag_info>{start_date}</Bag_info>
                     </Bag_info_box>
-                    <Bag_info_box>
+                    <Bag_info_box status="TRANSPARENT">
                         <Bag_icon><HiOutlineDotsHorizontal size="15"/></Bag_icon>
                         <Bag_info>{end_date}</Bag_info>
                     </Bag_info_box>
                     <Bag_line/>
-                    <Bag_info_box>
+                    <Bag_info_box status={status}>
                         <Bag_icon><AiOutlineCheckSquare size="15"/></Bag_icon>
                         <Bag_info>{status==="AVAILABLE" ? "짐 싸는 중" : "짐 싸기 완료"}</Bag_info>
                     </Bag_info_box>

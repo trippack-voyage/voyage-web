@@ -35,6 +35,19 @@ const Friend_inside_box = styled.div`
 
 const Set_box = styled.div`
     margin-top: 70px;
+    position: relative; /* 컨테이너를 relative로 설정 */
+`;
+
+const LinkCopyContainer = styled.div`
+    display: flex; /* 부모 컨테이너를 플렉스 컨테이너로 설정 */
+    justify-content: center; /* 가로 방향 가운데 정렬 */
+    align-items: center; /* 세로 방향 가운데 정렬 */
+    position: absolute;
+    top: -120px;
+    width: 100%; /* 부모 컨테이너의 너비를 100%로 설정하여 자식 요소를 가로로 가운데 정렬 */
+
+    position: absolute; /* Link 복사 컨테이너를 absolute로 설정 */
+    top: -120px; /* 원하는 높이로 조정 */
 `;
 
 //친구 관리, GPT 박스
@@ -65,6 +78,9 @@ const Link_box = styled.button`
     border: 3px solid #FF541E;
     box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
     border-radius: 20px;
+
+    margin: 0 auto; /* 수평 가운데 정렬 */
+    display: block; /* 블록 수준 요소로 설정하여 가운데 정렬이 먹히도록 합니다. */
 `;
 
 const Message = styled.div`
@@ -73,6 +89,7 @@ const Message = styled.div`
   font-size: 18px;
   font-weight: 500;
   color: #FF541E;
+  white-space: pre-line; /* 줄 바꿈을 보존합니다. */
 `;
 
 
@@ -172,14 +189,16 @@ function BackpackSide() {
                 <Friend_inside_box onClick={onClick_main}>{user_name}</Friend_inside_box>
             </Friend_list_box>
             <Set_box>
+            <LinkCopyContainer> {/* Link 복사 컨테이너 */}
                 {link && (
                 <div>
                     <Link_box onClick={() => { onClickLink(); setLink(false); }}>링크 복사하기</Link_box>
-                    <Message>{`${slug}로 입장 확인이 되어 초대링크가 생성되었습니다. \n 공유하세요!`}</Message>
+                    <Message>{`${slug}로 입장  \n 초대링크를 공유하세요!`}</Message>
                 </div>
                 )}
-                <Set_inside_box onClick={onClick_addBtn}>링크복사</Set_inside_box>
-                <Set_inside_box onClick={onClick_chatgpt}>짐도우미(GPT)</Set_inside_box>
+            </LinkCopyContainer>
+            <Set_inside_box onClick={onClick_addBtn}>링크복사</Set_inside_box>
+            <Set_inside_box onClick={onClick_chatgpt}>짐도우미(GPT)</Set_inside_box>
             </Set_box>
         </Side_box>
     );

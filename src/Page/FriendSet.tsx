@@ -343,13 +343,31 @@ function FriendSet() {
             method: 'GET'
     
         }).then((response) => {
-            console.log(response.data.result);
             Setf_list(response.data.result);
+            
+            for(let i = 0; i < flist.length; i++){
+                findUserCode(response.data.result[i]);
+            }
+
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
     },[userCode])
-    
+
+    //userCode로 사용자 정보 조회
+    const [flist_info , Setf_list_info] = useState<PList[]>([],);
+    function findUserCode(user: number){
+        axios({
+            url: `kakao/find/${Number(user)}`,
+            method: 'GET'
+
+        }).then((response) => {
+            console.log(response.data.result);
+            Setf_list_info(response.data);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    }
     
     //친구수락 확정 대기 목록
     const [friend_receive , setFriend_receive] = useState<PList[]>([],);
@@ -427,7 +445,7 @@ function FriendSet() {
                             return(    
                             <Find_Friend_box>
                                 <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
-                                <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                <Find_friend_name></Find_friend_name>
                             </Find_Friend_box>)
                         })}                  
                     </Friend_list_box>)}
