@@ -359,7 +359,7 @@ function FriendSet() {
     
         }).then((response) => {
             Setf_list(response.data.result);
-            for(let i = 0; i <= flist.length; i++){
+            for(let i = 0; i < flist.length; i++){
                 findUserCode(response.data.result[i]);
             }
 
@@ -382,6 +382,7 @@ function FriendSet() {
             Setf_list_info([response.data.kakaoNickname, ...flist_info]);
             Setf_list_info2([response.data.kakaoProfileImg, ...flist_info2]);   
             console.log(flist_info);
+            console.log(flist_info2);
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
@@ -472,7 +473,6 @@ function FriendSet() {
     //친구 삭제
     function friend_delete(friendcode: number){
 
-
           console.log(userCode);
           console.log(friendcode);
     }
@@ -486,7 +486,7 @@ function FriendSet() {
                 <Bagpack_main_header>
                     <Header_text>친구 관리</Header_text>
                     <Header_text2>친구 추가</Header_text2>
-                    <Header_text3>친구 요청</Header_text3>
+                    {/*<Header_text3>친구 요청</Header_text3>*/}
                 </Bagpack_main_header>
                 <Friend_main>
                     {flist.length === 0 ? 
@@ -528,7 +528,7 @@ function FriendSet() {
                                 </div> 
                             )
                         })}
-                        {friend_list.map(function(a,i){
+                        {/*{friend_list.map(function(a,i){
                             return( 
                                 <div>  
                                     {find_result === `${a.kakaoNickname}` ?
@@ -546,9 +546,9 @@ function FriendSet() {
                                     }
                                 </div> 
                             )
-                        })}
+                        })}*/}
                     </Friend_list_box3>
-
+{/* 
                     {flist.length === 0 ? 
                         (<Friend_list_box2>친구요청이 없어요!</Friend_list_box2>) : 
                         (<Friend_list_box2>
@@ -560,7 +560,7 @@ function FriendSet() {
                                 <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
                             </Find_Friend_box>)
                         })}                  
-                    </Friend_list_box2>)}
+                    </Friend_list_box2>)}*/}
                 </Friend_main>
             </Bagpack_main_box>
           </Bagpack_main>
