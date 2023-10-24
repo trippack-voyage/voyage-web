@@ -21,24 +21,29 @@ const Bagpack_main = styled.div`
 
 const Bagpack_main_box = styled.div`
     margin-left: 120px;
-    margin-top: 50px;
+    margin-top: 30px;
 `;
 
 //헤더
 const Bagpack_main_header = styled.div`
     display: flex;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-bottom: 30px;
     font-size: 40px;
     font-weight: 700;
 `;
 
-const Friend_list_box = styled.div`
+//친구관리, 친구찾기 박스 컨테이너
+const Friend_main = styled.div`
     display: flex;
+`;
+
+//친구 관리 박스
+const Friend_list_box = styled.div`
     margin-top: 10px;
     margin-bottom: 10px;
-    height: 500px;
-    width: 1000px;
+    height: 600px;
+    width: 450px;
     flex-direction: row;
     flex-wrap: wrap;
     background-color: white;
@@ -48,14 +53,66 @@ const Friend_list_box = styled.div`
 
     overflow-y: scroll;
     &::-webkit-scrollbar {
-      width: 5px;
+    width: 5px;
     }
     &::-webkit-scrollbar-thumb {
-      width: 5px;
-      height: 108px;
-      border-radius: 12px;
-      background: #d9d9d9;
+    width: 5px;
+    height: 108px;
+    border-radius: 12px;
+    background: #d9d9d9;
+    } 
+`;
+
+//친구 요청 박스
+const Friend_list_box2 = styled.div`
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 80px;
+    height: 600px;
+    width: 600px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #c1c1c1;
+
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    width: 5px;
     }
+    &::-webkit-scrollbar-thumb {
+    width: 5px;
+    height: 108px;
+    border-radius: 12px;
+    background: #d9d9d9;
+    } 
+`;
+
+//친구 추가 박스
+const Friend_list_box3 = styled.div`
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 80px;
+    height: 600px;
+    width: 450px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #c1c1c1;
+
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+    width: 5px;
+    height: 108px;
+    border-radius: 12px;
+    background: #d9d9d9;
+    } 
 `;
 
 //footer
@@ -75,6 +132,10 @@ const Friend_delete_btn = styled.button`
     border: none;
     background-color: #1a1919;
     color: white;
+    
+    &:hover{
+        color: #ea5028;
+    }
 `;
 
 //친구 추가 버튼
@@ -88,16 +149,23 @@ const Friend_add_btn = styled.button`
     border: none;
     background-color: #1a1919;
     color: white;
+
+    &:hover{
+        color: #ea5028;
+    }
 `;
 
 //프로필
 const Prifile_box = styled.div`
-    margin-right: 40px;
-    height: 170px;
-    border: 3px solid #FF541E;
-    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
-    border-radius: 10px;
+    display: flex;
+    border-radius: 12px;
+    margin-top: 10px;
     padding: 10px 20px;
+    height: 100px;
+    width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #f6f8f9;
 
     &.active{
         border: none;
@@ -107,15 +175,17 @@ const Prifile_box = styled.div`
 
 const Profile_img = styled.img`
     background-color: lightgray;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 60px;
+    margin: auto 0px;
+    margin-left: 20px;
 `;
 
 const Profile_name = styled.div`
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: 500;
+    margin: auto auto auto 30px;
+    font-size: 25px;
+    font-weight: 700;
     text-align: center;
 `;
 
@@ -140,41 +210,119 @@ const Message = styled.div`
   color: #FF541E;
 `;
 
+//친구 검색창
+const Find_friend = styled.input`
+    border: 3px solid #FF541E;
+    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+    width: 400px;
+    height: 60px;
+    background-color: white;
+    font-size: 22px;
+    padding: 15px;
+    border-radius: 12px;
+    outline: none;
+    margin: 10px auto;
+`;
+
+//친구 찾기 버튼
+const Find_btn = styled.button`
+    margin-left: 30px;
+    font-size: 20px;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 12px;
+    border: 3px solid black;
+    color: black;
+    font-weight: 700;
+    height: 60px;
+    margin-top: 10px;
+`;
+
+const Header_text = styled.text`
+`;
+
+const Header_text2 = styled.text`
+    margin-left: 350px;
+`;
+
+const Header_text3 = styled.text`
+    margin-left: 350px;
+`;
+
+//친구 찾기 친구 리스트 박스
+const Find_Friend_box = styled.div`
+    display: flex;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    width: 380px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #f6f8f9;
+`;
+
+//친구 찾기 친구 리스트 프로필
+const Find_friend_prifile = styled.img`
+    border: none;
+    display: flex;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+`;
+
+//친구 찾기 친구 리스트 이름
+const Find_friend_name = styled.div`
+    font-size: 20px;
+    margin-left: 25px;
+    font-weight: 700;
+    margin-top: auto;
+    margin-bottom: auto;
+`;
+
+const Find_frined_btn = styled.button`
+    margin: auto 0px auto auto;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 12px;
+    width: 105px;
+    height: 55px;
+    border: 3px solid #FF541E;
+    color: #FF541E;
+    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+`;
 
 function FriendSet() {
 
-    function onClick_deleteBtn(){
-        alert("친구가 삭제되었습니다.");
-    }
-
-    //친구 추가 버튼 클릭시
-    const bag_id = useParams().bagId;
-    const [slug, setSlug] = useState("");
-    const [link, setLink] = useState(false);
-    function onClick_addBtn(){
-        //초대링크 생성
-        axios({
-            url: '/invitations',
-            method: 'POST',
-            data:{
-                bagId: Number(bag_id)
-            },
-        }).then((response) => {
-            console.log("slug:" + response.data.result.slug); //slug값 추출
-            setSlug(response.data.result.slug); 
-            setLink(true);
-        }).catch((error) => {
-            console.error('AxiosError:', error);
-        });
-    }
-
     interface IList {
         kakaoProfileImg: string,
-        kakaoNickname: string
+        kakaoNickname: string,
+        userCode: number
     }
-    //친구 목록
-    const [friend_list , SetFriend_list] = useState<IList[]>([],);
 
+    interface PList {
+        kakaoProfileImg: string,
+        kakaoNickname: string,
+        userCode: number,
+        isFriend: boolean
+    }
+    
+    const [userCode, setUserCode] = useState("");
+    //유저코드 조회
+    useEffect(()=> {
+        axios({
+          url: `kakao/find-usercode/${localStorage.getItem("userName")}`,
+          method: 'GET'
+    
+        }).then((response) => {
+          setUserCode(response.data);
+        }).catch((error) => {
+          console.error('AxiosError:', error);
+        });
+    },[])  
+
+    //사용자 전체 목록
+    const [friend_list , SetFriend_list] = useState<IList[]>([],);
     useEffect(()=> {
         axios({
           url: '/kakao/all-users',
@@ -188,59 +336,20 @@ function FriendSet() {
         });
     },[])  
 
+    //친구리스트
+    const [flist , Setf_list] = useState<PList[]>([],);
+    useEffect(()=> {
+        axios({
+            url: `/friend/friendList/${userCode}`,
+            method: 'GET'
     
-    // 클립보드 권한 요청 함수
-    async function requestClipboardPermission() {
-        try {
-            if ('permissions' in navigator) {
-                const clipboardPermissionName = 'clipboard-write' as PermissionName;
-                const permissionStatus = await navigator.permissions.query({ name: clipboardPermissionName });
-                return permissionStatus.state === 'granted';
-            } else {
-                console.error('navigator.permissions.query is not supported in this environment.');
-                return false;
-            }
-        } catch (error) {
-            console.error('Error requesting clipboard permission:', error);
-            return false;
-        }
-    }
-
-
-    const [generatedLink, setGeneratedLink] = useState(''); // Initialize with an empty string
-
-    // 클릭 이벤트 핸들러
-    async function onClickLink() {
-        const hasClipboardPermission = await requestClipboardPermission();
-
-        if (hasClipboardPermission) {
-            axios({
-                url: `/invitations/${slug}`,
-                method: 'GET',
         }).then((response) => {
-            console.log("bagId획득:" + response.data.result.bagId);
-            console.log(`http://localhost:3000/bagpack/${response.data.result.bagId}`);
-
-            const link = `http://localhost:3000/bagpack/${response.data.result.bagId}`;
-            setGeneratedLink(link); // Set the generated link
-
-
-            // 링크를 클립보드에 복사
-            navigator.clipboard.writeText(`http://localhost:3000/bagpack/${response.data.result.bagId}`)
-                .then(() => {
-                    alert(" 초대링크가 복사되었습니다! ");
-                    setLink(false);
-                })
-                .catch((error) => {
-                    console.error('클립보드 액세스 에러:', error);
-                });
-            }).catch((error) => {
-                console.error('AxiosError:', error);
-            });
-        } else {
-            alert('클립보드 액세스 권한을 허용해야 합니다.');
-        }
-    }
+            console.log(response.data);
+            Setf_list(response.data);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    },[])  
 
     const [friend_state, setFriend_state] = useState([false, false, false]);
 
@@ -255,39 +364,109 @@ function FriendSet() {
         navi("/bag-list");
     }
 
+    function onClick_addBtn(){}
+
+    //친구 요청
+    const [find_result, setFind_result] = useState("");
+    const [find_request, setFind_request] = useState(false);
+    function friend_request(friendCode: number){
+
+        if(find_request === false)
+            setFind_request(true);
+        else
+            setFind_request(false);
+
+        axios({
+            url: `/friend/add`,
+            method: 'POST',
+            headers: { "Content-Type": "Application/json;charset=UTF-8"},
+            data:{
+                friendId: friendCode,
+                isFriend: false,
+                userId: userCode
+            },
+        }).then((response) => {
+                console.log(response);
+                window.location.replace("/friend-set");
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+    }
 
     return (
         <div>
           <GlobalStyle/>
           <Bagpack_main>
-            <BagPackSide/>
             <Bagpack_main_box>
-              <IoArrowBack size="50" onClick={onClickBack}/>
-              <Bagpack_main_header>친구 관리</Bagpack_main_header>
-              <Friend_list_box>
-                        {friend_list.map(function(a,i){
+                <IoArrowBack size="50" onClick={onClickBack}/>
+                <Bagpack_main_header>
+                    <Header_text>친구 관리</Header_text>
+                    <Header_text2>친구 추가</Header_text2>
+                    <Header_text3>친구 요청</Header_text3>
+                </Bagpack_main_header>
+                <Friend_main>
+                    {flist === null ? 
+                        (<Friend_list_box>친구가 아직 없어요!</Friend_list_box>) : 
+                        (<Friend_list_box>
+                        {flist.map(function(a,i){
                             return(    
-                            <Prifile_box 
-                                onClick={() => toggleActive(i)} 
-                                className={(friend_state[i] === false ? " active" : "")}
-                            >
-                                <Profile_img src={a.kakaoProfileImg} height="100" width="100"></Profile_img>
-                                <Profile_name>{a.kakaoNickname}</Profile_name>
-                            </Prifile_box>
+                            <Find_Friend_box>
+                                <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
+                                <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                            </Find_Friend_box>)
+                        })}                  
+                    </Friend_list_box>)}
+
+                    <Friend_list_box3>
+                        <Friend_main>
+                            <Find_friend 
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
+                                { setFind_result(e.target.value); }}>                
+                            </Find_friend>
+                        </Friend_main>
+                        {friend_list.map(function(a,i){
+                            return( 
+                                <div>  
+                                    {find_result === `${a.kakaoNickname}` ?
+                                    (<Find_Friend_box
+                                        onClick={() => toggleActive(i)} 
+                                        className={(friend_state[i] === false ? " active" : "")}
+                                    >
+                                        <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
+                                        <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                        {find_request === false ? 
+                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>):
+                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
+                                        }
+                                    </Find_Friend_box>):(<div></div>)
+                                    }
+                                </div> 
                             )
                         })}
-                    </Friend_list_box>
+                    </Friend_list_box3>
 
-              <FriendSet_main_footer>
-              {link && (
-                <div>
-                    <Link_box onClick={() => { onClickLink(); setLink(false); }}>링크 복사하기</Link_box>
-                    <Message>{`${slug}로 입장 확인이 되어 초대링크가 생성되었습니다. \n 공유하세요!`}</Message>
-                </div>
-                )}
-                <Friend_add_btn onClick={onClick_addBtn}>친구 추가하기</Friend_add_btn>
-                <Friend_delete_btn onClick={onClick_deleteBtn}>친구 삭제하기</Friend_delete_btn>
-              </FriendSet_main_footer>
+                    <Friend_list_box2>
+                        {friend_list.map(function(a,i){
+                            return( 
+                                <div>  
+                                    {find_result === `${a.kakaoNickname}` ?
+                                    (<Find_Friend_box
+                                        onClick={() => toggleActive(i)} 
+                                        className={(friend_state[i] === false ? " active" : "")}
+                                    >
+                                        <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
+                                        <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                        {find_request === false ? 
+                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>):
+                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
+                                        }
+                                    </Find_Friend_box>):(<div></div>)
+                                    }
+                                </div> 
+                            )
+                        })}
+                    </Friend_list_box2>
+                </Friend_main>
             </Bagpack_main_box>
           </Bagpack_main>
         </div>

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from "recoil";
 import { bagId } from "../../recoil/atoms";
+import axios from 'axios';
 
 const Side_box = styled.div`
     width: 450px;
@@ -53,18 +54,35 @@ const Set_inside_box = styled.div`
     color: white;
 `;
 
+const Link_box = styled.button`
+    width: 200px;
+    height: 60px;
+    font-size: 22px;
+    font-weight: 700;
+    margin: auto -80px auto auto;
+    color: #FF541E;
+    background-color: white;
+    border: 3px solid #FF541E;
+    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+    border-radius: 20px;
+`;
+
+const Message = styled.div`
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #FF541E;
+`;
+
+
 function BackpackSide() {
 
     //아이디 클릭시
     const navigate = useNavigate();
-    const bag_id = useRecoilValue(bagId);
+    const bag_id = useParams().bagId;
     function onClick_main(){
         navigate("/bagpack/" + `${bag_id}`);
-    }
-
-    //친구 관리
-    function onClick_friendSet(){
-        navigate("/friend-set/" + `${bag_id}`);
     }
 
     //CHAT GPT
@@ -74,13 +92,93 @@ function BackpackSide() {
 
     const user_name = localStorage.getItem("userName");
 
+    //링크복사 클릭시
+    const [slug, setSlug] = useState("");
+    const [link, setLink] = useState(false);
+    function onClick_addBtn(){
+        //초대링크 생성
+        axios({
+            url: '/invitations',
+            method: 'POST',
+            data:{
+                bagId: Number(bag_id)
+            },
+        }).then((response) => {
+            console.log("slug:" + response.data.result.slug); //slug값 추출
+            setSlug(response.data.result.slug); 
+            setLink(true);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    }
+
+    
+    // 클립보드 권한 요청 함수
+    async function requestClipboardPermission() {
+        try {
+            if ('permissions' in navigator) {
+                const clipboardPermissionName = 'clipboard-write' as PermissionName;
+                const permissionStatus = await navigator.permissions.query({ name: clipboardPermissionName });
+                return permissionStatus.state === 'granted';
+            } else {
+                console.error('navigator.permissions.query is not supported in this environment.');
+                return false;
+            }
+        } catch (error) {
+            console.error('Error requesting clipboard permission:', error);
+            return false;
+        }
+    }
+
+
+    const [generatedLink, setGeneratedLink] = useState(''); // Initialize with an empty string
+
+    // 클릭 이벤트 핸들러
+    async function onClickLink() {
+        const hasClipboardPermission = await requestClipboardPermission();
+
+        if (hasClipboardPermission) {
+            axios({
+                url: `/invitations/${slug}`,
+                method: 'GET',
+        }).then((response) => {
+            console.log("bagId획득:" + response.data.result.bagId);
+            console.log(`http://localhost:3000/bagpack/${response.data.result.bagId}`);
+
+            const link = `http://localhost:3000/bagpack/${response.data.result.bagId}`;
+            setGeneratedLink(link); // Set the generated link
+
+
+            // 링크를 클립보드에 복사
+            navigator.clipboard.writeText(`http://localhost:3000/bagpack/${response.data.result.bagId}`)
+                .then(() => {
+                    alert(" 초대링크가 복사되었습니다! ");
+                    setLink(false);
+                })
+                .catch((error) => {
+                    console.error('클립보드 액세스 에러:', error);
+                });
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+        } else {
+            alert('클립보드 액세스 권한을 허용해야 합니다.');
+        }
+    }
+
     return (
         <Side_box>
             <Friend_list_box>
                 <Friend_inside_box onClick={onClick_main}>{user_name}</Friend_inside_box>
             </Friend_list_box>
             <Set_box>
-                <Set_inside_box onClick={onClick_friendSet}>친구 관리</Set_inside_box>
+                {link && (
+                <div>
+                    <Link_box onClick={() => { onClickLink(); setLink(false); }}>링크 복사하기</Link_box>
+                    <Message>{`${slug}로 입장 확인이 되어 초대링크가 생성되었습니다. \n 공유하세요!`}</Message>
+                </div>
+                )}
+                <Set_inside_box onClick={onClick_addBtn}>링크복사</Set_inside_box>
                 <Set_inside_box onClick={onClick_chatgpt}>짐도우미(GPT)</Set_inside_box>
             </Set_box>
         </Side_box>

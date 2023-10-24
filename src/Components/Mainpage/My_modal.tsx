@@ -61,11 +61,6 @@ function My_modal() {
 
   const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
 
-  //친구관리
-  function friend(){
-
-  }
-
   //회원탈퇴
   function unlink_res() {
     //카카오 회원삭제
@@ -111,11 +106,16 @@ function My_modal() {
     })
   }
 
+  //친구 관리
+  function onClick_friendSet(){
+    navi("/friend-set");
+  }
+
   return (
       <ModalContainer>
         <GlobalStyle/>
         <ModalView>
-          <My_list onClick={friend}>친구관리</My_list>
+          <My_list onClick={onClick_friendSet}>친구관리</My_list>
           <My_list_line></My_list_line>
           <My_list onClick={logout}>로그아웃</My_list>
           <My_list_line></My_list_line>
