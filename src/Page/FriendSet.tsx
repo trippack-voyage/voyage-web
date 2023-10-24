@@ -330,6 +330,7 @@ function FriendSet() {
     
         }).then((response) => {
           setUserCode(response.data);
+          localStorage.setItem("userCode", userCode);
         }).catch((error) => {
           console.error('AxiosError:', error);
         });

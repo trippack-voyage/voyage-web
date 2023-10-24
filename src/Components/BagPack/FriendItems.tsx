@@ -70,20 +70,21 @@ function FriendItems() {
         isOk: boolean
       }
 
+
+    const [userCode, setUserCode] = useState("");
     //유저코드 조회
-    const [toFriendId, setUserCode] = useState("");
     useEffect(()=> {
         axios({
-          url: `kakao/${localStorage.getItem("kakaoId")}`,
-          method: 'GET'
+        url: `kakao/find-usercode/${localStorage.getItem("userName")}`,
+        method: 'GET'
     
         }).then((response) => {
-          setUserCode(response.data);
-          console.log(response.data);
+        setUserCode(response.data);
+        localStorage.setItem("userCode", userCode);
         }).catch((error) => {
-          console.error('AxiosError:', error);
+        console.error('AxiosError:', error);
         });
-    },[]) 
+    },[])  
 
     //요청물품 목록
     const [item_list , SetItem_list] = useState<IList[]>([],);       
@@ -93,7 +94,7 @@ function FriendItems() {
           url: '/request/getRequestsByToFriendId',
           method: 'GET',
           params:{
-            toFriendId: `${toFriendId}`
+            toFriendId: `${localStorage.getItem("userCode")}`
           }
     
         }).then((response) => {
