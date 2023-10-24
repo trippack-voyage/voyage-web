@@ -329,7 +329,6 @@ function FriendSet() {
           method: 'GET'
     
         }).then((response) => {
-          console.log(response.data);
           SetFriend_list(response.data);
         }).catch((error) => {
           console.error('AxiosError:', error);
@@ -349,7 +348,7 @@ function FriendSet() {
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
-    },[])
+    },[userCode])
     
     
     //친구수락 확정 대기 목록
@@ -365,7 +364,7 @@ function FriendSet() {
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
-    },[])  
+    },[userCode])  
 
     const [friend_state, setFriend_state] = useState([false, false, false]);
 
