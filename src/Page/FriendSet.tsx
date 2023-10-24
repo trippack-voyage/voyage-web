@@ -349,6 +349,22 @@ function FriendSet() {
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
+    },[])
+    
+    
+    //친구수락 확정 대기 목록
+    const [friend_receive , setFriend_receive] = useState<PList[]>([],);
+    useEffect(()=> {
+        axios({
+            url: `/friend/acceptRequest/${userCode}`,
+            method: 'GET'
+    
+        }).then((response) => {
+            console.log(response.data);
+            setFriend_receive(response.data);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
     },[])  
 
     const [friend_state, setFriend_state] = useState([false, false, false]);
@@ -443,9 +459,6 @@ function FriendSet() {
                                 </div> 
                             )
                         })}
-                    </Friend_list_box3>
-
-                    <Friend_list_box2>
                         {friend_list.map(function(a,i){
                             return( 
                                 <div>  
@@ -459,6 +472,28 @@ function FriendSet() {
                                         {find_request === false ? 
                                             (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>):
                                             (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
+                                        }
+                                    </Find_Friend_box>):(<div></div>)
+                                    }
+                                </div> 
+                            )
+                        })}
+                    </Friend_list_box3>
+
+                    <Friend_list_box2>
+                        {friend_receive.map(function(a,i){
+                            return( 
+                                <div>  
+                                    {find_result === `${a.kakaoNickname}` ?
+                                    (<Find_Friend_box
+                                        onClick={() => toggleActive(i)} 
+                                        className={(friend_state[i] === false ? " active" : "")}
+                                    >
+                                        <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
+                                        <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                        {find_request === false ? 
+                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>수락</Find_frined_btn>):
+                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>취소</Find_frined_btn>)
                                         }
                                     </Find_Friend_box>):(<div></div>)
                                     }
