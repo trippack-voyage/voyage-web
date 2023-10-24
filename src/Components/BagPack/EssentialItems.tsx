@@ -111,72 +111,68 @@ const No_travel_close_btn = styled.div`
     text-align: center;
 `;
 
-function EssentialItems() {
 
-    //박스 열림 상태
+function EssentialItems() {
+    // 박스 열림 상태
     const [isOpen_pItem, setIsOpen_pItem] = useState(false);
 
-    function onClick_prohibitedItem(){
-        if(isOpen_pItem === false)
+    function onClick_prohibitedItem() {
+        if (isOpen_pItem === false)
             setIsOpen_pItem(true);
         else
             setIsOpen_pItem(false);
     }
 
-    //체크 된 필수 용품
-    const [checkItems, setCheckItems] = useState(new Set)
-    const checkItemHandler = (id:any, isChecked:any) => {
-        if (isChecked) {
-          checkItems.add(id) 
-          setCheckItems(checkItems)
-        } else if (!isChecked) {
-          checkItems.delete(id)
-          setCheckItems(checkItems)
-        }
-        console.log(checkItems);
-    }
-      
-
-    //필수 용품 리스트
+    // 필수 용품 리스트
     const [essenitem_list, setEssentitem_list] = useState([
         "여권", "E-ticket", "지갑", "충전기", "보조배터리", "USIM", "멀티탭", "카메라", "양치도구",
         "세안용품", "샤워용품", "스킨케어", "화장품", "선크림",
-        "면도기", "고데기", "헤어롤", "속옷", "의류", "양말", "수영복", "우산, 우비", 
+        "면도기", "고데기", "헤어롤", "속옷", "의류", "양말", "수영복", "우산, 우비",
         "안경, 렌즈", "선글라스", "신발, 슬리퍼", "악세사리", "머리끈", "비상약", "물티슈", "여성용품"]);
+
+    // 필수 용품의 체크 상태 배열
+    const [checkItems, setCheckItems] = useState(new Array(essenitem_list.length).fill(false));
+
+
+    
+    // 체크된 항목 처리 함수
+    const checkItemHandler = (index: number) => {
+        const updatedCheckItems = [...checkItems];
+        updatedCheckItems[index] = !updatedCheckItems[index];
+        setCheckItems(updatedCheckItems);
+    }
 
     return (
         <div>
             {isOpen_pItem ? (
-            <ProhibitedItems_openBox>
-                <ProhibitedItems_openBox_header>
+                <ProhibitedItems_openBox>
+                    <ProhibitedItems_openBox_header>
+                        <No_travel_icon_box><No_travel_icon src={suitcase_icon}></No_travel_icon></No_travel_icon_box>
+                        <No_travel_text>필수 물품</No_travel_text>
+                    </ProhibitedItems_openBox_header>
+                    <Open_box_main>
+                        {essenitem_list.map(function (item, index) {
+                            return (
+                                <Item_listBox key={index}>
+                                    <Item_name>{item}</Item_name>
+                                    <CheckBox
+                                        type="checkbox"
+                                        checked={checkItems[index]}
+                                        onChange={() => checkItemHandler(index)}
+                                    />
+                                </Item_listBox>
+                            )
+                        })}
+                    </Open_box_main>
+                    <No_travel_close_btn onClick={onClick_prohibitedItem}>닫기</No_travel_close_btn>
+                </ProhibitedItems_openBox>) :
+                (<EssentialItems_closeBox>
                     <No_travel_icon_box><No_travel_icon src={suitcase_icon}></No_travel_icon></No_travel_icon_box>
                     <No_travel_text>필수 물품</No_travel_text>
-                </ProhibitedItems_openBox_header>  
-                <Open_box_main>
-                    {essenitem_list.map(function(a,i){
-                        return(
-                            <Item_listBox>
-                                <Item_name>{essenitem_list[i]}</Item_name>
-                                <CheckBox 
-                                    id={essenitem_list[i]}
-                                    type="checkbox" 
-                                    onChange={(e) => {
-                                        checkItemHandler(e.target.id, e.target.checked);
-                                      }}></CheckBox>
-                            </Item_listBox>
-                        )
-                    })}
-                </Open_box_main>
-                <No_travel_close_btn onClick={onClick_prohibitedItem}>닫기</No_travel_close_btn> 
-            </ProhibitedItems_openBox>):
-            (<EssentialItems_closeBox>
-                <No_travel_icon_box><No_travel_icon src={suitcase_icon}></No_travel_icon></No_travel_icon_box>
-                <No_travel_text>필수 물품</No_travel_text>
-                <No_travel_btn onClick={onClick_prohibitedItem}>열기</No_travel_btn>
-            </EssentialItems_closeBox>)}
+                    <No_travel_btn onClick={onClick_prohibitedItem}>열기</No_travel_btn>
+                </EssentialItems_closeBox>)}
         </div>
     );
-  }
-  
-  export default EssentialItems;
-  
+}
+
+export default EssentialItems;

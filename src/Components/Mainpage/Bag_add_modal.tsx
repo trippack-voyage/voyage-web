@@ -20,7 +20,7 @@ export const ModalContainer = styled.div`
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
-  margin-top: -595px;
+  margin-top: -540px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({

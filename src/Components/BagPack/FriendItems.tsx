@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import styled from "styled-components";
 import friend_icon from '../../img/friend-icon.png';
+
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
@@ -62,6 +64,47 @@ function FriendItems() {
         else
             setIsOpen_pItem(false);
     }
+
+    interface IList {
+        requestedProdect: string,
+        isOk: boolean
+      }
+
+    //유저코드 조회
+    const [toFriendId, setUserCode] = useState("");
+    useEffect(()=> {
+        axios({
+          url: `kakao/${localStorage.getItem("kakaoId")}`,
+          method: 'GET'
+    
+        }).then((response) => {
+          setUserCode(response.data);
+          console.log(response.data);
+        }).catch((error) => {
+          console.error('AxiosError:', error);
+        });
+    },[]) 
+
+    //요청물품 목록
+    const [item_list , SetItem_list] = useState<IList[]>([],);       
+
+    useEffect(()=> {
+        axios({
+          url: '/request/getRequestsByToFriendId',
+          method: 'GET',
+          params:{
+            toFriendId: `${toFriendId}`
+          }
+    
+        }).then((response) => {
+          console.log(response.data);
+          SetItem_list(response.data);
+        }).catch((error) => {
+          console.error('AxiosError:', error);
+        });
+      },[])  
+    
+
     return (
         <div>
             {isOpen_pItem ? (
@@ -69,6 +112,11 @@ function FriendItems() {
                 <No_travel_icon_box><No_travel_icon src={friend_icon}></No_travel_icon></No_travel_icon_box>
                 <No_travel_text>요청 물품</No_travel_text>
                 <No_travel_btn onClick={onClick_prohibitedItem}>닫기</No_travel_btn>
+                {item_list.map(function(a,i){
+                            return(    
+                                <div>{a.requestedProdect} {a.isOk}</div>
+                            )
+                        })}
             </ProhibitedItems_openBox>):
             (<EssentialItems_closeBox>
                 <No_travel_icon_box><No_travel_icon src={friend_icon}></No_travel_icon></No_travel_icon_box>

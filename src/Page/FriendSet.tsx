@@ -277,6 +277,7 @@ const Find_friend_name = styled.div`
     font-weight: 700;
     margin-top: auto;
     margin-bottom: auto;
+    width: 100px;
 `;
 
 const Find_frined_btn = styled.button`
@@ -286,6 +287,19 @@ const Find_frined_btn = styled.button`
     background-color: white;
     border-radius: 12px;
     width: 105px;
+    height: 55px;
+    border: 3px solid #FF541E;
+    color: #FF541E;
+    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+`;
+
+const Delete_frined_btn = styled.button`
+    margin: auto 0px auto auto;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 12px;
+    width: 75px;
     height: 55px;
     border: 3px solid #FF541E;
     color: #FF541E;
@@ -344,8 +358,7 @@ function FriendSet() {
     
         }).then((response) => {
             Setf_list(response.data.result);
-            
-            for(let i = 0; i < flist.length; i++){
+            for(let i = 0; i <= flist.length; i++){
                 findUserCode(response.data.result[i]);
             }
 
@@ -355,15 +368,19 @@ function FriendSet() {
     },[userCode])
 
     //userCode로 사용자 정보 조회
-    const [flist_info , Setf_list_info] = useState<PList[]>([],);
+    const [flist_info , Setf_list_info] = useState([""]);
+    const [flist_info2 , Setf_list_info2] = useState([""]);
+    const [name, setName] = useState("");
     function findUserCode(user: number){
         axios({
             url: `kakao/find/${Number(user)}`,
             method: 'GET'
 
         }).then((response) => {
-            console.log(response.data.result);
-            Setf_list_info(response.data);
+            setName(name);
+            Setf_list_info([response.data.kakaoNickname, ...flist_info]);
+            Setf_list_info2([response.data.kakaoProfileImg, ...flist_info2]);   
+            console.log(flist_info);
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
@@ -379,10 +396,35 @@ function FriendSet() {
         }).then((response) => {
             console.log(response.data.result);
             setFriend_receive(response.data.result);
+                        
+            for(let i = 0; i < flist.length; i++){
+                findUserCode2(response.data.result[i]);
+            }
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
     },[userCode])  
+
+     //userCode로 사용자 정보 조회
+    const [flist_info3 , Setf_list_info3] = useState([""]);
+    const [flist_info4 , Setf_list_info4] = useState([""]);
+    function findUserCode2(user: number){
+        axios({
+            url: `kakao/find/${Number(user)}`,
+            method: 'GET'
+
+        }).then((response) => {
+            setName(name);
+            Setf_list_info([response.data.kakaoNickname, ...flist_info3]);
+            Setf_list_info2([response.data.kakaoProfileImg, ...flist_info4]);
+            console.log(flist_info3);
+            console.log(flist_info4);
+            
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    }
+        
 
     const [friend_state, setFriend_state] = useState([false, false, false]);
 
@@ -426,6 +468,14 @@ function FriendSet() {
             });
     }
 
+    //친구 삭제
+    function friend_delete(friendcode: number){
+
+
+          console.log(userCode);
+          console.log(friendcode);
+    }
+
     return (
         <div>
           <GlobalStyle/>
@@ -444,8 +494,9 @@ function FriendSet() {
                         {flist.map(function(a,i){
                             return(    
                             <Find_Friend_box>
-                                <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
-                                <Find_friend_name></Find_friend_name>
+                                <Find_friend_prifile src={flist_info2[i]} height="100" width="100"></Find_friend_prifile>
+                                <Find_friend_name>{flist_info[i]}</Find_friend_name>
+                                <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
                             </Find_Friend_box>)
                         })}                  
                     </Friend_list_box>)}
@@ -497,28 +548,17 @@ function FriendSet() {
                         })}
                     </Friend_list_box3>
 
-                    {friend_receive.length === 0 ? 
-                    (<Friend_list_box2></Friend_list_box2>):(
-                    <Friend_list_box2>
-                        {friend_receive && friend_receive.map(function(a,i){
-                            return( 
-                                <div>  
-                                    {find_result === `${a.kakaoNickname}` ?
-                                    (<Find_Friend_box
-                                        onClick={() => toggleActive(i)} 
-                                        className={(friend_state[i] === false ? " active" : "")}
-                                    >
-                                        <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
-                                        <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                        {find_request === false ? 
-                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>수락</Find_frined_btn>):
-                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>취소</Find_frined_btn>)
-                                        }
-                                    </Find_Friend_box>):(<div></div>)
-                                    }
-                                </div> 
-                            )
-                        })}
+                    {flist.length === 0 ? 
+                        (<Friend_list_box2>친구요청이 없어요!</Friend_list_box2>) : 
+                        (<Friend_list_box2>
+                        {flist.map(function(a,i){
+                            return(    
+                            <Find_Friend_box>
+                                <Find_friend_prifile src={flist_info4[i]} height="100" width="100"></Find_friend_prifile>
+                                <Find_friend_name>{flist_info3[i]}</Find_friend_name>
+                                <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
+                            </Find_Friend_box>)
+                        })}                  
                     </Friend_list_box2>)}
                 </Friend_main>
             </Bagpack_main_box>

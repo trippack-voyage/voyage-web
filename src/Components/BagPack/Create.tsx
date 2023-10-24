@@ -51,7 +51,7 @@ export default function Create({
     bagId: 0,
     isRequired: false,
     packName: '',
-    isCompleted: false,
+    completed: false,
   });
 
   const bag_id = useParams().bagId;
@@ -61,7 +61,7 @@ export default function Create({
       bagId: `${Number(bag_id)}`,
       isRequired: formData.isRequired,
       packName: formData.packName,
-      isCompleted: false
+      completed: false
     };
 
     // Axios를 사용하여 POST 요청 보내기

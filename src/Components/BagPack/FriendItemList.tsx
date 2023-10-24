@@ -98,12 +98,9 @@ export interface PList {
   isRequired: boolean;
 }
 
-export default function ItemList() {
+export default function FriendItemList() {
   const [inputText, setInputText] = useState("");
   const [todoList, setTodoList] = useState<PList[]>([]);
-
-  const [editingStates, setEditingStates] = useState<{ [packId: number]: boolean }>({});
-  const [completionStates, setCompletionStates] = useState<{ [packId: number]: boolean }>({});
 
   // 입력값 변경내용 확인
   const textTypingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,27 +120,16 @@ export default function ItemList() {
     setInputText("");
   };
 
-   // 수정 모드로 전환하는 함수
-   const enterEditMode = (packId: number) => {
-    setEditingStates({
-      ...editingStates,
-      [packId]: true,
-    });
-  };
-
-
   // 값 삭제하기
   const onClickDelete = (packid: number) => {
     axios.delete(`/pack/${packid}`, {
     })
-      .then(function (response) {
-        console.log(response);
-
-        setPackList((prevPackList) => prevPackList.filter(item => item.packId !== packid));
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
   };
 
   // 값 수정하기
@@ -160,27 +146,12 @@ export default function ItemList() {
     }).then((response) => {
       console.log(response.data);
 
-      setPackList((prevPackList) =>
-        prevPackList.map(item => {
-          if (item.packId === packid) {
-            return { ...item, packName: updatedText || item.packName };
-          }
-          return item;
-        })
-      );
-      // 특정 항목에 대한 수정 모드 종료
-      setEditingStates({
-        ...editingStates,
-        [packid]: false,
-      });
-
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-    //setIsUpdating(false);
+    setIsUpdating(false);
   };
 
-  
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const handleFormSubmit = () => {
     setIsUpdating(false);
@@ -190,7 +161,7 @@ export default function ItemList() {
   const [packList, setPackList] = useState<PList[]>([]);
   const bag_id = useParams().bagId;
 
-  useEffect(() => {
+  useEffect(()=> {
     axios({
       url: `/pack/list/${bag_id}`,
       method: 'GET',
@@ -201,13 +172,13 @@ export default function ItemList() {
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-  }, [])
+  },[])  
 
   //체크 상태 변경
   const [isCompleted, setIsCompleted] = useState(false);
   const handleComplete = () => {
 
-    if (isCompleted === false)
+    if(isCompleted ===false)
       setIsCompleted(true);
     else
       setIsCompleted(false);
@@ -220,62 +191,51 @@ export default function ItemList() {
         onSubmit={textInputHandler}
         inputText={inputText}
       />
-      {packList.map(function (item, i) {
-        return (
-          <div key={item.packId}>
-             { !editingStates[item.packId] ? (  // 수정 모드 상태 확인
-              <ItemContainer>
-                <CompleteBtn
-                  className={completionStates[item.packId] ? " checked" : ""}
-                  onClick={() => {
-                    // Toggle the completion state for this item
-                    setCompletionStates({
-                      ...completionStates,
-                      [item.packId]: !completionStates[item.packId],
-                    });
-                  }}
-                ></CompleteBtn>
-                <ItemText
-                  style={item.completed ? { textDecoration: "line-through" } : undefined}>
-                  {item.packName}
-                </ItemText>
-                <ButtonContainer>
-                  <InlineBtnBox onClick={() => {
-                    enterEditMode(item.packId);
-                  }}>
-                    <HiOutlinePencilSquare size="28" />
-                  </InlineBtnBox>
-                  <InlineBtnBox onClick={() => onClickDelete(item.packId)}>
-                    <BsTrash size="28" />
-                  </InlineBtnBox>
-                </ButtonContainer>
-              </ItemContainer>)
-              : (<ItemContainer>
-                <CompleteBtn
-                  className={isCompleted ? " checked" : ""}
-                  onClick={handleComplete}>
-                </CompleteBtn>
-                <ItemUpdateForm onSubmit={handleFormSubmit}>
-                  <ItemTextUpdateInput
-                    placeholder={`${item.packName}`}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setUpdatedText(e.target.value); }}
-                  />
-                  <ButtonContainer>
-                    <InlineBtnBox type="button" onClick={() => updateHandler(item.packId)}>
-                      <BsCheckLg size="30" />
-                    </InlineBtnBox>
-                    <InlineBtnBox onClick={() => {
-                      // 특정 항목에 대한 수정 모드 종료
-                      setEditingStates({ ...editingStates, [item.packId]: false });
-                    }}>
-                      <IoClose size="30" />
-                    </InlineBtnBox>
-                  </ButtonContainer>
-                </ItemUpdateForm>
-              </ItemContainer>)}
+      {packList.map(function(item,i){
+        return(
+          <div>
+          {isUpdating === false? (
+          <ItemContainer>
+            <CompleteBtn
+              className={isCompleted ? " checked" : ""}
+              onClick={handleComplete}>  
+            </CompleteBtn>
+            <ItemText
+              style={item.completed ? { textDecoration: "line-through" } : undefined}>
+              {item.packName}
+            </ItemText>
+            <ButtonContainer>
+              <InlineBtnBox onClick={() => setIsUpdating(true)}>
+                <HiOutlinePencilSquare size="28" />
+              </InlineBtnBox>
+              <InlineBtnBox onClick={() => onClickDelete(item.packId)}>
+                <BsTrash size="28" />
+              </InlineBtnBox>
+            </ButtonContainer>
+          </ItemContainer>)
+
+          :(<ItemContainer>
+              <CompleteBtn
+                className={isCompleted ? " checked" : ""}
+                onClick={handleComplete}>  
+              </CompleteBtn>
+              <ItemUpdateForm onSubmit={handleFormSubmit}>
+              <ItemTextUpdateInput
+                placeholder={`${item.packName}`}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setUpdatedText(e.target.value); }}
+              />
+              <ButtonContainer>
+                <InlineBtnBox type="submit" onClick={() => updateHandler(item.packId)}>
+                  <BsCheckLg size="30" />
+                </InlineBtnBox>
+                <InlineBtnBox onClick={() => setIsUpdating(false)}>
+                  <IoClose size="30" />
+                </InlineBtnBox>
+              </ButtonContainer>
+            </ItemUpdateForm>
+          </ItemContainer>)}
           </div>
-        )
-      }
+        )}
       )}
     </div>
   );
