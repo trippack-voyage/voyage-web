@@ -107,6 +107,7 @@ function Bag_delete_modal(){
     })
     .then(function (response) {
       console.log(response);
+      window.location.replace("/bag-list");
     })
     .catch(function (error) {
       console.log(error);
