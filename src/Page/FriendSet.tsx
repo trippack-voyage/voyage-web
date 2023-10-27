@@ -336,7 +336,7 @@ function FriendSet() {
         });
     },[])  
 
-    //사용자 전체 목록
+    //사용자 전체 목록(구현완료)
     const [friend_list , SetFriend_list] = useState<IList[]>([],);
     useEffect(()=> {
         axios({
@@ -350,25 +350,23 @@ function FriendSet() {
         });
     },[])  
 
-    //친구리스트
-    const [flist , Setf_list] = useState<PList[]>([],);
+    //친구리스트(완성)
+    const [myfriendlist , Setmyfriendlist] = useState<PList[]>([],);
     useEffect(()=> {
         axios({
             url: `/friend/friendList/${Number(userCode)}`,
             method: 'GET'
     
         }).then((response) => {
-            Setf_list(response.data.result);
-            for(let i = 0; i < flist.length; i++){
-                findUserCode(response.data.result[i]);
-            }
+            Setmyfriendlist(response.data.result);
+            console.log(response.data.result);
 
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
     },[userCode])
 
-    //userCode로 사용자 정보 조회
+    /*userCode로 사용자 정보 조회
     const [flist_info , Setf_list_info] = useState([""]);
     const [flist_info2 , Setf_list_info2] = useState([""]);
     const [name, setName] = useState("");
@@ -387,7 +385,8 @@ function FriendSet() {
             console.error('AxiosError:', error);
         });
     }
-    
+    */
+   /*
     //친구수락 확정 대기 목록
     const [friend_receive , setFriend_receive] = useState<PList[]>([],);
     useEffect(()=> {
@@ -427,7 +426,7 @@ function FriendSet() {
         });
     }
         
-
+*/
     const [friend_state, setFriend_state] = useState([false, false, false]);
 
     let [btnActive, setBtnActive] = useState();
@@ -436,6 +435,7 @@ function FriendSet() {
 
     };
 
+    //메인화면 이동
     const navi = useNavigate();
     function onClickBack(){
         navi("/bag-list");
@@ -443,7 +443,7 @@ function FriendSet() {
 
     function onClick_addBtn(){}
 
-    //친구 요청
+    //친구 요청(구현 완료)
     const [find_result, setFind_result] = useState("");
     const [find_request, setFind_request] = useState(false);
     function friend_request(friendCode: number){
@@ -489,14 +489,14 @@ function FriendSet() {
                     {/*<Header_text3>친구 요청</Header_text3>*/}
                 </Bagpack_main_header>
                 <Friend_main>
-                    {flist.length === 0 ? 
+                    {myfriendlist.length === 0 ? 
                         (<Friend_list_box>친구가 아직 없어요!</Friend_list_box>) : 
                         (<Friend_list_box>
-                        {flist.map(function(a,i){
+                        {myfriendlist.map(function(a,i){
                             return(    
                             <Find_Friend_box>
-                                <Find_friend_prifile src={flist_info2[i]} height="100" width="100"></Find_friend_prifile>
-                                <Find_friend_name>{flist_info[i]}</Find_friend_name>
+                                <Find_friend_prifile src={`${a.kakaoProfileImg}`} height="100" width="100"></Find_friend_prifile>
+                                <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
                                 <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
                             </Find_Friend_box>)
                         })}                  
