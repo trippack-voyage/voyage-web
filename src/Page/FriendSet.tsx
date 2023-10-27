@@ -321,8 +321,8 @@ function FriendSet() {
         isFriend: boolean
     }
     
+    //사용자 유저코드 조회(완성)
     const [userCode, setUserCode] = useState("");
-    //유저코드 조회
     useEffect(()=> {
         axios({
           url: `kakao/find-usercode/${localStorage.getItem("userName")}`,
@@ -441,8 +441,6 @@ function FriendSet() {
         navi("/bag-list");
     }
 
-    function onClick_addBtn(){}
-
     //친구 요청(구현 완료)
     const [find_result, setFind_result] = useState("");
     const [find_request, setFind_request] = useState(false);
@@ -473,8 +471,22 @@ function FriendSet() {
     //친구 삭제
     function friend_delete(friendcode: number){
 
-          console.log(userCode);
-          console.log(friendcode);
+        console.log(userCode);
+        console.log(friendcode);
+        axios.delete(`/friend/delete/${Number(userCode)}/${Number(friendcode)}`, {   
+          })
+          .then(function (response) {
+            console.log(response);
+            window.location.replace("/friend-set");
+            alert("친구가 삭제되었습니다!");
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function () {
+            console.log(userCode);
+            console.log(friendcode);
+          });        
     }
 
     return (
