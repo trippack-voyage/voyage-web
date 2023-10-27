@@ -163,7 +163,7 @@ function EssentialItems() {
             for(let i = 0; i < packEssList.length; i++){
                 for(let j = 0; j < essenitem_list.length; j++){
                     if(packEssList[i].packName === essenitem_list[j]){
-                        checkItems[j] = true;                        
+                        checkItems[j] = true;              
                     }
                 }
             }
@@ -178,7 +178,7 @@ function EssentialItems() {
         updatedCheckItems[index] = !updatedCheckItems[index];
         setCheckItems(updatedCheckItems);
 
-        //체크하면 백엔드로 필수물품 이름 전달
+        //체크하면 백엔드로 필수물품 이름 전달(추가)
         if(updatedCheckItems[index] === true){
             
             const data = {
@@ -198,6 +198,19 @@ function EssentialItems() {
             });
 
             //console.log(data);
+        }
+
+        //체크해제하면 백엔드로 필수물품 이름 전달(삭제)
+        if(updatedCheckItems[index] === false){
+    
+            const data = {
+                bagId: `${Number(bag_id)}`,
+                isRequired: true,
+                packName: essenitem_list[index],
+                completed: false
+            };
+
+            console.log(data);
         }
     }
 
