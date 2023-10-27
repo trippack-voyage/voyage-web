@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import suitcase_icon from '../../img/suitcases-icon.png';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
@@ -111,17 +113,17 @@ const No_travel_close_btn = styled.div`
     text-align: center;
 `;
 
+export interface PList {
+    packId: number;
+    packName: string;
+    completed: boolean;
+    isRequired: boolean;
+  }
 
 function EssentialItems() {
-    // 박스 열림 상태
-    const [isOpen_pItem, setIsOpen_pItem] = useState(false);
 
-    function onClick_prohibitedItem() {
-        if (isOpen_pItem === false)
-            setIsOpen_pItem(true);
-        else
-            setIsOpen_pItem(false);
-    }
+    //bagId 가져오기
+    const bag_id = useParams().bagId;
 
     // 필수 용품 리스트
     const [essenitem_list, setEssentitem_list] = useState([
@@ -133,14 +135,72 @@ function EssentialItems() {
     // 필수 용품의 체크 상태 배열
     const [checkItems, setCheckItems] = useState(new Array(essenitem_list.length).fill(false));
 
+    //물품 가져오기
+    const [packEssList, setPackEssList] = useState<PList[]>([]);
 
+    useEffect(() => {
+        
+        axios({
+            url: `/pack/list/${bag_id}`,
+            method: 'GET',
+    
+            }).then((response) => {
+            setPackEssList(response.data);
+    
+            }).catch((error) => {
+            console.error('AxiosError:', error);
+            });
+
+    }, [])
+
+    // 박스 열림 상태
+    const [isOpen_pItem, setIsOpen_pItem] = useState(false);
+
+    function onClick_prohibitedItem() {
+        if (isOpen_pItem === false){
+            setIsOpen_pItem(true);
+            //필수물품만 추려서 체크 판별
+            for(let i = 0; i < packEssList.length; i++){
+                for(let j = 0; j < essenitem_list.length; j++){
+                    if(packEssList[i].packName === essenitem_list[j]){
+                        checkItems[j] = true;                        
+                    }
+                }
+            }
+        }
+        else
+            setIsOpen_pItem(false);
+    }
     
     // 체크된 항목 처리 함수
     const checkItemHandler = (index: number) => {
         const updatedCheckItems = [...checkItems];
         updatedCheckItems[index] = !updatedCheckItems[index];
         setCheckItems(updatedCheckItems);
+
+        //체크하면 백엔드로 필수물품 이름 전달
+        if(updatedCheckItems[index] === true){
+            
+            const data = {
+                bagId: `${Number(bag_id)}`,
+                isRequired: true,
+                packName: essenitem_list[index],
+                completed: true
+            };
+
+            axios
+            .post('/pack', data)
+            .then((response) => {
+                console.log('서버 응답:', response.data);
+            })
+            .catch((error) => {
+                console.error('Axios 에러:', error);
+            });
+
+            //console.log(data);
+        }
     }
+
 
     return (
         <div>
