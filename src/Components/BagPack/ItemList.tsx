@@ -222,57 +222,60 @@ export default function ItemList() {
       />
       {packList.map(function (item, i) {
         return (
-          <div key={item.packId}>
-             { !editingStates[item.packId] ? (  // 수정 모드 상태 확인
-              <ItemContainer>
-                <CompleteBtn
-                  className={completionStates[item.packId] ? " checked" : ""}
-                  onClick={() => {
-                    // Toggle the completion state for this item
-                    setCompletionStates({
-                      ...completionStates,
-                      [item.packId]: !completionStates[item.packId],
-                    });
-                  }}
-                ></CompleteBtn>
-                <ItemText
-                  style={item.completed ? { textDecoration: "line-through" } : undefined}>
-                  {item.packName}
-                </ItemText>
-                <ButtonContainer>
-                  <InlineBtnBox onClick={() => {
-                    enterEditMode(item.packId);
-                  }}>
-                    <HiOutlinePencilSquare size="28" />
-                  </InlineBtnBox>
-                  <InlineBtnBox onClick={() => onClickDelete(item.packId)}>
-                    <BsTrash size="28" />
-                  </InlineBtnBox>
-                </ButtonContainer>
-              </ItemContainer>)
-              : (<ItemContainer>
-                <CompleteBtn
-                  className={isCompleted ? " checked" : ""}
-                  onClick={handleComplete}>
-                </CompleteBtn>
-                <ItemUpdateForm onSubmit={handleFormSubmit}>
-                  <ItemTextUpdateInput
-                    placeholder={`${item.packName}`}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setUpdatedText(e.target.value); }}
-                  />
+          <div>
+            {item.isRequired == false ? (
+            <div key={item.packId}>
+              { !editingStates[item.packId] ? (  // 수정 모드 상태 확인
+                <ItemContainer>
+                  <CompleteBtn
+                    className={completionStates[item.packId] ? " checked" : ""}
+                    onClick={() => {
+                      // Toggle the completion state for this item
+                      setCompletionStates({
+                        ...completionStates,
+                        [item.packId]: !completionStates[item.packId],
+                      });
+                    }}
+                  ></CompleteBtn>
+                  <ItemText
+                    style={item.completed ? { textDecoration: "line-through" } : undefined}>
+                    {item.packName}
+                  </ItemText>
                   <ButtonContainer>
-                    <InlineBtnBox type="button" onClick={() => updateHandler(item.packId)}>
-                      <BsCheckLg size="30" />
-                    </InlineBtnBox>
                     <InlineBtnBox onClick={() => {
-                      // 특정 항목에 대한 수정 모드 종료
-                      setEditingStates({ ...editingStates, [item.packId]: false });
+                      enterEditMode(item.packId);
                     }}>
-                      <IoClose size="30" />
+                      <HiOutlinePencilSquare size="28" />
+                    </InlineBtnBox>
+                    <InlineBtnBox onClick={() => onClickDelete(item.packId)}>
+                      <BsTrash size="28" />
                     </InlineBtnBox>
                   </ButtonContainer>
-                </ItemUpdateForm>
-              </ItemContainer>)}
+                </ItemContainer>)
+                : (<ItemContainer>
+                  <CompleteBtn
+                    className={isCompleted ? " checked" : ""}
+                    onClick={handleComplete}>
+                  </CompleteBtn>
+                  <ItemUpdateForm onSubmit={handleFormSubmit}>
+                    <ItemTextUpdateInput
+                      placeholder={`${item.packName}`}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setUpdatedText(e.target.value); }}
+                    />
+                    <ButtonContainer>
+                      <InlineBtnBox type="button" onClick={() => updateHandler(item.packId)}>
+                        <BsCheckLg size="30" />
+                      </InlineBtnBox>
+                      <InlineBtnBox onClick={() => {
+                        // 특정 항목에 대한 수정 모드 종료
+                        setEditingStates({ ...editingStates, [item.packId]: false });
+                      }}>
+                        <IoClose size="30" />
+                      </InlineBtnBox>
+                    </ButtonContainer>
+                  </ItemUpdateForm>
+                </ItemContainer>)}
+            </div>) : (<div></div>)}
           </div>
         )
       }
