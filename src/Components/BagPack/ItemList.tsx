@@ -153,6 +153,7 @@ export default function ItemList() {
       url: `/pack/${packid}`,
       method: 'PUT',
       data: {
+        bagId: Number(bag_id),
         packName: updatedText,
         isRequired: false,
         completed: false
