@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
 import { useNavigate, useParams } from 'react-router-dom';
-import {IoArrowBack} from "react-icons/io5";
+import { IoArrowBack } from "react-icons/io5";
 import axios from 'axios';
 
 export const GlobalStyle = createGlobalStyle`
@@ -320,43 +320,43 @@ function FriendSet() {
         userCode: number,
         isFriend: boolean
     }
-    
+
     //사용자 유저코드 조회(완성)
     const [userCode, setUserCode] = useState("");
-    useEffect(()=> {
+    useEffect(() => {
         axios({
-          url: `kakao/find-usercode/${localStorage.getItem("userName")}`,
-          method: 'GET'
-    
+            url: `kakao/find-usercode/${localStorage.getItem("userName")}`,
+            method: 'GET'
+
         }).then((response) => {
-          setUserCode(response.data);
-          localStorage.setItem("userCode", userCode);
+            setUserCode(response.data);
+            localStorage.setItem("userCode", userCode);
         }).catch((error) => {
-          console.error('AxiosError:', error);
+            console.error('AxiosError:', error);
         });
-    },[])  
+    }, [])
 
     //사용자 전체 목록(구현완료)
-    const [friend_list , SetFriend_list] = useState<IList[]>([],);
-    useEffect(()=> {
+    const [friend_list, SetFriend_list] = useState<IList[]>([],);
+    useEffect(() => {
         axios({
-          url: '/kakao/all-users',
-          method: 'GET'
-    
+            url: '/kakao/all-users',
+            method: 'GET'
+
         }).then((response) => {
-          SetFriend_list(response.data);
+            SetFriend_list(response.data);
         }).catch((error) => {
-          console.error('AxiosError:', error);
+            console.error('AxiosError:', error);
         });
-    },[])  
+    }, [])
 
     //친구리스트(완성)
-    const [myfriendlist , Setmyfriendlist] = useState<PList[]>([],);
-    useEffect(()=> {
+    const [myfriendlist, Setmyfriendlist] = useState<PList[]>([],);
+    useEffect(() => {
         axios({
             url: `/friend/friendList/${Number(userCode)}`,
             method: 'GET'
-    
+
         }).then((response) => {
             Setmyfriendlist(response.data.result);
             console.log(response.data.result);
@@ -364,13 +364,13 @@ function FriendSet() {
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
-    },[userCode])
+    }, [userCode])
 
-    /*userCode로 사용자 정보 조회
-    const [flist_info , Setf_list_info] = useState([""]);
-    const [flist_info2 , Setf_list_info2] = useState([""]);
+    //userCode로 사용자 정보 조회
+    const [flist_info, Setf_list_info] = useState([""]);
+    const [flist_info2, Setf_list_info2] = useState([""]);
     const [name, setName] = useState("");
-    function findUserCode(user: number){
+    function findUserCode(user: number) {
         axios({
             url: `kakao/find/${Number(user)}`,
             method: 'GET'
@@ -378,38 +378,37 @@ function FriendSet() {
         }).then((response) => {
             setName(name);
             Setf_list_info([response.data.kakaoNickname, ...flist_info]);
-            Setf_list_info2([response.data.kakaoProfileImg, ...flist_info2]);   
+            Setf_list_info2([response.data.kakaoProfileImg, ...flist_info2]);
             console.log(flist_info);
             console.log(flist_info2);
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
     }
-    */
-   /*
+
     //친구수락 확정 대기 목록
-    const [friend_receive , setFriend_receive] = useState<PList[]>([],);
-    useEffect(()=> {
+    const [friend_receive, setFriend_receive] = useState<PList[]>([],);
+    useEffect(() => {
         axios({
             url: `/friend/acceptRequest/${Number(userCode)}`,
             method: 'GET'
-    
+
         }).then((response) => {
             console.log(response.data.result);
             setFriend_receive(response.data.result);
-                        
-            for(let i = 0; i < flist.length; i++){
+
+            for (let i = 0; i < response.data.result.length; i++) {
                 findUserCode2(response.data.result[i]);
             }
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
-    },[userCode])  
+    }, [userCode])
 
-     //userCode로 사용자 정보 조회
-    const [flist_info3 , Setf_list_info3] = useState([""]);
-    const [flist_info4 , Setf_list_info4] = useState([""]);
-    function findUserCode2(user: number){
+    //userCode로 사용자 정보 조회
+    const [flist_info3, Setf_list_info3] = useState([""]);
+    const [flist_info4, Setf_list_info4] = useState([""]);
+    function findUserCode2(user: number) {
         axios({
             url: `kakao/find/${Number(user)}`,
             method: 'GET'
@@ -417,36 +416,36 @@ function FriendSet() {
         }).then((response) => {
             setName(name);
             Setf_list_info([response.data.kakaoNickname, ...flist_info3]);
-            Setf_list_info2([response.data.kakaoProfileImg, ...flist_info4]);
+            Setf_list_info4([response.data.kakaoProfileImg, ...flist_info4]);
             console.log(flist_info3);
             console.log(flist_info4);
-            
+
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
     }
-        
-*/
+
+
     const [friend_state, setFriend_state] = useState([false, false, false]);
 
     let [btnActive, setBtnActive] = useState();
 
-    const toggleActive = (e:any) => {
+    const toggleActive = (e: any) => {
 
     };
 
     //메인화면 이동
     const navi = useNavigate();
-    function onClickBack(){
+    function onClickBack() {
         navi("/bag-list");
     }
 
     //친구 요청(구현 완료)
     const [find_result, setFind_result] = useState("");
     const [find_request, setFind_request] = useState(false);
-    function friend_request(friendCode: number){
+    function friend_request(friendCode: number) {
 
-        if(find_request === false)
+        if (find_request === false)
             setFind_request(true);
         else
             setFind_request(false);
@@ -454,113 +453,110 @@ function FriendSet() {
         axios({
             url: `/friend/add`,
             method: 'POST',
-            headers: { "Content-Type": "Application/json;charset=UTF-8"},
-            data:{
+            headers: { "Content-Type": "Application/json;charset=UTF-8" },
+            data: {
                 friendId: friendCode,
                 isFriend: false,
                 userId: userCode
             },
         }).then((response) => {
-                console.log(response);
-                window.location.replace("/friend-set");
-            }).catch((error) => {
-                console.error('AxiosError:', error);
-            });
+            console.log(response);
+            window.location.replace("/friend-set");
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
     }
 
     //친구 삭제
-    function friend_delete(friendcode: number){
+    function friend_delete(friendcode: number) {
 
         console.log(userCode);
         console.log(friendcode);
-        axios.delete(`/friend/delete/${Number(userCode)}/${Number(friendcode)}`, {   
-          })
-          .then(function (response) {
-            console.log(response);
-            window.location.replace("/friend-set");
-            alert("친구가 삭제되었습니다!");
-          })
-          .catch(function (error) {
-            console.log(error);
-          })
-          .then(function () {
-            console.log(userCode);
-            console.log(friendcode);
-          });        
+        axios.delete(`/friend/delete/${Number(userCode)}/${Number(friendcode)}`, {
+        })
+            .then(function (response) {
+                console.log(response);
+                window.location.replace("/friend-set");
+                alert("친구가 삭제되었습니다!");
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                console.log(userCode);
+                console.log(friendcode);
+            });
     }
 
     return (
         <div>
-          <GlobalStyle/>
-          <Bagpack_main>
-            <Bagpack_main_box>
-                <IoArrowBack size="50" onClick={onClickBack}/>
-                <Bagpack_main_header>
-                    <Header_text>친구 관리</Header_text>
-                    <Header_text2>친구 추가</Header_text2>
-                    {/*<Header_text3>친구 요청</Header_text3>*/}
-                </Bagpack_main_header>
-                <Friend_main>
-                    {myfriendlist.length === 0 ? 
-                        (<Friend_list_box>친구가 아직 없어요!</Friend_list_box>) : 
-                        (<Friend_list_box>
-                        {myfriendlist.map(function(a,i){
-                            return(    
-                            <Find_Friend_box>
-                                <Find_friend_prifile src={`${a.kakaoProfileImg}`} height="100" width="100"></Find_friend_prifile>
-                                <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
-                            </Find_Friend_box>)
-                        })}                  
-                    </Friend_list_box>)}
+            <GlobalStyle />
+            <Bagpack_main>
+                <Bagpack_main_box>
+                    <IoArrowBack size="50" onClick={onClickBack} />
+                    <Bagpack_main_header>
+                        <Header_text>친구 관리</Header_text>
+                        <Header_text2>친구 추가</Header_text2>
+                        {/*<Header_text3>친구 요청</Header_text3>*/}
+                    </Bagpack_main_header>
+                    <Friend_main>
+                        {myfriendlist.length === 0 ?
+                            (<Friend_list_box>친구가 아직 없어요!</Friend_list_box>) :
+                            (<Friend_list_box>
+                                {myfriendlist.map(function (a, i) {
+                                    return (
+                                        <Find_Friend_box>
+                                            <Find_friend_prifile src={`${a.kakaoProfileImg}`} height="100" width="100"></Find_friend_prifile>
+                                            <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                            <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
+                                        </Find_Friend_box>)
+                                })}
+                            </Friend_list_box>)}
 
-                    <Friend_list_box3>
-                        <Friend_main>
-                            <Find_friend 
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => 
-                                { setFind_result(e.target.value); }}>                
-                            </Find_friend>
-                        </Friend_main>
-                        {friend_list.map(function(a,i){
-                            return( 
-                                <div>  
-                                    {find_result === `${a.kakaoNickname}` ?
-                                    (<Find_Friend_box
-                                        onClick={() => toggleActive(i)} 
-                                        className={(friend_state[i] === false ? " active" : "")}
-                                    >
-                                        <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
-                                        <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                        {find_request === false ? 
-                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>):
-                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
+                        <Friend_list_box3>
+                            <Friend_main>
+                                <Find_friend
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setFind_result(e.target.value); }}>
+                                </Find_friend>
+                            </Friend_main>
+                            {friend_list.map(function (a, i) {
+                                return (
+                                    <div>
+                                        {find_result === `${a.kakaoNickname}` ?
+                                            (<Find_Friend_box
+                                                onClick={() => toggleActive(i)}
+                                                className={(friend_state[i] === false ? " active" : "")}
+                                            >
+                                                <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
+                                                <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                                {find_request === false ?
+                                                    (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>) :
+                                                    (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
+                                                }
+                                            </Find_Friend_box>) : (<div></div>)
                                         }
-                                    </Find_Friend_box>):(<div></div>)
-                                    }
-                                </div> 
-                            )
-                        })}
-                    </Friend_list_box3>
-{/* 
-                    {flist.length === 0 ? 
-                        (<Friend_list_box2>친구요청이 없어요!</Friend_list_box2>) : 
-                        (<Friend_list_box2>
-                        {flist.map(function(a,i){
-                            return(    
-                            <Find_Friend_box>
-                                <Find_friend_prifile src={flist_info4[i]} height="100" width="100"></Find_friend_prifile>
-                                <Find_friend_name>{flist_info3[i]}</Find_friend_name>
-                                <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
-                            </Find_Friend_box>)
-                        })}                  
-                    </Friend_list_box2>)}*/}
-                </Friend_main>
-            </Bagpack_main_box>
-          </Bagpack_main>
+                                    </div>
+                                )
+                            })}
+                        </Friend_list_box3>
+                        {friend_receive.length === 0 ? (
+                            <Friend_list_box2>친구요청이 없어요!</Friend_list_box2>
+                        ) : (
+                            <Friend_list_box2>
+                                {friend_receive.map((friend, i) => (
+                                    <Find_Friend_box key={i}>
+                                        <Find_friend_prifile src={friend.kakaoProfileImg} height="100" width="100" />
+                                        <Find_friend_name>{friend.kakaoNickname}</Find_friend_name>
+                                        <Delete_frined_btn onClick={() => friend_delete(friend.userCode)}>수락</Delete_frined_btn>
+                                    </Find_Friend_box>
+                                ))}
+                            </Friend_list_box2>
+                        )}                </Friend_main>
+                </Bagpack_main_box>
+            </Bagpack_main>
         </div>
-      );
-      
-  }
-  
-  export default FriendSet;
-  
+    );
+
+}
+
+export default FriendSet;
