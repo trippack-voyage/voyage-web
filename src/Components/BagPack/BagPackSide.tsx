@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from "recoil";
@@ -107,8 +107,6 @@ function BackpackSide() {
         navigate("/chat-gpt");
     }
 
-    const user_name = localStorage.getItem("userName");
-
     //링크복사 클릭시
     const [slug, setSlug] = useState("");
     const [link, setLink] = useState(false);
@@ -182,6 +180,38 @@ function BackpackSide() {
             alert('클립보드 액세스 권한을 허용해야 합니다.');
         }
     }
+
+    //가방 만든 사람 카카오 정보 조회(구현 완료)
+    const [user_name, setUser_name] = useState("");
+    useEffect(()=> {
+        axios({
+            url: `/bag/${Number(bag_id)}`,
+            method: 'GET'
+    
+        }).then((response) => {
+            let bagUser = response.data.kakaoId;
+
+            axios({
+                url: `/kakao/all-users`,
+                method: 'GET'
+        
+            }).then((response) => {
+                console.log(response.data);
+
+                for(let i = 0; i < response.data.length; i++){
+                    if(response.data[i].kakaoId === bagUser){
+                        setUser_name(response.data[i].kakaoNickname);
+                    }
+                }
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+
+    },[])
 
     return (
         <Side_box>

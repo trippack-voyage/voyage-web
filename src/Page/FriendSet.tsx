@@ -540,25 +540,6 @@ function FriendSet() {
                                 </div> 
                             )
                         })}
-                        {/*{friend_list.map(function(a,i){
-                            return( 
-                                <div>  
-                                    {find_result === `${a.kakaoNickname}` ?
-                                    (<Find_Friend_box
-                                        onClick={() => toggleActive(i)} 
-                                        className={(friend_state[i] === false ? " active" : "")}
-                                    >
-                                        <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
-                                        <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                        {find_request === false ? 
-                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>):
-                                            (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
-                                        }
-                                    </Find_Friend_box>):(<div></div>)
-                                    }
-                                </div> 
-                            )
-                        })}*/}
                     </Friend_list_box3>
 {/* 
                     {flist.length === 0 ? 

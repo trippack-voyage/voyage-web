@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
@@ -9,6 +9,7 @@ import FriendItmes from '../Components/BagPack/FriendItems';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from "recoil";
 import { bagDelState, bagState, bagUpdateState, bagId } from "../recoil/atoms";
+import axios from 'axios';
 //아이콘
 import {BsTrash3} from 'react-icons/bs';
 import {RxPencil2} from 'react-icons/rx';
@@ -106,7 +107,38 @@ function Backpack() {
         setIsbagState(true);
     }
 
-    const user_name = localStorage.getItem("userName");
+    //가방 만든 사람 카카오 정보 조회(구현 완료)
+    const bag_id = useParams().bagId;
+    const [user_name, setUser_name] = useState("");
+    useEffect(()=> {
+        axios({
+            url: `/bag/${Number(bag_id)}`,
+            method: 'GET'
+    
+        }).then((response) => {
+            let bagUser = response.data.kakaoId;
+
+            axios({
+                url: `/kakao/all-users`,
+                method: 'GET'
+        
+            }).then((response) => {
+                console.log(response.data);
+
+                for(let i = 0; i < response.data.length; i++){
+                    if(response.data[i].kakaoId === bagUser){
+                        setUser_name(response.data[i].kakaoNickname);
+                    }
+                }
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+
+    },[])
 
     return (
         <div>
