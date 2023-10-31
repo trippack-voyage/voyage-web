@@ -186,7 +186,7 @@ export default function ItemList() {
     setIsUpdating(false);
   };
 
-  //추가물품 가져오기
+  //추가물품 가져오기(구현 완료)
   const [packList, setPackList] = useState<PList[]>([]);
   const bag_id = useParams().bagId;
 
@@ -198,19 +198,58 @@ export default function ItemList() {
     }).then((response) => {
       console.log(response.data);
       setPackList(response.data);
+      
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
+    console.log(packList);
   }, [])
+
 
   //체크 상태 변경
   const [isCompleted, setIsCompleted] = useState(false);
-  const handleComplete = () => {
+  const handleComplete = (pack_id:Number, pack_name:String) => {
 
-    if (isCompleted === false)
+    console.log(pack_id);
+
+    if (isCompleted === false){
+      
+      axios({
+        url: `/pack/${Number(pack_id)}`,
+        method: 'PUT',
+        data: {
+          bagName: Number(bag_id),
+          completed: true,
+          isRequired: false,
+          packName: String(pack_name)
+        },
+      }).then((response) => {
+        console.log(response.data);
+  
+      }).catch((error) => {
+        console.error('AxiosError:', error);
+      });
       setIsCompleted(true);
-    else
+    }
+    else{
+      axios({
+        url: `/pack/${Number(pack_id)}`,
+        method: 'PUT',
+        data: {
+          bagName: Number(bag_id),
+          completed: false,
+          isRequired: false,
+          packName: String(pack_name)
+        },
+      }).then((response) => {
+        console.log(response.data);
+  
+      }).catch((error) => {
+        console.error('AxiosError:', error);
+      });
+
       setIsCompleted(false);
+    }
   };
 
   return (
@@ -228,17 +267,17 @@ export default function ItemList() {
               { !editingStates[item.packId] ? (  // 수정 모드 상태 확인
                 <ItemContainer>
                   <CompleteBtn
-                    className={completionStates[item.packId] ? " checked" : ""}
+                    className={completionStates[item.packId] || item.completed? " checked" : ""}
                     onClick={() => {
                       // Toggle the completion state for this item
                       setCompletionStates({
                         ...completionStates,
                         [item.packId]: !completionStates[item.packId],
-                      });
+                      }); handleComplete(item.packId, item.packName)
                     }}
                   ></CompleteBtn>
                   <ItemText
-                    style={item.completed ? { textDecoration: "line-through" } : undefined}>
+                    style={item.completed || completionStates[item.packId]? { textDecoration: "line-through" } : undefined}>
                     {item.packName}
                   </ItemText>
                   <ButtonContainer>
@@ -255,7 +294,7 @@ export default function ItemList() {
                 : (<ItemContainer>
                   <CompleteBtn
                     className={isCompleted ? " checked" : ""}
-                    onClick={handleComplete}>
+                    onClick={() => {handleComplete(item.packId, item.packName)}}>
                   </CompleteBtn>
                   <ItemUpdateForm onSubmit={handleFormSubmit}>
                     <ItemTextUpdateInput

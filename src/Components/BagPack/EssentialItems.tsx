@@ -203,22 +203,13 @@ function EssentialItems() {
         //체크해제하면 백엔드로 필수물품 이름 전달(삭제)
         if(updatedCheckItems[index] === false){
     
-            const data = {
-                bagId: `${Number(bag_id)}`,
-                isRequired: true,
-                packName: String(essenitem_list[index]),
-                completed: false
-            };
-
             let packId = 0;
 
             for(let i = 0; i < packEssList.length; i++){
                 if(packEssList[i].packName === essenitem_list[index])
                     packId = packEssList[i].packId;
             }
-
-            console.log(packId);
-
+            //console.log(packId);
             axios.delete(`/pack/delete/${Number(packId)}`, {   
             })
             .then(function (response) {
@@ -231,7 +222,6 @@ function EssentialItems() {
             });  
         }
     }
-
 
     return (
         <div>
