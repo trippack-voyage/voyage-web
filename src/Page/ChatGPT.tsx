@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
@@ -88,11 +88,14 @@ function ChatGPT() {
     function onClickBack(){
         navi("/bag-list");
     }
-
     const chat_res = useRecoilValue(chat_response);
 
-    const [response_chat, setResponse_chat] = useState([]);
-    //setResponse_chat([chat_res, ...response_chat]);
+    const [response_chat, setResponse_chat] = useState<string[]>([]);
+    useEffect(()=> {
+        
+        setResponse_chat([String(chat_res), ...response_chat]);
+    },[])
+
     const [send_chat, setSend_chat] = useState([]);
 
     return (
@@ -105,7 +108,9 @@ function ChatGPT() {
                     <Bagpack_main_header>짐 도우미(GPT)</Bagpack_main_header>
                     <Bagpack_main_text>짐 도우미(GPT)를 이용해 짐을 쌀 때 필요한 정보를 얻어보세요!</Bagpack_main_text>
                     <Friend_list_box>
-                        <Response_box>{chat_res}</Response_box>
+                    {response_chat.map((chat, i) => (
+                        <Response_box>{chat}</Response_box>))
+                    }
                     </Friend_list_box>
                     <FriendSet_main_footer>
                         <ChatInputBox></ChatInputBox>

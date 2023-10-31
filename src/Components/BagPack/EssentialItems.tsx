@@ -184,10 +184,10 @@ function EssentialItems() {
             const data = {
                 bagId: `${Number(bag_id)}`,
                 isRequired: true,
-                packName: essenitem_list[index],
+                packName: `${essenitem_list[index]} + ${Number(bag_id)}`,
                 completed: true
             };
-
+/*
             axios
             .post('/pack', data)
             .then((response) => {
@@ -196,20 +196,21 @@ function EssentialItems() {
             .catch((error) => {
                 console.error('Axios 에러:', error);
             });
-
+*/
             //console.log(data);
         }
 
         //체크해제하면 백엔드로 필수물품 이름 전달(삭제)
         if(updatedCheckItems[index] === false){
-    
-            console.log(updatedCheckItems[index]);
             
             let packId = 0;
 
             for(let i = 0; i < packEssList.length; i++){
-                if(packEssList[i].packName === essenitem_list[index])
-                    packId = packEssList[i].packId;
+                if(`${packEssList[i].packName}` === `${essenitem_list[index]} + ${Number(bag_id)}`){
+                    //packId = packEssList[i].packId;
+                    console.log(`${essenitem_list[index]} + ${Number(bag_id)}`);
+                    console.log(`${essenitem_list[index]} + ${Number(bag_id)}`);
+                }
             }
             //console.log(packId);
             axios.delete(`/pack/delete/${Number(packId)}`, {   

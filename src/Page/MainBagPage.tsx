@@ -6,12 +6,20 @@ import axios from 'axios';
 import {FaPlus} from 'react-icons/fa';
 import {TiWeatherPartlySunny} from 'react-icons/ti';
 //recoil
-import { useRecoilState, useRecoilValue } from "recoil";
-import { bagAddModalState, weatherModalState, myModalState } from "../recoil/atoms";
+import { useRecoilState } from "recoil";
+import { bagAddModalState, weatherModalState } from "../recoil/atoms";
 //component 가져오기
 import SuitCase from '../Components/Mainpage/SuitCase';
 import Bag_add_modal from '../Components/Mainpage/Bag_add_modal';
 import Weather_modal from '../Components/Mainpage/Weather_modal';
+
+//swipper 추가
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from "swiper";
+import 'swiper/scss'
+import 'swiper/scss/navigation'
+import 'swiper/scss/pagination'
+
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -45,13 +53,13 @@ const Main_title = styled.div`
   font-size: 40px;
   font-weight: 500;
   margin: 0px auto;
+  margin-top: 50px;
   color: #1a1919;
   font-family: 'TAEBAEKfont';
 `;
 
 const Bag_select_container = styled.div`
   display: flex;
-  z-index: 8;
 `
 const Bag_select_text = styled.div`
   font-family: 'S-CoreDream-3Light';
@@ -64,43 +72,6 @@ const ToggleContainer = styled.div`
   position: relative;
   cursor: pointer;
   margin-right: 50px;
-  z-index: 0;
-
-  > .toggle-container {
-    width: 80px;
-    height: 42px;
-    border-radius: 30px;
-    background-color: gray;
-  }
-
-    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
-  > .toggle--checked {
-    background-color: #ea5028;
-    transition : 0.5s
-  }
-
-  > .toggle-circle {
-    position: absolute;
-    top: 1.5px;
-    left: 2px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background-color: rgb(255,254,255);
-    transition : 0.5s
-    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
-
-  } >.toggle--checked {
-    left: 40px;
-    transition : 0.5s
-  }
-`;
-
-const ToggleContainer2 = styled.div`
-  position: relative;
-  cursor: pointer;
-  margin-right: 50px;
-  z-index: -1;
 
   > .toggle-container {
     width: 80px;
@@ -209,6 +180,8 @@ const Bag_container = styled.div`
   flex-wrap: wrap;
 `;
 
+SwiperCore.use([Navigation, Pagination])
+
 function MainBagPage() {
   interface IList {
     bagName: string,
@@ -231,8 +204,6 @@ function MainBagPage() {
   const openWeatherModalHandler = () => {
     setIsOpenWeather(true);
   };
-
-  const myModal = useRecoilValue(myModalState);
 
   /*가방 리스트 가져오기*/
   const kakaoId = localStorage.getItem("kakaoId");
@@ -262,27 +233,36 @@ function MainBagPage() {
     setisOn(!isOn)
   };
 
+  
+
   return (
     <div>
+      <div>
+    </div>
       <GlobalStyle/>
+      
       <Main_header>
+      <Swiper
+        className="banner"
+        spaceBetween={50}
+        slidesPerView={1}
+
+        navigation
+        pagination={{ clickable: true }}
+      >
+        <SwiperSlide><img className="banner" alt="banner_01" src="/banner1.png" /></SwiperSlide>
+        <SwiperSlide><img className="banner" alt="banner_02" src="/banner2.png" /></SwiperSlide>
+        <SwiperSlide><img className="banner" alt="banner_03" src="/banner3.png" /></SwiperSlide>
+        <SwiperSlide><img className="banner" alt="banner_04" src="/banner4.png" /></SwiperSlide>
+      </Swiper>
         <Main_title>내 여행 가방들</Main_title>
         <Main_title_line></Main_title_line>
         <Bag_select_container>
           <Bag_select_text>완료 가방만 보기</Bag_select_text>
-          {myModal === false? 
-          (<ToggleContainer 
-            className={`toggle-container ${isOn ? "toggle--checked" : null}`}
-            onClick={toggleHandler}>
+          <ToggleContainer onClick={toggleHandler}>
             <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
             <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
-          </ToggleContainer>):(<ToggleContainer2
-            className={`toggle-container ${isOn ? "toggle--checked" : null}`}
-            onClick={toggleHandler}>
-            <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
-            <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
-          </ToggleContainer2>)
-          }
+          </ToggleContainer>
         </Bag_select_container>
       </Main_header>
       <Main_main>
@@ -320,7 +300,7 @@ function MainBagPage() {
                       start_date={item.startDate}
                       end_date={item.endDate}
                       status={item.status}
-                      bagId={item.bagId}/> ):("")}
+                      bagId={item.bagId}/> ):(null)}
                   </div>
                 )}
               )}

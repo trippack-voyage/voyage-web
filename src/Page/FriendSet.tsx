@@ -138,6 +138,7 @@ const Friend_delete_btn = styled.button`
     }
 `;
 
+
 //친구 추가 버튼
 const Friend_add_btn = styled.button`
     width: 300px;
@@ -294,6 +295,20 @@ const Find_frined_btn = styled.button`
 `;
 
 const Delete_frined_btn = styled.button`
+    margin: auto 0px auto auto;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 12px;
+    width: 75px;
+    height: 55px;
+    border: 3px solid #FF541E;
+    color: #FF541E;
+    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+`;
+
+//친구 수락 버튼
+const Accept_frined_btn = styled.button`
     margin: auto 0px auto auto;
     font-size: 20px;
     font-weight: 700;
@@ -488,6 +503,41 @@ function FriendSet() {
             });
     }
 
+    //친구 수락
+    function friend_accept(friendcode: number) {
+
+        console.log(userCode);
+        console.log(friendcode);
+        axios.patch(`/friend/accept/${Number(friendcode)}/${Number(userCode)}`, {
+        })
+            .then(function (response) {
+                console.log(response);
+                window.location.replace("/friend-set");
+                alert("친구 요청을 수락했습니다!");
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                console.log(userCode);
+                console.log(friendcode);
+            });
+    }
+
+    const [friendRequests, setFriendRequests] = useState([]); // 대기 중인 친구 요청 목록
+
+    useEffect(() => {
+        axios({
+            url: `/friend/friendRequests/${userCode}`, // 사용자의 userCode로 대기 중인 친구 요청 가져오기
+            method: 'GET'
+        }).then((response) => {
+            setFriendRequests(response.data);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    }, [userCode]);
+
+
     return (
         <div>
             <GlobalStyle />
@@ -547,7 +597,7 @@ function FriendSet() {
                                     <Find_Friend_box key={i}>
                                         <Find_friend_prifile src={friend.kakaoProfileImg} height="100" width="100" />
                                         <Find_friend_name>{friend.kakaoNickname}</Find_friend_name>
-                                        <Delete_frined_btn onClick={() => friend_delete(friend.userCode)}>수락</Delete_frined_btn>
+                                        <Accept_frined_btn onClick={() => friend_accept(friend.userCode)}>수락</Accept_frined_btn>
                                     </Find_Friend_box>
                                 ))}
                             </Friend_list_box2>
