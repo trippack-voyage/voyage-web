@@ -210,7 +210,25 @@ function EssentialItems() {
                 completed: false
             };
 
-            console.log(data);
+            let packId = 0;
+
+            for(let i = 0; i < packEssList.length; i++){
+                if(packEssList[i].packName === essenitem_list[index])
+                    packId = packEssList[i].packId;
+            }
+
+            console.log(packId);
+
+            axios.delete(`/pack/delete/${Number(packId)}`, {   
+            })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+            .then(function () {
+            });  
         }
     }
 
