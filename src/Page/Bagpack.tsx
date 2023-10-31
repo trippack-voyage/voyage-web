@@ -123,7 +123,7 @@ function Backpack() {
                 method: 'GET'
         
             }).then((response) => {
-                console.log(response.data);
+                //console.log(response.data);
 
                 for(let i = 0; i < response.data.length; i++){
                     if(response.data[i].kakaoId === bagUser){

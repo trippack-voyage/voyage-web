@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilValue } from "recoil";
-import { bagId } from "../../recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { user_bag, bagId } from "../../recoil/atoms";
 import axios from 'axios';
 
 const Side_box = styled.div`
@@ -97,7 +97,10 @@ function BackpackSide() {
 
     //아이디 클릭시
     const navigate = useNavigate();
-    const bag_id = useParams().bagId;
+    const bagCode = useParams().bagId;
+    const [bag_id, setBag_id] = useRecoilState(bagId);
+    console.log(bagCode);
+    
     function onClick_main(){
         navigate("/bagpack/" + `${bag_id}`);
     }
@@ -196,7 +199,7 @@ function BackpackSide() {
                 method: 'GET'
         
             }).then((response) => {
-                console.log(response.data);
+                //console.log(response.data);
 
                 for(let i = 0; i < response.data.length; i++){
                     if(response.data[i].kakaoId === bagUser){

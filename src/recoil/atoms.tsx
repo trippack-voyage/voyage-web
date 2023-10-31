@@ -47,6 +47,11 @@ export const user_accessToken = atom<String>({
   default: "",
 });
 
+export const user_bag = atom<String>({
+  key: 'user_bag',
+  default: "",
+});
+
 //가방 정보-----------------------------------
 export const bagAddModalState = atom<boolean>({ //가방 추가 모달
   key: 'bagAddModalState',

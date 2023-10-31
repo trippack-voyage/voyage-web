@@ -41,12 +41,57 @@ const Main_header = styled.div`
   text-align: center;
 `;
 
-const Main_title = styled.span`
+const Main_title = styled.div`
   font-size: 40px;
   font-weight: 500;
   margin: 0px auto;
   color: #1a1919;
   font-family: 'TAEBAEKfont';
+`;
+
+const Bag_select_container = styled.div`
+  display: flex;
+`
+const Bag_select_text = styled.div`
+  font-family: 'S-CoreDream-3Light';
+  font-size: 30px;
+  margin: auto 10px auto auto;
+  width: 250px;
+`;
+
+const ToggleContainer = styled.div`
+  position: relative;
+  cursor: pointer;
+  margin-right: 50px;
+
+  > .toggle-container {
+    width: 80px;
+    height: 42px;
+    border-radius: 30px;
+    background-color: gray;
+  }
+
+    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
+  > .toggle--checked {
+    background-color: #ea5028;
+    transition : 0.5s
+  }
+
+  > .toggle-circle {
+    position: absolute;
+    top: 1.5px;
+    left: 2px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgb(255,254,255);
+    transition : 0.5s
+    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
+
+  } >.toggle--checked {
+    left: 40px;
+    transition : 0.5s
+  }
 `;
 
 const Main_title_line = styled.div`
@@ -152,6 +197,7 @@ function MainBagPage() {
   /*가방 리스트 가져오기*/
   const kakaoId = localStorage.getItem("kakaoId");
   const [bag_list , SetBag_list] = useState<IList[]>([],);
+  const [bag_list_end , SetBag_list_end] = useState<IList[]>([],);
 
   useEffect(()=> {
     axios({
@@ -162,12 +208,19 @@ function MainBagPage() {
       }
 
     }).then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
       SetBag_list(response.data);
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-  },[])  
+  },[]) 
+
+  const [isOn, setisOn] = useState(false);
+
+  const toggleHandler = () => {
+    // isOn의 상태를 변경하는 메소드를 구현
+    setisOn(!isOn)
+  };
 
   return (
     <div>
@@ -175,6 +228,13 @@ function MainBagPage() {
       <Main_header>
         <Main_title>내 여행 가방들</Main_title>
         <Main_title_line></Main_title_line>
+        <Bag_select_container>
+          <Bag_select_text>완료 가방만 보기</Bag_select_text>
+          <ToggleContainer onClick={toggleHandler}>
+            <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
+            <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
+          </ToggleContainer>
+        </Bag_select_container>
       </Main_header>
       <Main_main>
         {bag_list.length === 0 ? 
@@ -183,17 +243,40 @@ function MainBagPage() {
             <Bag_none_text>가방을 추가해보세요!</Bag_none_text>
           </Bag_none>:
           <Bag_container>
-            {bag_list.map(function(item,i){
-              return(
-                <SuitCase
-                  bagName={item.bagName}
-                  location={item.location}
-                  start_date={item.startDate}
-                  end_date={item.endDate}
-                  status={item.status}
-                  bagId={item.bagId}/> 
+            {isOn === false? 
+            (<Bag_container>
+              {bag_list.map(function(item,i){
+                return(
+                  <div>
+                    {item.status === 'AVAILABLE' ? (
+                    <SuitCase
+                      bagName={item.bagName}
+                      location={item.location}
+                      start_date={item.startDate}
+                      end_date={item.endDate}
+                      status={item.status}
+                      bagId={item.bagId}/> ):(null)}
+                  </div>
+                )}
               )}
-            )}
+            </Bag_container>): 
+            (<Bag_container>
+              {bag_list.map(function(item,i){
+                return(
+                  <div>
+                    {item.status === 'FINISHED' ? (
+                    <SuitCase
+                      bagName={item.bagName}
+                      location={item.location}
+                      start_date={item.startDate}
+                      end_date={item.endDate}
+                      status={item.status}
+                      bagId={item.bagId}/> ):(null)}
+                  </div>
+                )}
+              )}
+            </Bag_container>)
+            }
           </Bag_container>
         }
         <Bag_add_btn_box>

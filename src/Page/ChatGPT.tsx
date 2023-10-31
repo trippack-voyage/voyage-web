@@ -91,6 +91,9 @@ function ChatGPT() {
 
     const chat_res = useRecoilValue(chat_response);
 
+    const [response_chat, setResponse_chat] = useState([]);
+    const [send_chat, setSend_chat] = useState([]);
+
     return (
         <div>
             <GlobalStyle/>

@@ -146,7 +146,7 @@ export default function ItemList() {
       })
   };
 
-  // 값 수정하기
+  // 값 수정하기(구현 완료)
   const [updatedText, setUpdatedText] = useState<string>();
   const updateHandler = (packid: number): void => {
     axios({
@@ -207,7 +207,7 @@ export default function ItemList() {
   }, [])
 
 
-  //체크 상태 변경
+  //체크 상태 변경(구현 완료)
   const [isCompleted, setIsCompleted] = useState(false);
   const handleComplete = (pack_id:Number, pack_name:String) => {
 
