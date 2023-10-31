@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const ModalContainer = styled.div`
   display: flex;
-  z-index: 50;
+  z-index: 10;
 `;
 
 export const ModalView = styled.div.attrs(props => ({

@@ -41,7 +41,7 @@ const SuitCase_handle = styled.div`
 
 //캐리어
 const SuitCase_box = styled.div`
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 20px;
     height: 350px;
     width: 280px;
