@@ -206,7 +206,7 @@ function EssentialItems() {
             const data = {
                 bagId: `${Number(bag_id)}`,
                 isRequired: true,
-                packName: essenitem_list[index],
+                packName: String(essenitem_list[index]),
                 completed: false
             };
 

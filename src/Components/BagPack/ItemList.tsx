@@ -132,7 +132,7 @@ export default function ItemList() {
   };
 
 
-  // 값 삭제하기
+  // 값 삭제하기(구현 완료)
   const onClickDelete = (packid: number) => {
     axios.delete(`/pack/${packid}`, {
     })
