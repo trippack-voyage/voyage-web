@@ -223,9 +223,10 @@ function FriendItems() {
 
     }
 
+    //짐 요청 보내기
     const [FriendPack, setFriendPack] = useState("");
     function OnClick_Item() { 
-        // Axios를 사용하여 POST 요청 보내기
+
         axios({
             url: `/request/create/`,
             method: 'POST',

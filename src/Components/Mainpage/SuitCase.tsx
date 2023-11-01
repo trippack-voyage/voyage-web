@@ -32,7 +32,7 @@ const SuitCase_container = styled.div`
 
 //손잡이
 const SuitCase_handle = styled.div`
-    border: 10px solid black;
+    border: 10px solid #e17254;
     border-radius: 20px;
     height: 90px;
     width: 120px;
@@ -41,34 +41,22 @@ const SuitCase_handle = styled.div`
 
 //캐리어
 const SuitCase_box = styled.div`
-    border: 2px solid black;
+    border: 5px solid #e17254;
     border-radius: 20px;
     height: 350px;
     width: 280px;
     index: 1;
     background-color: white;
     margin: -20px auto auto auto;
+    box-shadow: 5px 5px #e17254;
 `;
 
 //가방 정보 컨테이너
 const Bag_info_container = styled.div`
     margin-top: 40px;
     height: 285px;
-    border: 1px solid white;
-`;
-
-const Bag_icon_box = styled.div`
-    display: flex;
-    margin-top: 20px;
-`
-//가방 정보 수정 아이콘
-const Edit_icon = styled.div`
-    margin-left: 15px;
-`;
-
-//가방 삭제 아이콘
-const Del_icon = styled.div`
-    margin-left: 20px;
+    border-top: 3px solid #e17254;
+    border-bottom: 3px solid #e17254;
 `;
 
 // 가방 상태가 변경될 때 스타일 변경
@@ -84,7 +72,7 @@ background-color: ${(props) => (props.status === 'FINISHED' ? '#EA5028' : 'trans
 const Bag_info_box1 = styled.div`
     display: flex;
     font-family: 'S-CoreDream-3Light';
-    margin-top: 115px;
+    margin-top: 105px;
 `;
 
 //가방 정보 아이콘
