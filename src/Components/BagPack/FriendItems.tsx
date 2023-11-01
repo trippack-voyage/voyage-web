@@ -168,71 +168,14 @@ interface InputTextProps {
 
 function FriendItems() {
 
+    //열기, 닫기 상태 변경(구현 완료)
     const [isOpen_pItem, setIsOpen_pItem] = useState(false);
-
     function onClick_prohibitedItem(){
         if(isOpen_pItem === false)
             setIsOpen_pItem(true);
         else
             setIsOpen_pItem(false);
     }
-
-    const [friendCode, setFriendCode] = useState([]);
-    /*유저코드 조회
-    useEffect(()=> {
-        axios({
-        url: `kakao/find-usercode/${Number(localStorage.getItem("userName"))}`,
-        method: 'GET'
-    
-        }).then((response) => {
-            setUserCode(response.data);
-            console.log(response.data);
-            localStorage.setItem("userCode", userCode);
-
-            for(let i = 0; i < response.data.length; i++){
-                setFriendCode(response.data[i].fromUserId);
-                console.log(response.data[i].fromUserId);
-            }
-        }).catch((error) => {
-        console.error('AxiosError:', error);
-        });
-    },[])  */
-
-    //요청물품 목록(구현 완료)
-    const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);       
-
-    useEffect(()=> {
-        axios({
-          url: '/request/getRequestsByToFriendId',
-          method: 'GET',
-          params:{
-            toFriendId: `${localStorage.getItem("userCode")}`
-          }
-    
-        }).then((response) => {
-            console.log(response.data);
-            SetfriendItem_list(response.data);
-            for(let i = 0; i < response.data.length; i++){
-                setFriendCode(response.data[i].fromUserId);
-            }
-        }).catch((error) => {
-          console.error('AxiosError:', error);
-        });
-    },[])  
-
-
-    //사용자 조회
-    useEffect(()=> {
-            axios({
-            url: `kakao/find/${Number(friendCode)}`,
-            method: 'GET'
-        
-            }).then((response) => {
-                console.log(response.data);
-            }).catch((error) => {
-            console.error('AxiosError:', error);
-            });
-    },[])  
     
     //요청 수락(구현 완료)
     const bag_id = useParams().bagId;
@@ -248,7 +191,6 @@ function FriendItems() {
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
-
     }
 
     //짐 요청 삭제(구현 완료)
@@ -264,19 +206,110 @@ function FriendItems() {
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
-
     }
+
+    //가방 만든 사람 카카오 정보 조회
+    const [user_name, setUser_name] = useState("");
+    const [userCode, setUserCode] = useState("");
+    useEffect(()=> {
+        axios({
+            url: `/bag/${Number(bag_id)}`,
+            method: 'GET'
+    
+        }).then((response) => {
+            let bagUser = response.data.kakaoId;
+            axios({
+                url: `/kakao/all-users`,
+                method: 'GET'
+        
+            }).then((response) => {
+
+                for(let i = 0; i < response.data.length; i++){
+                    if(response.data[i].kakaoId === bagUser){
+                        setUser_name(response.data[i].kakaoNickname);
+                    }
+                }
+
+                axios({
+                    url: `kakao/find-usercode/${user_name}`,
+                    method: 'GET'
+        
+                }).then((response) => {
+                    setUserCode(response.data);
+                    console.log(response.data);
+                }).catch((error) => {
+                    console.error('AxiosError:', error);
+                });
+
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+
+    },[])
+
+    //사용자 유저코드 조회
+    /*const [userCode, setUserCode] = useState("");
+    useEffect(() => {
+        axios({
+            url: `kakao/find-usercode/${"이미지"}`,
+            method: 'GET'
+
+        }).then((response) => {
+            setUserCode(response.data);
+            console.log(response.data);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    }, [])*/
+
+    //요청물품 목록(구현 완료)
+    const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);       
+    useEffect(()=> {
+        axios({
+            url: '/request/getRequestsByToFriendId',
+            method: 'GET',
+            params:{
+            toFriendId: `${localStorage.getItem("userCode")}`
+            }
+    
+        }).then((response) => {
+            console.log(Number(userCode));
+            for(let i = 0; i < response.data.length; i++){
+                if(response.data[i].toUserId === `${Number(userCode)}`)
+                    SetfriendItem_list(response.data);
+            }
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    },[]) 
+
+    const [requestCode, setRequestCode] = useState(0);
+    useEffect(()=> {
+        axios({
+            url: `/kakao/find-usercode/${String(user_name)}`,
+            method: 'GET'
+    
+        }).then((response) => {            
+            //console.log(response.data);
+            setRequestCode(response.data);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+
+    },[])
 
     //짐 요청 보내기
     const [FriendPack, setFriendPack] = useState("");
     function OnClick_Item() { 
-
         axios({
             url: `/request/create/`,
             method: 'POST',
             params:{
                 fromUserId: `${Number(localStorage.getItem("userCode"))}`,
-                toFriendId: '',
+                toFriendId: `${Number(requestCode)}`,
                 requestedProduct: FriendPack,
             },
         }).then((response) => {

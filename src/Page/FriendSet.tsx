@@ -90,102 +90,6 @@ const Friend_list_box3 = styled.div`
     } 
 `;
 
-//footer
-const FriendSet_main_footer = styled.div`
-    display: flex;
-    margin-top: 30px;
-`;
-
-//친구 삭제 버튼
-const Friend_delete_btn = styled.button`
-    width: 300px;
-    height: 60px;
-    font-size: 22px;
-    font-weight: 700;
-    margin-left: 20px;
-    border-radius: 20px;
-    border: none;
-    background-color: #1a1919;
-    color: white;
-    
-    &:hover{
-        color: #ea5028;
-    }
-`;
-
-
-//친구 추가 버튼
-const Friend_add_btn = styled.button`
-    width: 300px;
-    height: 60px;
-    font-size: 22px;
-    font-weight: 700;
-    margin: auto 0 auto auto;
-    border-radius: 20px;
-    border: none;
-    background-color: #1a1919;
-    color: white;
-
-    &:hover{
-        color: #ea5028;
-    }
-`;
-
-//프로필
-const Prifile_box = styled.div`
-    display: flex;
-    border-radius: 12px;
-    margin-top: 10px;
-    padding: 10px 20px;
-    height: 100px;
-    width: 900px;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: #f6f8f9;
-
-    &.active{
-        border: none;
-        box-shadow: none;
-    }
-`;
-
-const Profile_img = styled.img`
-    background-color: lightgray;
-    width: 70px;
-    height: 70px;
-    border-radius: 60px;
-    margin: auto 0px;
-    margin-left: 20px;
-`;
-
-const Profile_name = styled.div`
-    margin: auto auto auto 30px;
-    font-size: 25px;
-    font-weight: 700;
-    text-align: center;
-`;
-
-const Link_box = styled.button`
-    width: 200px;
-    height: 60px;
-    font-size: 22px;
-    font-weight: 700;
-    margin: auto -80px auto auto;
-    color: #FF541E;
-    background-color: white;
-    border: 3px solid #FF541E;
-    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
-    border-radius: 20px;
-`;
-
-const Message = styled.div`
-  text-align: center;
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #FF541E;
-`;
-
 //친구 검색창
 const Find_friend = styled.input`
     border: 3px solid #FF541E;
@@ -198,20 +102,6 @@ const Find_friend = styled.input`
     border-radius: 12px;
     outline: none;
     margin: 10px auto;
-`;
-
-//친구 찾기 버튼
-const Find_btn = styled.button`
-    margin-left: 30px;
-    font-size: 20px;
-    padding: 10px 15px;
-    background-color: white;
-    border-radius: 12px;
-    border: 3px solid black;
-    color: black;
-    font-weight: 700;
-    height: 60px;
-    margin-top: 10px;
 `;
 
 const Header_text = styled.text`

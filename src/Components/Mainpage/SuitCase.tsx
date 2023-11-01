@@ -49,6 +49,13 @@ const SuitCase_box = styled.div`
     background-color: white;
     margin: -20px auto auto auto;
     box-shadow: 5px 5px #e17254;
+
+    /* Add a thicker border on hover */
+    transition: box-shadow 0.3s; /* Add a transition for smooth animation */
+
+    &:hover {
+        box-shadow: 0 0 0 5px black; /* Add a thicker border on hover */
+    }
 `;
 
 //가방 정보 컨테이너

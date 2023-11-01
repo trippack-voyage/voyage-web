@@ -160,7 +160,7 @@ function BackpackSide() {
                 url: `/invitations/${slug}`,
                 method: 'GET',
         }).then((response) => {
-            console.log("bagId획득:" + response.data.result.bagId);
+            //console.log("bagId획득:" + response.data.result.bagId);
             console.log(`http://localhost:3000/bagpack/${response.data.result.bagId}`);
 
             const link = `http://localhost:3000/bagpack/${response.data.result.bagId}`;
