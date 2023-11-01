@@ -251,7 +251,7 @@ function FriendItems() {
 
     }
 
-    //짐 요청 삭제
+    //짐 요청 삭제(구현 완료)
     function onClickdelete(requestedId: Number){
         axios({
             url: `/request/deleteRequest/`,
