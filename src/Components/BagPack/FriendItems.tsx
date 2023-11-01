@@ -90,15 +90,29 @@ const ItemText = styled.div`
     padding: 10px 0px;
 `;
 
+//수락 버튼
 const Friend_ok_btn = styled.button`
     margin: 5px 0px 5px auto;
-    color: white;
-    background-color: black;
-    font-size: 22px;
+    background-color: white;
+    font-size: 20px;
     font-weight: 600;
     border-radius: 15px;
-    width: 100px;
-    height: 50px;
+    width: 80px;
+    height: 45px;
+    border: 2px solid black;
+`;
+
+//삭제 버튼
+const Friend_pack_delete_btn = styled.button`
+    margin: 5px 0px 5px 10px;
+    color: white;
+    background-color: black;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 15px;
+    width: 80px;
+    height: 45px;
+    border: none;
 `;
 const Friend_haeder_text = styled.div`
     font-size: 19px;
@@ -237,6 +251,22 @@ function FriendItems() {
 
     }
 
+    //짐 요청 삭제
+    function onClickdelete(requestedId: Number){
+        axios({
+            url: `/request/deleteRequest/`,
+            method: 'POST',
+            params:{
+                requestId: Number(requestedId),
+            },
+        }).then((response) => {
+            window.location.replace(`/bagpack/${bag_id}`);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+
+    }
+
     //짐 요청 보내기
     const [FriendPack, setFriendPack] = useState("");
     function OnClick_Item() { 
@@ -288,6 +318,7 @@ function FriendItems() {
                                     (<Friend_ok_btn onClick={() => onClickok(item.requestId)}>수락</Friend_ok_btn>):
                                     (<Friend_ok_btn onClick={() => onClickok(item.requestId)}>요청</Friend_ok_btn>)
                                 }
+                                <Friend_pack_delete_btn onClick={() => onClickdelete(item.requestId)}>삭제</Friend_pack_delete_btn>
                             </ItemContainer>
                         )
                     })}
