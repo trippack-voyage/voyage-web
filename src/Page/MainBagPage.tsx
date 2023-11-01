@@ -271,11 +271,6 @@ function MainBagPage() {
         </Bag_select_container>
       </Main_header>
       <Main_main>
-        {bag_list.length === 0 ? 
-          <Bag_none>
-            <Bag_none_text>아직 가방이 없습니다.</Bag_none_text>
-            <Bag_none_text>가방을 추가해보세요!</Bag_none_text>
-          </Bag_none>:
           <Bag_container>
             {isOn === false? 
             (<Bag_container>
@@ -306,8 +301,7 @@ function MainBagPage() {
                       end_date={item.endDate}
                       status={item.status}
                       bagId={item.bagId}/> ):(<Bag_none1>
-                        <Bag_none_text>아직 가방이 없습니다.</Bag_none_text>
-                        <Bag_none_text>가방을 추가해보세요!</Bag_none_text>
+
                       </Bag_none1>)}
                   </div>
                 )}
@@ -315,7 +309,6 @@ function MainBagPage() {
             </Bag_container>)
             }
           </Bag_container>
-        }
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <FaPlus size="40"></FaPlus>

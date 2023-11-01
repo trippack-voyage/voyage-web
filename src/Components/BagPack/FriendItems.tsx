@@ -277,10 +277,12 @@ function FriendItems() {
     
         }).then((response) => {
             console.log(Number(userCode));
+            SetfriendItem_list(response.data);
+            /*
             for(let i = 0; i < response.data.length; i++){
                 if(response.data[i].toUserId === `${Number(userCode)}`)
                     SetfriendItem_list(response.data);
-            }
+            }*/
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
