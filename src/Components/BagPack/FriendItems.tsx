@@ -52,6 +52,7 @@ const ProhibitedItems_openBox = styled.div`
     border-radius: 15px;
     margin-top: 15px;
     border: 1px solid #c1c1c1;
+    margin-bottom: 40px;
 `;
 
 //추가 아이템 박스
@@ -140,7 +141,7 @@ const ItemAddBtn = styled.button`
 `;
 
 interface IList {
-    requestedId: Number,
+    requestId: Number,
     requestedProduct: string,
     isOk: boolean
 }
@@ -183,7 +184,7 @@ function FriendItems() {
         });
     },[])  */
 
-    //요청물품 목록
+    //요청물품 목록(구현 완료)
     const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);       
 
     useEffect(()=> {
@@ -219,7 +220,20 @@ function FriendItems() {
             });
     },[])  
     
-    function onClickok(requestedId : Number){
+    //요청 수락(구현 완료)
+    const bag_id = useParams().bagId;
+    function onClickok(requestedId: Number){
+        axios({
+            url: `/request/acceptRequest/`,
+            method: 'POST',
+            params:{
+                requestId: Number(requestedId),
+            },
+        }).then((response) => {
+            window.location.replace(`/bagpack/${bag_id}`);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
 
     }
 
@@ -270,9 +284,9 @@ function FriendItems() {
                         return(    
                             <ItemContainer>
                                 <ItemText>{item.requestedProduct}</ItemText>
-                                {item.isOk ? 
-                                    (<Friend_ok_btn onClick={() => onClickok(item.requestedId)}>수락</Friend_ok_btn>):
-                                    (<Friend_ok_btn onClick={() => onClickok(item.requestedId)}>요청</Friend_ok_btn>)
+                                {item.isOk? 
+                                    (<Friend_ok_btn onClick={() => onClickok(item.requestId)}>수락</Friend_ok_btn>):
+                                    (<Friend_ok_btn onClick={() => onClickok(item.requestId)}>요청</Friend_ok_btn>)
                                 }
                             </ItemContainer>
                         )
