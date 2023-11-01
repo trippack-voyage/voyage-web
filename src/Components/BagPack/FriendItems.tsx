@@ -276,7 +276,7 @@ function FriendItems() {
             }
     
         }).then((response) => {
-            console.log(Number(userCode));
+            console.log(response.data);
             SetfriendItem_list(response.data);
             /*
             for(let i = 0; i < response.data.length; i++){
