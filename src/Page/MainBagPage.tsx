@@ -45,7 +45,7 @@ export const GlobalStyle = createGlobalStyle`
 `
 const Main_header = styled.div`
   margin-top: 60px;
-  z-index: 10;
+  z-index: 7;
   text-align: center;
 `;
 
@@ -167,6 +167,12 @@ const Bag_none = styled.div`
   width: 100%;
 `;
 
+//가방 없을 때 문구
+const Bag_none1 = styled.div`
+  margin: 100px auto 300px auto;
+  width: 1000%;
+`;
+
 const Bag_none_text = styled.div`
   font-size: 20px;
   margin-top: 20px;
@@ -246,7 +252,6 @@ function MainBagPage() {
         className="banner"
         spaceBetween={50}
         slidesPerView={1}
-
         navigation
         pagination={{ clickable: true }}
       >
@@ -300,7 +305,10 @@ function MainBagPage() {
                       start_date={item.startDate}
                       end_date={item.endDate}
                       status={item.status}
-                      bagId={item.bagId}/> ):(null)}
+                      bagId={item.bagId}/> ):(<Bag_none1>
+                        <Bag_none_text>아직 가방이 없습니다.</Bag_none_text>
+                        <Bag_none_text>가방을 추가해보세요!</Bag_none_text>
+                      </Bag_none1>)}
                   </div>
                 )}
               )}

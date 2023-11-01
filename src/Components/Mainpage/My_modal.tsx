@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const ModalContainer = styled.div`
   display: flex;
-  z-index: 10;
+  
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -31,6 +31,7 @@ export const ModalView = styled.div.attrs(props => ({
   margin: -10px 50px -250px auto;
   padding: 10px;
   background-color: black;
+  z-index: 11;
 `;
 
 const My_list = styled.div`
@@ -40,6 +41,7 @@ const My_list = styled.div`
   font-weight: 500;
   cursor: pointer;
   font-family: 'TAEBAEKfont';
+  z-index: 11;
   &:hover{
     color: #ea5028;
   }
