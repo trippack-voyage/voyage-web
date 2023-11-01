@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from "styled-components";
 import friend_icon from '../../img/friend-icon.png';
-
+import { useParams } from 'react-router-dom';
+import CreateTodo from "./Create";
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
@@ -49,10 +50,106 @@ const ProhibitedItems_openBox = styled.div`
     background-color: white;
     width: 950px;
     border-radius: 15px;
-    display: flex;
     margin-top: 15px;
     border: 1px solid #c1c1c1;
 `;
+
+//추가 아이템 박스
+const ItemContainer = styled.div`
+    width: 800px;
+    margin: 20px auto;
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+`;
+
+//요청물품 열린 박스 헤더
+const FriendItems_openBox_header = styled.div`
+    background-color: white;
+    width: 945px;
+    border-radius: 15px;
+    display: flex;
+    margin-bottom: 20px;
+`;
+//요청물품 열린 박스 메인
+const FriendItems_openBox = styled.div`
+    background-color: white;
+    width: 945px;
+    border-radius: 15px;
+    margin-top: 15px;
+`;
+
+//요청물품 텍스트
+const ItemText = styled.div`
+    font-size: 25px;
+    font-weight: 600;
+    color: #1a1919;
+    margin-top: 10px;
+    margin-left: 30px;
+    padding: 10px 0px;
+`;
+
+const Friend_ok_btn = styled.button`
+    margin: 5px 0px 5px auto;
+    color: white;
+    background-color: black;
+    font-size: 22px;
+    font-weight: 600;
+    border-radius: 15px;
+    width: 100px;
+    height: 50px;
+`;
+const Friend_haeder_text = styled.div`
+    font-size: 19px;
+    color: gray;
+    margin-bottom: 30px;
+    margin-left: 100px;
+`;
+
+const ItemCreateContainer = styled.div`
+  padding: 30px 70px;
+`;
+
+const ItemInputContainer = styled.div`
+  border: 3px solid #FF541E;
+  box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+  border-radius: 12px;
+`;
+
+const ItemInputBox = styled.input`
+  width: 700px;
+  height: 70px;
+  font-size: 22px;
+  padding: 25px;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+`;
+
+const ItemAddBtn_box = styled.span`
+  margin-left: 15px;
+`;
+
+const ItemAddBtn = styled.button`
+  font-size: 20px;
+  margin: auto auto auto 20px;
+  color: #FF541E;
+  background-color: white;
+  border: none;
+  font-weight: 600;
+`;
+
+interface IList {
+    requestedId: Number,
+    requestedProduct: string,
+    isOk: boolean
+}
+
+interface InputTextProps {
+    onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+    onSubmit(event: React.FormEvent<HTMLFormElement>): void;
+    inputText: string;
+}
 
 function FriendItems() {
 
@@ -65,29 +162,29 @@ function FriendItems() {
             setIsOpen_pItem(false);
     }
 
-    interface IList {
-        requestedProdect: string,
-        isOk: boolean
-      }
-
-
-    const [userCode, setUserCode] = useState("");
-    //유저코드 조회
+    const [friendCode, setFriendCode] = useState([]);
+    /*유저코드 조회
     useEffect(()=> {
         axios({
-        url: `kakao/find-usercode/${localStorage.getItem("userName")}`,
+        url: `kakao/find-usercode/${Number(localStorage.getItem("userName"))}`,
         method: 'GET'
     
         }).then((response) => {
-        setUserCode(response.data);
-        localStorage.setItem("userCode", userCode);
+            setUserCode(response.data);
+            console.log(response.data);
+            localStorage.setItem("userCode", userCode);
+
+            for(let i = 0; i < response.data.length; i++){
+                setFriendCode(response.data[i].fromUserId);
+                console.log(response.data[i].fromUserId);
+            }
         }).catch((error) => {
         console.error('AxiosError:', error);
         });
-    },[])  
+    },[])  */
 
     //요청물품 목록
-    const [item_list , SetItem_list] = useState<IList[]>([],);       
+    const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);       
 
     useEffect(()=> {
         axios({
@@ -98,26 +195,88 @@ function FriendItems() {
           }
     
         }).then((response) => {
-          console.log(response.data);
-          SetItem_list(response.data);
+            console.log(response.data);
+            SetfriendItem_list(response.data);
+            for(let i = 0; i < response.data.length; i++){
+                setFriendCode(response.data[i].fromUserId);
+            }
         }).catch((error) => {
           console.error('AxiosError:', error);
         });
-      },[])  
+    },[])  
+
+
+    //사용자 조회
+    useEffect(()=> {
+            axios({
+            url: `kakao/find/${Number(friendCode)}`,
+            method: 'GET'
+        
+            }).then((response) => {
+                console.log(response.data);
+            }).catch((error) => {
+            console.error('AxiosError:', error);
+            });
+    },[])  
     
+    function onClickok(requestedId : Number){
+
+    }
+
+    const [FriendPack, setFriendPack] = useState("");
+    function OnClick_Item() { 
+        // Axios를 사용하여 POST 요청 보내기
+        axios({
+            url: `/request/create/`,
+            method: 'POST',
+            params:{
+                fromUserId: `${Number(localStorage.getItem("userCode"))}`,
+                toFriendId: '',
+                requestedProduct: FriendPack,
+            },
+        }).then((response) => {
+            console.log(response);
+            window.location.replace("/bag-list");
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    }
 
     return (
         <div>
             {isOpen_pItem ? (
             <ProhibitedItems_openBox>
-                <No_travel_icon_box><No_travel_icon src={friend_icon}></No_travel_icon></No_travel_icon_box>
-                <No_travel_text>요청 물품</No_travel_text>
-                <No_travel_btn onClick={onClick_prohibitedItem}>닫기</No_travel_btn>
-                {item_list.map(function(a,i){
-                            return(    
-                                <div>{a.requestedProdect} {a.isOk}</div>
-                            )
-                        })}
+                <FriendItems_openBox_header>
+                    <No_travel_icon_box><No_travel_icon src={friend_icon}></No_travel_icon></No_travel_icon_box>
+                    <No_travel_text>요청 물품</No_travel_text>
+                    <No_travel_btn onClick={onClick_prohibitedItem}>닫기</No_travel_btn>
+                </FriendItems_openBox_header>
+                <Friend_haeder_text>친구들이 요청한 물품이에요. 요청을 수락하여 같이 짐을 싸보세요!</Friend_haeder_text>
+                <ItemCreateContainer>
+                    <ItemInputContainer>
+                        <ItemInputBox
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setFriendPack(e.target.value);}}
+                            type="text"
+                            placeholder="물품을 추가해주세요."
+                        />
+                        <ItemAddBtn_box>
+                            <ItemAddBtn onClick={OnClick_Item}>추가</ItemAddBtn>
+                        </ItemAddBtn_box>
+                    </ItemInputContainer>
+                </ItemCreateContainer>
+                <FriendItems_openBox>
+                    {friendItem_list.map(function(item,i){
+                        return(    
+                            <ItemContainer>
+                                <ItemText>{item.requestedProduct}</ItemText>
+                                {item.isOk ? 
+                                    (<Friend_ok_btn onClick={() => onClickok(item.requestedId)}>수락</Friend_ok_btn>):
+                                    (<Friend_ok_btn onClick={() => onClickok(item.requestedId)}>요청</Friend_ok_btn>)
+                                }
+                            </ItemContainer>
+                        )
+                    })}
+                </FriendItems_openBox>
             </ProhibitedItems_openBox>):
             (<EssentialItems_closeBox>
                 <No_travel_icon_box><No_travel_icon src={friend_icon}></No_travel_icon></No_travel_icon_box>
