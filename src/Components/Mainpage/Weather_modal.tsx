@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import styled, {createGlobalStyle} from "styled-components";
+import React, { useState } from 'react';
+import styled, { createGlobalStyle } from "styled-components";
 import { ReactComponent as Bag_add_arrow } from '../../svg/bag_add_arrow.svg';
 import { weatherModalState, user_id } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -132,13 +132,23 @@ const Weather = styled.div`
 `;
 
 const Weather_content1 = styled.div`
+display: flex;
+align-items: center; // 중앙 정렬을 위해 추가
   margin-left: 90px;
 `;
 
 const Weather_content2 = styled.div`
+  display: flex;
+  align-items: center; 
   margin-left: 20px;
   border-left: 2px solid black;
-  padding: 0px 30px;
+  padding: 0px 20px;
+  height: 30px; 
+
+  img {
+    max-width: 60px; 
+    max-height: 60px;
+  }
 `;
 
 function Weather_modal() {
@@ -146,12 +156,12 @@ function Weather_modal() {
   //닫기 버튼 클릭 시
   const [isOpen, setIsOpen] = useRecoilState(weatherModalState);
 
-   const openModalHandler = () => {
+  const openModalHandler = () => {
     setIsOpen(false);
   };
 
   const [location, setLocation] = useState(""); //지역이름
-  const [weatherData, setWeatherData] = useState({ temperature: 22.22, weather: "맑음" }); // 초기 상태 설정
+  const [weatherData, setWeatherData] = useState({ temperature: 22.22, weather: "맑음", icon: "02d" }); // 초기 상태 설정
 
 
   //조회하기 버튼 클릭 시
@@ -162,47 +172,51 @@ function Weather_modal() {
       })
       .then((response) => {
         // 서버에서 받은 데이터를 상태로 업데이트
-        setWeatherData(response.data);})
+        setWeatherData(response.data);
+      })
       .catch((error) => {
         console.error('AxiosError:', error);
       });
   }
-  
+
 
   return (
-      <ModalContainer>
-        <GlobalStyle/>
-        <ModalView>
-            <Bag_add_modal_header>
-                <Bag_add_modal_backarrow>
-                    <Bag_add_arrow width="20" height="20" onClick={openModalHandler}/>
-                </Bag_add_modal_backarrow>
-                <Bag_add_modal_header_text>날씨 조회하기</Bag_add_modal_header_text>
-            </Bag_add_modal_header>
-            <Weather_text>여행 가는 나라의 날씨를 검색해보세요!</Weather_text>
-            <Bag_add_modal_main>
-                <Bag_add_modal_input_box>
-                    <Bag_add_modal_input 
-                      placeholder='지역 이름을 입력해주세요. ex) seoul'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setLocation(e.target.value); }}>                        
-                    </Bag_add_modal_input>
-                </Bag_add_modal_input_box>
-                <Bag_add_modal_input_box>
-                    <Weather_result_box>
-                      <Weather>
-                        <Weather_content1>날씨</Weather_content1>
-                        <Weather_content2>{weatherData.weather}</Weather_content2>
-                      </Weather>
-                      <Weather>
-                        <Weather_content1>온도</Weather_content1>
-                        <Weather_content2>{weatherData.temperature}</Weather_content2>
-                      </Weather>
-                    </Weather_result_box>
-                </Bag_add_modal_input_box>
-                <Bag_add_modal_btn onClick={onClick_weather}>조회하기</Bag_add_modal_btn>
-            </Bag_add_modal_main>
-        </ModalView>
-      </ModalContainer>
+    <ModalContainer>
+      <GlobalStyle />
+      <ModalView>
+        <Bag_add_modal_header>
+          <Bag_add_modal_backarrow>
+            <Bag_add_arrow width="20" height="20" onClick={openModalHandler} />
+          </Bag_add_modal_backarrow>
+          <Bag_add_modal_header_text>날씨 조회하기</Bag_add_modal_header_text>
+        </Bag_add_modal_header>
+        <Weather_text>여행 가는 나라의 날씨를 검색해보세요!</Weather_text>
+        <Bag_add_modal_main>
+          <Bag_add_modal_input_box>
+            <Bag_add_modal_input
+              placeholder='지역 이름을 입력해주세요. ex) seoul'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setLocation(e.target.value); }}>
+            </Bag_add_modal_input>
+          </Bag_add_modal_input_box>
+          <Bag_add_modal_input_box>
+            <Weather_result_box>
+              <Weather>
+                <Weather_content1>날씨</Weather_content1>
+                <Weather_content2>{weatherData.weather} <img
+                  src={`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
+                  alt="날씨 아이콘" 
+                /></Weather_content2>
+              </Weather>
+              <Weather>
+                <Weather_content1>온도</Weather_content1>
+                <Weather_content2>{weatherData.temperature}</Weather_content2>
+              </Weather>
+            </Weather_result_box>
+          </Bag_add_modal_input_box>
+          <Bag_add_modal_btn onClick={onClick_weather}>조회하기</Bag_add_modal_btn>
+        </Bag_add_modal_main>
+      </ModalView>
+    </ModalContainer>
   );
 }
 
