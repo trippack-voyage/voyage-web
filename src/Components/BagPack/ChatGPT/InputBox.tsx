@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useState, ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from "recoil";
 import { chat_response } from "../../../recoil/atoms";
+import styled from "styled-components";
+import axios from 'axios';
 
 const ItemCreateContainer = styled.div`
   padding: 1px 5px;
@@ -37,12 +37,16 @@ const ItemAddBtn = styled.button`
   border: none;
   font-weight: 700;
 `;
+interface InputBoxProps {
+    inputValue: string;
+    setInputValue: Dispatch<SetStateAction<string>>;
+    onClickChat: () => void;
+  }
 
-export default function InputBox() {
-    const [inputValue, setInputValue] = useState("");
-    const [responseText, setResponseText] = useRecoilState (chat_response); // API 응답을 저장하는 상태
+  export default function InputBox({ inputValue, setInputValue, onClickChat }: InputBoxProps) {
+    const [responseText, setResponseText] = useRecoilState(chat_response); // API 응답을 저장하는 상태
 
-    function onClickChat() {
+    const handleClickChat = async () => {
         axios({
             url: '/chat-gpt/question',
             method: 'POST',
@@ -55,19 +59,17 @@ export default function InputBox() {
             const apiResponse = response.data;
             if (apiResponse.choices && apiResponse.choices[0] && apiResponse.choices[0].text) {
                 setResponseText(apiResponse.choices[0].text);
-                
             }
         }).catch(function (error) {
             console.error(error);
         });
-    }
-    
+    };
 
-    return (<>
+    return (
         <ItemCreateContainer>
             <ItemInputContainer>
                 <ItemInputBox
-                    onChange={(e) => setInputValue(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
                     type="text"
                     placeholder="짐 도우미(GPT)에게 질문해보세요!"
                 />
@@ -76,7 +78,6 @@ export default function InputBox() {
                 </ItemAddBtn_box>
             </ItemInputContainer>
         </ItemCreateContainer>
-    
-    </>);
+    );
 }
 

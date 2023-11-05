@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import BagPackSide from '../Components/BagPack/BagPackSide';
 import { useNavigate } from 'react-router-dom';
-import {IoArrowBack} from "react-icons/io5";
+import { IoArrowBack } from "react-icons/io5";
 import ChatInputBox from '../Components/BagPack/ChatGPT/InputBox';
+import axios from 'axios';
 
 //recoil
 import { chat_response } from '../recoil/atoms';
@@ -94,40 +95,55 @@ function ChatGPT() {
   function onClickBack() {
     navi("/bag-list");
   }
-  
-  
+
+
 
   const [response_chat, setResponse_chat] = useState<{ text: string, isUser: boolean }[]>([]);
   const [inputValue, setInputValue] = useState(""); // 추가
-  const [if_res, setif_res] = useState(false);
-  
-  
   const chat_res = useRecoilValue(chat_response);
+
 
   useEffect(() => {
     // 새로운 응답을 질문과 응답 객체로 나누어 추가
-    let newChat :{ text: string; isUser: boolean }[]= [];
-
-    if (chat_res) {
-      newChat = [
-        { text: String(chat_res), isUser: true }, // 사용자 질문
-        { text: chat_res.question, isUser: false }, // GPT 응답
-      ];
+    if (chat_res.text) {
+      setResponse_chat((prevChat) => [
+        ...prevChat,
+        { text: chat_res.text, isUser: false },  // GPT 응답
+        { text: inputValue, isUser: true },  // 사용자 질문
+      ]);
     }
+  }, [chat_res])
 
-    // 입력값이 비어있지 않다면 질문도 추가
-    console.log(chat_res);
+  const onClickChat = async () => {
     if (inputValue) {
-      newChat.unshift({ text: inputValue, isUser: true });
+      // 질문을 보낼 때 응답 객체에도 저장
+      setResponse_chat((prevChat) => [
+        ...prevChat,
+        { text: inputValue, isUser: true },
+      ]);
+
+
+      // axios로 질문 보내고 응답 받기
+      try {
+        const response = await axios.post('/chat-gpt/question', {
+          question: inputValue,
+        });
+        console.log(response.data);
+
+        if (response.data && response.data.choices && response.data.choices[0]) {
+          const choicesText = response.data.choices.map((choice: { text: string }) => choice.text).join(', ');
+
+          setResponse_chat((prevChat) => [
+            ...prevChat,
+            { text: choicesText, isUser: false }, // choices text 출력
+          ]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      setInputValue(""); // 입력값 초기화
     }
-   
-    
-    
-    setResponse_chat((prevChat) => ([
-      ...prevChat,
-      ...newChat,
-    ]));
-}, [chat_res, inputValue])
+  };
   return (
     <div>
       <GlobalStyle />
@@ -138,15 +154,15 @@ function ChatGPT() {
           <Bagpack_main_header>짐 도우미(GPT)</Bagpack_main_header>
           <Bagpack_main_text>짐 도우미(GPT)를 이용해 짐을 쌀 때 필요한 정보를 얻어보세요!</Bagpack_main_text>
           <Friend_list_box>
-            
-          {response_chat.slice().map((message, i) => (
+
+            {response_chat.slice().map((message, i) => (
               <Response_box key={i}>
-                {message.text} 
+                {message.text}
               </Response_box>
             ))}
           </Friend_list_box>
           <FriendSet_main_footer>
-            <ChatInputBox />
+            <ChatInputBox inputValue={inputValue} setInputValue={setInputValue} onClickChat={onClickChat} />
           </FriendSet_main_footer>
         </Bagpack_main_box>
       </Bagpack_main>
