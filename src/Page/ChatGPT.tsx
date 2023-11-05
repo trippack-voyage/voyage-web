@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoArrowBack } from "react-icons/io5";
 import ChatInputBox from '../Components/BagPack/ChatGPT/InputBox';
 import axios from 'axios';
+// import Typing from 'react-typing-animation';
 
 //recoil
 import { chat_response } from '../recoil/atoms';
@@ -75,19 +76,35 @@ const FriendSet_main_footer = styled.div`
     margin-top: 30px;
 `;
 
-//응답 박스
-const Response_box = styled.div`
-  padding: 20px 30px;
-  font-size: 20px;
-  word-break: break-all;
-  line-height: 30px;
-  background-color: #f0f0f0;
-  border-radius: 12px;
-  padding: 10px;
-  max-width: 70%;
-  margin-left: auto;
+// 질문 스타일
+const QuestionBox = styled.div`
+    color: White; 
+    padding: 20px 30px;
+    font-size: 20px;
+    word-break: break-all;
+    line-height: 30px;
+    background-color: #000000;
+    border-radius: 12px;
+    padding: 10px;
+    max-width: 50%;
+    margin-right: auto;
+    margin-bottom: 20px;
 `;
 
+// 응답 스타일
+const ResponseBox = styled.div`
+    color: White; 
+    padding: 20px 30px;
+    font-size: 20px;
+    word-break: break-all;
+    line-height: 30px;
+    background-color: #FF541E; // 응답의 색상
+    border-radius: 12px;
+    padding: 10px;
+    max-width: 50%;
+    margin-left: auto; // 오른쪽 정렬
+    margin-bottom: 20px;
+`
 function ChatGPT() {
 
   //메인 이동
@@ -154,11 +171,13 @@ function ChatGPT() {
           <Bagpack_main_header>짐 도우미(GPT)</Bagpack_main_header>
           <Bagpack_main_text>짐 도우미(GPT)를 이용해 짐을 쌀 때 필요한 정보를 얻어보세요!</Bagpack_main_text>
           <Friend_list_box>
-
             {response_chat.slice().map((message, i) => (
-              <Response_box key={i}>
-                {message.text}
-              </Response_box>
+              // 조건에 따라 질문과 응답 스타일을 다르게 적용
+              message.isUser ? (
+                <QuestionBox key={i}>{message.text}</QuestionBox>
+              ) : (
+                <ResponseBox key={i}> {message.text} </ResponseBox>
+              )
             ))}
           </Friend_list_box>
           <FriendSet_main_footer>
