@@ -79,9 +79,9 @@ export const end_date = atom<String>({
 });
 
 //chatGpt
-export const chat_response = atom<String>({
+export const chat_response = atom({
   key: 'chat_response',
-  default: "",
+  default: { text: "", question: "" },
 });
 
 //weather

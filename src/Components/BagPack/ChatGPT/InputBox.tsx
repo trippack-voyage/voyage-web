@@ -55,13 +55,15 @@ export default function InputBox() {
             const apiResponse = response.data;
             if (apiResponse.choices && apiResponse.choices[0] && apiResponse.choices[0].text) {
                 setResponseText(apiResponse.choices[0].text);
+                
             }
         }).catch(function (error) {
             console.error(error);
         });
     }
+    
 
-    return (
+    return (<>
         <ItemCreateContainer>
             <ItemInputContainer>
                 <ItemInputBox
@@ -74,5 +76,7 @@ export default function InputBox() {
                 </ItemAddBtn_box>
             </ItemInputContainer>
         </ItemCreateContainer>
-    );
+    
+    </>);
 }
+

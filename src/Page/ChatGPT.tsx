@@ -5,6 +5,7 @@ import BagPackSide from '../Components/BagPack/BagPackSide';
 import { useNavigate } from 'react-router-dom';
 import {IoArrowBack} from "react-icons/io5";
 import ChatInputBox from '../Components/BagPack/ChatGPT/InputBox';
+
 //recoil
 import { chat_response } from '../recoil/atoms';
 import { useRecoilValue } from 'recoil';
@@ -48,7 +49,7 @@ const Friend_list_box = styled.div`
     margin-bottom: 10px;
     height: 450px;
     width: 1000px;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     background-color: white;
     border-radius: 20px;
@@ -75,51 +76,82 @@ const FriendSet_main_footer = styled.div`
 
 //응답 박스
 const Response_box = styled.div`
-    padding: 20px 30px;
-    font-size: 20px;
-    word-break:break-all; 
-    line-height: 30px;
+  padding: 20px 30px;
+  font-size: 20px;
+  word-break: break-all;
+  line-height: 30px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  padding: 10px;
+  max-width: 70%;
+  margin-left: auto;
 `;
 
 function ChatGPT() {
 
-    //메인 이동
-    const navi = useNavigate();
-    function onClickBack(){
-        navi("/bag-list");
-    }
-    const chat_res = useRecoilValue(chat_response);
-
-    const [response_chat, setResponse_chat] = useState<string[]>([]);
-    useEffect(()=> {
-        
-        setResponse_chat([String(chat_res), ...response_chat]);
-    },[])
-
-    const [send_chat, setSend_chat] = useState([]);
-
-    return (
-        <div>
-            <GlobalStyle/>
-            <Bagpack_main>
-                <BagPackSide/>
-                <Bagpack_main_box>
-                    <IoArrowBack size="50" onClick={onClickBack}/>
-                    <Bagpack_main_header>짐 도우미(GPT)</Bagpack_main_header>
-                    <Bagpack_main_text>짐 도우미(GPT)를 이용해 짐을 쌀 때 필요한 정보를 얻어보세요!</Bagpack_main_text>
-                    <Friend_list_box>
-                    {response_chat.map((chat, i) => (
-                        <Response_box>{chat}</Response_box>))
-                    }
-                    </Friend_list_box>
-                    <FriendSet_main_footer>
-                        <ChatInputBox></ChatInputBox>
-                    </FriendSet_main_footer>
-                </Bagpack_main_box>
-            </Bagpack_main>
-        </div>
-    );
+  //메인 이동
+  const navi = useNavigate();
+  function onClickBack() {
+    navi("/bag-list");
   }
   
-  export default ChatGPT;
   
+
+  const [response_chat, setResponse_chat] = useState<{ text: string, isUser: boolean }[]>([]);
+  const [inputValue, setInputValue] = useState(""); // 추가
+  const [if_res, setif_res] = useState(false);
+  
+  
+  const chat_res = useRecoilValue(chat_response);
+
+  useEffect(() => {
+    // 새로운 응답을 질문과 응답 객체로 나누어 추가
+    let newChat :{ text: string; isUser: boolean }[]= [];
+
+    if (chat_res) {
+      newChat = [
+        { text: String(chat_res), isUser: true }, // 사용자 질문
+        { text: chat_res.question, isUser: false }, // GPT 응답
+      ];
+    }
+
+    // 입력값이 비어있지 않다면 질문도 추가
+    console.log(chat_res);
+    if (inputValue) {
+      newChat.unshift({ text: inputValue, isUser: true });
+    }
+   
+    
+    
+    setResponse_chat((prevChat) => ([
+      ...prevChat,
+      ...newChat,
+    ]));
+}, [chat_res, inputValue])
+  return (
+    <div>
+      <GlobalStyle />
+      <Bagpack_main>
+        <BagPackSide />
+        <Bagpack_main_box>
+          <IoArrowBack size="50" onClick={onClickBack} />
+          <Bagpack_main_header>짐 도우미(GPT)</Bagpack_main_header>
+          <Bagpack_main_text>짐 도우미(GPT)를 이용해 짐을 쌀 때 필요한 정보를 얻어보세요!</Bagpack_main_text>
+          <Friend_list_box>
+            
+          {response_chat.slice().map((message, i) => (
+              <Response_box key={i}>
+                {message.text} 
+              </Response_box>
+            ))}
+          </Friend_list_box>
+          <FriendSet_main_footer>
+            <ChatInputBox />
+          </FriendSet_main_footer>
+        </Bagpack_main_box>
+      </Bagpack_main>
+    </div>
+  );
+}
+
+export default ChatGPT
