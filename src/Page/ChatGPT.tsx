@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { IoArrowBack } from "react-icons/io5";
 import ChatInputBox from '../Components/BagPack/ChatGPT/InputBox';
 import axios from 'axios';
-// import Typing from 'react-typing-animation';
 
 //recoil
 import { chat_response } from '../recoil/atoms';
@@ -52,13 +51,12 @@ const Friend_list_box = styled.div`
     height: 450px;
     width: 1000px;
     flex-direction: column;
-    flex-wrap: wrap;
     background-color: white;
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #c1c1c1;
-
-    overflow-y: scroll;
+    overflow-y: auto;  // overflow-y를 auto로 수정
+    max-height: 450px;  /* 최대 높이 설정 */
     &::-webkit-scrollbar {
       width: 5px;
     }
@@ -105,6 +103,8 @@ const ResponseBox = styled.div`
     margin-left: auto; // 오른쪽 정렬
     margin-bottom: 20px;
 `
+
+
 function ChatGPT() {
 
   //메인 이동
@@ -161,6 +161,8 @@ function ChatGPT() {
       setInputValue(""); // 입력값 초기화
     }
   };
+
+  
   return (
     <div>
       <GlobalStyle />
