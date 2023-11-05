@@ -85,7 +85,7 @@ const QuestionBox = styled.div`
     border-radius: 12px;
     padding: 10px;
     max-width: 50%;
-    margin-right: auto;
+    margin-left: auto; // 오른쪽 정렬
     margin-bottom: 20px;
 `;
 
@@ -100,7 +100,7 @@ const ResponseBox = styled.div`
     border-radius: 12px;
     padding: 10px;
     max-width: 50%;
-    margin-left: auto; // 오른쪽 정렬
+    margin-right: auto;
     margin-bottom: 20px;
 `
 
@@ -176,9 +176,9 @@ function ChatGPT() {
             {response_chat.slice().map((message, i) => (
               // 조건에 따라 질문과 응답 스타일을 다르게 적용
               message.isUser ? (
-                <QuestionBox key={i}>{message.text}</QuestionBox>
+                <QuestionBox key={i}>User: {message.text}</QuestionBox>
               ) : (
-                <ResponseBox key={i}> {message.text} </ResponseBox>
+                <ResponseBox key={i}>AI: {message.text} </ResponseBox>
               )
             ))}
           </Friend_list_box>
