@@ -46,7 +46,7 @@ const SuitCase_box = styled.div`
     height: 350px;
     width: 280px;
     index: 1;
-    background-color: white;
+    background-color: ${({ theme }) => theme.body}; 
     margin: -20px auto auto auto;
     box-shadow: 5px 5px #e17254;
 

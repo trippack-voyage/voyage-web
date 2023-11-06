@@ -6,7 +6,7 @@ import axios from 'axios';
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     height: 80px;
     width: 950px;
     border-radius: 15px;
@@ -40,7 +40,7 @@ const No_travel_btn = styled.button`
     font-weight: 500;
     border: none;
     color: gray;
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
 `;
 
 //물품 열린 박스

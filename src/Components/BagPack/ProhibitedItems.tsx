@@ -4,7 +4,7 @@ import no_travel_icon from '../../img/icon-no-travelling.png';
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     height: 80px;
     width: 950px;
     border-radius: 15px;
@@ -29,7 +29,7 @@ const No_travel_text = styled.div`
     margin: 25px auto auto 23px;
     font-size: 25px;
     font-weight: 900;
-    color: #1a1919;
+    color: ${({ theme }) => theme.text};
 `;
 
 //물품 열기 버튼
@@ -39,7 +39,7 @@ const No_travel_btn = styled.button`
     font-weight: 500;
     border: none;
     color: gray;
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
 `;
 
 //물품 열린 박스

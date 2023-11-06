@@ -23,7 +23,7 @@ const Header_box = styled.div`
   padding-top: 40px;
   padding-bottom: 40px;
   border-bottom: 1px solid #c1c1c1;
-  background-color: white;
+  background-color: ${({ theme }) => theme.headerBackground};
   justify-content: center;
   z-index: 10;
 `;
@@ -55,7 +55,7 @@ const Mypage_btnBox = styled.div`
 `
 
 const Mypage_btn = styled.button`
-  background-color: white;
+  background-color: ${({ theme }) => theme.headerBackground};
   border: none;
   font-size: 25px;
   color: gray;

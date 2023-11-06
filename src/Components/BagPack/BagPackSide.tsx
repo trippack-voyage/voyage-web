@@ -9,7 +9,7 @@ const Side_box = styled.div`
     width: 450px;
     height: 830px;
     border-radius: 20px;
-    background-color: white;
+    background-color: ${({ theme }) => theme.toggleBackground};
     margin: 17px 0px 17px 20px;
     border: 1px solid #c1c1c1;
 `;

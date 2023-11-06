@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'TAEBAEKfont';
@@ -29,7 +30,7 @@ export const ModalView = styled.div.attrs(props => ({
   text-align: center;
   text-decoration: none;
   padding: 40px 20px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.headerBackground};
   border-radius: 30px;
   width: 500px;
   height: 580px;
@@ -81,6 +82,8 @@ const Bag_add_modal_input = styled.input`
   padding: 5px 20px;
   font-size: 19px;
   font-weight: 700;
+  background-color: ${({ theme }) => theme.headerBackground};
+
 
   &::placeholder{
     color: #c1c1c1;
@@ -186,7 +189,7 @@ function Weather_modal() {
       <ModalView>
         <Bag_add_modal_header>
           <Bag_add_modal_backarrow>
-            <Bag_add_arrow width="20" height="20" onClick={openModalHandler} />
+            <Bag_add_arrow width="20" height="20" onClick={openModalHandler} style={{ fill: 'white' }} />
           </Bag_add_modal_backarrow>
           <Bag_add_modal_header_text>날씨 조회하기</Bag_add_modal_header_text>
         </Bag_add_modal_header>

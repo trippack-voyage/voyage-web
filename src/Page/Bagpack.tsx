@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-color: #f6f8f9;
+        background-color: ${({ theme }) => theme.navBar};
     }
 `
 const Bagpack_main = styled.div`

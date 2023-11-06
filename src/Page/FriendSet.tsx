@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-color: #f6f8f9;
+        background-color: ${({ theme }) => theme.toggleBackground};
     }
 `
 
@@ -47,7 +47,7 @@ const Friend_list_box = styled.div`
     width: 450px;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: white;
+    background-color: ${({ theme }) => theme.navBar};
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #c1c1c1;
@@ -73,7 +73,7 @@ const Friend_list_box3 = styled.div`
     width: 450px;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: white;
+    background-color: ${({ theme }) => theme.navBar};
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #c1c1c1;
@@ -96,7 +96,7 @@ const Find_friend = styled.input`
     box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
     width: 400px;
     height: 60px;
-    background-color: white;
+    background-color: ${({ theme }) => theme.navBar};
     font-size: 22px;
     padding: 15px;
     border-radius: 12px;
@@ -124,7 +124,8 @@ const Find_Friend_box = styled.div`
     width: 380px;
     margin-right: auto;
     margin-left: auto;
-    background-color: #f6f8f9;
+    background-color: ${({ theme }) => theme.list};
+
 `;
 
 //친구 찾기 친구 리스트 프로필
@@ -150,7 +151,7 @@ const Find_frined_btn = styled.button`
     margin: auto 0px auto auto;
     font-size: 20px;
     font-weight: 700;
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     border-radius: 12px;
     width: 105px;
     height: 55px;
@@ -163,7 +164,7 @@ const Delete_frined_btn = styled.button`
     margin: auto 0px auto auto;
     font-size: 20px;
     font-weight: 700;
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     border-radius: 12px;
     width: 75px;
     height: 55px;
@@ -177,7 +178,7 @@ const Accept_frined_btn = styled.button`
     margin: auto 0px auto auto;
     font-size: 20px;
     font-weight: 700;
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     border-radius: 12px;
     width: 75px;
     height: 55px;
