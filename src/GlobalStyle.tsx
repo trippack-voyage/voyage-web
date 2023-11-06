@@ -1,6 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
 
+interface ThemeInterface {
+  theme: {
+    body: string;
+    text: string;
+    toggleBorder: string;
+    toggleBackground: string;
+    mainColor: string;
+    navBar: string;
+  };
+}
+
 export const GlobalStyle = createGlobalStyle`
+
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -58,6 +70,20 @@ table {
 a {
   text-decoration: none;
   color:inherit;
+}
+
+body {
+  font-family: 'NanumSquare', sans-serif;
+  background: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
+  transition: all 0.5s ease-in-out;
+}
+button {
+  background: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.5s ease-in-out;
 }
 
 `;

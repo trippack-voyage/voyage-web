@@ -26,7 +26,6 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-color: #f6f8f9;
     }
 
     @font-face {
