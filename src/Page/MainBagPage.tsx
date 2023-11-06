@@ -134,7 +134,7 @@ const Bag_add_btn = styled.button`
   color: white;
   position: fixed;
   right : 3rem;
-  bottom : 5%;
+  bottom : 10%;
 `;
 
 //날씨 버튼 박스
@@ -155,7 +155,7 @@ const Weather_btn = styled.button`
   color: white;
   position: fixed;
   right : 3rem;
-  bottom : 18%;
+  bottom : 22%;
 `;
 
 //가방 없을 때 문구
