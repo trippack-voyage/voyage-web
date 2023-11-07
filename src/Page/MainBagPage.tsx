@@ -172,6 +172,29 @@ const Bag_none1 = styled.div`
   width: 1000%;
 `;
 
+//가방 정렬
+const SortingOptions = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const SortingLabel = styled.label`
+  font-size: 24px;
+  margin-right: 10px;
+`;
+
+const SortingButton = styled.button`
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: ${({ theme }) => theme.button1};
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const Bag_none_text = styled.div`
   font-size: 20px;
   margin-top: 20px;
@@ -185,7 +208,13 @@ const Bag_container = styled.div`
   flex-wrap: wrap;
 `;
 
+
 SwiperCore.use([Navigation, Pagination])
+
+const SelectedSortingOption = styled(SortingButton)`
+  color: #ff5733; /* Change to your desired color */
+  font-weight: bold;
+`;
 
 function MainBagPage() {
   interface IList {
@@ -210,14 +239,20 @@ function MainBagPage() {
     setIsOpenWeather(true);
   };
 
+  //가방 정렬 선언
+  const [sortByLatest, setSortByLatest] = useState(true); // 날짜정렬
+
+  const toggleSortingOrder = () => {
+    setSortByLatest((prevState) => !prevState);
+  };
+
   /*가방 리스트 가져오기*/
   const kakaoId = localStorage.getItem("kakaoId");
   const [bag_list , SetBag_list] = useState<IList[]>([],);
-  const [bag_list_end , SetBag_list_end] = useState<IList[]>([],);
 
   useEffect(()=> {
     axios({
-      url: '/bag/list',
+      url: sortByLatest ? '/bag/latestlist' : '/bag/list',
       method: 'GET',
       params:{
         kakaoId: `${kakaoId}`
@@ -229,7 +264,8 @@ function MainBagPage() {
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-  },[]) 
+  }, [sortByLatest, kakaoId]);
+ 
 
   const [isOn, setisOn] = useState(false);
 
@@ -269,6 +305,26 @@ function MainBagPage() {
           </ToggleContainer>
         </Bag_select_container>
       </Main_header>
+
+      <Bag_select_container>
+        <Bag_select_text>
+        <SortingOptions>
+          <SortingLabel>
+            {sortByLatest ? '시간순' : '최신순'}:
+          </SortingLabel>
+          {sortByLatest ? (
+            <SelectedSortingOption onClick={toggleSortingOrder}>
+              최신순
+            </SelectedSortingOption>
+          ) : (
+            <SelectedSortingOption onClick={toggleSortingOrder}>
+              시간순
+            </SelectedSortingOption>
+          )}
+        </SortingOptions>
+        </Bag_select_text>
+      </Bag_select_container>
+
       <Main_main>
           <Bag_container>
             {isOn === false? 
