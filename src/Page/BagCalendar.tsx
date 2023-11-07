@@ -14,8 +14,15 @@ type Bag = {
   status: string;
 };
 
+type TripInfo = {
+  numberOfLocations: number;
+  totalTripDuration: number;
+  uniqueLocations: string[];
+};
+
 function MyBagCalendar() {
   const [bagList, setBagList] = useState<Bag[]>([]);
+  const [tripInfo, setTripInfo] = useState<TripInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,6 +41,15 @@ function MyBagCalendar() {
         console.error('AxiosError:', error);
         setLoading(false);
       });
+
+    axios
+      .get(`/bag/trip-info/${kakaoId}`)
+      .then((response) => {
+        setTripInfo(response.data);
+      })
+      .catch((error) => {
+        console.error('AxiosError:', error);
+      });
   }, []);
 
   //메인화면 이동
@@ -44,16 +60,28 @@ function MyBagCalendar() {
 
 
   return (
-    <div style={{ textAlign: 'center', fontFamily: 'Your Font, sans-serif' }}>
+    <div style={{ textAlign: 'center', fontFamily: 'S-CoreDream-3Light' }}>
       <IoArrowBack
         size="50"
         style={{ position: 'absolute', left: '100px', top: '20px', cursor: 'pointer' }}
         onClick={onClickBack}
-      />      <h1 style={{ fontSize: '40px', fontWeight: 'bold', paddingTop: '100px' }}>나의 여행 달력</h1>
+      />
+      <h1 style={{ fontSize: '40px', fontWeight: 'bold', paddingTop: '100px' }}>나의 여행 달력</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <BagCalendar bagList={bagList} />
+        <div style={{ marginTop: '20px' }}>
+          <p style={{ fontSize: '20px', fontFamily: 'S-CoreDream-3Light' }}>
+            총 여행기간 {tripInfo?.totalTripDuration}일 🌍
+          </p>
+          <p style={{ fontSize: '20px', fontFamily: 'S-CoreDream-3Light', marginTop: '10px' }}>
+            지금까지 총 {tripInfo?.numberOfLocations}개 도시를 여행하였습니다 ✈️
+          </p>
+          <p style={{ fontSize: '20px', fontFamily: 'S-CoreDream-3Light', marginTop: '10px' }}>
+            방문한 도시: {tripInfo?.uniqueLocations.join(', ')}
+          </p>
+          <BagCalendar bagList={bagList} />
+        </div>
       )}
     </div>
   );
