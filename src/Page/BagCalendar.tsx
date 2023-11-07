@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
+import { useNavigate, useParams } from 'react-router-dom';
+import { IoArrowBack } from "react-icons/io5";
 
 type Bag = {
   bagId: number;
@@ -34,9 +36,20 @@ function MyBagCalendar() {
       });
   }, []);
 
+  //메인화면 이동
+  const navigate = useNavigate();
+  const onClickBack = () => {
+    navigate("/bag-list");
+  };
+
+
   return (
     <div style={{ textAlign: 'center', fontFamily: 'Your Font, sans-serif' }}>
-      <h1 style={{ fontSize: '40px', fontWeight: 'bold', paddingTop: '40px' }}>나의 여행 달력</h1>
+      <IoArrowBack
+        size="50"
+        style={{ position: 'absolute', left: '100px', top: '20px', cursor: 'pointer' }}
+        onClick={onClickBack}
+      />      <h1 style={{ fontSize: '40px', fontWeight: 'bold', paddingTop: '100px' }}>나의 여행 달력</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
