@@ -1,4 +1,3 @@
-
 import React, { ReactElement, useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
@@ -6,6 +5,7 @@ import { lightTheme, Theme } from '../theme';
 
 interface ToggleProps {
   theme: Theme;
+  isVisible: boolean; 
 }
 
 const ToggleButton = styled('button')<ToggleProps>`
@@ -16,7 +16,7 @@ const ToggleButton = styled('button')<ToggleProps>`
   bottom: 1.5rem;
   border-radius: 30px;
   cursor: pointer;
-  display: flex;
+  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -47,28 +47,38 @@ const ModeContent = styled.p`
   margin-left: 5px;
 `;
 
-export default function DarkModeToggle(): ReactElement {
+export default function DarkModeToggle({
+  isVisible, 
+}: {
+  isVisible: boolean; 
+})  {
   const { theme, toggleTheme } = useContext(ThemeContext);
-
+  if (!isVisible) {
+    return null; // isVisible이 false이면 null을 반환하여 아무것도 렌더링하지 않음
+  }
   return (
-    <ToggleButton onClick={toggleTheme} theme={theme}>
-      {theme === lightTheme ? (
+    <ToggleButton onClick={toggleTheme} theme={theme} isVisible={isVisible}>
+      {isVisible && (
         <>
-          <Emoji>
-            <span role="img" aria-label="darkMoon">
-              🌚
-            </span>
-          </Emoji>
-          <ModeContent>다크 모드</ModeContent>
-        </>
-      ) : (
-        <>
-          <Emoji>
-            <span role="img" aria-label="lightSun">
-              🌞
-            </span>
-          </Emoji>
-          <ModeContent>라이트 모드</ModeContent>
+          {theme === lightTheme ? (
+            <>
+              <Emoji>
+                <span role="img" aria-label="darkMoon">
+                  🌚
+                </span>
+              </Emoji>
+              <ModeContent>다크 모드</ModeContent>
+            </>
+          ) : (
+            <>
+              <Emoji>
+                <span role="img" aria-label="lightSun">
+                  🌞
+                </span>
+              </Emoji>
+              <ModeContent>라이트 모드</ModeContent>
+            </>
+          )}
         </>
       )}
     </ToggleButton>

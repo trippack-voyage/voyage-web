@@ -12,12 +12,11 @@ import { GlobalStyle } from './GlobalStyle';
 import StartPage from './Page/StartPage';
 import OAuth2RedirectHandeler from './Page/OAuth2RedirectHandeler';
 
-import DarkModeToggle from './Components/DarkModeToggle'; // Import the DarkModeToggle component
+import DarkModeToggle from './Components/DarkModeToggle'; 
 
 import { lightTheme, darkTheme, Theme } from './theme';
 import { useDarkMode } from './hooks/useDarkMode';
 import { ThemeProvider } from 'styled-components';
-
 
 
 interface ContextProps {
@@ -32,16 +31,17 @@ export const ThemeContext = createContext<ContextProps>({
   },
 });
 
-
 function App() {
-  const { theme, toggleTheme } = useDarkMode();
+const isStartPage = window.location.pathname === '/'; 
+const isVisible = !isStartPage; // StartPage인 경우에만 isVisible을 false로 지정
+
+const { theme, toggleTheme } = useDarkMode(isVisible);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <ThemeProvider theme={theme === lightTheme ? lightTheme : darkTheme}>
       <GlobalStyle />
-        <DarkModeToggle />
-
+        <DarkModeToggle isVisible={isVisible} /> 
       <RecoilRoot>
         <Routes>
           <Route element={<Header />}>
