@@ -24,7 +24,7 @@ const ItemInputBox = styled.input`
   border-radius: 12px;
   outline: none;
   background-color: ${({ theme }) => theme.button};
-
+  color: ${({ theme }) => theme.text};
 `;
 
 const ItemAddBtn_box = styled.span`
