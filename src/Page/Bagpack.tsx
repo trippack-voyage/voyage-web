@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-color: ${({ theme }) => theme.navBar};
+        background-color: ${({ theme }) => theme.body};
     }
 `
 const Bagpack_main = styled.div`
@@ -51,6 +51,7 @@ const Bagpack_main_header = styled.div`
 const Bagpack_main_header_text1 = styled.span`
     font-size: 48px;
     font-weight: 700;
+    color: ${({ theme }) => theme.text};
 `;
 
 const Bagpack_main_header_text2 = styled.span`
@@ -58,6 +59,7 @@ const Bagpack_main_header_text2 = styled.span`
     font-weight: 700;
     margin-left: 10px;
     padding-top: 15px;
+    color: ${({ theme }) => theme.text};
 `;
 
 const Bag_icon_box = styled.div`

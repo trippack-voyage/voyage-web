@@ -9,7 +9,7 @@ const Side_box = styled.div`
     width: 450px;
     height: 830px;
     border-radius: 20px;
-    background-color: ${({ theme }) => theme.toggleBackground};
+    background-color: ${({ theme }) => theme.headerBackground};
     margin: 17px 0px 17px 20px;
     border: 1px solid #c1c1c1;
 `;
@@ -21,7 +21,7 @@ const Friend_list_box = styled.div`
 
 //친구 리스트 박스
 const Friend_inside_box = styled.div`
-    border: 2px solid #1a1919;
+    border: 2px solid  ${({ theme }) => theme.button1};
     font-size: 22px;
     font-weight: 700;
     margin: 20px auto;
@@ -30,7 +30,7 @@ const Friend_inside_box = styled.div`
     border-radius: 15px;
     cursor: pointer;
     text-align: center;
-    color: #1a1919;
+    color: ${({ theme }) => theme.list1};
 `;
 
 const Set_box = styled.div`
@@ -74,7 +74,7 @@ const Link_box = styled.button`
     font-weight: 700;
     margin: auto -80px auto auto;
     color: #FF541E;
-    background-color: white;
+    background-color: ${({ theme }) => theme.button};
     border: 3px solid #FF541E;
     box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
     border-radius: 20px;

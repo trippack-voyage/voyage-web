@@ -30,7 +30,7 @@ export const ModalView = styled.div.attrs(props => ({
   text-align: center;
   text-decoration: none;
   padding: 40px 20px;
-  background-color: ${({ theme }) => theme.headerBackground};
+  background-color: ${({ theme }) => theme.navBar};
   border-radius: 30px;
   width: 500px;
   height: 580px;
@@ -112,7 +112,7 @@ const Bag_add_modal_btn = styled.button`
 const Weather_text = styled.div`
   margin-top: 40px;
   font-size: 20px;
-  color: gray;
+  color: ${({ theme }) => theme.text1};
 `;
 
 //날씨 결과 박스

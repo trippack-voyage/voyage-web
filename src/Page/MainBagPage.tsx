@@ -53,7 +53,7 @@ const Main_title = styled.div`
   font-weight: 500;
   margin: 0px auto;
   margin-top: 50px;
-  color: #1a1919;
+  color:${({ theme }) => theme.button1};
   font-family: 'TAEBAEKfont';
 `;
 

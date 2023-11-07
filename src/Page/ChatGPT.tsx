@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-color: #f6f8f9;
+        background-color: ${({ theme }) => theme.body};
     }
 `
 
@@ -51,7 +51,7 @@ const Friend_list_box = styled.div`
     height: 450px;
     width: 1000px;
     flex-direction: column;
-    background-color: white;
+    background-color: ${({ theme }) => theme.button};
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #c1c1c1;

@@ -12,7 +12,7 @@ const ItemInputContainer = styled.div`
   border: 3px solid #FF541E;
   box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
   border-radius: 12px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.button};
 `;
 
 const ItemInputBox = styled.input`
@@ -23,6 +23,8 @@ const ItemInputBox = styled.input`
   border: none;
   border-radius: 12px;
   outline: none;
+  background-color: ${({ theme }) => theme.button};
+
 `;
 
 const ItemAddBtn_box = styled.span`
@@ -33,7 +35,7 @@ const ItemAddBtn = styled.button`
   font-size: 20px;
   margin: auto 10px auto 20px;
   color: #FF541E;
-  background-color: white;
+  background-color: ${({ theme }) => theme.button};
   border: none;
   font-weight: 700;
 `;

@@ -44,7 +44,7 @@ const No_travel_btn = styled.button`
 
 //물품 열린 박스
 const ProhibitedItems_openBox = styled.div`
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     width: 950px;
     border-radius: 15px;
     margin-top: 15px;
@@ -95,6 +95,7 @@ const Item_icon_text = styled.span`
     font-weight: 600;
     display: flex;
     margin: auto auto auto 10px;
+    color: ${({ theme }) => theme.list1};
 `;
 
 //위탁수하물 금지물품 상세텍스트
@@ -105,7 +106,7 @@ const Item_icon_txt = styled.span`
     color: gray;
 `;
 
-//닫기 버튼
+//닫기 버튼ㅍ
 const No_travel_close_btn = styled.div`
     margin: 20px 5px 25px auto;
     border: none;
@@ -113,7 +114,7 @@ const No_travel_close_btn = styled.div`
     font-size: 19px;
     font-weight: 500;
     color: gray;
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     width: 100px;
     border-radius: 20px;
     cursor: pointer;

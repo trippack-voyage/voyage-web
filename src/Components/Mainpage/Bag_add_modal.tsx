@@ -29,7 +29,7 @@ export const ModalView = styled.div.attrs(props => ({
   text-align: center;
   text-decoration: none;
   padding: 40px 20px;
-  background-color: ${({ theme }) => theme.headerBackground};
+  background-color: ${({ theme }) => theme.navBar};
   border-radius: 30px;
   width: 500px;
   height: 580px;
@@ -96,7 +96,6 @@ const Bag_add_modal_input_text = styled.div`
   margin-left: 40px;
   margin-right: auto;
   text-align: left; 
-  background-color: ${({ theme }) => theme.headerBackground};
 
   &::placeholder{
     color: #c1c1c1;

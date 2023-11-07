@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
         width: 100%;
-        background-color: ${({ theme }) => theme.toggleBackground};
+        background-color: ${({ theme }) => theme.body};
     }
 `
 
@@ -47,7 +47,7 @@ const Friend_list_box = styled.div`
     width: 450px;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: ${({ theme }) => theme.navBar};
+    background-color: ${({ theme }) => theme.toggleBackground};
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #c1c1c1;
@@ -73,7 +73,7 @@ const Friend_list_box3 = styled.div`
     width: 450px;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: ${({ theme }) => theme.navBar};
+    background-color: ${({ theme }) => theme.toggleBackground};
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #c1c1c1;

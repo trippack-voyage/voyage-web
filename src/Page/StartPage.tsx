@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styled, {keyframes, createGlobalStyle} from 'styled-components';
 import LoginLogo from '../img/kakao_login_large_wide.png';
 import SuitCase from '../img/suitcases.png';
+import DarkModeToggle from '../Components/DarkModeToggle'; // DarkModeToggle 컴포넌트 추가
+
 
 export const GlobalStyle = createGlobalStyle`
     #root,
@@ -122,6 +124,7 @@ const SuitCase_img = styled.img`
 	animation: ${Box_Ani} 4s infinite; /* 애니메이션 적용 */
 `;
 
+
 function StartPage() {
 
   const Rest_api_key='b791159adc4e18ab175997922e03859a' //REST API KEY
@@ -132,6 +135,8 @@ function StartPage() {
   const startService = () => {
     window.location.href = kakaoURL
   }
+  const isDarkModeToggleVisible = false; // true로 설정하면 표시됨
+
 
   return (
     <div>

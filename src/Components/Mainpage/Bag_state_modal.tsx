@@ -31,7 +31,7 @@ export const ModalView = styled.div.attrs(props => ({
   text-align: center;
   text-decoration: none;
   padding: 40px 20px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.navBar};
   border-radius: 30px;
   width: 500px;
   height: 310px;
