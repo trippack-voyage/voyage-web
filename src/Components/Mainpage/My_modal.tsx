@@ -27,7 +27,7 @@ export const ModalView = styled.div.attrs(props => ({
   background-color: white;
   border-radius: 20px;
   width: 180px;
-  height: 260px;
+  height: 325px;
   margin: -10px 50px -250px auto;
   padding: 10px;
   background-color: black;
@@ -113,11 +113,18 @@ function My_modal() {
     navi("/friend-set");
   }
 
+   //여행달력
+   function onClick_BagCalendar(){
+    navi("/bag-calendar");
+  }
+
   return (
       <ModalContainer>
         <GlobalStyle/>
         <ModalView>
           <My_list onClick={onClick_friendSet}>친구관리</My_list>
+          <My_list_line></My_list_line>
+          <My_list onClick={onClick_BagCalendar}>여행달력</My_list>
           <My_list_line></My_list_line>
           <My_list onClick={logout}>로그아웃</My_list>
           <My_list_line></My_list_line>

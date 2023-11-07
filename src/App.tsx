@@ -7,6 +7,7 @@ import MainBagPage from './Page/MainBagPage';
 
 import Bagpack from './Page/Bagpack';
 import FriendSet from './Page/FriendSet';
+import BagCalendar from './Page/BagCalendar';
 import ChatGPT from './Page/ChatGPT';
 import { GlobalStyle } from './GlobalStyle';
 import StartPage from './Page/StartPage';
@@ -49,6 +50,7 @@ const { theme, toggleTheme } = useDarkMode(isVisible);
           </Route>
           <Route path="/bagpack/:bagId" element={<Bagpack />} />
           <Route path="/friend-set" element={<FriendSet />} />
+          <Route path="/bag-calendar" element={<BagCalendar />} />
           <Route path="/chat-gpt" element={<ChatGPT />} />
           <Route path="/" element={<StartPage />} />
           <Route path="api/oauth/token" element={<OAuth2RedirectHandeler />}></Route>
