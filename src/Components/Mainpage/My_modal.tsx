@@ -13,25 +13,31 @@ export const GlobalStyle = createGlobalStyle`
       font-style: normal;
     }
 `
-
+//마이페이지 모달 컨테이너
 export const ModalContainer = styled.div`
   display: flex;
-  
 `;
 
+//마이페이지 모달 박스
 export const ModalView = styled.div.attrs(props => ({
   role: 'dialog'
 }))`
   text-align: center;
-  text-decoration: none;
   background-color: white;
   border-radius: 20px;
   width: 180px;
   height: 325px;
-  margin: -10px 50px -250px auto;
+  margin: -30px 30px -300px auto;
   padding: 10px;
   background-color: black;
   z-index: 11;
+
+  @media screen and (max-width: 500px){
+    width: 150px;
+    height: 305px;
+    margin: -10px 10px -300px auto;
+
+  }
 `;
 
 const My_list = styled.div`
@@ -44,6 +50,10 @@ const My_list = styled.div`
   z-index: 11;
   &:hover{
     color: #ea5028;
+  }
+
+  @media screen and (max-width: 500px){
+    font-size: 19px;
   }
 `;
 

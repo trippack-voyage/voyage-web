@@ -26,14 +26,25 @@ const Header_box = styled.div`
   background-color: ${({ theme }) => theme.headerBackground};
   justify-content: center;
   z-index: 10;
+
+  @media screen and (max-width: 500px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 `;
 
+//로고 컨테이너
 const Logo_container = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
   font-size: 40px;
   font-weight: 900;
+
+  @media screen and (max-width: 500px) {
+    font-size: 30px;
+    margin-top: 10px;
+  }
 `
 
 const Logo_icon = styled.img`
@@ -42,6 +53,13 @@ const Logo_icon = styled.img`
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
+
+  @media screen and (max-width: 500px) {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    margin-bottom: 7px;
+  }
 `
 
 const Logo_text = styled.text`
@@ -49,29 +67,43 @@ const Logo_text = styled.text`
   margin-top: 5px;
 `
 
+//마이페이지 버튼 컨테이너
 const Mypage_btnBox = styled.div`
   margin: auto 30px auto -90px; 
   display: flex;
-`
 
+  @media screen and (max-width: 500px) {
+    margin: 5px 10px auto -80px; 
+  }
+`
+//마이페이지 버튼
 const Mypage_btn = styled.button`
   background-color: ${({ theme }) => theme.headerBackground};
   border: none;
   font-size: 25px;
   color: gray;
-`
 
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
+`
+//마이페이지 화살표
 const Mypage_icon_box = styled.div`
   margin: 10px 0px;
-`
 
+  @media screen and (max-width: 500px){
+    margin-left: -15px;
+    margin-top: 12px;
+  }
+`
+/*
+//마이페이지 박스 컨테이너
 export const ModalContainer = styled.div`
   display: flex;
   flex-flow: row wrep;
   justify-content: center;
   align-items: center;
   z-index: 50;
-  margin-top: -220px;
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -86,7 +118,7 @@ export const ModalView = styled.div.attrs(props => ({
   border: 1px solid black;
   width: 400px;
   height: 550px;
-`;
+`;*/
 
 function Header() {
 

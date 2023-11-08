@@ -46,6 +46,10 @@ const Main_header = styled.div`
   margin-top: 60px;
   z-index: 7;
   text-align: center;
+
+  @media screen and (max-width: 500px) {
+    
+  }
 `;
 
 const Main_title = styled.div`
