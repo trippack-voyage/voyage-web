@@ -43,15 +43,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 `
 const Main_header = styled.div`
-  margin-top: 60px;
+  margin-top: 10px;
   z-index: 7;
   text-align: center;
-
-  @media screen and (max-width: 500px) {
-    
-  }
 `;
 
+//내 여행 가방들-제목
 const Main_title = styled.div`
   font-size: 40px;
   font-weight: 500;
@@ -59,18 +56,33 @@ const Main_title = styled.div`
   margin-top: 50px;
   color:${({ theme }) => theme.button1};
   font-family: 'TAEBAEKfont';
+
+  @media screen and (max-width: 500px){
+    font-size: 25px;
+    margin-top: 30px;
+  }
 `;
 
+//완료 가방만 보기 버튼 컨테이너
 const Bag_select_container = styled.div`
   display: flex;
 `
+
+//완료 가방만 보기 버튼 문구
 const Bag_select_text = styled.div`
   font-family: 'S-CoreDream-3Light';
   font-size: 30px;
   margin: auto 10px auto auto;
   width: 250px;
+
+  @media screen and (max-width: 500px){
+    font-size: 19px;
+    width: 200px;
+    margin: 5px -20px auto auto;
+  }
 `;
 
+//완료 가방만 보기 슬라이더 버튼
 const ToggleContainer = styled.div`
   position: relative;
   cursor: pointer;
@@ -81,9 +93,13 @@ const ToggleContainer = styled.div`
     height: 42px;
     border-radius: 30px;
     background-color: gray;
+
+    @media screen and (max-width: 500px){
+      width: 50px;
+      height: 28px;
+    }
   }
 
-    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
   > .toggle--checked {
     background-color: #ea5028;
     transition : 0.5s
@@ -91,25 +107,49 @@ const ToggleContainer = styled.div`
 
   > .toggle-circle {
     position: absolute;
-    top: 1.5px;
+    top: 1.7px;
     left: 2px;
     width: 38px;
     height: 38px;
     border-radius: 50%;
     background-color: rgb(255,254,255);
     transition : 0.5s
-    //.toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현
 
   } >.toggle--checked {
     left: 40px;
     transition : 0.5s
   }
+
+  @media screen and (max-width: 500px){
+    margin-right: 20px;
+
+    > .toggle-circle {
+      position: absolute;
+      top: 1.5px;
+      left: 2px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: rgb(255,254,255);
+      transition : 0.5s
+
+    } >.toggle--checked {
+      left: 23px;
+      transition : 0.5s
+    }
+  
+  }
 `;
 
+//구분선
 const Main_title_line = styled.div`
   border: 2px solid #1a1919;
   width: 100px;
-  margin: 30px auto;
+  margin: 20px auto;
+
+  @media screen and (max-width: 500px){
+    width: 70px;
+  }
 `;
 
 const Main_main = styled.div`
@@ -129,16 +169,21 @@ const Bag_add_btn_box = styled.div`
 
 //가방 추가 버튼
 const Bag_add_btn = styled.button`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-  font-size: 50px;
-  background-color: #1a1919;
+  display: flex;
+  width: 115px;
+  height: 45px;
+  font-size: 0.8rem;
+  background-color: white;
   border: none;
-  color: white;
   position: fixed;
-  right : 3rem;
-  bottom : 10%;
+  right: 1.5rem;
+  bottom: 5.5rem;
+  border-radius: 30px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  flex-direction: row;
+  align-items: center;
+  color: black;
 `;
 
 //날씨 버튼 박스
@@ -150,16 +195,21 @@ const Weather_btn_box = styled.div`
 
 //날씨 버튼
 const Weather_btn = styled.button`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-  font-size: 50px;
-  background-color: #1a1919;
+  display: flex;
+  width: 115px;
+  height: 45px;
+  font-size: 0.8rem;
+  background-color: white;
   border: none;
-  color: white;
   position: fixed;
-  right : 3rem;
-  bottom : 22%;
+  right: 1.5rem;
+  bottom: 9.5rem;
+  border-radius: 30px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  flex-direction: row;
+  align-items: center;
+  color: black;
 `;
 
 //가방 없을 때 문구
@@ -210,6 +260,26 @@ const Bag_container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+`;
+
+//베너 이미지
+const Banner_img = styled.img`
+  
+  @media screen and (max-width: 500px){
+    width: 400px;
+  }
+`;
+
+//이모지
+const Emoji = styled.figure`
+  width: 33px;
+  height: 33px;
+  border-radius: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
 `;
 
 
@@ -294,10 +364,10 @@ function MainBagPage() {
         navigation
         pagination={{ clickable: true }}
       >
-        <SwiperSlide><img className="banner" alt="banner_01" src="/banner1.png" /></SwiperSlide>
-        <SwiperSlide><img className="banner" alt="banner_02" src="/banner2.png" /></SwiperSlide>
-        <SwiperSlide><img className="banner" alt="banner_03" src="/banner3.png" /></SwiperSlide>
-        <SwiperSlide><img className="banner" alt="banner_04" src="/banner4.png" /></SwiperSlide>
+        <SwiperSlide><Banner_img className="banner" alt="banner_01" src="/banner1.png" /></SwiperSlide>
+        <SwiperSlide><Banner_img className="banner" alt="banner_02" src="/banner2.png" /></SwiperSlide>
+        <SwiperSlide><Banner_img className="banner" alt="banner_03" src="/banner3.png" /></SwiperSlide>
+        <SwiperSlide><Banner_img className="banner" alt="banner_04" src="/banner4.png" /></SwiperSlide>
       </Swiper>
         <Main_title>내 여행 가방들</Main_title>
         <Main_title_line></Main_title_line>
@@ -370,12 +440,14 @@ function MainBagPage() {
           </Bag_container>
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
-            <FaPlus size="40"></FaPlus>
+            <Emoji>💼</Emoji>
+            가방 추가
           </Bag_add_btn>
         </Bag_add_btn_box>
         <Weather_btn_box>
           <Weather_btn onClick={openWeatherModalHandler}>
-            <TiWeatherPartlySunny size="40"></TiWeatherPartlySunny>
+            <Emoji>🔍</Emoji>
+            날씨 검색
           </Weather_btn>
         </Weather_btn_box>
       </Main_main>
