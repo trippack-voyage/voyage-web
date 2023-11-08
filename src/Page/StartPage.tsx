@@ -2,16 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import styled, {keyframes, createGlobalStyle} from 'styled-components';
 import LoginLogo from '../img/kakao_login_large_wide.png';
-import SuitCase from '../img/suitcases.png';
-import DarkModeToggle from '../Components/DarkModeToggle'; // DarkModeToggle 컴포넌트 추가
-
+import Logo from '../img/logo.png';
 
 export const GlobalStyle = createGlobalStyle`
     #root,
     html,
     body {
         width: 100%;
-        background-color: #000000;
+        background-color: #ea5028;
     }
     @font-face {
       font-family: 'TAEBAEKfont';
@@ -23,32 +21,41 @@ export const GlobalStyle = createGlobalStyle`
 
 //how to pack
 const Logo_text2 = styled.div`
-  color: #fffeef;
-  font-size: 60px;
+  font-size: 30px;
   font-weight: 700;
   text-align: center;
-  margin-top: 150px;
+  margin-top: 80px;
   font-family: 'TAEBAEKfont';
+
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 //together ...
 const Logo_text3 = styled.div`
-  color: #fffeef;
-  font-size: 60px;
+  font-size: 30px;
   font-weight: 700;
   text-align: center;
   margin-top: 20px;
   font-family: 'TAEBAEKfont';
+
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 //함께 ...
 const Logo_text4 = styled.div`
-  color: #fffeef;
   font-size: 25px;
   font-weight: 500;
   text-align: center;
   margin-top: 30px;
   font-family: 'TAEBAEKfont';
+
+  @media screen and (max-width: 500px) {
+    font-size: 17px;
+  }
 `;
 
 //로고 박스
@@ -56,74 +63,53 @@ const Logo_container = styled.div`
   display: flex;
 `;
 
-//로고 문구
-const Logo_text = styled.div`
-  margin: 100px auto auto auto;
-  color: #ea5028;
+//로고 이미지
+const Logo_img = styled.img`
+  margin: 0px auto;
+  width: 350px;
+  height: 350px;
+`;
+
+//voyage
+const Logo_text5 = styled.div`
+  font-size: 50px;
+  font-weight: 500;
   text-align: center;
-  font-size: 150px;
-  font-weight: 700;
+  margin-top: 10px;
   font-family: 'TAEBAEKfont';
+
+  @media screen and (max-width: 500px) {
+    font-size: 40px;
+  }
 `;
 
 //로그인 버튼 박스
 const StartBtn_box = styled.div`
   text-align: center;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 //로그인 버튼 이미지
 const StartBtn_image = styled.img`
   width: 400px;
+
+  @media screen and (max-width: 500px) {
+    width: 350px;
+  }
 `;
 
 //로그인 시...
 const StartText = styled.div`
   text-align: center;
-  font-family: Inter;
   font-size: 15px;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0em;
-  color: #c1c1c1;
-  margin-top: 10px;
-`;
+  margin-top: 15px;
+  margin-bottom: 30px;
 
-const Bag_line = styled.div`
-  display: flex;
-  margin-top: -5px;
-`;
-
-const Bag_line1 = styled.div`
-  border: 1px solid #fffeef;
-  width: 600px;
-`;
-
-const Bag_line2 = styled.div`
-  border: 1px solid #fffeef;
-  width: 420px;
-  margin-right: 0px;
-  margin-left: auto;
-`;
-
-//캐리어 애니메이션
-const Box_Ani = keyframes`
-  from {
-    transform: translate(100px, 95px);
-  }
-  to {
-    transform: translate(400px, 95px);
+  @media screen and (max-width: 500px) {
+    font-size: 13px;
   }
 `;
-
-//캐리어 아이콘
-const SuitCase_img = styled.img`
-	align-items: center;
-	justify-content: center;
-	height: 150px;
-	animation: ${Box_Ani} 4s infinite; /* 애니메이션 적용 */
-`;
-
 
 function StartPage() {
 
@@ -135,20 +121,17 @@ function StartPage() {
   const startService = () => {
     window.location.href = kakaoURL
   }
-  const isDarkModeToggleVisible = false; // true로 설정하면 표시됨
-
 
   return (
     <div>
-        <GlobalStyle/>
+      <GlobalStyle/>
         <Logo_text2>HOW TO PACK</Logo_text2>
         <Logo_text3>TOGETHER, EASILY AND SMARTLY</Logo_text3>
         <Logo_text4>함께, 쉽게, 똑똑하게 짐 싸는 방법</Logo_text4>
-        <Logo_container><SuitCase_img src={SuitCase}></SuitCase_img><Logo_text>VOYAGE</Logo_text></Logo_container>
-        <Bag_line>
-          <Bag_line1></Bag_line1>
-          <Bag_line2></Bag_line2>
-        </Bag_line>
+        <Logo_container>
+          <Logo_img src={Logo}></Logo_img>
+        </Logo_container>
+        <Logo_text5>VOYAGE</Logo_text5>
         <StartBtn_box>
           <StartBtn_image src={LoginLogo} onClick={startService}></StartBtn_image>
         </StartBtn_box>
