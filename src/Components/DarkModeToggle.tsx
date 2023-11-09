@@ -2,6 +2,9 @@ import React, { ReactElement, useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../App';
 import { lightTheme, Theme } from '../theme';
+//아이콘
+import {HiOutlineMoon} from 'react-icons/hi';
+import {BsSun} from 'react-icons/bs';
 
 interface ToggleProps {
   theme: Theme;
@@ -10,7 +13,7 @@ interface ToggleProps {
 
 const ToggleButton = styled('button')<ToggleProps>`
   position: fixed;
-  width: 115px;
+  width: 125px;
   height: 45px;
   right: 1.5rem;
   bottom: 1.5rem;
@@ -33,7 +36,7 @@ const ToggleButton = styled('button')<ToggleProps>`
 `;
 
 const Emoji = styled.figure`
-  width: 33px;
+  width: 40px;
   height: 33px;
   border-radius: 100%;
   font-size: 1.5rem;
@@ -44,7 +47,6 @@ const Emoji = styled.figure`
 
 const ModeContent = styled.p`
   font-size: 0.8rem;
-  margin-left: 5px;
 `;
 
 export default function DarkModeToggle({
@@ -63,18 +65,14 @@ export default function DarkModeToggle({
           {theme === lightTheme ? (
             <>
               <Emoji>
-                <span role="img" aria-label="darkMoon">
-                  🌚
-                </span>
+                  <HiOutlineMoon></HiOutlineMoon>
               </Emoji>
               <ModeContent>다크 모드</ModeContent>
             </>
           ) : (
             <>
               <Emoji>
-                <span role="img" aria-label="lightSun">
-                  🌞
-                </span>
+                <BsSun></BsSun>
               </Emoji>
               <ModeContent>라이트 모드</ModeContent>
             </>

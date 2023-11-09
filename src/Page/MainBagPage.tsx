@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import axios from 'axios';
 //아이콘
-import {FaPlus} from 'react-icons/fa';
-import {TiWeatherPartlySunny} from 'react-icons/ti';
+import {BsBagPlus} from 'react-icons/bs';
+import {IoIosSearch} from 'react-icons/io';
 //recoil
 import { useRecoilState } from "recoil";
 import { bagAddModalState, weatherModalState } from "../recoil/atoms";
@@ -170,7 +170,7 @@ const Bag_add_btn_box = styled.div`
 //가방 추가 버튼
 const Bag_add_btn = styled.button`
   display: flex;
-  width: 115px;
+  width: 125px;
   height: 45px;
   font-size: 0.8rem;
   background-color: white;
@@ -196,7 +196,7 @@ const Weather_btn_box = styled.div`
 //날씨 버튼
 const Weather_btn = styled.button`
   display: flex;
-  width: 115px;
+  width: 125px;
   height: 45px;
   font-size: 0.8rem;
   background-color: white;
@@ -272,14 +272,14 @@ const Banner_img = styled.img`
 
 //이모지
 const Emoji = styled.figure`
-  width: 33px;
+  width: 40px;
   height: 33px;
   border-radius: 100%;
   font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 5px;
+
 `;
 
 
@@ -440,13 +440,13 @@ function MainBagPage() {
           </Bag_container>
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
-            <Emoji>💼</Emoji>
+            <Emoji><BsBagPlus></BsBagPlus></Emoji>
             가방 추가
           </Bag_add_btn>
         </Bag_add_btn_box>
         <Weather_btn_box>
           <Weather_btn onClick={openWeatherModalHandler}>
-            <Emoji>🔍</Emoji>
+            <Emoji><IoIosSearch></IoIosSearch></Emoji>
             날씨 검색
           </Weather_btn>
         </Weather_btn_box>
