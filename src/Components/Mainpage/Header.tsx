@@ -2,7 +2,7 @@ import React from 'react';
 import styled, {createGlobalStyle} from "styled-components";
 import { Outlet } from "react-router";
 import SuitCase from '../../img/suitcases.png'
-import {FiChevronDown} from 'react-icons/fi';
+import {HiMenu} from 'react-icons/hi';
 import { myModalState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import My_modal from './My_modal';
@@ -96,29 +96,6 @@ const Mypage_icon_box = styled.div`
     margin-top: 12px;
   }
 `
-/*
-//마이페이지 박스 컨테이너
-export const ModalContainer = styled.div`
-  display: flex;
-  flex-flow: row wrep;
-  justify-content: center;
-  align-items: center;
-  z-index: 50;
-`;
-
-export const ModalView = styled.div.attrs(props => ({
-  role: 'dialog'
-}))`
-  text-align: center;
-  text-decoration: none;
-  padding: 30px 90px;
-  background-color: white;
-  border-radius: 30px;
-  color: #f18851;
-  border: 1px solid black;
-  width: 400px;
-  height: 550px;
-`;*/
 
 function Header() {
 
@@ -142,8 +119,7 @@ function Header() {
           <Logo_text>VOYAGE</Logo_text>
         </Logo_container>
         <Mypage_btnBox>
-          <Mypage_btn onClick={openModalHandler}>MY</Mypage_btn>
-          <Mypage_icon_box><FiChevronDown size="25" color="gray"/></Mypage_icon_box>
+          <Mypage_icon_box onClick={openModalHandler}><HiMenu size="30" color="gray"/></Mypage_icon_box>
         </Mypage_btnBox>
       </Header_box>
       {isOpen ? <My_modal></My_modal> : null}

@@ -64,16 +64,69 @@ const Main_title = styled.div`
 `;
 
 //완료 가방만 보기 버튼 컨테이너
-const Bag_select_container = styled.div`
+const Bag_select_container1 = styled.div`
   display: flex;
+  border: 2px solid black;
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin-right: 20px;
+  width: 290px;
+  box-shadow: 3px 3px lightgray;
+  cursor: pointer;
+  
+  &:hover {
+    background: #ea5028;
+    color: white;
+  }
+`
+const Complete_bag_btn = styled.div`
+  display: flex;
+  border: 2px solid black;
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin-right: 20px;
+  width: 290px;
+  box-shadow: 3px 3px lightgray;
+  cursor: pointer;
+  background-color: #ea5028;
+  color: white;
+
+  &:hover {
+    background: white;
+    color: black;
+  }
+`;
+//등록순/마감순 가방 보기 버튼 컨테이너
+const Bag_select_container2 = styled.div`
+  display: flex;
+  border: 2px solid black;
+  border-radius: 30px;
+  padding: 10px 0px;
+  width: 150px;
+  box-shadow: 3px 3px lightgray;
 `
 
 //완료 가방만 보기 버튼 문구
 const Bag_select_text = styled.div`
   font-family: 'S-CoreDream-3Light';
-  font-size: 30px;
-  margin: auto 10px auto auto;
-  width: 250px;
+  font-size: 25px;
+  margin: 5px auto;
+  font-weight: bold;
+
+  @media screen and (max-width: 500px){
+    font-size: 19px;
+    width: 200px;
+    margin: 5px -20px auto auto;
+  }
+`;
+
+//완료 가방만 보기 버튼 문구
+const Bag_select_text2 = styled.div`
+  font-family: 'S-CoreDream-3Light';
+  font-size: 25px;
+  margin: 5px 15px;
+  font-weight: bold;
+  cursor: pointer;
 
   @media screen and (max-width: 500px){
     font-size: 19px;
@@ -230,23 +283,18 @@ const Bag_none1 = styled.div`
 const SortingOptions = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const SortingLabel = styled.label`
-  font-size: 24px;
-  margin-right: 10px;
+  text-align: center;
 `;
 
 const SortingButton = styled.button`
-  font-size: 24px;
-  background-color: transparent;
+  font-size: 25px;
   border: none;
   cursor: pointer;
+  text-decoration: none;
   color: ${({ theme }) => theme.button1};
-
-  &:hover {
-    text-decoration: underline;
-  }
+  display: flex;
+  font-family: 'S-CoreDream-3Light';
+  margin-left: 30px;
 `;
 
 const Bag_none_text = styled.div`
@@ -282,13 +330,13 @@ const Emoji = styled.figure`
 
 `;
 
+const List_option = styled.div`
+  display: flex;
+  margin: 30px auto 50px 50px;
+`;
+
 
 SwiperCore.use([Navigation, Pagination])
-
-const SelectedSortingOption = styled(SortingButton)`
-  color: #ff5733; /* Change to your desired color */
-  font-weight: bold;
-`;
 
 function MainBagPage() {
   interface IList {
@@ -348,56 +396,49 @@ function MainBagPage() {
     setisOn(!isOn)
   };
 
-  
-
   return (
     <div>
-      <div>
-    </div>
-      <GlobalStyle/>
-      
+      <GlobalStyle/> 
+
       <Main_header>
-      <Swiper
-        className="banner"
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-      >
-        <SwiperSlide><Banner_img className="banner" alt="banner_01" src="/banner1.png" /></SwiperSlide>
-        <SwiperSlide><Banner_img className="banner" alt="banner_02" src="/banner2.png" /></SwiperSlide>
-        <SwiperSlide><Banner_img className="banner" alt="banner_03" src="/banner3.png" /></SwiperSlide>
-        <SwiperSlide><Banner_img className="banner" alt="banner_04" src="/banner4.png" /></SwiperSlide>
-      </Swiper>
+        <Swiper
+          className="banner"
+          spaceBetween={50}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+        >
+          <SwiperSlide><Banner_img className="banner" alt="banner_01" src="/banner1.png" /></SwiperSlide>
+          <SwiperSlide><Banner_img className="banner" alt="banner_02" src="/banner2.png" /></SwiperSlide>
+          <SwiperSlide><Banner_img className="banner" alt="banner_03" src="/banner3.png" /></SwiperSlide>
+          <SwiperSlide><Banner_img className="banner" alt="banner_04" src="/banner4.png" /></SwiperSlide>
+        </Swiper>
+
         <Main_title>내 여행 가방들</Main_title>
         <Main_title_line></Main_title_line>
-        <Bag_select_container>
-          <Bag_select_text>완료 가방만 보기</Bag_select_text>
-          <ToggleContainer onClick={toggleHandler}>
-            <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
-            <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
-          </ToggleContainer>
-        </Bag_select_container>
-      </Main_header>
 
-      <Bag_select_container>
-        <Bag_select_text>
-        <SortingOptions>
-          <SortingLabel>
-            {sortByLatest ? '시간순' : '최신순'}:
-          </SortingLabel>
-          {sortByLatest ? (
-            <SelectedSortingOption onClick={toggleSortingOrder}>
-              최신순
-            </SelectedSortingOption>
-          ) : (
-            <SelectedSortingOption onClick={toggleSortingOrder}>
-              시간순
-            </SelectedSortingOption>
-          )}
-        </SortingOptions>
-        </Bag_select_text>
-      </Bag_select_container>
+        <List_option>
+         {isOn ? (<Complete_bag_btn onClick={toggleHandler}>
+                  <Bag_select_text>👀 완료 가방만 보기</Bag_select_text></Complete_bag_btn>):
+                (<Bag_select_container1 onClick={toggleHandler}>
+                  <Bag_select_text>👀 완료 가방만 보기</Bag_select_text></Bag_select_container1>)}
+            {/*
+            <ToggleContainer onClick={toggleHandler}>
+              <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
+              <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
+            </ToggleContainer>
+            */}
+        
+          <Bag_select_container2>
+              <SortingOptions>
+                {sortByLatest ? (
+                  <Bag_select_text2 onClick={toggleSortingOrder}>✏️ 등록순</Bag_select_text2>) : 
+                  (<Bag_select_text2 onClick={toggleSortingOrder}>⏰ 마감순</Bag_select_text2>
+                )}
+              </SortingOptions>
+          </Bag_select_container2>
+        </List_option>
+      </Main_header>
 
       <Main_main>
           <Bag_container>
@@ -438,12 +479,14 @@ function MainBagPage() {
             </Bag_container>)
             }
           </Bag_container>
+
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <Emoji><BsBagPlus></BsBagPlus></Emoji>
             가방 추가
           </Bag_add_btn>
         </Bag_add_btn_box>
+        
         <Weather_btn_box>
           <Weather_btn onClick={openWeatherModalHandler}>
             <Emoji><IoIosSearch></IoIosSearch></Emoji>
