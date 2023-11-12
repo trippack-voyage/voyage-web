@@ -33,36 +33,6 @@ const SuitCase_container = styled.div`
     margin-bottom: 50px;
 `;
 
-//손잡이
-/*
-const SuitCase_handle = styled.div`
-    border: 10px solid lightgray;
-    border-radius: 20px;
-    height: 50px;
-    width: 120px;
-    margin: 0 auto;
-`;*/
-
-//캐리어
-const SuitCase_box = styled.div`
-    border: 3px solid lightgray;
-    border-radius: 10px;
-    background-color: white;
-    height: 350px;
-    width: 280px;
-    index: 1;
-    background-color: ${({ theme }) => theme.body}; 
-    margin: -20px auto auto auto;
-    box-shadow: 4px 4px lightgray;
-
-    /* Add a thicker border on hover */
-    transition: box-shadow 0.3s; /* Add a transition for smooth animation */
-
-    &:hover {
-        box-shadow: 0 0 0 4px black; /* Add a thicker border on hover */
-    }
-`;
-
 //가방 정보 컨테이너
 const Bag_info_container = styled.div<{ status: string }>`
     margin-top: -350px;
@@ -78,6 +48,7 @@ const Bag_info_box = styled.div`
     display: flex;
     font-family: 'S-CoreDream-3Light';
     margin-top: 5px;
+    cursor: pointer;
 `;
 
 
