@@ -135,65 +135,6 @@ const Bag_select_text2 = styled.div`
   }
 `;
 
-//완료 가방만 보기 슬라이더 버튼
-const ToggleContainer = styled.div`
-  position: relative;
-  cursor: pointer;
-  margin-right: 50px;
-
-  > .toggle-container {
-    width: 80px;
-    height: 42px;
-    border-radius: 30px;
-    background-color: gray;
-
-    @media screen and (max-width: 500px){
-      width: 50px;
-      height: 28px;
-    }
-  }
-
-  > .toggle--checked {
-    background-color: #ea5028;
-    transition : 0.5s
-  }
-
-  > .toggle-circle {
-    position: absolute;
-    top: 1.7px;
-    left: 2px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background-color: rgb(255,254,255);
-    transition : 0.5s
-
-  } >.toggle--checked {
-    left: 40px;
-    transition : 0.5s
-  }
-
-  @media screen and (max-width: 500px){
-    margin-right: 20px;
-
-    > .toggle-circle {
-      position: absolute;
-      top: 1.5px;
-      left: 2px;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background-color: rgb(255,254,255);
-      transition : 0.5s
-
-    } >.toggle--checked {
-      left: 23px;
-      transition : 0.5s
-    }
-  
-  }
-`;
-
 //구분선
 const Main_title_line = styled.div`
   border: 2px solid #1a1919;
@@ -368,7 +309,7 @@ function MainBagPage() {
     setSortByLatest((prevState) => !prevState);
   };
 
-  /*가방 리스트 가져오기*/
+  /*가방 리스트 가져오기(구현 완료)*/
   const kakaoId = localStorage.getItem("kakaoId");
   const [bag_list , SetBag_list] = useState<IList[]>([],);
 
@@ -396,6 +337,9 @@ function MainBagPage() {
     setisOn(!isOn)
   };
 
+  const [bag_list_cnt1, SetBag_list_cnt1] = useState(false);
+  const [bag_list_cnt2, SetBag_list_cnt2] = useState(false);
+
   return (
     <div>
       <GlobalStyle/> 
@@ -422,12 +366,6 @@ function MainBagPage() {
                   <Bag_select_text>👀 완료 가방만 보기</Bag_select_text></Complete_bag_btn>):
                 (<Bag_select_container1 onClick={toggleHandler}>
                   <Bag_select_text>👀 완료 가방만 보기</Bag_select_text></Bag_select_container1>)}
-            {/*
-            <ToggleContainer onClick={toggleHandler}>
-              <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
-              <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
-            </ToggleContainer>
-            */}
         
           <Bag_select_container2>
               <SortingOptions>
@@ -441,45 +379,45 @@ function MainBagPage() {
       </Main_header>
 
       <Main_main>
-          <Bag_container>
-            {isOn === false? 
-            (<Bag_container>
-              {bag_list.map(function(item,i){
-                return(
-                  <div>
-                    {item.status === 'AVAILABLE' ? (
-                    <SuitCase
-                      bagName={item.bagName}
-                      location={item.location}
-                      start_date={item.startDate}
-                      end_date={item.endDate}
-                      status={item.status}
-                      bagId={item.bagId}/> ):(null)}
-                  </div>
-                )}
+        <Bag_container>
+          {isOn === false? 
+          (<Bag_container>
+            {bag_list.map(function(item,i){
+              return(
+                <div>
+                  {item.status === 'AVAILABLE' ? (
+                  <SuitCase
+                    bagName={item.bagName}
+                    location={item.location}
+                    start_date={item.startDate}
+                    end_date={item.endDate}
+                    status={item.status}
+                    bagId={item.bagId}/>):
+                    (null)}
+                </div>
               )}
-            </Bag_container>): 
-            (<Bag_container>
-              {bag_list.map(function(item,i){
-                return(
-                  <div>
-                    {item.status === 'FINISHED' ? (
-                    <SuitCase
-                      bagName={item.bagName}
-                      location={item.location}
-                      start_date={item.startDate}
-                      end_date={item.endDate}
-                      status={item.status}
-                      bagId={item.bagId}/> ):(<Bag_none1>
+            )}
+          </Bag_container>): 
 
-                      </Bag_none1>)}
-                  </div>
-                )}
+          (<Bag_container>
+            {bag_list.map(function(item,i){
+              return(
+                <div>
+                  {item.status === 'FINISHED' ? (
+                  <SuitCase
+                    bagName={item.bagName}
+                    location={item.location}
+                    start_date={item.startDate}
+                    end_date={item.endDate}
+                    status={item.status}
+                    bagId={item.bagId}/> ):
+                    (null)}
+                </div>
               )}
-            </Bag_container>)
-            }
-          </Bag_container>
-
+            )}
+          </Bag_container>)
+          }
+        </Bag_container>
         <Bag_add_btn_box>
           <Bag_add_btn onClick={openModalHandler}>
             <Emoji><BsBagPlus></BsBagPlus></Emoji>
@@ -494,6 +432,7 @@ function MainBagPage() {
           </Weather_btn>
         </Weather_btn_box>
       </Main_main>
+
       {isOpen ? 
         <Bag_add_modal></Bag_add_modal>
       : null}
