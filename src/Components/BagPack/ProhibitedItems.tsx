@@ -106,7 +106,7 @@ const Item_icon_txt = styled.span`
     color: gray;
 `;
 
-//닫기 버튼ㅍ
+//닫기 버튼
 const No_travel_close_btn = styled.div`
     margin: 20px 5px 25px auto;
     border: none;

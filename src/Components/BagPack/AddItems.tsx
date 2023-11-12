@@ -48,7 +48,7 @@ const No_travel_btn = styled.button`
 
 //물품 열린 박스
 const ProhibitedItems_openBox = styled.div`
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     width: 950px;
     border-radius: 15px;
     margin-top: 15px;

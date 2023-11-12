@@ -21,6 +21,8 @@ const ItemInputBox = styled.input`
   border: none;
   border-radius: 12px;
   outline: none;
+  background-color: ${({ theme }) => theme.headerBackground};
+  color: ${({ theme }) => theme.text};
 `;
 
 const ItemAddBtn_box = styled.span`
@@ -31,7 +33,7 @@ const ItemAddBtn = styled.button`
   font-size: 20px;
   margin: auto auto auto 20px;
   color: #FF541E;
-  background-color: white;
+  background-color: ${({ theme }) => theme.headerBackground};
   border: none;
   font-weight: 600;
 `;

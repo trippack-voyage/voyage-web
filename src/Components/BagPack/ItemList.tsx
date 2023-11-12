@@ -55,7 +55,7 @@ const CompleteBtn = styled.button`
 const ItemText = styled.div`
   font-size: 25px;
   font-weight: 600;
-  color: #1a1919;
+  color: ${({ theme }) => theme.text};
   margin-top: 10px;
   margin-left: 30px;
 `;
@@ -72,7 +72,9 @@ const InlineBtnBox = styled.button`
   height: 50px;
   margin-right: 10px;
   border: none;
-  background-color: white;
+  background-color: ${({ theme }) => theme.headerBackground};
+  color: ${({ theme }) => theme.text};
+
 `;
 
 const ItemUpdateForm = styled.form`
@@ -85,7 +87,8 @@ const ItemUpdateForm = styled.form`
 const ItemTextUpdateInput = styled.input`
   font-size: 25px;
   font-weight: 600;
-  color: #1a1919;
+  background-color: ${({ theme }) => theme.headerBackground};
+  color: ${({ theme }) => theme.text};
   margin-bottom: 5px;
   border: none;
   outline: none;

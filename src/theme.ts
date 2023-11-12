@@ -7,6 +7,7 @@ export const lightTheme = {
     navBar: '#fcfcfc',
     button: '#ffffff',
     button1:'#1a1919',
+    button2:'#1a1919',
     list: '#f6f8f9',
     list1: '#1a1919',
     headerBackground: '#ffffff',
@@ -25,12 +26,13 @@ export const lightTheme = {
     navBar: '#303030',
     button: '#1a1919',
     button1: '#ffffff',
+    button2:'#3b3b3b',
     list: '#000000',
     list1: '#fcfcfc',
     headerBackground: '#000000',
     Background1: '#121212',
     Background2: '#1E1E1E',
-    Background3: '##252525',
+    Background3: '#252525',
     Background4: '#2E2E2E',
 
   };

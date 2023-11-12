@@ -39,6 +39,7 @@ const Bag_info_container = styled.div<{ status: string }>`
     height: 285px;
     margin-right: 15px;
     cursor: pointer;
+    color: black;
 
     margin-top: ${(props) => (props.status === 'FINISHED' ? '-375px;' : '-350px;')};
 `;

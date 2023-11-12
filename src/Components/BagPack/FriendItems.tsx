@@ -47,7 +47,7 @@ const No_travel_btn = styled.button`
 
 //물품 열린 박스
 const ProhibitedItems_openBox = styled.div`
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     width: 950px;
     border-radius: 15px;
     margin-top: 15px;
@@ -66,7 +66,7 @@ const ItemContainer = styled.div`
 
 //요청물품 열린 박스 헤더
 const FriendItems_openBox_header = styled.div`
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     width: 945px;
     border-radius: 15px;
     display: flex;
@@ -74,7 +74,7 @@ const FriendItems_openBox_header = styled.div`
 `;
 //요청물품 열린 박스 메인
 const FriendItems_openBox = styled.div`
-    background-color: white;
+    background-color: ${({ theme }) => theme.headerBackground};
     width: 945px;
     border-radius: 15px;
     margin-top: 15px;
@@ -84,7 +84,7 @@ const FriendItems_openBox = styled.div`
 const ItemText = styled.div`
     font-size: 25px;
     font-weight: 600;
-    color: #1a1919;
+    color: ${({ theme }) => theme.text};
     margin-top: 10px;
     margin-left: 30px;
     padding: 10px 0px;
@@ -107,7 +107,7 @@ const Friend_ok_btn = styled.button<{ status: boolean }>`
 const Friend_pack_delete_btn = styled.button`
     margin: 5px 0px 5px 10px;
     color: white;
-    background-color: black;
+    background-color: ${({ theme }) => theme.button2};
     font-size: 20px;
     font-weight: 600;
     border-radius: 15px;
@@ -140,6 +140,7 @@ const ItemInputBox = styled.input`
   border: none;
   border-radius: 12px;
   outline: none;
+  background-color: ${({ theme }) => theme.headerBackground};
 `;
 
 const ItemAddBtn_box = styled.span`
@@ -150,7 +151,7 @@ const ItemAddBtn = styled.button`
   font-size: 20px;
   margin: auto auto auto 20px;
   color: #FF541E;
-  background-color: white;
+  background-color: ${({ theme }) => theme.headerBackground};
   border: none;
   font-weight: 600;
 `;
