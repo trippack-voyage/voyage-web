@@ -154,17 +154,28 @@ const ItemAddBtn = styled.button`
   font-weight: 600;
 `;
 
-interface IList {
-    requestId: Number,
-    requestedProduct: string,
-    isOk: boolean,
-    fromUserKakaoNickname: string
-}
-
 interface InputTextProps {
     onChange(e: React.ChangeEvent<HTMLInputElement>): void;
     onSubmit(event: React.FormEvent<HTMLFormElement>): void;
     inputText: string;
+}
+
+interface IRequest {
+  
+    requestId: number;
+    requestedProduct: string;
+    fromUserId: number;
+    
+   
+  // Add other properties as needed
+}
+
+interface IList {
+    requestId: Number,
+    requestedProduct: string,
+    isOk: boolean,
+    fromUserKakaoNickname: string,
+    request: IRequest
 }
 
 function FriendItems() {
@@ -266,7 +277,7 @@ function FriendItems() {
         });
     }, [])*/
 
-    //요청물품 목록
+    //요청물품 목록 가져오기
     const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);       
     useEffect(()=> {
         axios({
@@ -349,7 +360,7 @@ function FriendItems() {
                     {friendItem_list.map(function(item,i){
                         return(    
                             <ItemContainer>
-                                <ItemText>{item.fromUserKakaoNickname}</ItemText>
+                                <ItemText>{item.fromUserKakaoNickname}{item.request.requestedProduct}</ItemText>
                                 {item.isOk? 
                                     (<Friend_ok_btn onClick={() => onClickok(item.requestId)}>수락</Friend_ok_btn>):
                                     (<Friend_ok_btn onClick={() => onClickok(item.requestId)}>요청</Friend_ok_btn>)
