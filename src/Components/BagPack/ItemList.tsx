@@ -196,12 +196,11 @@ export default function ItemList() {
 
   useEffect(() => {
     axios({
-      url: `/pack/list/${bag_id}`,
+      url: `/pack/list/${Number(bag_id)}`,
       method: 'GET',
 
     }).then((response) => {
-      console.log(response.data);
-      setPackList(response.data);
+      setPackList(response.data.packs);
       
     }).catch((error) => {
       console.error('AxiosError:', error);
