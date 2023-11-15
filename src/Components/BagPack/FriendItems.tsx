@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from "styled-components";
 import friend_icon from '../../img/friend-icon.png';
 import { useParams } from 'react-router-dom';
-import CreateTodo from "./Create";
+import { FiTrash2 } from "react-icons/fi";
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
@@ -57,10 +57,10 @@ const ProhibitedItems_openBox = styled.div`
 
 //추가 아이템 박스
 const ItemContainer = styled.div`
-    width: 800px;
+    width: 810px;
     margin: 20px auto;
     display: flex;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
     padding-bottom: 10px;
 `;
 
@@ -105,21 +105,19 @@ const Friend_ok_btn = styled.button<{ status: boolean }>`
 
 //삭제 버튼
 const Friend_pack_delete_btn = styled.button`
-    margin: 5px 0px 5px 10px;
-    color: white;
-    background-color: ${({ theme }) => theme.button2};
+    margin: 3px 0px 5px 530px;
     font-size: 20px;
     font-weight: 600;
-    border-radius: 15px;
     width: 80px;
     height: 45px;
     border: none;
+
 `;
 const Friend_haeder_text = styled.div`
     font-size: 19px;
     color: gray;
     margin-bottom: 30px;
-    margin-left: 100px;
+    margin-left: 70px;
 `;
 
 const ItemCreateContainer = styled.div`
@@ -160,24 +158,23 @@ const ItemAddBtn = styled.button`
 const FriendItem_info = styled.div`
 `;
 
+const FriendItem_info_box1 = styled.div`
+    display: flex;
+`;
+
 //요청자 이름
 const Friend_name = styled.div`
-    font-size: 15px;
+    font-size: 19px;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-left: 25px;
 `;
-interface InputTextProps {
-    onChange(e: React.ChangeEvent<HTMLInputElement>): void;
-    onSubmit(event: React.FormEvent<HTMLFormElement>): void;
-    inputText: string;
-}
 
 interface IRequest {
   
     requestId: number;
     requestedProduct: string;
     fromUserId: number;
-    
-   
-  // Add other properties as needed
 }
 
 interface IList {
@@ -199,7 +196,7 @@ function FriendItems() {
             setIsOpen_pItem(false);
     }
     
-    //요청 수락(구현 완료)
+    //요청 수락
     const bag_id = useParams().bagId;
     function onClickok(requestedId: Number){
         axios({
@@ -217,9 +214,10 @@ function FriendItems() {
 
     //짐 요청 삭제(구현 완료)
     function onClickdelete(requestedId: Number){
+        console.log(requestedId);
         axios({
             url: `/request/deleteRequest/`,
-            method: 'POST',
+            method: 'DELETE',
             params:{
                 requestId: Number(requestedId),
             },
@@ -272,34 +270,21 @@ function FriendItems() {
 
     },[])
 
-    //사용자 유저코드 조회
-    /*const [userCode, setUserCode] = useState("");
-    useEffect(() => {
-        axios({
-            url: `kakao/find-usercode/${"이미지"}`,
-            method: 'GET'
-
-        }).then((response) => {
-            setUserCode(response.data);
-            console.log(response.data);
-        }).catch((error) => {
-            console.error('AxiosError:', error);
-        });
-    }, [])*/
-
     //요청물품 목록 가져오기(구현 완료)
-    const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);       
+    const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);  
+    const [friend_code, Setfriend_code] = useState(0);
     useEffect(()=> {
         axios({
             url: '/request/getRequestsByBagId',
             method: 'GET',
             params:{
-            bagId: `${Number(bag_id)}`
+                bagId: `${Number(bag_id)}`
             }
     
         }).then((response) => {
             console.log(response.data);
             SetfriendItem_list(response.data);
+            Setfriend_code(response.data)
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
@@ -327,9 +312,11 @@ function FriendItems() {
             url: `/request/create/`,
             method: 'POST',
             params:{
+                bagId: bag_id,
                 fromUserId: `${Number(localStorage.getItem("userCode"))}`,
-                toFriendId: `${Number(requestCode)}`,
+                idOk: false,
                 requestedProduct: FriendPack,
+                toFriendId: `${Number(requestCode)}`
             },
         }).then((response) => {
             console.log(response);
@@ -354,7 +341,7 @@ function FriendItems() {
                         <ItemInputBox
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setFriendPack(e.target.value);}}
                             type="text"
-                            placeholder="물품을 추가해주세요."
+                            placeholder="친구에게 요청할 물품을 추가해주세요."
                         />
                         <ItemAddBtn_box>
                             <ItemAddBtn onClick={OnClick_Item}>추가</ItemAddBtn>
@@ -366,14 +353,20 @@ function FriendItems() {
                         return(    
                             <ItemContainer>
                                 <FriendItem_info>
-                                    <Friend_name>{item.fromUserKakaoNickname}</Friend_name>
-                                    <ItemText>{item.request.requestedProduct}</ItemText>
+                                    <FriendItem_info_box1>
+                                        <Friend_name>📢 요청차 | {item.fromUserKakaoNickname}</Friend_name>
+                                        <Friend_pack_delete_btn onClick={() => onClickdelete(item.request.requestId)}>
+                                            <FiTrash2 size="25" color="gray"/>
+                                        </Friend_pack_delete_btn>
+                                    </FriendItem_info_box1>
+                                    <FriendItem_info_box1>
+                                        <ItemText>{item.request.requestedProduct}</ItemText>
+                                        {item.isOk? 
+                                            (<Friend_ok_btn  status={item.isOk} onClick={() => onClickok(item.requestId)}>수락</Friend_ok_btn>):
+                                            (<Friend_ok_btn status={item.isOk} onClick={() => onClickok(item.requestId)}>수락완료</Friend_ok_btn>)
+                                        }   
+                                    </FriendItem_info_box1>
                                 </FriendItem_info>
-                                {item.isOk? 
-                                    (<Friend_ok_btn  status={item.isOk} onClick={() => onClickok(item.requestId)}>수락</Friend_ok_btn>):
-                                    (<Friend_ok_btn status={item.isOk} onClick={() => onClickok(item.requestId)}>수락완료</Friend_ok_btn>)
-                                }
-                                <Friend_pack_delete_btn onClick={() => onClickdelete(item.requestId)}>삭제</Friend_pack_delete_btn>
                             </ItemContainer>
                         )
                     })}
