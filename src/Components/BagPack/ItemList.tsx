@@ -140,8 +140,6 @@ export default function ItemList() {
     axios.delete(`/pack/${packid}`, {
     })
       .then(function (response) {
-        console.log(response);
-
         setPackList((prevPackList) => prevPackList.filter(item => item.packId !== packid));
       })
       .catch(function (error) {
@@ -162,8 +160,6 @@ export default function ItemList() {
         completed: false
       },
     }).then((response) => {
-      console.log(response.data);
-
       setPackList((prevPackList) =>
         prevPackList.map(item => {
           if (item.packId === packid) {
@@ -181,10 +177,8 @@ export default function ItemList() {
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-    //setIsUpdating(false);
   };
 
-  
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const handleFormSubmit = () => {
     setIsUpdating(false);
@@ -213,8 +207,6 @@ export default function ItemList() {
   const [isCompleted, setIsCompleted] = useState(false);
   const handleComplete = (pack_id:Number, pack_name:String) => {
 
-    console.log(pack_id);
-
     if (isCompleted === false){
       
       axios({
@@ -227,13 +219,14 @@ export default function ItemList() {
           packName: String(pack_name)
         },
       }).then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
   
       }).catch((error) => {
         console.error('AxiosError:', error);
       });
       setIsCompleted(true);
     }
+
     else{
       axios({
         url: `/pack/${Number(pack_id)}`,
@@ -245,7 +238,7 @@ export default function ItemList() {
           packName: String(pack_name)
         },
       }).then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
   
       }).catch((error) => {
         console.error('AxiosError:', error);
