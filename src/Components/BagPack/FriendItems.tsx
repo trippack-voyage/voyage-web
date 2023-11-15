@@ -230,6 +230,7 @@ function FriendItems() {
 
     //가방 만든 사람 이름 조회(구현 완료)
     const [user_name, setUser_name] = useState("");
+    const [user_kakaoId, setUser_kakaoId] = useState("");
     useEffect(()=> {
         axios({
             url: `/bag/${Number(bag_id)}`,
@@ -246,6 +247,7 @@ function FriendItems() {
                 for(let i = 0; i < response.data.length; i++){
                     if(response.data[i].kakaoId === bagUser){
                         setUser_name(response.data[i].kakaoNickname);
+                        setUser_kakaoId(response.data[i].kakaoId);
                     }
                 }
 
@@ -294,22 +296,28 @@ function FriendItems() {
     //짐 요청 보내기
     const [FriendPack, setFriendPack] = useState("");
     function OnClick_Item() { 
-        axios({
-            url: `/request/addReqeset/`,
-            method: 'POST',
-            data:{
-                bagId: Number(bag_id),
-                fromUserId: `${Number(localStorage.getItem("userCode"))}`,
-                idOk: false,
-                requestedProduct: FriendPack,
-                toFriendId: `${Number(requestCode)}`
-            },
-        }).then((response) => {
-            console.log(response);
-            window.location.replace(`/bagpack/${bag_id}`);
-        }).catch((error) => {
-            console.error('AxiosError:', error);
-        });
+
+        if(Number(localStorage.getItem("kakaoId")) === Number(user_kakaoId)){
+            alert("자신에게는 요청이 불가능해요!");
+        }
+        else{
+            axios({
+                url: `/request/addReqeset/`,
+                method: 'POST',
+                data:{
+                    bagId: Number(bag_id),
+                    fromUserId: `${Number(localStorage.getItem("userCode"))}`,
+                    idOk: false,
+                    requestedProduct: FriendPack,
+                    toFriendId: `${Number(requestCode)}`
+                },
+            }).then((response) => {
+                console.log(response);
+                window.location.replace(`/bagpack/${bag_id}`);
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+        }
     }
 
     return (
