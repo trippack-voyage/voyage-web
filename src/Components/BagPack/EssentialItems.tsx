@@ -113,11 +113,19 @@ const No_travel_close_btn = styled.div`
     text-align: center;
 `;
 
+interface PRequest {
+    packId: number;
+    packName: string;
+    completed: boolean;
+    isRequired: boolean;
+}
+
 export interface PList {
     packId: number;
     packName: string;
     completed: boolean;
     isRequired: boolean;
+    packs: PRequest;
   }
 
 function EssentialItems() {
@@ -145,7 +153,7 @@ function EssentialItems() {
             method: 'GET',
     
             }).then((response) => {
-            setPackEssList(response.data);
+            setPackEssList(response.data.packs);
     
             }).catch((error) => {
             console.error('AxiosError:', error);
@@ -162,8 +170,8 @@ function EssentialItems() {
             //필수물품만 추려서 체크 판별
             for(let i = 0; i < packEssList.length; i++){
                 for(let j = 0; j < essenitem_list.length; j++){
-                    if(packEssList[i].packName === `${essenitem_list[j]} + ${Number(bag_id)}`){
-                        checkItems[j] = true;            
+                    if(`${packEssList[i].packName}` === `${essenitem_list[j]} + ${Number(bag_id)}`){
+                        checkItems[j] = true;    
                     }
                 }
             }

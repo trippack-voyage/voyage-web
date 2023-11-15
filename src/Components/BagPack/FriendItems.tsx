@@ -228,9 +228,8 @@ function FriendItems() {
         });
     }
 
-    //가방 만든 사람 카카오 정보 조회
+    //가방 만든 사람 이름 조회(구현 완료)
     const [user_name, setUser_name] = useState("");
-    const [userCode, setUserCode] = useState("");
     useEffect(()=> {
         axios({
             url: `/bag/${Number(bag_id)}`,
@@ -250,17 +249,6 @@ function FriendItems() {
                     }
                 }
 
-                axios({
-                    url: `kakao/find-usercode/${user_name}`,
-                    method: 'GET'
-        
-                }).then((response) => {
-                    setUserCode(response.data);
-                    console.log(response.data);
-                }).catch((error) => {
-                    console.error('AxiosError:', error);
-                });
-
             }).catch((error) => {
                 console.error('AxiosError:', error);
             });
@@ -272,7 +260,6 @@ function FriendItems() {
 
     //요청물품 목록 가져오기(구현 완료)
     const [friendItem_list, SetfriendItem_list] = useState<IList[]>([],);  
-    const [friend_code, Setfriend_code] = useState(0);
     useEffect(()=> {
         axios({
             url: '/request/getRequestsByBagId',
@@ -284,12 +271,12 @@ function FriendItems() {
         }).then((response) => {
             console.log(response.data);
             SetfriendItem_list(response.data);
-            Setfriend_code(response.data)
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
     },[]) 
 
+    //가방 주인 user_code가져오기(구현 완료)
     const [requestCode, setRequestCode] = useState(0);
     useEffect(()=> {
         axios({
@@ -297,7 +284,6 @@ function FriendItems() {
             method: 'GET'
     
         }).then((response) => {            
-            //console.log(response.data);
             setRequestCode(response.data);
         }).catch((error) => {
             console.error('AxiosError:', error);
@@ -309,10 +295,10 @@ function FriendItems() {
     const [FriendPack, setFriendPack] = useState("");
     function OnClick_Item() { 
         axios({
-            url: `/request/create/`,
+            url: `/request/addReqeset/`,
             method: 'POST',
-            params:{
-                bagId: bag_id,
+            data:{
+                bagId: Number(bag_id),
                 fromUserId: `${Number(localStorage.getItem("userCode"))}`,
                 idOk: false,
                 requestedProduct: FriendPack,
@@ -320,7 +306,7 @@ function FriendItems() {
             },
         }).then((response) => {
             console.log(response);
-            window.location.replace("/bag-list");
+            window.location.replace(`/bagpack/${bag_id}`);
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
