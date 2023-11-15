@@ -56,9 +56,9 @@ export default function Create({
     completed: false,
   });
 
+  //추가물품 추가(구현 완료)
   const bag_id = useParams().bagId;
   function OnClick_Item() {
-    // JSON 데이터 생성
     const data = {
       bagId: `${Number(bag_id)}`,
       isRequired: formData.isRequired,
@@ -71,6 +71,7 @@ export default function Create({
       .post('/pack', data)
       .then((response) => {
         console.log('서버 응답:', response.data);
+        window.location.replace(`/bagpack/${bag_id}`);
       })
       .catch((error) => {
         console.error('Axios 에러:', error);
