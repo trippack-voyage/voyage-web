@@ -73,27 +73,16 @@ const Mypage_btnBox = styled.div`
   display: flex;
 
   @media screen and (max-width: 500px) {
-    margin: 5px 10px auto -80px; 
+    margin: 5px 10px auto -35px; 
   }
 `
-//마이페이지 버튼
-const Mypage_btn = styled.button`
-  background-color: ${({ theme }) => theme.headerBackground};
-  border: none;
-  font-size: 25px;
-  color: gray;
 
-  @media screen and (max-width: 500px) {
-    font-size: 20px;
-  }
-`
-//마이페이지 화살표
+//마이페이지 아이콘
 const Mypage_icon_box = styled.div`
   margin: 10px 0px;
 
   @media screen and (max-width: 500px){
-    margin-left: -15px;
-    margin-top: 12px;
+    margin-top: 7px;
   }
 `
 

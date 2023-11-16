@@ -28,7 +28,8 @@ const Logo_text2 = styled.div`
   font-family: 'TAEBAEKfont';
 
   @media screen and (max-width: 500px) {
-    font-size: 20px;
+    margin-top: 90px;
+    font-size: 18px;
   }
 `;
 
@@ -41,7 +42,7 @@ const Logo_text3 = styled.div`
   font-family: 'TAEBAEKfont';
 
   @media screen and (max-width: 500px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -55,6 +56,7 @@ const Logo_text4 = styled.div`
 
   @media screen and (max-width: 500px) {
     font-size: 17px;
+    margin-top: 20px;
   }
 `;
 
@@ -68,6 +70,12 @@ const Logo_img = styled.img`
   margin: 0px auto;
   width: 350px;
   height: 350px;
+
+  @media screen and (max-width: 500px) {
+    margin-top: 20px;
+    width: 300px;
+    height: 300px;
+  }
 `;
 
 //voyage
@@ -79,7 +87,8 @@ const Logo_text5 = styled.div`
   font-family: 'TAEBAEKfont';
 
   @media screen and (max-width: 500px) {
-    font-size: 40px;
+    margin-top: 30px;
+    font-size: 30px;
   }
 `;
 
@@ -87,6 +96,10 @@ const Logo_text5 = styled.div`
 const StartBtn_box = styled.div`
   text-align: center;
   margin-top: 30px;
+
+  @media screen and (max-width: 500px) {
+    margin-top: 50px;
+  }
 `;
 
 //로그인 버튼 이미지
