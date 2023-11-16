@@ -14,14 +14,11 @@ import axios from 'axios';
 import {BsTrash3} from 'react-icons/bs';
 import {RxPencil2} from 'react-icons/rx';
 import {PiAirplaneTilt} from 'react-icons/pi';
+import {IoArrowBack} from "react-icons/io5";
 //컴포넌트
 import Bag_update_modal from '../Components/Mainpage/Bag_update_modal';
 import Bag_delete_modal from '../Components/Mainpage/Bag_delete_modal';
 import Bag_state_modal from '../Components/Mainpage/Bag_state_modal';
-
-import {
-    IoArrowBack
-  } from "react-icons/io5";
 
 export const GlobalStyle = createGlobalStyle`
     #root,

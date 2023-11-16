@@ -12,6 +12,10 @@ const Side_box = styled.div`
     background-color: ${({ theme }) => theme.headerBackground};
     margin: 17px 0px 17px 20px;
     border: 1px solid #c1c1c1;
+
+    @media screen and (max-width: 500px){
+        display: none;
+    }
 `;
 
 //친구 박스

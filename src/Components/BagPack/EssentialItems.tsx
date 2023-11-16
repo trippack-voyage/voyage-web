@@ -143,7 +143,7 @@ function EssentialItems() {
     // 필수 용품의 체크 상태 배열
     const [checkItems, setCheckItems] = useState(new Array(essenitem_list.length).fill(false));
 
-    //물품 가져오기
+    //백엔드에서 저장된 필수 물품 가져오기(구현 완료)
     const [packEssList, setPackEssList] = useState<PList[]>([]);
 
     useEffect(() => {
@@ -164,6 +164,7 @@ function EssentialItems() {
     // 박스 열림 상태
     const [isOpen_pItem, setIsOpen_pItem] = useState(false);
 
+    //체크된 필수물품 보여주기
     function onClick_prohibitedItem() {
         if (isOpen_pItem === false){
             setIsOpen_pItem(true);
@@ -200,6 +201,7 @@ function EssentialItems() {
             .post('/pack', data)
             .then((response) => {
                 console.log('서버 응답:', response.data);
+                window.location.replace(`/bagpack/${bag_id}`);
             })
             .catch((error) => {
                 console.error('Axios 에러:', error);
@@ -223,6 +225,7 @@ function EssentialItems() {
             })
             .then(function (response) {
               console.log(response);
+              window.location.replace(`/bagpack/${bag_id}`);
             })
             .catch(function (error) {
               console.log(error);
