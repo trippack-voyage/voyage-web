@@ -63,7 +63,7 @@ const Main_title = styled.div`
   }
 `;
 
-//완료 가방만 보기 버튼 컨테이너
+//완료 가방만 보기 버튼(하얀색)
 const Bag_select_container1 = styled.div`
   display: flex;
   border: 2px solid black;
@@ -78,7 +78,13 @@ const Bag_select_container1 = styled.div`
     background: #ea5028;
     color: white;
   }
+
+  @media screen and (max-width:500px){
+    width: 190px;
+    margin-left: -15px;
+  }
 `
+//완료 가방만 보기 버튼(주황색)
 const Complete_bag_btn = styled.div`
   display: flex;
   border: 2px solid black;
@@ -95,7 +101,12 @@ const Complete_bag_btn = styled.div`
     background: white;
     color: black;
   }
+
+  @media screen and (max-width:500px){
+    width: 190px;
+  }
 `;
+
 //등록순/마감순 가방 보기 버튼 컨테이너
 const Bag_select_container2 = styled.div`
   display: flex;
@@ -104,6 +115,11 @@ const Bag_select_container2 = styled.div`
   padding: 10px 0px;
   width: 150px;
   box-shadow: 3px 3px lightgray;
+  
+  @media screen and (max-width:500px){
+    width: 100px;
+    padding: 10px 7px;
+  }
 `
 
 //완료 가방만 보기 버튼 문구
@@ -114,13 +130,11 @@ const Bag_select_text = styled.div`
   font-weight: bold;
 
   @media screen and (max-width: 500px){
-    font-size: 19px;
-    width: 200px;
-    margin: 5px -20px auto auto;
+    font-size: 15px;
   }
 `;
 
-//완료 가방만 보기 버튼 문구
+//등록순/마감순 보기 버튼 문구
 const Bag_select_text2 = styled.div`
   font-family: 'S-CoreDream-3Light';
   font-size: 25px;
@@ -129,9 +143,8 @@ const Bag_select_text2 = styled.div`
   cursor: pointer;
 
   @media screen and (max-width: 500px){
-    font-size: 19px;
-    width: 200px;
-    margin: 5px -20px auto auto;
+    font-size: 15px;
+    margin: auto 5px;
   }
 `;
 
@@ -206,42 +219,10 @@ const Weather_btn = styled.button`
   color: black;
 `;
 
-//가방 없을 때 문구
-const Bag_none = styled.div`
-  margin: 100px auto;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-`;
-
-//가방 없을 때 문구
-const Bag_none1 = styled.div`
-  margin: 100px auto 300px auto;
-  width: 1000%;
-`;
-
 //가방 정렬
 const SortingOptions = styled.div`
   display: flex;
   align-items: center;
-  text-align: center;
-`;
-
-const SortingButton = styled.button`
-  font-size: 25px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.button1};
-  display: flex;
-  font-family: 'S-CoreDream-3Light';
-  margin-left: 30px;
-`;
-
-const Bag_none_text = styled.div`
-  font-size: 20px;
-  margin-top: 20px;
-  font-family: S-CoreDream-3Light;
   text-align: center;
 `;
 
@@ -336,9 +317,6 @@ function MainBagPage() {
     // isOn의 상태를 변경하는 메소드를 구현
     setisOn(!isOn)
   };
-
-  const [bag_list_cnt1, SetBag_list_cnt1] = useState(false);
-  const [bag_list_cnt2, SetBag_list_cnt2] = useState(false);
 
   return (
     <div>

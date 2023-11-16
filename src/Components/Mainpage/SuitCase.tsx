@@ -2,8 +2,7 @@ import React from 'react';
 import styled, {createGlobalStyle} from 'styled-components';
 
 //아이콘
-import {IoLocationOutline , IoCalendarOutline} from 'react-icons/io5'; 
-import {BsBookmark} from 'react-icons/bs';
+import {IoLocationOutline} from 'react-icons/io5'; 
 import {HiOutlineDotsHorizontal} from 'react-icons/hi';
 import {AiOutlineCheckSquare} from 'react-icons/ai';
 
