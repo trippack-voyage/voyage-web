@@ -191,6 +191,14 @@ const Bag_add_btn = styled.button`
   flex-direction: row;
   align-items: center;
   color: black;
+
+  @media screen and (max-width:500px){
+    width: 100px;
+    height: 40px;
+    font-size: 0.7rem;
+    bottom: 4.5rem;
+    right: 1rem;
+  }
 `;
 
 //날씨 버튼 박스
@@ -217,6 +225,14 @@ const Weather_btn = styled.button`
   flex-direction: row;
   align-items: center;
   color: black;
+
+  @media screen and (max-width:500px){
+    width: 100px;
+    height: 40px;
+    font-size: 0.7rem;
+    bottom: 8rem;
+    right: 1rem;
+  }
 `;
 
 //가방 정렬
@@ -250,6 +266,11 @@ const Emoji = styled.figure`
   justify-content: center;
   align-items: center;
 
+  @media screen and (max-width:500px){
+    font-size: 1.1rem;
+    width: 25px;
+    margin-right: 4px;
+  }
 `;
 
 const List_option = styled.div`

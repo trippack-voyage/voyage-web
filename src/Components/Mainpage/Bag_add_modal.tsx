@@ -23,7 +23,7 @@ export const ModalContainer = styled.div`
   margin-top: -1000px;
 
   @media screen and (max-width: 500px){
-    margin-top: -1600px;
+    margin-top: -1650px;
   }
 `;
 

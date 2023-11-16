@@ -33,6 +33,13 @@ const ToggleButton = styled('button')<ToggleProps>`
       ${({ theme }) => (theme === lightTheme ? '0.9' : '1.13')}
     );
   }
+
+  @media screen and (max-width:500px){
+    width: 100px;
+    height: 40px;
+    bottom: 1rem;
+    right: 1rem;
+  }
 `;
 
 const Emoji = styled.figure`
@@ -43,10 +50,20 @@ const Emoji = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width:500px){
+    font-size: 1.1rem;
+    width: 25px;
+    margin-right: 4px;
+  }
 `;
 
 const ModeContent = styled.p`
   font-size: 0.8rem;
+
+  @media screen and (max-width:500px){
+    font-size: 0.7rem;
+  }
 `;
 
 export default function DarkModeToggle({
