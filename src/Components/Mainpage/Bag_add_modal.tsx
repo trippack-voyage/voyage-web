@@ -17,10 +17,14 @@ export const GlobalStyle = createGlobalStyle`
 
 export const ModalContainer = styled.div`
   display: flex;
-  flex-flow: row wrep;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  margin-top: -540px;
+  margin-top: -1000px;
+
+  @media screen and (max-width: 500px){
+    margin-top: -1600px;
+  }
 `;
 
 export const ModalView = styled.div.attrs(props => ({
@@ -30,13 +34,19 @@ export const ModalView = styled.div.attrs(props => ({
   text-decoration: none;
   padding: 40px 20px;
   background-color: ${({ theme }) => theme.navBar};
-  border-radius: 30px;
-  width: 500px;
-  height: 580px;
+  border-radius: 20px;
+  width: 420px;
+  height: 520px;
   box-shadow: gray 0px 0px 15px;
   z-index: 5;
   margin-top: 10px;
-  margin-bottom: 43px;
+  margin-bottom: 500px;
+  border: 3px solid black;
+
+  @media screen and (max-width: 500px){
+    width: 310px;
+    height: 500px;
+  }
 `;
 
 //모달 헤더
@@ -47,6 +57,11 @@ const Bag_add_modal_header = styled.div`
 //뒤로가기 화살표
 const Bag_add_modal_backarrow = styled.span`
   margin: auto auto auto 20px;
+
+  @media screen and (max-width: 500px){
+    margin: auto auto auto 6px;
+    z-index: 10;
+  }
 `;
 //모달 헤더 제목(가방추가하기)
 const Bag_add_modal_header_text = styled.span`
@@ -58,14 +73,24 @@ const Bag_add_modal_header_text = styled.span`
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: 'TAEBAEKfont';
+
+  @media screen and (max-width: 500px){
+    font-size: 22px;
+    margin-left: 4px;
+    top: 30%;
+  }
 `;
 //모달 메인
 const Bag_add_modal_main = styled.div`
-  margin-top: 50px;
+  margin-top: 30px;
+
+  @media screen and (max-width: 500px){
+    margin-top: 25px;
+  }
 `;
 
 const Bag_add_modal_input_box = styled.div`
-  margin-top: 15px;
+  margin-top: 10px;
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
@@ -76,15 +101,20 @@ const Bag_add_modal_input_box = styled.div`
 const Bag_add_modal_input = styled.input`
   border: 2px solid #1a1919;
   border-radius: 8px;
-  width: 400px;
-  height: 60px;
+  width: 350px;
+  height: 55px;
   padding: 5px 20px;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 700;
   background-color: ${({ theme }) => theme.headerBackground};
 
   &::placeholder{
     color: #c1c1c1;
+  }
+
+  @media screen and (max-width: 500px){
+    width: 265px;
+    font-size: 16px;
   }
 `;
 
@@ -93,19 +123,45 @@ const Bag_add_modal_input_text = styled.div`
   width: 110px;
   font-size: 19px;
   font-weight: 700;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-right: auto;
   text-align: left; 
 
   &::placeholder{
     color: #c1c1c1;
   }
+
+  @media screen and (max-width: 500px){
+    margin-left: 10px;
+  }
 `;
+
 //년도 입력
 const Bag_add_modal_input_year = styled.input`
   border: 2px solid #1a1919;
   border-radius: 8px;
-  width: 120px;
+  width: 100px;
+  height: 50px;
+  padding: 5px 20px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  background-color: ${({ theme }) => theme.headerBackground};
+
+  &::placeholder{
+    color: #c1c1c1;
+  }
+
+  @media screen and (max-width: 500px){
+    font-size: 15px;
+    width: 85px;
+  }
+`;
+//달, 일 입력
+const Bag_add_modal_input_month_day = styled.input`
+  border: 2px solid #1a1919;
+  border-radius: 8px;
+  width: 90px;
   height: 50px;
   padding: 5px 20px;
   font-size: 19px;
@@ -116,21 +172,10 @@ const Bag_add_modal_input_year = styled.input`
   &::placeholder{
     color: #c1c1c1;
   }
-`;
-//달, 일 입력
-const Bag_add_modal_input_month_day = styled.input`
-  border: 2px solid #1a1919;
-  border-radius: 8px;
-  width: 100px;
-  height: 50px;
-  padding: 5px 20px;
-  font-size: 19px;
-  font-weight: 700;
-  text-align: center;
-  background-color: ${({ theme }) => theme.headerBackground};
 
-  &::placeholder{
-    color: #c1c1c1;
+  @media screen and (max-width: 500px){
+    font-size: 15px;
+    width: 70px;
   }
 `;
 
@@ -148,14 +193,20 @@ const Bag_add_modal_btn = styled.button`
   border-radius: 10px;
   font-size: 20px;
   font-weight: 700;
-  margin-top: 10px;
-  width: 400px;
-  height: 60px;
+  width: 360px;
+  height: 55px;
   color: white;
   font-family: 'TAEBAEKfont';
+  margin-top: 10px;
 
   &:hover{
     color: #ea5028;
+  }
+
+  @media screen and (max-width: 500px){
+    width: 270px;
+    font-size: 17px;
+    margin-top: 0px;
   }
 `;
 

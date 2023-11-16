@@ -143,7 +143,7 @@ function EssentialItems() {
     // 필수 용품의 체크 상태 배열
     const [checkItems, setCheckItems] = useState(new Array(essenitem_list.length).fill(false));
 
-    //백엔드에서 저장된 필수 물품 가져오기(구현 완료)
+    //물품 가져오기
     const [packEssList, setPackEssList] = useState<PList[]>([]);
 
     useEffect(() => {
@@ -164,7 +164,6 @@ function EssentialItems() {
     // 박스 열림 상태
     const [isOpen_pItem, setIsOpen_pItem] = useState(false);
 
-    //체크된 필수물품 보여주기
     function onClick_prohibitedItem() {
         if (isOpen_pItem === false){
             setIsOpen_pItem(true);
