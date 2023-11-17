@@ -273,7 +273,7 @@ export default function ItemList() {
                 </ItemContainer>)
                 : (<ItemContainer>
                   <CompleteBtn
-                    className={isCompleted ? " checked" : ""}
+                    className={item.completed ? " checked" : ""}
                     onClick={() => {handleComplete(item.packId, item.packName)}}>
                   </CompleteBtn>
                   <ItemUpdateForm onSubmit={handleFormSubmit}>
