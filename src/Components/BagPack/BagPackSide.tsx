@@ -103,7 +103,6 @@ function BackpackSide() {
     const navigate = useNavigate();
     const bagCode = useParams().bagId;
     const [bag_id, setBag_id] = useRecoilState(bagId);
-    console.log(bagCode);
     
     function onClick_main(){
         navigate("/bagpack/" + `${bag_id}`);

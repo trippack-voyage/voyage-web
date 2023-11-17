@@ -195,41 +195,34 @@ export default function ItemList() {
 
     }).then((response) => {
       setPackList(response.data);
-      console.log(response.data);
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-    console.log(packList);
   }, [])
 
 
+  const [isCompleted, setIsCompleted] = useState(true);
   //체크 상태 변경(구현 완료)
-  const [isCompleted, setIsCompleted] = useState(false);
-  const handleComplete = (pack_id:Number, pack_name:String) => {
-    console.log(isCompleted);
-    if (isCompleted === false){
-      setIsCompleted(true);
-    }
+  const handleComplete = (pack_id:Number, pack_name:String, completed:boolean, iscompleted:boolean) => {
 
-    else{
-      setIsCompleted(false);
-    }
-/*
+    console.log(completed);
+    console.log(iscompleted);
+
     axios({
       url: `/pack/${Number(pack_id)}`,
       method: 'PUT',
       data: {
         bagName: Number(bag_id),
-        completed: isCompleted,
+        completed: completed,
         isRequired: false,
         packName: String(pack_name)
       },
     }).then((response) => {
-      //console.log(response.data);
+      console.log(response.data);
 
     }).catch((error) => {
       console.error('AxiosError:', error);
-    });*/
+    });
   };
 
   return (
@@ -253,7 +246,7 @@ export default function ItemList() {
                       setCompletionStates({
                         ...completionStates,
                         [item.packId]: !completionStates[item.packId],
-                      }); handleComplete(item.packId, item.packName)
+                      }); handleComplete(item.packId, item.packName, item.completed, !completionStates[item.packId])
                     }}
                   ></CompleteBtn>
                   <ItemText
@@ -274,7 +267,7 @@ export default function ItemList() {
                 : (<ItemContainer>
                   <CompleteBtn
                     className={item.completed ? " checked" : ""}
-                    onClick={() => {handleComplete(item.packId, item.packName)}}>
+                    onClick={() => {handleComplete(item.packId, item.packName, item.completed, !completionStates[item.packId])}}>
                   </CompleteBtn>
                   <ItemUpdateForm onSubmit={handleFormSubmit}>
                     <ItemTextUpdateInput
