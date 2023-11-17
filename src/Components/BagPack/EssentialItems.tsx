@@ -153,7 +153,8 @@ function EssentialItems() {
             method: 'GET',
     
             }).then((response) => {
-            setPackEssList(response.data.packs);
+            setPackEssList(response.data);
+            console.log(response.data);
     
             }).catch((error) => {
             console.error('AxiosError:', error);
@@ -169,12 +170,15 @@ function EssentialItems() {
         if (isOpen_pItem === false){
             setIsOpen_pItem(true);
             //필수물품만 추려서 체크 판별
-            for(let i = 0; i < packEssList.length; i++){
-                for(let j = 0; j < essenitem_list.length; j++){
-                    if(`${packEssList[i].packName}` === `${essenitem_list[j]} + ${Number(bag_id)}`){
+
+            if (packEssList) { // packEssList가 정의되어 있을 때만 실행
+                for(let i = 0; i < packEssList.length; i++){
+                    for(let j = 0; j < essenitem_list.length; j++){
+                        if(`${packEssList[i].packName}` === `${essenitem_list[j]} + ${Number(bag_id)}`){
                         checkItems[j] = true;    
+                        }
                     }
-                }
+             }
             }
         }
         else
@@ -201,7 +205,7 @@ function EssentialItems() {
             .post('/pack', data)
             .then((response) => {
                 console.log('서버 응답:', response.data);
-                window.location.replace(`/bagpack/${bag_id}`);
+                //window.location.replace(`/bagpack/${bag_id}`);
             })
             .catch((error) => {
                 console.error('Axios 에러:', error);
@@ -215,17 +219,19 @@ function EssentialItems() {
             
             let packId = 0;
 
+            if (packEssList) { // packEssList가 정의되어 있을 때만 실행
             for(let i = 0; i < packEssList.length; i++){
                 if(`${packEssList[i].packName}` === `${essenitem_list[index]} + ${Number(bag_id)}`){
                     packId = packEssList[i].packId;
                 }
             }
+        }
             console.log(packId);
             axios.delete(`/pack/${Number(packId)}`, {   
             })
             .then(function (response) {
               console.log(response);
-              window.location.replace(`/bagpack/${bag_id}`);
+              //window.location.replace(`/bagpack/${bag_id}`);
             })
             .catch(function (error) {
               console.log(error);

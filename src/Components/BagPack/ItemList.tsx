@@ -194,8 +194,8 @@ export default function ItemList() {
       method: 'GET',
 
     }).then((response) => {
-      setPackList(response.data.packs);
-      
+      setPackList(response.data);
+      console.log(response.data);
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
@@ -206,46 +206,30 @@ export default function ItemList() {
   //체크 상태 변경(구현 완료)
   const [isCompleted, setIsCompleted] = useState(false);
   const handleComplete = (pack_id:Number, pack_name:String) => {
-
+    console.log(isCompleted);
     if (isCompleted === false){
-      
-      axios({
-        url: `/pack/${Number(pack_id)}`,
-        method: 'PUT',
-        data: {
-          bagName: Number(bag_id),
-          completed: true,
-          isRequired: false,
-          packName: String(pack_name)
-        },
-      }).then((response) => {
-        //console.log(response.data);
-  
-      }).catch((error) => {
-        console.error('AxiosError:', error);
-      });
       setIsCompleted(true);
     }
 
     else{
-      axios({
-        url: `/pack/${Number(pack_id)}`,
-        method: 'PUT',
-        data: {
-          bagName: Number(bag_id),
-          completed: false,
-          isRequired: false,
-          packName: String(pack_name)
-        },
-      }).then((response) => {
-        //console.log(response.data);
-  
-      }).catch((error) => {
-        console.error('AxiosError:', error);
-      });
-
       setIsCompleted(false);
     }
+/*
+    axios({
+      url: `/pack/${Number(pack_id)}`,
+      method: 'PUT',
+      data: {
+        bagName: Number(bag_id),
+        completed: isCompleted,
+        isRequired: false,
+        packName: String(pack_name)
+      },
+    }).then((response) => {
+      //console.log(response.data);
+
+    }).catch((error) => {
+      console.error('AxiosError:', error);
+    });*/
   };
 
   return (
@@ -255,7 +239,7 @@ export default function ItemList() {
         onSubmit={textInputHandler}
         inputText={inputText}
       />
-      {packList.map(function (item, i) {
+      {packList && packList.map(function (item, i) {
         return (
           <div>
             {item.isRequired == false ? (

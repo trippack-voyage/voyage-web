@@ -115,6 +115,7 @@ function Backpack() {
             method: 'GET'
     
         }).then((response) => {
+
             let bagUser = response.data.kakaoId;
 
             axios({

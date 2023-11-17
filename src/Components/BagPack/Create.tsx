@@ -70,7 +70,7 @@ export default function Create({
     axios
       .post('/pack', data)
       .then((response) => {
-        console.log('서버 응답:', response.data);
+        console.log('서버 응답:', response);
         window.location.replace(`/bagpack/${bag_id}`);
       })
       .catch((error) => {

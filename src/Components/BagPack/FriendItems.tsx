@@ -295,7 +295,7 @@ function FriendItems() {
 
     //짐 요청 보내기
     const [FriendPack, setFriendPack] = useState("");
-    function OnClick_Item() { 
+    function OnClick_FriendItem() { 
 
         if(Number(localStorage.getItem("kakaoId")) === Number(user_kakaoId)){
             alert("자신에게는 요청이 불가능해요!");
@@ -304,7 +304,7 @@ function FriendItems() {
             axios({
                 url: `/request/addReqeset/`,
                 method: 'POST',
-                data:{
+                params:{
                     bagId: Number(bag_id),
                     fromUserId: `${Number(localStorage.getItem("userCode"))}`,
                     idOk: false,
@@ -338,7 +338,7 @@ function FriendItems() {
                             placeholder="친구에게 요청할 물품을 추가해주세요."
                         />
                         <ItemAddBtn_box>
-                            <ItemAddBtn onClick={OnClick_Item}>추가</ItemAddBtn>
+                            <ItemAddBtn onClick={OnClick_FriendItem}>추가</ItemAddBtn>
                         </ItemAddBtn_box>
                     </ItemInputContainer>
                 </ItemCreateContainer>
@@ -348,7 +348,7 @@ function FriendItems() {
                             <ItemContainer>
                                 <FriendItem_info>
                                     <FriendItem_info_box1>
-                                        <Friend_name>📢 요청차 | {item.fromUserKakaoNickname}</Friend_name>
+                                        <Friend_name>📢 요청자 | {item.fromUserKakaoNickname}</Friend_name>
                                         <Friend_pack_delete_btn onClick={() => onClickdelete(item.request.requestId)}>
                                             <FiTrash2 size="25" color="gray"/>
                                         </Friend_pack_delete_btn>
