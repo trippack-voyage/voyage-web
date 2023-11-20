@@ -205,20 +205,27 @@ export default function ItemList() {
   //체크 상태 변경(구현 완료)
   const handleComplete = (pack_id:Number, pack_name:String, completed:boolean, iscompleted:boolean) => {
 
-    console.log(completed);
-    console.log(iscompleted);
-
     axios({
       url: `/pack/${Number(pack_id)}`,
       method: 'PUT',
       data: {
         bagName: Number(bag_id),
-        completed: completed,
+        completed: !completed,
         isRequired: false,
         packName: String(pack_name)
       },
     }).then((response) => {
       console.log(response.data);
+
+      axios({
+        url: `/pack/list/${Number(bag_id)}`,
+        method: 'GET',
+  
+      }).then((response) => {
+        setPackList(response.data);
+      }).catch((error) => {
+        console.error('AxiosError:', error);
+      });
 
     }).catch((error) => {
       console.error('AxiosError:', error);
@@ -235,12 +242,12 @@ export default function ItemList() {
       {packList && packList.map(function (item, i) {
         return (
           <div>
-            {item.isRequired == false ? (
+            {item.isRequired === false ? (
             <div key={item.packId}>
               { !editingStates[item.packId] ? (  // 수정 모드 상태 확인
                 <ItemContainer>
                   <CompleteBtn
-                    className={completionStates[item.packId] || item.completed? " checked" : ""}
+                    className={item.completed? " checked" : ""}
                     onClick={() => {
                       // Toggle the completion state for this item
                       setCompletionStates({
@@ -250,7 +257,7 @@ export default function ItemList() {
                     }}
                   ></CompleteBtn>
                   <ItemText
-                    style={item.completed || completionStates[item.packId]? { textDecoration: "line-through" } : undefined}>
+                    style={item.completed? { textDecoration: "line-through" } : undefined}>
                     {item.packName}
                   </ItemText>
                   <ButtonContainer>
