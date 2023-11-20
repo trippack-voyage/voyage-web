@@ -154,7 +154,7 @@ function EssentialItems() {
     
             }).then((response) => {
             setPackEssList(response.data);
-            console.log(response.data);
+            //console.log(response.data);
     
             }).catch((error) => {
             console.error('AxiosError:', error);
@@ -175,7 +175,7 @@ function EssentialItems() {
                 for(let i = 0; i < packEssList.length; i++){
                     for(let j = 0; j < essenitem_list.length; j++){
                         if(`${packEssList[i].packName}` === `${essenitem_list[j]} + ${Number(bag_id)}`){
-                        checkItems[j] = true;    
+                            checkItems[j] = true;    
                         }
                     }
              }

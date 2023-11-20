@@ -100,7 +100,7 @@ const Friend_ok_btn = styled.button<{ status: boolean }>`
     height: 45px;
     border: 2px solid black;
 
-    width: ${(props) => (props.status ? '80px;' : '105px;')};
+    width: ${(props) => (props.status ? '105px;':'80px;')};
 `;
 
 //삭제 버튼
@@ -175,6 +175,7 @@ interface IRequest {
     requestId: number;
     requestedProduct: string;
     fromUserId: number;
+    isOk: boolean;
 }
 
 interface IList {
@@ -196,9 +197,10 @@ function FriendItems() {
             setIsOpen_pItem(false);
     }
     
-    //요청 수락
+    //요청 수락(구현완료)
     const bag_id = useParams().bagId;
     function onClickok(requestedId: Number){
+        console.log(requestedId);
         axios({
             url: `/request/acceptRequest/`,
             method: 'POST',
@@ -206,6 +208,7 @@ function FriendItems() {
                 requestId: Number(requestedId),
             },
         }).then((response) => {
+            console.log(response);
             window.location.replace(`/bagpack/${bag_id}`);
         }).catch((error) => {
             console.error('AxiosError:', error);
@@ -355,9 +358,9 @@ function FriendItems() {
                                     </FriendItem_info_box1>
                                     <FriendItem_info_box1>
                                         <ItemText>{item.request.requestedProduct}</ItemText>
-                                        {item.isOk? 
-                                            (<Friend_ok_btn  status={item.isOk} onClick={() => onClickok(item.requestId)}>수락</Friend_ok_btn>):
-                                            (<Friend_ok_btn status={item.isOk} onClick={() => onClickok(item.requestId)}>수락완료</Friend_ok_btn>)
+                                        {item.request.isOk === false? 
+                                            (<Friend_ok_btn status={item.request.isOk} onClick={() => onClickok(item.request.requestId)}>수락</Friend_ok_btn>):
+                                            (<Friend_ok_btn status={item.request.isOk}>수락완료</Friend_ok_btn>)
                                         }   
                                     </FriendItem_info_box1>
                                 </FriendItem_info>

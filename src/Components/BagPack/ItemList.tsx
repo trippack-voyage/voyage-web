@@ -200,8 +200,6 @@ export default function ItemList() {
     });
   }, [])
 
-
-  const [isCompleted, setIsCompleted] = useState(true);
   //체크 상태 변경(구현 완료)
   const handleComplete = (pack_id:Number, pack_name:String, completed:boolean, iscompleted:boolean) => {
 
@@ -215,7 +213,7 @@ export default function ItemList() {
         packName: String(pack_name)
       },
     }).then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
 
       axios({
         url: `/pack/list/${Number(bag_id)}`,
