@@ -220,18 +220,27 @@ function EssentialItems() {
             let packId = 0;
 
             if (packEssList) { // packEssList가 정의되어 있을 때만 실행
-            for(let i = 0; i < packEssList.length; i++){
-                if(`${packEssList[i].packName}` === `${essenitem_list[index]} + ${Number(bag_id)}`){
-                    packId = packEssList[i].packId;
+                for(let i = 0; i < packEssList.length; i++){
+                    if(`${packEssList[i].packName}` === `${essenitem_list[index]} + ${Number(bag_id)}`){
+                        packId = packEssList[i].packId;
+                    }
                 }
             }
-        }
-            console.log(packId);
+            //console.log(packId);
             axios.delete(`/pack/${Number(packId)}`, {   
             })
             .then(function (response) {
-              console.log(response);
-              //window.location.replace(`/bagpack/${bag_id}`);
+                axios({
+                    url: `/pack/list/${bag_id}`,
+                    method: 'GET',
+            
+                    }).then((response) => {
+                    setPackEssList(response.data);
+                    //console.log(response.data);
+            
+                    }).catch((error) => {
+                    console.error('AxiosError:', error);
+                    });
             })
             .catch(function (error) {
               console.log(error);

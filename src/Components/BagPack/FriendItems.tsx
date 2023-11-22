@@ -4,6 +4,8 @@ import styled from "styled-components";
 import friend_icon from '../../img/friend-icon.png';
 import { useParams } from 'react-router-dom';
 import { FiTrash2 } from "react-icons/fi";
+import { useRecoilValue } from 'recoil';
+//import {userId} from '../../recoil/atoms/user_id';
 
 //물품 닫힌 박스
 const EssentialItems_closeBox = styled.div`
@@ -298,16 +300,18 @@ function FriendItems() {
 
     //짐 요청 보내기
     const [FriendPack, setFriendPack] = useState("");
+    //const [fromId, setFromId] = useRecoilValue(user_id);
     function OnClick_FriendItem() { 
 
         if(Number(localStorage.getItem("kakaoId")) === Number(user_kakaoId)){
             alert("자신에게는 요청이 불가능해요!");
         }
         else{
+            console.log();
             axios({
                 url: `/request/addReqeset/`,
                 method: 'POST',
-                params:{
+                data:{
                     bagId: Number(bag_id),
                     fromUserId: `${Number(localStorage.getItem("userCode"))}`,
                     idOk: false,
