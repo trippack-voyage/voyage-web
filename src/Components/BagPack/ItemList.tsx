@@ -149,7 +149,7 @@ export default function ItemList() {
 
   // 값 수정하기(구현 완료)
   const [updatedText, setUpdatedText] = useState<string>();
-  const updateHandler = (packid: number): void => {
+  const updateHandler = (packid: number, completed:boolean): void => {
     axios({
       url: `/pack/${packid}`,
       method: 'PUT',
@@ -157,7 +157,7 @@ export default function ItemList() {
         bagId: Number(bag_id),
         packName: updatedText,
         isRequired: false,
-        completed: false
+        completed: completed
       },
     }).then((response) => {
       setPackList((prevPackList) =>
@@ -172,6 +172,16 @@ export default function ItemList() {
       setEditingStates({
         ...editingStates,
         [packid]: false,
+      });
+
+      axios({
+        url: `/pack/list/${Number(bag_id)}`,
+        method: 'GET',
+  
+      }).then((response) => {
+        setPackList(response.data);
+      }).catch((error) => {
+        console.error('AxiosError:', error);
       });
 
     }).catch((error) => {
@@ -201,7 +211,7 @@ export default function ItemList() {
   }, [])
 
   //체크 상태 변경(구현 완료)
-  const handleComplete = (pack_id:Number, pack_name:String, completed:boolean, iscompleted:boolean) => {
+  const handleComplete = (pack_id:Number, pack_name:String, completed:boolean) => {
 
     axios({
       url: `/pack/${Number(pack_id)}`,
@@ -251,7 +261,7 @@ export default function ItemList() {
                       setCompletionStates({
                         ...completionStates,
                         [item.packId]: !completionStates[item.packId],
-                      }); handleComplete(item.packId, item.packName, item.completed, !completionStates[item.packId])
+                      }); handleComplete(item.packId, item.packName, item.completed)
                     }}
                   ></CompleteBtn>
                   <ItemText
@@ -272,7 +282,7 @@ export default function ItemList() {
                 : (<ItemContainer>
                   <CompleteBtn
                     className={item.completed ? " checked" : ""}
-                    onClick={() => {handleComplete(item.packId, item.packName, item.completed, !completionStates[item.packId])}}>
+                    onClick={() => {handleComplete(item.packId, item.packName, item.completed)}}>
                   </CompleteBtn>
                   <ItemUpdateForm onSubmit={handleFormSubmit}>
                     <ItemTextUpdateInput
@@ -280,7 +290,7 @@ export default function ItemList() {
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setUpdatedText(e.target.value); }}
                     />
                     <ButtonContainer>
-                      <InlineBtnBox type="button" onClick={() => updateHandler(item.packId)}>
+                      <InlineBtnBox type="button" onClick={() => updateHandler(item.packId, item.completed)}>
                         <BsCheckLg size="30" />
                       </InlineBtnBox>
                       <InlineBtnBox onClick={() => {
