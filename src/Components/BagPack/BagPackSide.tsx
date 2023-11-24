@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from "recoil";
 import { user_bag, bagId } from "../../recoil/atoms";
+import KakaoShare from './KakaoShare';
 import axios from 'axios';
 
 const Side_box = styled.div`
@@ -38,7 +39,7 @@ const Friend_inside_box = styled.div`
 `;
 
 const Set_box = styled.div`
-    margin-top: 70px;
+    margin-top: 0px;
     position: relative; /* 컨테이너를 relative로 설정 */
 `;
 
@@ -234,6 +235,7 @@ function BackpackSide() {
                 )}
             </LinkCopyContainer>
             <Set_inside_box onClick={onClick_addBtn}>링크복사</Set_inside_box>
+            <Set_inside_box> <KakaoShare /> </Set_inside_box>    
             <Set_inside_box onClick={onClick_chatgpt}>짐도우미(GPT)</Set_inside_box>
             </Set_box>
         </Side_box>
