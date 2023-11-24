@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Logo from '../../img/logo_info.png';
 
 declare global {
   interface Window {
@@ -7,8 +6,11 @@ declare global {
   }
 }
 
-const KakaoShare = () => {
-  const [initialized, setInitialized] = useState(false);
+interface KakaoShareProps {
+  bagId: number;
+}
+
+const KakaoShare: React.FC<KakaoShareProps> = ({ bagId }) => {  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -68,8 +70,8 @@ const KakaoShare = () => {
           {
             title: '초대가방 가기',
             link: {
-              mobileWebUrl: 'http://localhost:3000',
-              webUrl: 'http://localhost:3000',
+              mobileWebUrl: `http://localhost:3000/bagpack/${bagId}`,
+              webUrl: `http://localhost:3000/bagpack/${bagId}`,
             },
           },
           {

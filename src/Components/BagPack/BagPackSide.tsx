@@ -235,7 +235,7 @@ function BackpackSide() {
                 )}
             </LinkCopyContainer>
             <Set_inside_box onClick={onClick_addBtn}>링크복사</Set_inside_box>
-            <Set_inside_box> <KakaoShare /> </Set_inside_box>    
+            <Set_inside_box> <KakaoShare bagId={Number(bag_id)} /> </Set_inside_box>    
             <Set_inside_box onClick={onClick_chatgpt}>짐도우미(GPT)</Set_inside_box>
             </Set_box>
         </Side_box>
