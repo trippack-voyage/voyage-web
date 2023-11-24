@@ -306,6 +306,7 @@ function MainBagPage() {
 
   //가방 정렬 선언
   const [sortByLatest, setSortByLatest] = useState(true); // 날짜정렬
+  const [isOn, setisOn] = useState(false); //상태정렬
 
   const toggleSortingOrder = () => {
     setSortByLatest((prevState) => !prevState);
@@ -315,29 +316,50 @@ function MainBagPage() {
   const kakaoId = localStorage.getItem("kakaoId");
   const [bag_list , SetBag_list] = useState<IList[]>([],);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   useEffect(()=> {
     axios({
       url: sortByLatest ? '/bag/latestlist' : '/bag/list',
       method: 'GET',
       params:{
-        kakaoId: `${kakaoId}`
-      }
-
-    }).then((response) => {
-      //console.log(response.data);
-      SetBag_list(response.data);
+        kakaoId: `${kakaoId}`,
+        page: currentPage - 1, 
+        size: 5,
+        status: isOn ? 'FINISHED' : 'AVAILABLE',
+      },
+    })
+      .then((response) => {
+      SetBag_list(response.data.content); 
+      setTotalPages(response.data.totalPages); 
     }).catch((error) => {
       console.error('AxiosError:', error);
     });
-  }, [sortByLatest, kakaoId]);
+  }, [sortByLatest, kakaoId, currentPage, isOn]);
  
-
-  const [isOn, setisOn] = useState(false);
+  const nextPageHandler = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+  const prevPageHandler = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
 
   const toggleHandler = () => {
-    // isOn의 상태를 변경하는 메소드를 구현
     setisOn(!isOn)
   };
+
+// 가방 필터링 함수
+  const filterBagsByStatus = (status: string) => {
+    return bag_list.filter(item => item.status === status);
+  };
+
+  // 상태에 따라 필터링된 가방 목록
+  const availableBags = filterBagsByStatus('AVAILABLE');
+  const finishedBags = filterBagsByStatus('FINISHED');
+
+  // 현재 상태에 따른 가방 목록
+  const filteredBags = isOn ? finishedBags : availableBags;
 
   return (
     <div>
@@ -438,6 +460,15 @@ function MainBagPage() {
       {isOpenWeather ? 
         <Weather_modal></Weather_modal>
       : null}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+        <button onClick={prevPageHandler} disabled={currentPage === 1}>
+          이전페이지
+        </button>
+        <span>{currentPage}</span>
+        <button onClick={nextPageHandler} disabled={currentPage === totalPages}>
+          다음페이지
+        </button>
+      </div>
     </div>
   );
 }
