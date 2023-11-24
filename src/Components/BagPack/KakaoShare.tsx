@@ -51,9 +51,9 @@ const KakaoShare = () => {
       kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-          title: '당신을 가방에 초대합니다.',
-          description: '#함께 #여행 #가방',
-          imageUrl: 'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          title: '여행 파트너로 가방에 초대합니다!\n함께 멋진 여행을 떠나볼까요? ',
+          description: '함께. 쉽게, 똑똑하게 찜 싸는 방법',
+          imageUrl: 'https://source.unsplash.com/featured/?travel',
           link: {
             mobileWebUrl: 'http://localhost:3000',
             webUrl: 'http://localhost:3000',
@@ -66,14 +66,14 @@ const KakaoShare = () => {
         },
         buttons: [
           {
-            title: '웹으로 보기',
+            title: '초대가방 가기',
             link: {
               mobileWebUrl: 'http://localhost:3000',
               webUrl: 'http://localhost:3000',
             },
           },
           {
-            title: '앱으로 보기',
+            title: '회원가입 가기',
             link: {
               mobileWebUrl: 'http://localhost:3000',
               webUrl: 'http://localhost:3000',
