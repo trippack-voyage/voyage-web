@@ -86,6 +86,16 @@ function OAuth2RedirectHandeler() {
             }).then(function (response) {
               localStorage.setItem("kakaoId", id);
               localStorage.setItem("userName", nickname);
+
+              axios({
+                url: `kakao/find-usercode/${localStorage.getItem("userName")}`,
+                method: 'GET'
+    
+            }).then((response) => {
+                localStorage.setItem("userCode", response.data);
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
             });
           }
 
