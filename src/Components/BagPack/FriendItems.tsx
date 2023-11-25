@@ -229,9 +229,6 @@ function FriendItems() {
             console.error('AxiosError:', error);
         });
     }
-
-    //가방 주인 user_code가져오기(구현 완료)
-    const [requestCode, setRequestCode] = useState(0);
     const [user_kakaoId, setUser_kakaoId] = useState("");
 
     //요청물품 목록 가져오기(구현 완료)
@@ -251,8 +248,24 @@ function FriendItems() {
         });
     }
 
+    
+    //가방 주인 user_code가져오기(구현 완료)
+    const [requestCode, setRequestCode] = useState(0);
     useEffect(()=> {
         GetFriendItemList();
+
+        axios({
+            url: `/bag/${bag_id}`,
+            method: 'GET',
+            params:{
+                bagId: bag_id
+            }
+    
+        }).then((response) => {
+            setRequestCode(response.data.userCode)
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
     },[]) 
 
     //짐 요청 보내기
@@ -264,24 +277,19 @@ function FriendItems() {
             alert("자신에게는 요청이 불가능해요!");
         }
         else{
-            console.log(Number(bag_id));
-            console.log(localStorage.getItem("userCode"));
-            console.log(FriendPack);
-            console.log(requestCode);
-            let ok = false;
-            console.log(ok);
+
             axios({
                 url: `/request/addReqeset/`,
                 method: 'POST',
                 params:{
                     bagId: Number(bag_id),
                     fromUserId: localStorage.getItem("userCode"),
-                    idOk: ok,
+                    idOk: false,
                     requestedProduct: FriendPack,
                     toFriendId: requestCode
                 },
             }).then((response) => {
-                console.log(response);
+                //console.log(response);
                 GetFriendItemList();
             }).catch((error) => {
                 console.error('AxiosError:', error);
