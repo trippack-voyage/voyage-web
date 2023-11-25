@@ -284,7 +284,7 @@ function FriendItems() {
                 params:{
                     bagId: Number(bag_id),
                     fromUserId: localStorage.getItem("userCode"),
-                    idOk: false,
+                    isOk: false,
                     requestedProduct: FriendPack,
                     toFriendId: requestCode
                 },
