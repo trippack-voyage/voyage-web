@@ -29,8 +29,17 @@ const Bagpack_main_header = styled.div`
     display: flex;
     margin-top: 50px;
     margin-bottom: 30px;
-    font-size: 40px;
+    font-size: 37px;
     font-weight: 700;
+`;
+
+const Header_text = styled.text<{ color?: boolean }>`
+    border-bottom: 2px solid black;
+    padding: 20px 0px;
+    width: 510px;
+    color: ${(props) => props.color ? 'black' : 'gray'};
+    border-bottom:  ${(props) => props.color ? '3px solid black' : '3px solid gray'};
+    cursor: pointer;
 `;
 
 //친구관리, 친구찾기 박스 컨테이너
@@ -102,17 +111,6 @@ const Find_friend = styled.input`
     border-radius: 12px;
     outline: none;
     margin: 10px auto;
-`;
-
-const Header_text = styled.text`
-`;
-
-const Header_text2 = styled.text`
-    margin-left: 350px;
-`;
-
-const Header_text3 = styled.text`
-    margin-left: 350px;
 `;
 
 //친구 찾기 친구 리스트 박스
@@ -306,15 +304,6 @@ function FriendSet() {
         });
     }
 
-
-    const [friend_state, setFriend_state] = useState([false, false, false]);
-
-    let [btnActive, setBtnActive] = useState();
-
-    const toggleActive = (e: any) => {
-
-    };
-
     //메인화면 이동
     const navi = useNavigate();
     function onClickBack() {
@@ -422,6 +411,28 @@ function FriendSet() {
         });
     }, [userCode]);
 
+    const [header_text1 , setHeader_text1] = useState(true);
+    const [header_text2 , setHeader_text2] = useState(false);
+    const [header_text3 , setHeader_text3] = useState(false);
+    function onClickHeader(index:number){
+        if(index === 1){
+            setHeader_text1(true);
+            setHeader_text2(false);
+            setHeader_text3(false);
+        }
+
+        else if(index === 2){
+            setHeader_text1(false);
+            setHeader_text2(true);
+            setHeader_text3(false);
+        }
+
+        else{
+            setHeader_text1(false);
+            setHeader_text2(false);
+            setHeader_text3(true);
+        }
+    }
 
     return (
         <div>
@@ -430,78 +441,86 @@ function FriendSet() {
                 <Bagpack_main_box>
                     <IoArrowBack size="50" onClick={onClickBack} />
                     <Bagpack_main_header>
-                        <Header_text>친구 관리</Header_text>
-                        <Header_text2>친구 추가</Header_text2>
-                        <Header_text3>친구 요청</Header_text3>
+                        <Header_text onClick={()=>{onClickHeader(1)}} color={header_text1}>친구 관리</Header_text>
+                        <Header_text onClick={()=>{onClickHeader(2)}} color={header_text2}>친구 추가</Header_text>
+                        <Header_text onClick={()=>{onClickHeader(3)}} color={header_text3}>친구 요청</Header_text>
                     </Bagpack_main_header>
-                    <Friend_main>
-                        {myfriendlist.length === 0 ?
-                            (<Friend_list_box>친구가 아직 없어요!</Friend_list_box>) :
-                            (<Friend_list_box>
-                                {myfriendlist.map(function (a, i) {
-                                    return (
-                                        <Find_Friend_box>
-                                            <Find_friend_prifile src={`${a.kakaoProfileImg}`} height="100" width="100"></Find_friend_prifile>
-                                            <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                            <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>삭제</Delete_frined_btn>
-                                        </Find_Friend_box>)
-                                })}
-                            </Friend_list_box>)}
 
-                        <Friend_list_box3>
-                            <Friend_main>
-                                <Find_friend
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setFind_result(e.target.value); }}>
-                                </Find_friend>
-                            </Friend_main>
-                            {friend_list.map(function (a, i) {
-                                return (
-                                    <div>
-                                        {find_result === `${a.kakaoNickname}` ?
-                                            (<Find_Friend_box
-                                                onClick={() => toggleActive(i)}
-                                                className={(friend_state[i] === false ? " active" : "")}
-                                            >
+                    <Friend_main>
+                        {header_text1 ? 
+                            (<div>{myfriendlist.length === 0 ?
+                                (<Friend_list_box>친구가 아직 없어요!</Friend_list_box>) :
+                                (<Friend_list_box>
+                                    {myfriendlist.map(function (a, i) {
+                                        return (
+                                            <Find_Friend_box>
+                                                <Find_friend_prifile 
+                                                    src={`${a.kakaoProfileImg}`} 
+                                                    height="100" 
+                                                    width="100">
+                                                </Find_friend_prifile>
+                                                <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                                <Delete_frined_btn onClick={() => friend_delete(a.userCode)}>
+                                                    삭제
+                                                </Delete_frined_btn>
+                                            </Find_Friend_box>)
+                                    })}
+                                </Friend_list_box>)}
+                            </div>):(<div></div>)}
+
+                        {header_text2 ? 
+                            (<div>
+                                <Friend_list_box3>
+                                    <Friend_main>
+                                        <Find_friend onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setFind_result(e.target.value);}}>
+                                    </Find_friend>
+                                </Friend_main>
+                                {friend_list.map(function (a, i) {
+                                    return (
+                                        <div>
+                                            {find_result === `${a.kakaoNickname}` ?
+                                                (<Find_Friend_box>
+                                                    <Find_friend_prifile src={a.kakaoProfileImg} 
+                                                        height="100" 
+                                                        width="100">
+                                                    </Find_friend_prifile>
+                                                    <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                                    {find_request === false ?
+                                                        (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>) :
+                                                        (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
+                                                    }
+                                                </Find_Friend_box>) : (<div></div>)}
+                                        </div>)})}
+                                        
+                                {friendRequests.map(function (a, i) {
+                                    return (
+                                        <div>
+                                            <Find_Friend_box>
                                                 <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
                                                 <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                                {find_request === false ?
-                                                    (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>) :
-                                                    (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
-                                                }
-                                            </Find_Friend_box>) : (<div></div>)
-                                        }
-                                    </div>
-                                )
-                            })}
-                            {friendRequests.map(function (a, i) {
-                                return (
-                                    <div>
-                                        <Find_Friend_box
-                                            onClick={() => toggleActive(i)}
-                                            className={(friend_state[i] === false ? " active" : "")}
-                                        >
-                                            <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
-                                            <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                            <Find_frined_btn onClick={() => cancel_friend_request(a.userCode)}>대기중</Find_frined_btn>
-                                        </Find_Friend_box>
-                                    </div>
-                                )
-                            })}
+                                                <Find_frined_btn onClick={() => cancel_friend_request(a.userCode)}>대기중</Find_frined_btn>
+                                            </Find_Friend_box>
+                                        </div>
+                                    )})}
+                                </Friend_list_box3>
+                            </div>):(<div></div>)}
 
-                        </Friend_list_box3>
-                        {friend_receive.length === 0 ? (
-                            <Friend_list_box3>친구요청이 없어요!</Friend_list_box3>
-                        ) : (
-                            <Friend_list_box3>
-                                {friend_receive.map((friend, i) => (
-                                    <Find_Friend_box key={i}>
-                                        <Find_friend_prifile src={friend.kakaoProfileImg} height="100" width="100" />
-                                        <Find_friend_name>{friend.kakaoNickname}</Find_friend_name>
-                                        <Accept_frined_btn onClick={() => friend_accept(friend.userCode)}>수락</Accept_frined_btn>
-                                    </Find_Friend_box>
-                                ))}
-                            </Friend_list_box3>
-                        )}</Friend_main>
+                        {header_text3 ?   
+                            (<div>         
+                                {friend_receive.length === 0 ? (
+                                    <Friend_list_box3>친구요청이 없어요!</Friend_list_box3>)
+                                    :(<Friend_list_box3>
+                                        {friend_receive.map((friend, i) => (
+                                            <Find_Friend_box key={i}>
+                                                <Find_friend_prifile src={friend.kakaoProfileImg} height="100" width="100" />
+                                                <Find_friend_name>{friend.kakaoNickname}</Find_friend_name>
+                                                <Accept_frined_btn onClick={() => friend_accept(friend.userCode)}>수락</Accept_frined_btn>
+                                            </Find_Friend_box>
+                                        ))}
+                                    </Friend_list_box3>
+                                )}
+                            </div>):(<div></div>)}
+                    </Friend_main>
                 </Bagpack_main_box>
             </Bagpack_main>
         </div>

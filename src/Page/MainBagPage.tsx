@@ -251,6 +251,7 @@ const Bag_container = styled.div`
 //베너 이미지
 const Banner_img = styled.img`
   
+  width: 100%;
   @media screen and (max-width: 500px){
     width: 400px;
   }
