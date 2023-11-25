@@ -28,7 +28,7 @@ function MyBagCalendar() {
   useEffect(() => {
     const kakaoId = localStorage.getItem('kakaoId');
     axios
-      .get('/bag/list', {
+      .get('/bag/triplist', {
         params: {
           kakaoId: kakaoId,
         },
