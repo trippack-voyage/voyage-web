@@ -390,6 +390,23 @@ function FriendSet() {
             });
     }
 
+    // 친구 요청 취소
+    function cancel_friend_request(friendcode: number) {
+        axios
+            .delete(`/friend/delete/${Number(userCode)}/${Number(friendcode)}`)
+            .then(function (response) {
+                // console.log(response);
+                window.location.replace("/friend-set");
+                alert("친구 요청이 취소되었습니다!");
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+            });
+    }
+
+
     const [friendRequests, setFriendRequests] = useState<PList[]>([],); // 대기 중인 친구 요청 목록
 
     useEffect(() => {
@@ -460,17 +477,17 @@ function FriendSet() {
                                 return (
                                     <div>
                                         <Find_Friend_box
-                                                onClick={() => toggleActive(i)}
-                                                className={(friend_state[i] === false ? " active" : "")}
-                                            >
-                                                <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
-                                                <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                                <Find_frined_btn>대기중</Find_frined_btn>
-                                            </Find_Friend_box>
+                                            onClick={() => toggleActive(i)}
+                                            className={(friend_state[i] === false ? " active" : "")}
+                                        >
+                                            <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
+                                            <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
+                                            <Find_frined_btn onClick={() => cancel_friend_request(a.userCode)}>대기중</Find_frined_btn>
+                                        </Find_Friend_box>
                                     </div>
                                 )
                             })}
-                            
+
                         </Friend_list_box3>
                         {friend_receive.length === 0 ? (
                             <Friend_list_box3>친구요청이 없어요!</Friend_list_box3>
