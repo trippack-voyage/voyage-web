@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import BagPackSide from '../Components/BagPack/BagPackSide';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { IoArrowBack } from "react-icons/io5";
 import axios from 'axios';
 
@@ -29,7 +28,6 @@ const Bagpack_main_header = styled.div`
     display: flex;
     margin-top: 10px;
     margin-bottom: 30px;
-    font-size: 35px;
     font-weight: 700;
 `;
 
@@ -41,6 +39,12 @@ const Header_text = styled.text<{ color?: boolean }>`
     border-bottom:  ${(props) => props.color ? '3px solid black' : '3px solid gray'};
     cursor: pointer;
     text-align: center;
+    font-size: 35px;
+
+    @media screen and (max-width: 500px){
+        width: 120px;
+        font-size: 25px;
+    }
 `;
 
 //친구관리, 친구찾기 박스 컨테이너
@@ -49,6 +53,10 @@ const Friend_main = styled.div`
     margin: 0 auto;
     width: 1000px;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 500px){
+        width: 350px;
+    }
 `;
 
 //친구 관리 박스
@@ -61,6 +69,10 @@ const Friend_list_box = styled.div`
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #c1c1c1;
+
+    @media screen and (max-width: 500px){
+        width: 350px;
+    }
 
     overflow-y: scroll;
     &::-webkit-scrollbar {
@@ -78,6 +90,10 @@ const Friend_list_box = styled.div`
 const Find_friend_container = styled.div`
     margin: 0 auto;
     width: 800px;
+
+    @media screen and (max-width: 500px){
+        width: 300px;
+    }
 `;
 //친구 검색창
 const Find_friend = styled.input`
@@ -91,6 +107,12 @@ const Find_friend = styled.input`
     border-radius: 12px;
     outline: none;
     margin: 10px auto;
+
+    @media screen and (max-width: 500px){
+        width: 300px;
+        font-size: 18px;
+        height: 60px;
+    }
 `;
 
 //친구 찾기 친구 리스트 박스
@@ -104,6 +126,10 @@ const Find_Friend_box = styled.div`
     margin-left: auto;
     background-color: ${({ theme }) => theme.list};
 
+    @media screen and (max-width: 500px){
+        width: 315px;
+    }
+
 `;
 
 //친구 찾기 친구 리스트 프로필
@@ -114,6 +140,12 @@ const Find_friend_prifile = styled.img`
     width: 60px;
     height: 60px;
     margin-left: 30px;
+
+    @media screen and (max-width: 500px){
+        margin-left: 0px;
+        width: 45px;
+        height: 45px;
+    }
 `;
 
 //친구 찾기 친구 리스트 이름
@@ -124,6 +156,11 @@ const Find_friend_name = styled.div`
     margin-top: auto;
     margin-bottom: auto;
     width: 100px;
+
+    @media screen and (max-width: 500px){
+        font-size: 17px;
+        margin-left: 20px;
+    }
 `;
 
 const Find_frined_btn = styled.button`
@@ -137,6 +174,13 @@ const Find_frined_btn = styled.button`
     border: 3px solid #FF541E;
     color: #FF541E;
     box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+
+        
+    @media screen and (max-width: 500px){
+        font-size: 15px;
+        width: 89px;
+        height: 40px;
+    }
 `;
 
 const Delete_frined_btn = styled.button`
@@ -150,20 +194,12 @@ const Delete_frined_btn = styled.button`
     border: 3px solid #FF541E;
     color: #FF541E;
     box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
-`;
-
-//친구 수락 버튼
-const Accept_frined_btn = styled.button`
-    margin: auto 0px auto auto;
-    font-size: 20px;
-    font-weight: 700;
-    background-color: ${({ theme }) => theme.headerBackground};
-    border-radius: 12px;
-    width: 75px;
-    height: 55px;
-    border: 3px solid #FF541E;
-    color: #FF541E;
-    box-shadow: rgba(245, 105, 60, 0.18) 0px 0px 15px;
+    
+    @media screen and (max-width: 500px){
+        font-size: 15px;
+        width: 65px;
+        height: 40px;
+    }
 `;
 
 const Friend_list_text = styled.div`
@@ -237,6 +273,7 @@ function FriendSet() {
     const [flist_info, Setf_list_info] = useState([""]);
     const [flist_info2, Setf_list_info2] = useState([""]);
     const [name, setName] = useState("");
+    /*
     function findUserCode(user: number) {
         axios({
             url: `kakao/find/${Number(user)}`,
@@ -251,9 +288,9 @@ function FriendSet() {
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
-    }
+    }*/
 
-    //친구수락 확정 대기 목록
+    //친구수락 확정 대기 목록(구현 완료)
     const [friend_receive, setFriend_receive] = useState<PList[]>([],);
     useEffect(() => {
         axios({
@@ -261,7 +298,7 @@ function FriendSet() {
             method: 'GET'
 
         }).then((response) => {
-            console.log(response.data.result);
+            //console.log(response.data.result);
             setFriend_receive(response.data.result);
 
             for (let i = 0; i < response.data.result.length; i++) {
@@ -318,8 +355,21 @@ function FriendSet() {
                 userId: userCode
             },
         }).then((response) => {
-            //console.log(response);
-            window.location.replace("/friend-set");
+            axios({
+                url: `/friend/acceptRequest/${Number(userCode)}`,
+                method: 'GET'
+    
+            }).then((response) => {
+                //console.log(response.data.result);
+                setFriend_receive(response.data.result);
+    
+                for (let i = 0; i < response.data.result.length; i++) {
+                    findUserCode2(response.data.result[i]);
+                }
+            }).catch((error) => {
+                console.error('AxiosError:', error);
+            });
+
         }).catch((error) => {
             console.error('AxiosError:', error);
         });
@@ -332,7 +382,6 @@ function FriendSet() {
         })
             .then(function (response) {
                 //console.log(response);
-                alert("친구가 삭제되었습니다!");
                 axios({
                     url: `/friend/friendList/${Number(userCode)}`,
                     method: 'GET'
@@ -354,11 +403,9 @@ function FriendSet() {
             });
     }
 
-    //친구 수락
+    //친구 수락(구현 완료)
     function friend_accept(friendcode: number) {
 
-        console.log(userCode);
-        console.log(friendcode);
         axios.patch(`/friend/accept/${Number(friendcode)}/${Number(userCode)}`, {
         })
             .then(function (response) {
@@ -370,19 +417,32 @@ function FriendSet() {
                 console.log(error);
             })
             .then(function () {
-                //console.log(userCode);
-                //console.log(friendcode);
+
             });
     }
+    
+    // 사용자의 userCode로 대기 중인 친구 요청 가져오기(구현 완료)
+    const [friendRequests, setFriendRequests] = useState<PList[]>([],); // 대기 중인 친구 요청 목록
 
-    // 친구 요청 취소
+    useEffect(() => {
+        axios({
+            url: `/friend/friendRequests/${userCode}`,
+            method: 'GET'
+        }).then((response) => {
+            setFriendRequests(response.data.result);
+            console.log(response.data.result);
+        }).catch((error) => {
+            console.error('AxiosError:', error);
+        });
+    }, [userCode]);
+
+    // 친구 요청 취소(구현 완료)
     function cancel_friend_request(friendcode: number) {
         axios
             .delete(`/friend/delete/${Number(userCode)}/${Number(friendcode)}`)
             .then(function (response) {
-                // console.log(response);
+                console.log(response);
                 window.location.replace("/friend-set");
-                alert("친구 요청이 취소되었습니다!");
             })
             .catch(function (error) {
                 console.log(error);
@@ -390,22 +450,6 @@ function FriendSet() {
             .then(function () {
             });
     }
-
-
-    const [friendRequests, setFriendRequests] = useState<PList[]>([],); // 대기 중인 친구 요청 목록
-
-    useEffect(() => {
-        axios({
-            url: `/friend/friendRequests/${userCode}`, // 사용자의 userCode로 대기 중인 친구 요청 가져오기
-            method: 'GET'
-        }).then((response) => {
-            setFriendRequests(response.data.result);
-            console.log("친구요청");
-            console.log(response.data.result);
-        }).catch((error) => {
-            console.error('AxiosError:', error);
-        });
-    }, [userCode]);
 
     //친구 관리, 추가, 요청 박스 변경(구현 완료)
     const [header_text1 , setHeader_text1] = useState(true);
@@ -486,18 +530,18 @@ function FriendSet() {
                                                     <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
                                                     {find_request === false ?
                                                         (<Find_frined_btn onClick={() => friend_request(a.userCode)}>친구요청</Find_frined_btn>) :
-                                                        (<Find_frined_btn onClick={() => friend_request(a.userCode)}>요청완료</Find_frined_btn>)
+                                                        (<Find_frined_btn onClick={() => cancel_friend_request(a.userCode)}>요청취소</Find_frined_btn>)
                                                     }
                                                 </Find_Friend_box>) : (<div></div>)}
                                         </div>)})}
-                                        
+                                      
                                     {friendRequests.map(function (a, i) {
                                     return (
                                         <div>
                                             <Find_Friend_box>
                                                 <Find_friend_prifile src={a.kakaoProfileImg} height="100" width="100"></Find_friend_prifile>
                                                 <Find_friend_name>{a.kakaoNickname}</Find_friend_name>
-                                                <Find_frined_btn onClick={() => cancel_friend_request(a.userCode)}>대기중</Find_frined_btn>
+                                                <Find_frined_btn onClick={() => cancel_friend_request(a.userCode)}>요청취소</Find_frined_btn>
                                             </Find_Friend_box>
                                         </div>
                                     )})}
@@ -513,7 +557,7 @@ function FriendSet() {
                                             <Find_Friend_box key={i}>
                                                 <Find_friend_prifile src={friend.kakaoProfileImg} height="100" width="100" />
                                                 <Find_friend_name>{friend.kakaoNickname}</Find_friend_name>
-                                                <Accept_frined_btn onClick={() => friend_accept(friend.userCode)}>수락</Accept_frined_btn>
+                                                <Delete_frined_btn onClick={() => friend_accept(friend.userCode)}>수락</Delete_frined_btn>
                                             </Find_Friend_box>
                                         ))}
                                     </Friend_list_box>
