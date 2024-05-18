@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# 📅함께, 쉽게, 똑똑하게 짐 싸는 방법 VOYAGE
+> **제 12회 동덕여자대학교 교내 소프트웨어 경신대회 우수상 수상작**<br/> **개발기간: 2023.09~2023.10**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 👩‍💻Web Developers
 
-## Available Scripts
+|               이미지               |               이다솔               |
+| :---------------------------------: | :-------------------------------------: |
+| [jpg723](https://github.com/jpg723) | [dasol729](https://github.com/dasol729) |
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🛠️skills
+- react
+- typescript
+- styledcomponent
+  
+## 💡What is VOYAGE?
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/693e0a46-5dad-4b5b-b559-7fd3df158be5/>
+<img src=https://github.com/flag-app/flag-app-web/assets/86431761/a470e254-d6f3-4d79-bf9a-eadbec461d13/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/5fb08b58-d795-4614-955d-d9ba37b5b06d/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/3ca68bde-e364-4d87-a1b7-9ef80c57f9de/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/e0c8e043-1dde-4d4a-a5b8-38bb316503d2/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/997f8488-2bea-4638-870b-b04ad9fe42d5/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/086eb3e0-fe2f-4a83-af5b-eb020de92cb5/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/e94c7634-79c9-4b3d-88a3-1898acd5296e/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/714ae874-b7b3-4170-9e7c-7590f9d297cb/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/9f91c8cd-b4bc-47a6-a150-b48e3c2c8619/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/4a30df5e-714b-4e88-9d77-2ff23193f546/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/3fc6efef-6b07-4460-93b5-3b0f6049e8e7/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/b5d8373a-6573-4fc1-a9aa-8129f5351474/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/9bc0e15a-7770-4f0b-8d30-7d62edeab989/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/8fe1832a-f6b0-4035-892c-cee9578c1830/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/868c5774-5d7b-419e-8180-9a776148e911/>
