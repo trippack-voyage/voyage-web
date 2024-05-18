@@ -1,5 +1,8 @@
 # 📅함께, 쉽게, 똑똑하게 짐 싸는 방법 VOYAGE
 > **제 12회 동덕여자대학교 교내 소프트웨어 경신대회 우수상 수상작**<br/> **개발기간: 2023.09~2023.10**
+> 
+## 🔗Link(시연영상 링크)
+https://drive.google.com/file/d/1gO86WO_bOWB4SBrzBVotUQlMscqwN5qY/view?usp=sharing
 
 ## 👩‍💻Web Developers
 
@@ -20,9 +23,9 @@
 <img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/e0c8e043-1dde-4d4a-a5b8-38bb316503d2/>
 <img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/997f8488-2bea-4638-870b-b04ad9fe42d5/>
 <img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/086eb3e0-fe2f-4a83-af5b-eb020de92cb5/>
-<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/e94c7634-79c9-4b3d-88a3-1898acd5296e/>
-<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/714ae874-b7b3-4170-9e7c-7590f9d297cb/>
-<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/9f91c8cd-b4bc-47a6-a150-b48e3c2c8619/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/a62d3d03-4c53-44de-a33b-09d380626b98/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/6d6c1a3e-9ebe-46b7-ab9a-7ea8ff4aff25/>
+<img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/e68d4fa2-efb4-47c9-8ae3-d0bc64e6ecd2/>
 <img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/4a30df5e-714b-4e88-9d77-2ff23193f546/>
 <img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/3fc6efef-6b07-4460-93b5-3b0f6049e8e7/>
 <img src=https://github.com/trippack-voyage/voyage-web/assets/86431761/b5d8373a-6573-4fc1-a9aa-8129f5351474/>
