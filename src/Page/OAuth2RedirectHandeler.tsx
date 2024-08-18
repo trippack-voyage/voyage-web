@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
 function OAuth2RedirectHandeler() {
 
-  const Rest_api_key='b791159adc4e18ab175997922e03859a' //REST API KEY
+  const Rest_api_key='' //REST API KEY
   const redirect_uri = 'http://localhost:3000/api/oauth/token' //Redirect URI
   const grant_type = 'authorization_code';
   const params = new URL(document.location.toString()).searchParams;
